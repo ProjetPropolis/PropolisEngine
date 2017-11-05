@@ -1,0 +1,29 @@
+fileFormatVersion: 2
+guid: e56843cd3958c401eaf976854829de81
+timeCreated: 1509921859
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Deck
+  fontNames:
+  - Deck
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 7e0eda507e7584203af9f90a85ca90a7, type: 3}
+  - {fileID: 12800000, guid: 09fc78a1685c24a79a569eb49abd4b97, type: 3}
+  - {fileID: 12800000, guid: b9cf96052c0f04426990e87adfb0a8cb, type: 3}
+  - {fileID: 12800000, guid: 1be620888b4844609acc0a5b00a6f9de, type: 3}
+  - {fileID: 12800000, guid: 8fb551fd83d0649c0a2cf8c011e77570, type: 3}
+  - {fileID: 12800000, guid: 446526cf93d544b5bb85b2860b550658, type: 3}
+  - {fileID: 12800000, guid: c0297ecfe5ce24e8a8cb5c27c20da216, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
