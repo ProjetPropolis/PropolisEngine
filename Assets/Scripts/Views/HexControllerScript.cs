@@ -7,7 +7,7 @@ public class HexControllerScript : MonoBehaviour {
 
     Vector3 newTuilePos; //world position de chaque nouvelle tuile apparaissant autour de cette tuile-ci
     private bool isActive;
-    GameControllerScript gameControllerScript;
+    public GameControllerScript gameControllerScript;
     public bool IsActive {
 
         get

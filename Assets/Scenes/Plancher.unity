@@ -1453,6 +1453,7 @@ GameObject:
   - component: {fileID: 219675396}
   - component: {fileID: 219675395}
   - component: {fileID: 219675394}
+  - component: {fileID: 219675393}
   m_Layer: 0
   m_Name: Hex3
   m_TagString: Hex5
@@ -1474,6 +1475,32 @@ Transform:
   m_Father: {fileID: 2012106214}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &219675393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 219675391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  packID: 
+  hexID: 2
+  lifeTime: 0
+  otherPackID: 0
+  otherHexColor: 
+  newHex: 0
+  someoneOn: 0
+  color: 
+  isBad: 0
+  isCircled: 0
+  otherHex: {fileID: 0}
+  osc: {fileID: 2012106212}
+  DebugOSCSound: {fileID: 1865805507}
+  TimeAlive: 2
+  TimeToLive: 0
 --- !u!60 &219675394
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -1761,6 +1788,7 @@ GameObject:
   - component: {fileID: 276211974}
   - component: {fileID: 276211973}
   - component: {fileID: 276211972}
+  - component: {fileID: 276211971}
   m_Layer: 0
   m_Name: Hex5
   m_TagString: Hex1
@@ -1782,6 +1810,32 @@ Transform:
   m_Father: {fileID: 2012106214}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &276211971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 276211969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  packID: 
+  hexID: 4
+  lifeTime: 0
+  otherPackID: 0
+  otherHexColor: 
+  newHex: 0
+  someoneOn: 0
+  color: 
+  isBad: 0
+  isCircled: 0
+  otherHex: {fileID: 0}
+  osc: {fileID: 2012106212}
+  DebugOSCSound: {fileID: 1865805507}
+  TimeAlive: 2
+  TimeToLive: 0
 --- !u!60 &276211972
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -2166,6 +2220,7 @@ GameObject:
   - component: {fileID: 359825343}
   - component: {fileID: 359825342}
   - component: {fileID: 359825341}
+  - component: {fileID: 359825339}
   m_Layer: 0
   m_Name: Hex4
   m_TagString: Hex6
@@ -2187,6 +2242,32 @@ Transform:
   m_Father: {fileID: 2012106214}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &359825339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 359825337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  packID: 
+  hexID: 3
+  lifeTime: 0
+  otherPackID: 0
+  otherHexColor: 
+  newHex: 0
+  someoneOn: 0
+  color: 
+  isBad: 0
+  isCircled: 0
+  otherHex: {fileID: 0}
+  osc: {fileID: 2012106212}
+  DebugOSCSound: {fileID: 1865805507}
+  TimeAlive: 2
+  TimeToLive: 0
 --- !u!60 &359825341
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -2386,6 +2467,7 @@ GameObject:
   - component: {fileID: 397453147}
   - component: {fileID: 397453146}
   - component: {fileID: 397453145}
+  - component: {fileID: 397453144}
   m_Layer: 0
   m_Name: Hex6
   m_TagString: Hex2
@@ -2407,6 +2489,32 @@ Transform:
   m_Father: {fileID: 2012106214}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &397453144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 397453142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  packID: 
+  hexID: 5
+  lifeTime: 0
+  otherPackID: 0
+  otherHexColor: 
+  newHex: 0
+  someoneOn: 0
+  color: 
+  isBad: 0
+  isCircled: 0
+  otherHex: {fileID: 0}
+  osc: {fileID: 2012106212}
+  DebugOSCSound: {fileID: 1865805507}
+  TimeAlive: 2
+  TimeToLive: 0
 --- !u!60 &397453145
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -3005,6 +3113,7 @@ GameObject:
   - component: {fileID: 521106976}
   - component: {fileID: 521106975}
   - component: {fileID: 521106974}
+  - component: {fileID: 521106977}
   m_Layer: 0
   m_Name: Hex2
   m_TagString: Hex4
@@ -3139,6 +3248,32 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!114 &521106977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 521106972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  packID: 
+  hexID: 1
+  lifeTime: 0
+  otherPackID: 0
+  otherHexColor: 
+  newHex: 0
+  someoneOn: 0
+  color: 
+  isBad: 0
+  isCircled: 0
+  otherHex: {fileID: 0}
+  osc: {fileID: 2012106212}
+  DebugOSCSound: {fileID: 1865805507}
+  TimeAlive: 2
+  TimeToLive: 0
 --- !u!1 &616437541
 GameObject:
   m_ObjectHideFlags: 0
@@ -5265,6 +5400,7 @@ GameObject:
   - component: {fileID: 982837859}
   - component: {fileID: 982837858}
   - component: {fileID: 982837857}
+  - component: {fileID: 982837855}
   m_Layer: 0
   m_Name: Hex1
   m_TagString: Hex3
@@ -5286,6 +5422,32 @@ Transform:
   m_Father: {fileID: 2012106214}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &982837855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 982837853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  packID: 
+  hexID: 0
+  lifeTime: 0
+  otherPackID: 0
+  otherHexColor: 
+  newHex: 0
+  someoneOn: 0
+  color: 
+  isBad: 0
+  isCircled: 0
+  otherHex: {fileID: 0}
+  osc: {fileID: 2012106212}
+  DebugOSCSound: {fileID: 1865805507}
+  TimeAlive: 2
+  TimeToLive: 0
 --- !u!60 &982837857
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -9590,6 +9752,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1865805506}
   - component: {fileID: 1865805505}
+  - component: {fileID: 1865805507}
   m_Layer: 0
   m_Name: Controllers
   m_TagString: Untagged
@@ -9622,6 +9785,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1865805507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1865805504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aef1600830a31ed4e89536029937c2c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inPort: 6969
+  outIP: 132.208.122.55
+  outPort: 17001
 --- !u!1 &1894126314
 GameObject:
   m_ObjectHideFlags: 0
@@ -9941,6 +10118,7 @@ GameObject:
   - component: {fileID: 2007890440}
   - component: {fileID: 2007890439}
   - component: {fileID: 2007890438}
+  - component: {fileID: 2007890436}
   m_Layer: 0
   m_Name: Hex7
   m_TagString: Hex7
@@ -9962,6 +10140,32 @@ Transform:
   m_Father: {fileID: 2012106214}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2007890436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2007890434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  packID: 
+  hexID: 6
+  lifeTime: 0
+  otherPackID: 0
+  otherHexColor: 
+  newHex: 0
+  someoneOn: 0
+  color: 
+  isBad: 0
+  isCircled: 0
+  otherHex: {fileID: 0}
+  osc: {fileID: 2012106212}
+  DebugOSCSound: {fileID: 1865805507}
+  TimeAlive: 2
+  TimeToLive: 0
 --- !u!60 &2007890438
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -10084,6 +10288,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 2012106214}
+  - component: {fileID: 2012106213}
+  - component: {fileID: 2012106212}
   m_Layer: 0
   m_Name: HexFlower
   m_TagString: Untagged
@@ -10091,6 +10297,33 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &2012106212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2012106211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aef1600830a31ed4e89536029937c2c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inPort: 15001
+  outIP: 132.208.122.100
+  outPort: 13001
+--- !u!114 &2012106213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2012106211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3eaed0470a6dc6f41906c148469b0e60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Osc: {fileID: 2012106212}
+  ChildHexsList: []
 --- !u!4 &2012106214
 Transform:
   m_ObjectHideFlags: 0
