@@ -12,7 +12,7 @@ namespace Propolis
     }
     public class PropolisManager:MonoBehaviour
     {
-        public const char CommandSeparator = ' ';
+        public const string CommandSeparator = " ";
         public const string LineFilterConsole = "\r\n";
         public PropolisData _propolisData;
         public string ConsoleLog;
@@ -107,14 +107,28 @@ namespace Propolis
         private bool CreateType(string type, Queue<string> modelParams) 
         {
             IPropolisDataType dataType = null;
-            string[] arrayParams = modelParams.ToArray<string>();
+            
             bool validCreation = true;
+            int parentID = -1 ;
 
             if (modelParams.Count == 0)
             {
                 AppendToConsoleLog("Error on create method, no create data");
                 return false;
             }
+
+
+            if (type == PropolisDataTypes.Hex)
+            {
+                if (!int.TryParse(modelParams.Dequeue(), out parentID))
+                {
+                    return false;
+                }
+            }
+
+            string[] arrayParams = modelParams.ToArray<string>();
+
+
 
             switch (type)
             {
@@ -137,7 +151,7 @@ namespace Propolis
             switch (type)
             {
                 case PropolisDataTypes.HexGroup: _propolisData.HexGroupList.Add((HexGroupData)dataType); break;
-                case PropolisDataTypes.Hex: validCreation= AppendChildrenTypeToParent(type, dataType, modelParams); break;
+                case PropolisDataTypes.Hex: validCreation= AppendChildrenTypeToParent(type, parentID, dataType, modelParams); break;
                 default: AppendToConsoleLog("Error on create method, Invalid type : " + type); break;
             }      
 
@@ -145,12 +159,12 @@ namespace Propolis
         }
 
 
-        private bool AppendChildrenTypeToParent(string type, IPropolisDataType dataType,  Queue<string> modelParams)
+        private bool AppendChildrenTypeToParent(string type, int parentID, IPropolisDataType dataType,  Queue<string> modelParams)
         {
             bool validCreation = false;
-            int parentID;
 
-            if (modelParams.Count == 0)
+
+            if (modelParams.Count == 0 || parentID == -1)
             {
                 AppendToConsoleLog("Error on create method, no create data passed to the manager");
                 return false;
@@ -158,10 +172,8 @@ namespace Propolis
 
             try
             {
-                if (!int.TryParse(modelParams.Dequeue(), out parentID))
-                {
-                    return false;
-                }
+               
+             
                 try
                 {
                     switch (type)
@@ -183,7 +195,7 @@ namespace Propolis
                 return false;
             }     
 
-            return validCreation;
+            return true;
         }
 
 
@@ -195,7 +207,7 @@ namespace Propolis
             parsedCommand = null;
             try
             {
-               Queue<string> bufferCommand = new Queue <string>(rawCommand.Split(PropolisManager.CommandSeparator));
+               Queue<string> bufferCommand = new Queue <string>(rawCommand.Split(CommandSeparator.ToCharArray(),System.StringSplitOptions.RemoveEmptyEntries));
                command = bufferCommand.Dequeue();
                parsedCommand = bufferCommand;
                validParsing = true;                
