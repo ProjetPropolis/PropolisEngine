@@ -13,12 +13,12 @@ Each part of a command must be seperated by a space. Otherwise the parser will r
 
 #### CREATE
 
-  **CREATE [type] [params ....]**
+  *CREATE [type] [params ....]*
   
   ##### HexGroup
   
-  ** CREATE HEXGROUP [ID] [X] [Y] [Z] [IP_ADRESS] [IN_PORT] [OUT_PORT] **
+  CREATE HEXGROUP [ID] [X] [Y] [Z] [IP_ADRESS] [IN_PORT] [OUT_PORT]
   
   ##### Hex
   
-  ** CREATE HEX [HEX_GROUP_ID] [ID] [STATUS]**
+  CREATE HEX [HEX_GROUP_ID] [ID] [STATUS]
