@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 212818096878760550}
   - component: {fileID: 50941381951029828}
   - component: {fileID: 60921361027818430}
-  - component: {fileID: 114762039019316054}
   m_Layer: 0
   m_Name: Hex3
   m_TagString: Hex5
@@ -38,8 +37,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4629388577920554}
-  - component: {fileID: 114167291131236280}
-  - component: {fileID: 114360639315194298}
   m_Layer: 0
   m_Name: HexFlower
   m_TagString: Untagged
@@ -58,8 +55,6 @@ GameObject:
   - component: {fileID: 212791720130387810}
   - component: {fileID: 50636016119289670}
   - component: {fileID: 60381753936106998}
-  - component: {fileID: 114382056923832252}
-  - component: {fileID: 114385666646533666}
   m_Layer: 0
   m_Name: Hex1
   m_TagString: Hex3
@@ -117,7 +112,6 @@ GameObject:
   - component: {fileID: 212416991235089084}
   - component: {fileID: 50845997205304442}
   - component: {fileID: 60054410929205680}
-  - component: {fileID: 114449487415805564}
   m_Layer: 0
   m_Name: Hex5
   m_TagString: Hex1
@@ -136,8 +130,6 @@ GameObject:
   - component: {fileID: 212533464884338840}
   - component: {fileID: 50348493907129052}
   - component: {fileID: 60235782572218446}
-  - component: {fileID: 114200878181648010}
-  - component: {fileID: 114679471066987738}
   m_Layer: 0
   m_Name: Hex4
   m_TagString: Hex6
@@ -156,7 +148,6 @@ GameObject:
   - component: {fileID: 212673957711884620}
   - component: {fileID: 50501603438556768}
   - component: {fileID: 60723183838405592}
-  - component: {fileID: 114186679649270212}
   m_Layer: 0
   m_Name: Hex2
   m_TagString: Hex4
@@ -737,139 +728,6 @@ PolygonCollider2D:
       - {x: 0.049999997, y: -1.0519116}
       - {x: 0.12329556, y: -1.026488}
       - {x: 0.5927683, y: -0.9698961}
---- !u!114 &114167291131236280
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1361878503541294}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15d278761a87f07448eee699912b83f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inPort: 14001
-  outIP: 192.168.0.3
-  outPort: 12001
---- !u!114 &114186679649270212
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1500863587766528}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42e75e94fe628f446a78e587bb57b84b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  packID: 
-  hexID: 1
-  lifeTime: 0
-  otherPackID: 0
-  otherHexColor: 
-  newHex: 0
-  someoneOn: 0
-  color: blue
-  isBad: 0
-  isCircled: 0
-  otherHex: {fileID: 0}
-  osc: {fileID: 0}
---- !u!114 &114200878181648010
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1487096571156748}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42e75e94fe628f446a78e587bb57b84b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  packID: 
-  hexID: 3
-  lifeTime: 0
-  otherPackID: 0
-  otherHexColor: 
-  newHex: 0
-  someoneOn: 0
-  color: yellow
-  isBad: 0
-  isCircled: 0
-  otherHex: {fileID: 0}
-  osc: {fileID: 0}
---- !u!114 &114360639315194298
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1361878503541294}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d3ab45225cc1664995c1baeae4b65a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Osc: {fileID: 114167291131236280}
-  ChildHexsList: []
---- !u!114 &114382056923832252
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1369357604000688}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42e75e94fe628f446a78e587bb57b84b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  packID: 
-  hexID: 0
-  lifeTime: 0
-  otherPackID: 0
-  otherHexColor: 
-  newHex: 0
-  someoneOn: 0
-  color: blue
-  isBad: 0
-  isCircled: 0
-  otherHex: {fileID: 0}
-  osc: {fileID: 0}
---- !u!114 &114385666646533666
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1369357604000688}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a818d75f9b32f74a99215c530c63b04, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _ID: 0
-  _isActive: 0
-  _lifeTime: 0
---- !u!114 &114449487415805564
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1443279096423534}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42e75e94fe628f446a78e587bb57b84b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  packID: 
-  hexID: 4
-  lifeTime: 0
-  otherPackID: 0
-  otherHexColor: 
-  newHex: 0
-  someoneOn: 0
-  color: orange
-  isBad: 0
-  isCircled: 0
-  otherHex: {fileID: 0}
-  osc: {fileID: 0}
 --- !u!114 &114459112758101872
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -893,20 +751,6 @@ MonoBehaviour:
   isCircled: 0
   otherHex: {fileID: 0}
   osc: {fileID: 0}
---- !u!114 &114679471066987738
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1487096571156748}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a818d75f9b32f74a99215c530c63b04, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _ID: 0
-  _isActive: 0
-  _lifeTime: 0
 --- !u!114 &114689692964643312
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -921,29 +765,6 @@ MonoBehaviour:
   _ID: 7
   _isActive: 0
   _lifeTime: 0
---- !u!114 &114762039019316054
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1242696238839440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42e75e94fe628f446a78e587bb57b84b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  packID: 
-  hexID: 2
-  lifeTime: 0
-  otherPackID: 0
-  otherHexColor: 
-  newHex: 0
-  someoneOn: 0
-  color: blue
-  isBad: 0
-  isCircled: 0
-  otherHex: {fileID: 0}
-  osc: {fileID: 0}
 --- !u!114 &114852704540648876
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -976,6 +797,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -991,6 +813,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -1018,6 +841,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -1033,6 +857,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -1060,6 +885,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -1075,6 +901,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -1102,6 +929,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -1117,6 +945,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -1144,6 +973,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -1159,6 +989,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -1186,6 +1017,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -1201,6 +1033,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -1228,6 +1061,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -1243,6 +1077,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5

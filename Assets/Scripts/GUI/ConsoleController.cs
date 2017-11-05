@@ -3,21 +3,19 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
+using Propolis;
 
 public class ConsoleController : MonoBehaviour {
 
 	public Text consoleText;
 	public InputField consoleinputField;
+    public PropolisManager PropolisManager;
 
 	public void sendValueToConsole(string newLine) {
-		consoleinputField.placeholder.GetComponent<Text>().text = "/hex all on";
-		if (verifyString (newLine) == true) {
-			consoleText.text += newLine + "\n";
-		} else {
-			consoleinputField.placeholder.GetComponent<Text>().text = "INVALID COMMAND";
-			consoleinputField.text = "";
-		}
-	}
+		consoleinputField.placeholder.GetComponent<Text>().text = "/Enter command here...";
+        consoleinputField.text = PropolisManager.WriteCommand(consoleinputField.text);
+        consoleText.text = PropolisManager.ConsoleLog;
+    }
 
 	public void addFromField() {
 		sendValueToConsole (consoleinputField.text);
@@ -25,14 +23,7 @@ public class ConsoleController : MonoBehaviour {
 	}
 
 	public void clearConsole() {
-		consoleText.text = "";
-	}
-		
-	private bool verifyString(string consoleLineToCheck) {
-		if (Regex.IsMatch (consoleLineToCheck, "/hex", RegexOptions.IgnoreCase)) {
-			return true;
-		} else {
-			return false;		
-		}
-	}
+        PropolisManager.ClearConsole();
+        consoleText.text = PropolisManager.ConsoleLog;
+    }
 }
