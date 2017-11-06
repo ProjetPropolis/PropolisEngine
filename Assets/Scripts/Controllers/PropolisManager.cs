@@ -34,14 +34,29 @@ namespace Propolis
         {
             ConsoleLog = "";
         }
+        private void WriteDividerLineInConsole()
+        {
+            AppendToConsoleLog("------------------------------------");
+        }
 
-        public string WriteCommand(string rawCommand)
+        private void WriteDividerLineInConsole(int times)
+        {
+            for (int i = 0; i < times; i++)
+            {
+                AppendToConsoleLog("------------------------------------");
+            }
+            
+        }
+
+        public string SendCommand(string rawCommand)
         {
             bool validCommand = false;
             string command;
             Queue<string> modelParams;
+            WriteDividerLineInConsole();
             AppendToConsoleLog(rawCommand);
-            if(ParseCommand(rawCommand.ToLower(),out command, out modelParams))
+            AppendToConsoleLog("");
+            if (ParseCommand(rawCommand.ToLower(),out command, out modelParams))
             {
                 switch (command)
                 {
@@ -67,7 +82,7 @@ namespace Propolis
                 AppendToConsoleLog("An error has occured, Look in Console log for more details...");
             }
 
-
+          
             return GetLastConsoleEntry();
         }
 
