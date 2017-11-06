@@ -10,6 +10,7 @@ namespace Propolis
         public const string Hex = "hex";
         public const string HexGroup = "hexgroup";
     }
+
     public class PropolisManager:MonoBehaviour
     {
         public const string CommandSeparator = " ";
@@ -34,6 +35,7 @@ namespace Propolis
         {
             ConsoleLog = "";
         }
+
         private void WriteDividerLineInConsole()
         {
             AppendToConsoleLog("------------------------------------");
@@ -61,11 +63,11 @@ namespace Propolis
                 switch (command)
                 {
                     case "create":validCommand = Create(modelParams); break;
-                    case "update": validCommand = false; break;
-                    case "update-all": validCommand = false; break;
-                    case "delete": validCommand = false; break;
-                    case "save": validCommand = false; break;
-                    case "load": validCommand = false; break;
+                    case "update": validCommand = false; AppendToConsoleLog("Command not yet implemented"); break;
+                    case "update-all": validCommand = false; AppendToConsoleLog("Command not yet implemented"); break;
+                    case "delete": validCommand = false; AppendToConsoleLog("Command not yet implemented"); break;
+                    case "save": validCommand = false; AppendToConsoleLog("Command not yet implemented"); break;
+                    case "load": validCommand = false; AppendToConsoleLog("Command not yet implemented"); break;
                     default: AppendToConsoleLog("Error unknown command: " + rawCommand); break;
                 }
 
@@ -81,11 +83,9 @@ namespace Propolis
             {
                 AppendToConsoleLog("An error has occured, Look in Console log for more details...");
             }
-
-          
+   
             return GetLastConsoleEntry();
         }
-
 
         private string GetLastConsoleEntry()
         {
@@ -115,7 +115,6 @@ namespace Propolis
                 default: AppendToConsoleLog("Error on create method, Invalid type : " + type); break;
             }
 
-
             return validCreate;
         }
 
@@ -132,7 +131,6 @@ namespace Propolis
                 return false;
             }
 
-
             if (type == PropolisDataTypes.Hex)
             {
                 if (!int.TryParse(modelParams.Dequeue(), out parentID))
@@ -142,8 +140,6 @@ namespace Propolis
             }
 
             string[] arrayParams = modelParams.ToArray<string>();
-
-
 
             switch (type)
             {
@@ -173,11 +169,8 @@ namespace Propolis
             return validCreation;
         }
 
-
         private bool AppendChildrenTypeToParent(string type, int parentID, IPropolisDataType dataType,  Queue<string> modelParams)
         {
-            bool validCreation = false;
-
 
             if (modelParams.Count == 0 || parentID == -1)
             {
@@ -187,8 +180,7 @@ namespace Propolis
 
             try
             {
-               
-             
+                           
                 try
                 {
                     switch (type)
@@ -201,9 +193,7 @@ namespace Propolis
                     AppendToConsoleLog("Error on create method, trying to create" +type+" for inexistant parent");
                     return false;
                 }
-
-                
-              
+                          
             }
             catch
             {
@@ -212,8 +202,6 @@ namespace Propolis
 
             return true;
         }
-
-
 
         private bool ParseCommand(string rawCommand, out string command, out Queue<string> parsedCommand)
         {
