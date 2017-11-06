@@ -21,9 +21,9 @@ public class menuController : MonoBehaviour {
 
 	private void updateArrow() {
 		if (menuAnimator.GetBool("showBool") == true) {
-			btnArrowText.text = ">";
-		} else {
 			btnArrowText.text = "<";
+		} else {
+			btnArrowText.text = ">";
 		}
 	}
 }
