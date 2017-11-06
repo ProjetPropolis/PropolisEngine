@@ -4,12 +4,12 @@ using UnityEngine;
 using System.Linq;
 using System;
 
-public class HexGroup : MonoBehaviour {
+public class HexFlowerController : MonoBehaviour {
 
     public OSC Osc;
 
     [SerializeField]
-    public List<Hex> ChildHexsList;
+    public List<HexControllerScript> ChildHexsList;
 
     // Use this for initialization
 
@@ -20,7 +20,7 @@ public class HexGroup : MonoBehaviour {
     }
     void Start () {
         Osc.SetAddressHandler("/hex", OnReceiveHexStatus);
-        ChildHexsList = transform.GetComponentsInChildren<Hex>().ToList<Hex>();
+        ChildHexsList = transform.GetComponentsInChildren<HexControllerScript>().ToList<HexControllerScript>();
     }
 	
 	// Update is called once per frame

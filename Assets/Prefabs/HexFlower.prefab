@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 212818096878760550}
   - component: {fileID: 50941381951029828}
   - component: {fileID: 60921361027818430}
-  - component: {fileID: 114594929550572010}
   m_Layer: 0
   m_Name: Hex3
   m_TagString: Hex5
@@ -38,10 +37,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4629388577920554}
-  - component: {fileID: 114347977400049098}
-  - component: {fileID: 114270828151343320}
   m_Layer: 0
-  m_Name: HexGroup
+  m_Name: HexFlower
   m_TagString: Untagged
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -58,7 +55,6 @@ GameObject:
   - component: {fileID: 212791720130387810}
   - component: {fileID: 50636016119289670}
   - component: {fileID: 60381753936106998}
-  - component: {fileID: 114518077474834752}
   m_Layer: 0
   m_Name: Hex1
   m_TagString: Hex3
@@ -77,7 +73,8 @@ GameObject:
   - component: {fileID: 212876099412944230}
   - component: {fileID: 50320415532741120}
   - component: {fileID: 60416690898269896}
-  - component: {fileID: 114173971669877652}
+  - component: {fileID: 114852704540648876}
+  - component: {fileID: 114689692964643312}
   m_Layer: 0
   m_Name: Hex7
   m_TagString: Hex7
@@ -96,7 +93,7 @@ GameObject:
   - component: {fileID: 212340254583507616}
   - component: {fileID: 50185264381463006}
   - component: {fileID: 60832590958752036}
-  - component: {fileID: 114954466883978050}
+  - component: {fileID: 114459112758101872}
   m_Layer: 0
   m_Name: Hex6
   m_TagString: Hex2
@@ -115,7 +112,6 @@ GameObject:
   - component: {fileID: 212416991235089084}
   - component: {fileID: 50845997205304442}
   - component: {fileID: 60054410929205680}
-  - component: {fileID: 114171815807865648}
   m_Layer: 0
   m_Name: Hex5
   m_TagString: Hex1
@@ -134,7 +130,6 @@ GameObject:
   - component: {fileID: 212533464884338840}
   - component: {fileID: 50348493907129052}
   - component: {fileID: 60235782572218446}
-  - component: {fileID: 114302625795186274}
   m_Layer: 0
   m_Name: Hex4
   m_TagString: Hex6
@@ -153,7 +148,6 @@ GameObject:
   - component: {fileID: 212673957711884620}
   - component: {fileID: 50501603438556768}
   - component: {fileID: 60723183838405592}
-  - component: {fileID: 114822709408021456}
   m_Layer: 0
   m_Name: Hex2
   m_TagString: Hex4
@@ -734,202 +728,7 @@ PolygonCollider2D:
       - {x: 0.049999997, y: -1.0519116}
       - {x: 0.12329556, y: -1.026488}
       - {x: 0.5927683, y: -0.9698961}
---- !u!114 &114171815807865648
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1443279096423534}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameControllerScript: {fileID: 0}
-  Parent: {fileID: 0}
-  packID: 
-  hexID: 4
-  lifeTime: 0
-  otherPackID: 0
-  otherHexColor: 
-  newHex: 0
-  someoneOn: 0
-  color: 
-  isBad: 0
-  isCircled: 0
-  otherHex: {fileID: 0}
-  osc: {fileID: 114270828151343320}
-  DebugOSCSound: {fileID: 0}
-  TimeAlive: 2
-  TimeToLive: 0
---- !u!114 &114173971669877652
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1394985892003806}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameControllerScript: {fileID: 0}
-  Parent: {fileID: 0}
-  packID: 
-  hexID: 6
-  lifeTime: 0
-  otherPackID: 0
-  otherHexColor: 
-  newHex: 0
-  someoneOn: 0
-  color: 
-  isBad: 0
-  isCircled: 0
-  otherHex: {fileID: 0}
-  osc: {fileID: 114270828151343320}
-  DebugOSCSound: {fileID: 0}
-  TimeAlive: 2
-  TimeToLive: 0
---- !u!114 &114270828151343320
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1361878503541294}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aef1600830a31ed4e89536029937c2c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inPort: 15001
-  outIP: 132.208.122.100
-  outPort: 13001
---- !u!114 &114302625795186274
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1487096571156748}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameControllerScript: {fileID: 0}
-  Parent: {fileID: 0}
-  packID: 
-  hexID: 3
-  lifeTime: 0
-  otherPackID: 0
-  otherHexColor: 
-  newHex: 0
-  someoneOn: 0
-  color: 
-  isBad: 0
-  isCircled: 0
-  otherHex: {fileID: 0}
-  osc: {fileID: 114270828151343320}
-  DebugOSCSound: {fileID: 0}
-  TimeAlive: 2
-  TimeToLive: 0
---- !u!114 &114347977400049098
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1361878503541294}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3eaed0470a6dc6f41906c148469b0e60, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Osc: {fileID: 114270828151343320}
-  ChildHexsList: []
---- !u!114 &114518077474834752
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1369357604000688}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameControllerScript: {fileID: 0}
-  Parent: {fileID: 0}
-  packID: 
-  hexID: 0
-  lifeTime: 0
-  otherPackID: 0
-  otherHexColor: 
-  newHex: 0
-  someoneOn: 0
-  color: 
-  isBad: 0
-  isCircled: 0
-  otherHex: {fileID: 0}
-  osc: {fileID: 114270828151343320}
-  DebugOSCSound: {fileID: 0}
-  TimeAlive: 2
-  TimeToLive: 0
---- !u!114 &114594929550572010
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1242696238839440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameControllerScript: {fileID: 0}
-  Parent: {fileID: 0}
-  packID: 
-  hexID: 2
-  lifeTime: 0
-  otherPackID: 0
-  otherHexColor: 
-  newHex: 0
-  someoneOn: 0
-  color: 
-  isBad: 0
-  isCircled: 0
-  otherHex: {fileID: 0}
-  osc: {fileID: 114270828151343320}
-  DebugOSCSound: {fileID: 0}
-  TimeAlive: 2
-  TimeToLive: 0
---- !u!114 &114822709408021456
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1500863587766528}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameControllerScript: {fileID: 0}
-  Parent: {fileID: 0}
-  packID: 
-  hexID: 1
-  lifeTime: 0
-  otherPackID: 0
-  otherHexColor: 
-  newHex: 0
-  someoneOn: 0
-  color: 
-  isBad: 0
-  isCircled: 0
-  otherHex: {fileID: 0}
-  osc: {fileID: 114270828151343320}
-  DebugOSCSound: {fileID: 0}
-  TimeAlive: 2
-  TimeToLive: 0
---- !u!114 &114954466883978050
+--- !u!114 &114459112758101872
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -937,11 +736,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1438897815040702}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
+  m_Script: {fileID: 11500000, guid: 42e75e94fe628f446a78e587bb57b84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameControllerScript: {fileID: 0}
-  Parent: {fileID: 0}
   packID: 
   hexID: 5
   lifeTime: 0
@@ -949,14 +746,48 @@ MonoBehaviour:
   otherHexColor: 
   newHex: 0
   someoneOn: 0
-  color: 
+  color: orange
   isBad: 0
   isCircled: 0
   otherHex: {fileID: 0}
-  osc: {fileID: 114270828151343320}
-  DebugOSCSound: {fileID: 0}
-  TimeAlive: 2
-  TimeToLive: 0
+  osc: {fileID: 0}
+--- !u!114 &114689692964643312
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1394985892003806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a818d75f9b32f74a99215c530c63b04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ID: 7
+  _isActive: 0
+  _lifeTime: 0
+--- !u!114 &114852704540648876
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1394985892003806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42e75e94fe628f446a78e587bb57b84b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  packID: 
+  hexID: 6
+  lifeTime: 0
+  otherPackID: 0
+  otherHexColor: 
+  newHex: 0
+  someoneOn: 0
+  color: blue
+  isBad: 0
+  isCircled: 0
+  otherHex: {fileID: 0}
+  osc: {fileID: 0}
 --- !u!212 &212340254583507616
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -19,7 +19,7 @@ namespace Propolis
             command = GUILayout.TextField(command, 100);
             if (GUILayout.Button("Send"))
             {
-                manager.SendCommand(command);
+                manager.WriteCommand(command);
             }
             if (GUILayout.Button("Clear"))
             {

@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Hex: MonoBehaviour {
+public class HexControllerScript : MonoBehaviour {
 
     Vector3 newTuilePos; //world position de chaque nouvelle tuile apparaissant autour de cette tuile-ci
     private bool isActive;
-    public GameControllerScript gameControllerScript;
-    public HexGroup Parent;
+    GameControllerScript gameControllerScript;
     public bool IsActive {
 
         get
@@ -89,10 +88,6 @@ public class Hex: MonoBehaviour {
 
     }
 
-    public string ExportToConsoleParams()
-    {
-        return hexID + " " + StatusToInt(GetStatus()); // à remplacer avec le nouveau status
-    }
 
     private void SendOscMessage(string address, int value, int value2)
     {
@@ -171,7 +166,7 @@ public class Hex: MonoBehaviour {
         /*if (this.checker != this.IsActive)
         {
             //Debug.Log(hexID + "changement d'état");
-            if (gameObject.GetComponent<Hex>().IsActive == true)
+            if (gameObject.GetComponent<HexControllerScript>().IsActive == true)
             {
                 //Debug.Log(hexID + "IsActive est true et je Verify()");
                 
@@ -210,16 +205,16 @@ public class Hex: MonoBehaviour {
         {
             otherHex = otherColliders[i];
 
-            if (hexID != otherHex.GetComponent<Hex>().hexID && otherHex.GetComponent<Hex>().IsActive == true)
+            if (hexID != otherHex.GetComponent<HexControllerScript>().hexID && otherHex.GetComponent<HexControllerScript>().IsActive == true)
             {
                 ActiveHexPack.Add(otherHex);
                 //Debug.Log("HexID " + hexID + "ActiveHexPack count is " + ActiveHexPack.Count);
             }
 
             //si une tuile dans son environnement est isBad, on veut que cette mauvaise tuile vérifie son état pour voir si elle est maintenant encerclée
-            if (otherHex.GetComponent<Hex>().isBad == true && hexID != otherHex.GetComponent<Hex>().hexID)
+            if (otherHex.GetComponent<HexControllerScript>().isBad == true && hexID != otherHex.GetComponent<HexControllerScript>().hexID)
             {
-                otherHex.GetComponent<Hex>().Verify();
+                otherHex.GetComponent<HexControllerScript>().Verify();
             }
         }
 
@@ -260,7 +255,7 @@ public class Hex: MonoBehaviour {
             //Debug.Log(newTuilePos);
             //CalculateAngle();
 
-            otherPackID = tuile.gameObject.GetComponent<Hex>().packID;
+            otherPackID = tuile.gameObject.GetComponent<HexControllerScript>().packID;
             Debug.Log("l'autre tuile packID est " + otherPackID);
             Debug.Log("je joue");
             newHex = false;
