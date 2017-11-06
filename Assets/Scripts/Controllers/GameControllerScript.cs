@@ -3,26 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Propolis;
+using System.Linq;
 
 public class GameControllerScript : MonoBehaviour {
-
-    GameObject hex;
-    List<GameObject> tuilesActives = new List<GameObject>();
-    int sizeOfList;
-    public float countDownTest;
-    private string hexPackID;
-    string newColor;
-
     public float BatteryLevel = 0.0f;
     public float BatteryIncrement = .1f;
     public OSC osc;
     public PropolisManager propolisManager;
+    [SerializeField]
+    public List<HexGroup> HexGroupList;
 
 
 	void Start () {
-        countDownTest = 6;
-        newColor = "orange";
 
+        HexGroupList = transform.GetComponentsInChildren<HexGroup>().ToList<HexGroup>();
 
     }
 
@@ -46,22 +40,6 @@ public class GameControllerScript : MonoBehaviour {
     }
 	
 	void Update () {
-        countDownTest = countDownTest - Time.deltaTime;
-        if (countDownTest < 0)
-        {
-            countDownTest = 0;
-            //SendToHex();
-            countDownTest = 1000;
-        }
-    }
-
-
-
-    public void AjoutAListe(GameObject nouvelleTuile)
-    {
-        tuilesActives.Add(nouvelleTuile);
-        sizeOfList = tuilesActives.Count;
-        Debug.Log("nombre de tuiles " + sizeOfList );
 
     }
 
