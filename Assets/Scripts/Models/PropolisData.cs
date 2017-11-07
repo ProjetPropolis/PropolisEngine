@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 
 namespace Propolis
@@ -20,6 +21,22 @@ namespace Propolis
             HexGroupList = new List<HexGroupData>();
             LastEvent = new PropolisLastEventState();
 
+        }
+
+        public HexGroupData GetHexGroupDataById(int id)
+        {
+            HexGroupData returnValue = null;
+
+            try
+            {
+                returnValue = HexGroupList.First(x => x.ID == id);
+            }
+            catch
+            {
+                return null; 
+            }
+
+            return returnValue;
         }
 
         public static PropolisData Instance

@@ -16,8 +16,6 @@ public class mouseDrag : MonoBehaviour
 	public int cameraZoomMax = 20;
 	public int cameraZoomMin = 5;
 
-	private RaycastHit hit;
-
 	public void Start()
 	{
 		_camera = GetComponent<Camera>();

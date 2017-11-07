@@ -10,6 +10,12 @@ namespace Propolis
         public const string Hex = "hex";
         public const string HexGroup = "hexgroup";
     }
+
+    public static class PropolisActions
+    {
+        public const string Create = "create";
+        public const string Update = "update";
+    }
     public class PropolisManager:MonoBehaviour
     {
         public const char CommandSeparator = ' ';
@@ -17,6 +23,7 @@ namespace Propolis
         public PropolisData _propolisData;
         public string ConsoleLog;
         private PropolisLastEventState _TempLastBuffer;
+        public GameController GameController;
         
         private void Awake()
         {
@@ -64,8 +71,9 @@ namespace Propolis
                 AppendToConsoleLog("Error unknown command: " + rawCommand);
             }
 
-            if(validCommand)
+            if (validCommand) {
                 AppendToConsoleLog("Action Successful");
+            }                
             else
             {
                 AppendToConsoleLog("An error has occured, Look in Console log for more details...");

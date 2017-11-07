@@ -13,6 +13,7 @@ TagManager:
   - Hex7
   - HexPackManager
   - Tabs
+  - Hex
   layers:
   - Default
   - TransparentFX
