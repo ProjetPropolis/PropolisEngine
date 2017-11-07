@@ -13,6 +13,13 @@ public class menuController : MonoBehaviour {
 		updateArrow ();
 	}
 
+	void Update(){
+		if (Input.GetKeyDown("escape")) {
+			updateBool ();
+		}
+	}
+
+
 	public void updateBool() {
 		var newBool = !menuAnimator.GetBool("showBool");
 		menuAnimator.SetBool ("showBool", newBool);
