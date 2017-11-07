@@ -23,6 +23,22 @@ namespace Propolis
 
         }
 
+        public bool AddHexGroup(HexGroupData hexGroupData, out string statusMessage)
+        {
+            if(GetHexGroupDataById(hexGroupData.ID) == null)
+            {
+                HexGroupList.Add(hexGroupData);
+                statusMessage = null;
+                return true;
+            }
+            else
+            {
+                statusMessage = "An Hexgroup of the same id already exist";
+                return false;
+            }
+        }
+
+
         public HexGroupData GetHexGroupDataById(int id)
         {
             HexGroupData returnValue = null;

@@ -11,7 +11,7 @@ namespace Propolis
 
         // Use this for initialization
         void Start() {
-
+            propolisData = PropolisData.Instance;
         }
 
         public void UpdateFromModel()
@@ -26,7 +26,7 @@ namespace Propolis
         {
             switch (propolisData.LastEvent.Type)
             {
-                case PropolisDataTypes.HexGroup: break;
+                case PropolisDataTypes.HexGroup: InstantiateHexGroup(); break;
             }
         }
 

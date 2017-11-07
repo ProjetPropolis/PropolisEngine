@@ -5,6 +5,8 @@ using System.Linq;
 
 namespace Propolis
 {
+
+
     public static class PropolisDataTypes
     {
         public const string Hex = "hex";
@@ -120,6 +122,7 @@ namespace Propolis
 
         private bool CreateType(string type, Queue<string> modelParams) 
         {
+            string statusMessage = null;
             PropolisDataType dataType = null;
             string[] arrayParams = modelParams.ToArray<string>();
             bool validCreation = true;
@@ -152,13 +155,23 @@ namespace Propolis
 
             switch (type)
             {
-                case PropolisDataTypes.HexGroup: _propolisData.HexGroupList.Add((HexGroupData)dataType); break;
+                case PropolisDataTypes.HexGroup: validCreation = _propolisData.AddHexGroup((HexGroupData)dataType,out statusMessage); break;
                 case PropolisDataTypes.Hex: validCreation= AppendChildrenTypeToParent(type, dataType, modelParams); break;
                 default: AppendToConsoleLog("Error on create method, Invalid type : " + type); break;
             }
 
             if (validCreation)
+            {
                 _propolisData.LastEvent = _TempLastBuffer;
+            }
+            else
+            {
+                if (statusMessage != null)
+                {
+                    AppendToConsoleLog(statusMessage);
+                }
+            }
+               
             return validCreation;
         }
 
