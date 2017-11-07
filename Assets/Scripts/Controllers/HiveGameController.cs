@@ -5,9 +5,9 @@ namespace Propolis
 {
     public class HiveGameController : MonoBehaviour {
 
-        GameController GameController;
-        PropolisData propolisData;
-        GameObject hexGroupPrefab;
+        public GameController GameController;
+        public PropolisData propolisData;
+        public GameObject hexGroupPrefab;
 
         // Use this for initialization
         void Start() {

@@ -73,6 +73,7 @@ namespace Propolis
 
             if (validCommand) {
                 AppendToConsoleLog("Action Successful");
+                UpdateAllModules();
             }                
             else
             {
@@ -206,7 +207,7 @@ namespace Propolis
 
         private void UpdateAllModules()
         {
-
+            GameController.UpdateFromModel();
         }
 
         private bool ParseCommand(string rawCommand, out string command, out Queue<string> parsedCommand)
