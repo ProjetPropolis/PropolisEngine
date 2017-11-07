@@ -11,7 +11,7 @@ namespace Propolis
         public HexGroupData(string[] modelParams) : base()
         {
             Error = true;
-            if(modelParams.Length  == 7)
+            if(modelParams.Length  == 6)
             {
                 try
                 {
@@ -19,12 +19,12 @@ namespace Propolis
                     Position = new Vector3(
                         Convert.ToInt32(modelParams[1]),
                         Convert.ToInt32(modelParams[2]),
-                        Convert.ToInt32(modelParams[3])
+                        0);
 
-                        );
-                    IP = modelParams[4];
-                    InPort = Convert.ToInt32(modelParams[5]);
-                    OutPort = Convert.ToInt32(modelParams[6]);
+                        
+                    IP = modelParams[3];
+                    InPort = Convert.ToInt32(modelParams[4]);
+                    OutPort = Convert.ToInt32(modelParams[5]);
                     Childrens = new List<PropolisDataType>();
 
                 }
