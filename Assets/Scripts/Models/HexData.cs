@@ -2,9 +2,9 @@
 
 
 namespace Propolis {
-    public class HexData: IPropolisDataType
+    public class HexData: PropolisDataType
     {
-        public HexData (string[] modelParams)
+        public HexData (string[] modelParams) : base()
         {
             Error = true;
             int parsingStatusValue;
@@ -30,9 +30,7 @@ namespace Propolis {
 
             }
         }
-        public int ID { get; set;}
         public int Status { get; set; }
-        public new bool Error { get; set; }
     }
 }
 

@@ -6,11 +6,9 @@ using Propolis;
 
 public class GameControllerScript : MonoBehaviour {
 
-    GameObject hex;
     List<GameObject> tuilesActives = new List<GameObject>();
     int sizeOfList;
     public float countDownTest;
-    private string hexPackID;
     string newColor;
 
     public float BatteryLevel = 0.0f;

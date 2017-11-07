@@ -16,6 +16,7 @@ namespace Propolis
         public const string LineFilterConsole = "\r\n";
         public PropolisData _propolisData;
         public string ConsoleLog;
+        private PropolisLastEventState _TempLastBuffer;
         
         private void Awake()
         {
@@ -41,8 +42,10 @@ namespace Propolis
             string command;
             Queue<string> modelParams;
             AppendToConsoleLog(rawCommand);
+            _TempLastBuffer = new PropolisLastEventState();
             if(ParseCommand(rawCommand.ToLower(),out command, out modelParams))
             {
+                _TempLastBuffer.Action = command;
                 switch (command)
                 {
                     case "create":validCommand = Create(modelParams); break;
@@ -51,6 +54,7 @@ namespace Propolis
                     case "delete": validCommand = false; break;
                     case "save": validCommand = false; break;
                     case "load": validCommand = false; break;
+                    case "status": validCommand = true; AppendToConsoleLog(_propolisData.ExportToJSON()); break;
                     default: AppendToConsoleLog("Error unknown command: " + rawCommand); break;
                 }
 
@@ -93,6 +97,7 @@ namespace Propolis
                 return false;
             }
             string type = modelParams.Dequeue();
+            _TempLastBuffer.Type = type;
             switch (type)
             {
                 case PropolisDataTypes.HexGroup: validCreate= CreateType(type, modelParams); break;
@@ -106,7 +111,7 @@ namespace Propolis
 
         private bool CreateType(string type, Queue<string> modelParams) 
         {
-            IPropolisDataType dataType = null;
+            PropolisDataType dataType = null;
             string[] arrayParams = modelParams.ToArray<string>();
             bool validCreation = true;
 
@@ -127,6 +132,8 @@ namespace Propolis
             {
                 return false;
             }
+
+            _TempLastBuffer.ID = dataType.ID;
           
             if (dataType.Error == true)
             {
@@ -139,13 +146,15 @@ namespace Propolis
                 case PropolisDataTypes.HexGroup: _propolisData.HexGroupList.Add((HexGroupData)dataType); break;
                 case PropolisDataTypes.Hex: validCreation= AppendChildrenTypeToParent(type, dataType, modelParams); break;
                 default: AppendToConsoleLog("Error on create method, Invalid type : " + type); break;
-            }      
+            }
 
+            if (validCreation)
+                _propolisData.LastEvent = _TempLastBuffer;
             return validCreation;
         }
 
 
-        private bool AppendChildrenTypeToParent(string type, IPropolisDataType dataType,  Queue<string> modelParams)
+        private bool AppendChildrenTypeToParent(string type, PropolisDataType dataType,  Queue<string> modelParams)
         {
             bool validCreation = false;
             int parentID;
@@ -187,6 +196,10 @@ namespace Propolis
         }
 
 
+        private void UpdateAllModules()
+        {
+
+        }
 
         private bool ParseCommand(string rawCommand, out string command, out Queue<string> parsedCommand)
         {

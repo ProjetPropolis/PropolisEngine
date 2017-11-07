@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 namespace Propolis
 {
-    public sealed class PropolisData
+    [System.Serializable]
+    public class PropolisData
     {
         private static volatile PropolisData instance;
         private static object syncRoot = new Object();
@@ -16,6 +18,7 @@ namespace Propolis
         private PropolisData() {
 
             HexGroupList = new List<HexGroupData>();
+            LastEvent = new PropolisLastEventState();
 
         }
 
@@ -35,6 +38,11 @@ namespace Propolis
                 return instance;
             }
         }
+
+        public string ExportToJSON()
+        {
+            return JsonUtility.ToJson(instance);
+        } 
 
     }
 }

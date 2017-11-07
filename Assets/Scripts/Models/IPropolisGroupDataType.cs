@@ -6,7 +6,7 @@ namespace Propolis
 {
     public interface IPropolisGroupDataType
     {
-        List<IPropolisDataType> Childrens { get; set; }
+        List<PropolisDataType> Childrens { get; set; }
     }
 }
 

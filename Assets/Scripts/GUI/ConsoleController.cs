@@ -16,7 +16,7 @@ public class ConsoleController : MonoBehaviour {
 
 	public void sendValueToConsole(string newLine) {
 		consoleinputField.placeholder.GetComponent<Text>().text = "/Enter command here...";
-        consoleinputField.text = PropolisManager.WriteCommand(consoleinputField.text);
+        consoleinputField.text = PropolisManager.SendCommand(consoleinputField.text);
         consoleText.text = PropolisManager.ConsoleLog;
 		ScrollToBottom();
     }
