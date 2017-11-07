@@ -8,6 +8,8 @@ namespace Propolis
         public GameController GameController;
         public PropolisData propolisData;
         public GameObject hexGroupPrefab;
+        public Transform HiveViewTransform;
+
 
         // Use this for initialization
         void Start() {
@@ -32,10 +34,19 @@ namespace Propolis
 
         private void InstantiateHexGroup()
         {
-            
+
             HexGroupData hexGroupData = propolisData.GetHexGroupDataById(propolisData.LastEvent.ID);
-            if(hexGroupData != null)
-                Instantiate(hexGroupPrefab, hexGroupData.Position, Quaternion.identity);
+            if (hexGroupData != null)
+            {
+                GameObject gameObject = Instantiate(hexGroupPrefab, hexGroupData.Position, Quaternion.identity);
+                HexGroup hexGroup = gameObject.GetComponent<HexGroup>();
+                hexGroup.transform.parent = HiveViewTransform;
+                hexGroup.ID = hexGroupData.ID;
+                hexGroup.Osc.inPort = hexGroupData.InPort;
+                hexGroup.Osc.outPort = hexGroupData.OutPort;
+                hexGroup.Osc.outIP = hexGroupData.IP;
+
+            }
         }
 
         // Update is called once per frame

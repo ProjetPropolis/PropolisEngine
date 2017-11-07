@@ -7,6 +7,7 @@ using System;
 public class HexGroup : MonoBehaviour {
 
     public OSC Osc;
+    public int ID;
 
     [SerializeField]
     public List<Hex> ChildHexsList;
