@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Camera))]
 public class mouseDrag : MonoBehaviour
@@ -15,6 +16,8 @@ public class mouseDrag : MonoBehaviour
 	public int cameraZoomMax = 20;
 	public int cameraZoomMin = 5;
 
+	private RaycastHit hit;
+
 	public void Start()
 	{
 		_camera = GetComponent<Camera>();
@@ -29,6 +32,7 @@ public class mouseDrag : MonoBehaviour
 		float distanceToIntersection;
 		Ray mouseRay = _camera.ScreenPointToRay(Input.mousePosition);
 
+
 		if (Input.GetKeyDown(dragKey))
 		{
 			_groundPlane.Raycast(mouseRay, out distanceToIntersection);
@@ -42,21 +46,31 @@ public class mouseDrag : MonoBehaviour
 			_transform.position += _dragOrigin - intersection;
 		}
 
-		if (Input.GetAxis("Mouse ScrollWheel") < 0) // back
-		{
-			if (cameraCurrentZoom < cameraZoomMax)
-			{
-				cameraCurrentZoom += 1;
-				Camera.main.orthographicSize = Mathf.Max(Camera.main.orthographicSize + 1);
-			} 
+
+		//ZOOM SCROLL
+
+		if(Input.GetAxis("Mouse ScrollWheel") < 0 || Input.GetAxis("Mouse ScrollWheel") > 0) {
+			if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject () == false) {
+				if (Input.GetAxis("Mouse ScrollWheel") < 0) // back
+				{
+					if (cameraCurrentZoom < cameraZoomMax)
+					{
+						cameraCurrentZoom += 1;
+						Camera.main.orthographicSize = Mathf.Max(Camera.main.orthographicSize + 1);
+					} 
+				}
+				if (Input.GetAxis("Mouse ScrollWheel") > 0) // forward
+				{
+					if (cameraCurrentZoom > cameraZoomMin)
+					{
+						cameraCurrentZoom -= 1;
+						Camera.main.orthographicSize = Mathf.Min(Camera.main.orthographicSize - 1);
+					}   
+				}
+			}
+							
 		}
-		if (Input.GetAxis("Mouse ScrollWheel") > 0) // forward
-		{
-			if (cameraCurrentZoom > cameraZoomMin)
-			{
-				cameraCurrentZoom -= 1;
-				Camera.main.orthographicSize = Mathf.Min(Camera.main.orthographicSize - 1);
-			}   
-		}
+			
+
 	}
 }

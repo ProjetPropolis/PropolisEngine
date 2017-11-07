@@ -12,11 +12,13 @@ public class ConsoleController : MonoBehaviour {
 	public InputField consoleinputField;
 	public GameObject consolefieldObj;
     public PropolisManager PropolisManager;
+	public ScrollRect thisone;
 
 	public void sendValueToConsole(string newLine) {
 		consoleinputField.placeholder.GetComponent<Text>().text = "/Enter command here...";
         consoleinputField.text = PropolisManager.WriteCommand(consoleinputField.text);
         consoleText.text = PropolisManager.ConsoleLog;
+		ScrollToBottom();
     }
 
 	public void addFromField() {
@@ -31,12 +33,18 @@ public class ConsoleController : MonoBehaviour {
 
 	public void Update() {
 		//SEND TO CONSOLE ON ENTER KEY
-		if (Input.GetKeyDown ("return")) {
-			addFromField ();
+		if (Input.GetKeyDown("return")) {
+			addFromField();
+			EventSystem.current.SetSelectedGameObject(consolefieldObj,null);
 		} 
 		//IF NOT ENTER KEY FOCUS ON TEXT FIELD
-		if(!Input.GetKeyDown ("return")){
-			EventSystem.current.SetSelectedGameObject(consolefieldObj);
+		if(!Input.GetKeyDown("return")){
+			EventSystem.current.SetSelectedGameObject(consolefieldObj,null);
 		}
+	}
+
+	public void ScrollToBottom()
+	{
+		thisone.normalizedPosition = new Vector2(0, 0);
 	}
 }
