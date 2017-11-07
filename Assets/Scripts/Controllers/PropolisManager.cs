@@ -36,7 +36,7 @@ namespace Propolis
             ConsoleLog = "";
         }
 
-        public string WriteCommand(string rawCommand)
+        public string SendCommand(string rawCommand)
         {
             bool validCommand = false;
             string command;
