@@ -32,18 +32,22 @@ public class mouseDrag : MonoBehaviour
 		float distanceToIntersection;
 		Ray mouseRay = _camera.ScreenPointToRay(Input.mousePosition);
 
-
-		if (Input.GetKeyDown(dragKey))
-		{
-			_groundPlane.Raycast(mouseRay, out distanceToIntersection);
-			_dragOrigin = mouseRay.GetPoint(distanceToIntersection);
-		}
-
 		if (Input.GetKey(dragKey))
 		{
-			_groundPlane.Raycast(mouseRay, out distanceToIntersection);
-			Vector3 intersection = mouseRay.GetPoint(distanceToIntersection);
-			_transform.position += _dragOrigin - intersection;
+			if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject () == false) {
+				if (Input.GetKeyDown(dragKey))
+				{
+					_groundPlane.Raycast(mouseRay, out distanceToIntersection);
+					_dragOrigin = mouseRay.GetPoint(distanceToIntersection);
+				}
+
+				if (Input.GetKey(dragKey))
+				{
+					_groundPlane.Raycast(mouseRay, out distanceToIntersection);
+					Vector3 intersection = mouseRay.GetPoint(distanceToIntersection);
+					_transform.position += _dragOrigin - intersection;
+				}
+			}
 		}
 
 
