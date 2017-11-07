@@ -8,6 +8,7 @@ namespace Propolis
     {
         private static volatile PropolisData instance;
         private static object syncRoot = new Object();
+        public PropolisLastEventState LastEvent { get; set; }
 
         public List<HexGroupData> HexGroupList{ get; set; }
  
