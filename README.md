@@ -2,6 +2,13 @@
 
 Propolis Game Engine in Unity
 
+## Keybaord Shortcuts in UI
+
+Esc - Open/Close Control Panel
+Tab - Switch from one tab to the other in Control Panel
+R - Switch to Ruche View
+M - Switch to Champ Moléculaires View
+A - Switch to All View
 
 ## Propolis Engine Console Script
 
