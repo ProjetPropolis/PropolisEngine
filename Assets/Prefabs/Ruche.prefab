@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4951907079653904}
   m_Layer: 0
   m_Name: Ruche
-  m_TagString: Untagged
+  m_TagString: aView
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
