@@ -28,6 +28,11 @@ namespace Propolis
             if(GetHexGroupDataById(hexGroupData.ID) == null)
             {
                 HexGroupList.Add(hexGroupData);
+                for(int i= 0; i < 6; i++)
+                {
+                    hexGroupData.Childrens.Add(new HexData(i));
+                }
+                
                 statusMessage = null;
                 return true;
             }

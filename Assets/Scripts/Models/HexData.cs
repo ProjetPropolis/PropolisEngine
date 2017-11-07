@@ -4,6 +4,12 @@
 namespace Propolis {
     public class HexData: PropolisDataType
     {
+        public HexData(int id ) : base()
+        {
+            Status = 0;
+            ID = id;
+            Error = false;
+        }
         public HexData (string[] modelParams) : base()
         {
             Error = true;
