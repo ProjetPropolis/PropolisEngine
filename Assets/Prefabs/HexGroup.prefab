@@ -745,15 +745,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  packID: 
-  hexID: 4
+  ID: 4
   lifeTime: 2
-  otherPackID: 0
-  otherHexColor: 
-  newHex: 0
-  someoneOn: 0
-  color: 
-  isBad: 0
   isCircled: 0
   otherHex: {fileID: 0}
   osc: {fileID: 114366736888829554}
@@ -770,15 +763,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  packID: 
-  hexID: 2
+  ID: 2
   lifeTime: 2
-  otherPackID: 0
-  otherHexColor: 
-  newHex: 0
-  someoneOn: 0
-  color: 
-  isBad: 0
   isCircled: 0
   otherHex: {fileID: 0}
   osc: {fileID: 114366736888829554}
@@ -795,15 +781,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  packID: 
-  hexID: 0
+  ID: 0
   lifeTime: 2
-  otherPackID: 0
-  otherHexColor: 
-  newHex: 0
-  someoneOn: 0
-  color: 
-  isBad: 0
   isCircled: 0
   otherHex: {fileID: 0}
   osc: {fileID: 114366736888829554}
@@ -834,15 +813,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  packID: 
-  hexID: 5
+  ID: 5
   lifeTime: 2
-  otherPackID: 0
-  otherHexColor: 
-  newHex: 0
-  someoneOn: 0
-  color: 
-  isBad: 0
   isCircled: 0
   otherHex: {fileID: 0}
   osc: {fileID: 114366736888829554}
@@ -859,15 +831,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  packID: 
-  hexID: 1
+  ID: 1
   lifeTime: 2
-  otherPackID: 0
-  otherHexColor: 
-  newHex: 0
-  someoneOn: 0
-  color: 
-  isBad: 0
   isCircled: 0
   otherHex: {fileID: 0}
   osc: {fileID: 114366736888829554}
@@ -884,15 +849,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  packID: 
-  hexID: 3
+  ID: 3
   lifeTime: 2
-  otherPackID: 0
-  otherHexColor: 
-  newHex: 0
-  someoneOn: 0
-  color: 
-  isBad: 0
   isCircled: 0
   otherHex: {fileID: 0}
   osc: {fileID: 114366736888829554}
@@ -909,15 +867,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  packID: 
-  hexID: 6
+  ID: 6
   lifeTime: 2
-  otherPackID: 0
-  otherHexColor: 
-  newHex: 0
-  someoneOn: 0
-  color: 
-  isBad: 0
   isCircled: 0
   otherHex: {fileID: 0}
   osc: {fileID: 114366736888829554}
@@ -935,6 +886,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Osc: {fileID: 114366736888829554}
+  ID: 0
   ChildHexsList: []
 --- !u!212 &212340254583507616
 SpriteRenderer:

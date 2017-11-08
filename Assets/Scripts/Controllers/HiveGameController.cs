@@ -25,6 +25,40 @@ namespace Propolis
             {
                 case PropolisActions.Create: ProcessCreationElement();break ;
                 case PropolisActions.Delete: ProcessSupressionElement(); break;
+                case PropolisActions.UpdateItemStatus: UpdateHexGroupItemStatus(); break;
+            }
+        }
+
+        private void UpdateHexGroupItemStatus()
+        {
+            //if all hex of an hexgroup have changed
+            HexGroupData hexGroupData = propolisData.HexGroupList.FirstOrDefault(x => x.ID == propolisData.LastEvent.GroupID);
+
+            foreach (HexGroup hg in ListHexGroup)
+            {
+                if(hg.ID == propolisData.LastEvent.GroupID)
+                {
+                    foreach (Hex hex in hg.ChildHexsList)
+                    {
+                        foreach (var hexData in hexGroupData.Childrens)
+                        {
+                            if (hex.ID == hexData.ID)
+                            {
+                                hex.Status = (PropolisStatus)hexData.Status;
+                            }
+                        }
+                    }
+                }
+              
+            }  
+            
+        }
+
+        private void ProcessUpdateItemStatus()
+        {
+            switch (propolisData.LastEvent.Type)
+            {
+                case PropolisDataTypes.HexGroup: UpdateHexGroupItemStatus(); break;
             }
         }
 
@@ -57,6 +91,11 @@ namespace Propolis
             {
 
             }        
+        }
+
+        public void SendCommand(string command)
+        {
+            GameController.SendCommand(command);
         }
 
         private void InstantiateHexGroup()

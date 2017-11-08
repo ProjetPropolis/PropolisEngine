@@ -25,7 +25,11 @@ namespace Propolis
                     IP = modelParams[3];
                     InPort = Convert.ToInt32(modelParams[4]);
                     OutPort = Convert.ToInt32(modelParams[5]);
-                    Childrens = new List<PropolisDataType>();
+                    Childrens = new List<PropolisGroupItemData>();
+                    for (int i = 0; i < 7; i++)
+                    {
+                        Childrens.Add(new PropolisGroupItemData(i));
+                    }
 
                 }
                 catch
@@ -38,7 +42,7 @@ namespace Propolis
             }
         }
         public Vector3 Position { get; set; }
-        public List<PropolisDataType> Childrens{get;set;}
+        public List<PropolisGroupItemData> Childrens{get;set;}
         public string IP { get; set; }
         public int OutPort { get; set; }
         public int InPort { get; set; }

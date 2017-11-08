@@ -49,7 +49,7 @@ namespace Propolis
                 {
                     case PropolisActions.Create:validCommand = Create(modelParams); break;
                     case PropolisActions.Delete: validCommand = Delete(modelParams); break;
-
+                    case PropolisActions.UpdateItemStatus: validCommand = UpdateItemStatus(modelParams); break;
                     case PropolisActions.AppStatus: validCommand = true; AppendToConsoleLog(_propolisData.ExportToJSON()); break;
                     default: AppendToConsoleLog("Error unknown command: " + rawCommand); break;
                 }
@@ -104,6 +104,86 @@ namespace Propolis
 
 
             return validCreate;
+        }
+
+        private bool UpdateItemStatus(Queue<string> modelParams)
+        {
+            bool validUpdate = false;
+            string statusMessage = null;
+            
+
+            if (modelParams.Count !=4   )
+            {
+                AppendToConsoleLog("Error on "+PropolisActions.UpdateItemStatus+" method, incorrect set of parameter, looking for [type] [ID]");
+                return false;
+            }
+
+            string type = modelParams.Dequeue();
+            _TempLastBuffer.Type = type;
+
+            try
+            {
+                _TempLastBuffer.GroupID = int.Parse(modelParams.Dequeue());
+            }
+            catch
+            {
+                AppendToConsoleLog("Error on delete method, incorrect set of parameter, looking for [type] [GroupID] [ID] [Status]");
+                return false;
+            }
+
+            string target = modelParams.Dequeue();
+            int status; 
+
+            try
+            {
+                status = int.Parse(modelParams.Dequeue());
+            }
+            catch
+            {
+                AppendToConsoleLog("Error on delete method, incorrect set of parameter, looking for [type] [GroupID] [ID] [Status]");
+                return false;
+            }
+
+            if (target == "all")
+            {
+                _TempLastBuffer.ID = -1;
+                switch (type)
+                {
+                    case PropolisDataTypes.HexGroup: validUpdate = _propolisData.UpdateItemStatus(PropolisDataTypes.HexGroup, _TempLastBuffer.GroupID, status, out statusMessage); break;
+                    default: AppendToConsoleLog("Error on create method, Invalid type : " + type); break;
+                }
+            }
+            else
+            {
+                try
+                {
+                    _TempLastBuffer.ID = int.Parse(target);
+                }
+                catch
+                {
+                    AppendToConsoleLog("Error on delete method, incorrect set of parameter, looking for [type] [GroupID] [ID] [Status]");
+                    return false;
+                }
+                switch (type)
+                {
+                    case PropolisDataTypes.HexGroup: validUpdate = _propolisData.UpdateItemStatus(PropolisDataTypes.HexGroup, _TempLastBuffer.GroupID, _TempLastBuffer.ID, status, out statusMessage); break;
+                    default: AppendToConsoleLog("Error on create method, Invalid type : " + type); break;
+                }
+            }
+
+            if (validUpdate)
+            {
+                _propolisData.LastEvent = _TempLastBuffer;
+            }
+            else
+            {
+                if (statusMessage != null)
+                {
+                    AppendToConsoleLog(statusMessage);
+                }
+            }
+
+            return validUpdate;
         }
 
         private bool Delete(Queue<string> modelParams)
@@ -213,7 +293,6 @@ namespace Propolis
             switch (type)
             {
                 case PropolisDataTypes.HexGroup: validCreation = _propolisData.AddHexGroup((HexGroupData)dataType,out statusMessage); break;
-                case PropolisDataTypes.Hex: validCreation= AppendChildrenTypeToParent(type, dataType, modelParams); break;
                 default: AppendToConsoleLog("Error on create method, Invalid type : " + type); break;
             }
 
@@ -233,7 +312,7 @@ namespace Propolis
         }
 
 
-        private bool AppendChildrenTypeToParent(string type, PropolisDataType dataType,  Queue<string> modelParams)
+        private bool AppendChildrenTypeToParent(string type, PropolisGroupItemData dataType,  Queue<string> modelParams)
         {
             bool validCreation = false;
             int parentID;
@@ -273,7 +352,6 @@ namespace Propolis
 
             return validCreation;
         }
-
 
         private void UpdateAllModules()
         {

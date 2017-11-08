@@ -26,6 +26,7 @@ namespace Propolis
         public string Type { get; set; }
         public string Action { get; set; }
         public int ID { get; set; }
+        public int GroupID { get; set; }
     }
 }
 

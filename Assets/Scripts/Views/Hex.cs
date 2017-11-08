@@ -18,6 +18,7 @@ public class Hex : MonoBehaviour {
         set
         {
             status = value;
+            ChangeColor();
             SendOscMessage("/hex", ID, (int)status);
         }
     }
@@ -36,9 +37,20 @@ public class Hex : MonoBehaviour {
     {
         osc = transform.parent.gameObject.GetComponent<OSC>();
         material = GetComponent<Renderer>().material;
-        status = PropolisStatus.ON;
+        Status = PropolisStatus.OFF;
 
         SendDataToTouchDesigner();
+
+    }
+
+    void ChangeColor()
+    {
+        switch (Status)
+        {
+
+            case PropolisStatus.OFF: material.color = new Color(50, 0, 80); break;
+            case PropolisStatus.ON: material.color = new Color(75, 75, 0); break;
+        }
 
     }
 

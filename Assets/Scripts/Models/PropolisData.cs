@@ -23,38 +23,89 @@ namespace Propolis
 
         }
 
+        public bool UpdateItemStatus(string type, int groupID, int id, int status, out string statusMessage)
+        {
+            statusMessage = null;
+
+            if (GetHexGroupDataById(groupID) == null)
+            {
+                statusMessage = "No " + type + " with the id " + groupID + " can be found";
+                return false;
+            }
+
+            switch (type)
+            {
+                case PropolisDataTypes.HexGroup:
+                    HexGroupList = HexGroupList.Select(x => {
+                        if (x.ID == groupID)
+                        {
+                            x.Childrens = x.Childrens.Select(c => {
+                                if(c.ID == id)
+                                    c.Status = status;
+                                return c;
+                            }).ToList<PropolisGroupItemData>();
+                        }
+                        return x;
+                    }).ToList<HexGroupData>();
+                    break;
+            }
+            return true;
+
+        }
+
+        public bool UpdateItemStatus(string type,int groupID,int status, out string statusMessage)
+        {
+            statusMessage = null;
+
+            if (GetHexGroupDataById(groupID) == null)
+            {
+                statusMessage = "No " + type + " with the id " + groupID + " can be found";
+                return false;
+            }
+
+            switch (type)
+            {
+                case PropolisDataTypes.HexGroup:
+                    HexGroupList = HexGroupList.Select(x => {
+                        if (x.ID == groupID)
+                        {
+                            x.Childrens = x.Childrens.Select(c => {
+                                c.Status = status;
+                                return c;
+                            }).ToList<PropolisGroupItemData>();
+                        }
+                        return x;
+                    }).ToList<HexGroupData>();
+                    break;
+            }
+            return true;
+            
+        }
+
 
         public bool DeleteDataGroup(string type, int id, out string statusMessage)
         {
             statusMessage = null;
             if (GetHexGroupDataById(id) == null)
             {
-                statusMessage = "No " + type + " with the id " + id + "can be found";
+                statusMessage = "No " + type + " with the id " + id + " can be found";
                 return false;
             }
-            else
+            switch (type)
             {
-                switch (type)
-                {
-                    case PropolisDataTypes.HexGroup:
-                        HexGroupList = HexGroupList.Where(x => x.ID != id).ToList<HexGroupData>(); break;
-                }
-                return true;
+                case PropolisDataTypes.HexGroup:
+                    HexGroupList = HexGroupList.Where(x => x.ID != id).ToList<HexGroupData>(); break;
             }
+            return true;
+            
         }
 
-
-     
 
         public bool AddHexGroup(HexGroupData hexGroupData, out string statusMessage)
         {
             if(GetHexGroupDataById(hexGroupData.ID) == null)
             {
                 HexGroupList.Add(hexGroupData);
-                for(int i= 0; i < 6; i++)
-                {
-                    hexGroupData.Childrens.Add(new PropolisGroupItemData(i));
-                }
                 
                 statusMessage = null;
                 return true;

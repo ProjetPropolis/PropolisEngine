@@ -7,7 +7,7 @@ namespace Propolis
     public static class PropolisActions
     {
         public const string Create = "create";
-        public const string UpdateItemStatus = "update-item-status";
+        public const string UpdateItemStatus = "uis";
         public const string Delete = "delete";
         public const string AppStatus = "app-status";
     }   
