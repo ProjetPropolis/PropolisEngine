@@ -10,9 +10,11 @@ namespace Propolis {
         {
             ID = 15;
             Error = true;
+            Status = 0;
         }
         public int ID { get; set; }
         public bool Error { get; set; }
+        public int Status { get; set; }
     }
 }
 

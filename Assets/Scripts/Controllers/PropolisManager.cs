@@ -7,17 +7,7 @@ namespace Propolis
 {
 
 
-    public static class PropolisDataTypes
-    {
-        public const string Hex = "hex";
-        public const string HexGroup = "hexgroup";
-    }
-
-    public static class PropolisActions
-    {
-        public const string Create = "create";
-        public const string Update = "update";
-    }
+   
     public class PropolisManager:MonoBehaviour
     {
         public const char CommandSeparator = ' ';
@@ -57,13 +47,10 @@ namespace Propolis
                 _TempLastBuffer.Action = command;
                 switch (command)
                 {
-                    case "create":validCommand = Create(modelParams); break;
-                    case "update": validCommand = false; break;
-                    case "update-all": validCommand = false; break;
-                    case "delete": validCommand = false; break;
-                    case "save": validCommand = false; break;
-                    case "load": validCommand = false; break;
-                    case "status": validCommand = true; AppendToConsoleLog(_propolisData.ExportToJSON()); break;
+                    case PropolisActions.Create:validCommand = Create(modelParams); break;
+                    case PropolisActions.Delete: validCommand = Delete(modelParams); break;
+
+                    case PropolisActions.AppStatus: validCommand = true; AppendToConsoleLog(_propolisData.ExportToJSON()); break;
                     default: AppendToConsoleLog("Error unknown command: " + rawCommand); break;
                 }
 
@@ -112,8 +99,79 @@ namespace Propolis
             switch (type)
             {
                 case PropolisDataTypes.HexGroup: validCreate= CreateType(type, modelParams); break;
-                case PropolisDataTypes.Hex: validCreate = CreateType(type, modelParams); break;
                 default: AppendToConsoleLog("Error on create method, Invalid type : " + type); break;
+            }
+
+
+            return validCreate;
+        }
+
+        private bool Delete(Queue<string> modelParams)
+        {
+            bool validDelete = false;
+            string statusMessage = null;
+            if (modelParams.Count != 2)
+            {
+                AppendToConsoleLog("Error on delete method, incorrect set of parameter, looking for [type] [ID]");
+                return false;
+            }
+            string type = modelParams.Dequeue();
+            _TempLastBuffer.Type = type;
+            try
+            {
+                _TempLastBuffer.ID = int.Parse(modelParams.Dequeue());
+            }
+            catch
+            {
+                AppendToConsoleLog("Error on delete method, incorrect set of parameter, looking for [type] [ID]");
+                return false;               
+            }
+          
+            switch (type)
+            {
+                case PropolisDataTypes.HexGroup: validDelete = _propolisData.DeleteDataGroup(PropolisDataTypes.HexGroup, _TempLastBuffer.ID, out statusMessage); break;
+                default: AppendToConsoleLog("Error on create method, Invalid type : " + type); break;
+            }
+
+            if (validDelete)
+            {
+                _propolisData.LastEvent = _TempLastBuffer;
+            }
+            else
+            {
+                if (statusMessage != null)
+                {
+                    AppendToConsoleLog(statusMessage);
+                }
+            }
+
+            return validDelete;
+        }
+
+
+        private bool UpdateItem<ItemType>(Queue<string> modelParams)
+        {
+            bool validCreate = false;
+            if (modelParams.Count != 3)
+            {
+                AppendToConsoleLog("Error on create method, no create type and data passed to the manager");
+                return false;
+            }
+            string type = modelParams.Dequeue();
+            _TempLastBuffer.Type = type;
+            try
+            {
+
+            }
+            catch
+            {
+                AppendToConsoleLog("Invalid parameters for update item looking for [Type] [GroupID] [ID] [Status]");
+                return false;
+            }
+            switch (type)
+            {
+                case PropolisDataTypes.Hex: validCreate = CreateType(type, modelParams); break;
+                default: AppendToConsoleLog("Error on create method, Invalid type : " + type + "not an item look for atom or hex"); break;
             }
 
 
@@ -136,7 +194,6 @@ namespace Propolis
             switch (type)
             {
                 case PropolisDataTypes.HexGroup: dataType = new HexGroupData(arrayParams); break;
-                case PropolisDataTypes.Hex: dataType = new HexData(arrayParams); break;
                 default: AppendToConsoleLog("Error on create method, Invalid type : " + type); break;
             }
 

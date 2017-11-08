@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Propolis
 {
     [System.Serializable]
-    public class HexGroupData: PropolisDataType,IPropolisGroupDataType
+    public class HexGroupData: PropolisDataType
     {
         public HexGroupData(string[] modelParams) : base()
         {
@@ -17,8 +17,8 @@ namespace Propolis
                 {
                     ID = Convert.ToInt32(modelParams[0]);
                     Position = new Vector3(
-                        Convert.ToInt32(modelParams[1]),
-                        Convert.ToInt32(modelParams[2]),
+                        float.Parse(modelParams[1]),
+                        float.Parse(modelParams[2]),
                         0);
 
                         

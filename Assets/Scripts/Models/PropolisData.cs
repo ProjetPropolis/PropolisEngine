@@ -23,6 +23,29 @@ namespace Propolis
 
         }
 
+
+        public bool DeleteDataGroup(string type, int id, out string statusMessage)
+        {
+            statusMessage = null;
+            if (GetHexGroupDataById(id) == null)
+            {
+                statusMessage = "No " + type + " with the id " + id + "can be found";
+                return false;
+            }
+            else
+            {
+                switch (type)
+                {
+                    case PropolisDataTypes.HexGroup:
+                        HexGroupList = HexGroupList.Where(x => x.ID != id).ToList<HexGroupData>(); break;
+                }
+                return true;
+            }
+        }
+
+
+     
+
         public bool AddHexGroup(HexGroupData hexGroupData, out string statusMessage)
         {
             if(GetHexGroupDataById(hexGroupData.ID) == null)
@@ -30,7 +53,7 @@ namespace Propolis
                 HexGroupList.Add(hexGroupData);
                 for(int i= 0; i < 6; i++)
                 {
-                    hexGroupData.Childrens.Add(new HexData(i));
+                    hexGroupData.Childrens.Add(new PropolisGroupItemData(i));
                 }
                 
                 statusMessage = null;

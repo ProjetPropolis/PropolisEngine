@@ -2,15 +2,15 @@
 
 
 namespace Propolis {
-    public class HexData: PropolisDataType
+    public class PropolisGroupItemData: PropolisDataType
     {
-        public HexData(int id ) : base()
+        public PropolisGroupItemData(int id ) : base()
         {
             Status = 0;
             ID = id;
             Error = false;
         }
-        public HexData (string[] modelParams) : base()
+        public PropolisGroupItemData(string[] modelParams) : base()
         {
             Error = true;
             int parsingStatusValue;
@@ -36,7 +36,6 @@ namespace Propolis {
 
             }
         }
-        public int Status { get; set; }
     }
 }
 

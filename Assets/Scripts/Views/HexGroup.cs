@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System;
+using Propolis;
 
 public class HexGroup : MonoBehaviour {
 
@@ -13,12 +14,6 @@ public class HexGroup : MonoBehaviour {
     public List<Hex> ChildHexsList;
 
     // Use this for initialization
-
-    private void Awake()
-    {
-        
-        
-    }
     void Start () {
         Osc.SetAddressHandler("/hex", OnReceiveHexStatus);
         ChildHexsList = transform.GetComponentsInChildren<Hex>().ToList<Hex>();
@@ -34,6 +29,6 @@ public class HexGroup : MonoBehaviour {
     {
         Debug.Log("received");
         var value = message.values[0];
-        ChildHexsList[Convert.ToInt32(value)].IsActive = (Convert.ToInt32(message.values[1]) == 1);
+        ChildHexsList[Convert.ToInt32(value)].Status = (PropolisStatus)Convert.ToInt32(message.values[1]);
     }
 }
