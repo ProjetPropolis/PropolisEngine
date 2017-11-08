@@ -14,10 +14,19 @@ public class ConsoleController : MonoBehaviour {
     public PropolisManager PropolisManager;
 	public ScrollRect thisone;
 
+	private List<string> consoleHistory;
+	private int historyIndex;
+
+	public void Awake() {
+		consoleHistory = new List<string>();
+	}
+
 	public void sendValueToConsole(string newLine) {
 		consoleinputField.placeholder.GetComponent<Text>().text = "/Enter command here...";
         consoleinputField.text = PropolisManager.SendCommand(consoleinputField.text);
         consoleText.text = PropolisManager.ConsoleLog;
+		consoleHistory.Add(newLine);
+		historyIndex = consoleHistory.Count;
 		ScrollToBottom();
     }
 
@@ -37,10 +46,33 @@ public class ConsoleController : MonoBehaviour {
 			addFromField();
 			EventSystem.current.SetSelectedGameObject(consolefieldObj,null);
 		} 
+
+		if (Input.GetKeyDown("up")) {
+			moveInHistory ("up");
+		} 
+
+		if (Input.GetKeyDown("down")) {
+			moveInHistory("down");
+		} 
+
 		//IF NOT ENTER KEY FOCUS ON TEXT FIELD
 		if(!Input.GetKeyDown("return")){
 			EventSystem.current.SetSelectedGameObject(consolefieldObj,null);
 		}
+	}
+		
+	//TERMINAL STYLE UP AND DOWN KEY TO NAVIGATE IN COMMAND HISTORY
+
+	public void moveInHistory(string direction) {
+		if (direction == "up") {
+			historyIndex--;
+		} 
+		if (direction == "down") {
+			historyIndex++;
+		}
+		if (historyIndex >= consoleHistory.Count) { historyIndex = consoleHistory.Count - 1; } 
+		if (historyIndex <= 0) {historyIndex = 0; consoleinputField.text = ""; }
+		consoleinputField.text = consoleHistory[historyIndex];
 	}
 
 	public void ScrollToBottom()
