@@ -35,12 +35,17 @@ public class Hex : MonoBehaviour {
     public float TimeToLive = 0.0f;
     private void Start()
     {
-        osc = transform.parent.gameObject.GetComponent<OSC>();
+       
+
+        
+
+    }
+
+    private void OnEnable()
+    {
         material = GetComponent<Renderer>().material;
+        osc = transform.parent.gameObject.GetComponent<OSC>();
         Status = PropolisStatus.OFF;
-
-        SendDataToTouchDesigner();
-
     }
 
     void ChangeColor()

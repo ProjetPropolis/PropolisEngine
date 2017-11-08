@@ -112,6 +112,7 @@ namespace Propolis
                 hexGroup.Osc.outPort = hexGroupData.OutPort;
                 hexGroup.Osc.outIP = hexGroupData.IP;
                 ListHexGroup.Add(hexGroup);
+                gameObject.SetActive(true);
             }
 
             
