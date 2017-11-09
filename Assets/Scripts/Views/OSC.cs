@@ -159,11 +159,21 @@ public class UDPPacketIO
 	{
 		try
 		{
-			Sender = new UdpClient();
-			Debug.Log("Opening OSC listener on port " + localPort);
+            if(Sender == null)
+            {
+                Sender = new UdpClient();
+                Debug.Log("Opening OSC listener on port " + localPort);
+            }
+			
+			
 			
 			IPEndPoint listenerIp = new IPEndPoint(IPAddress.Any, localPort);
-			Receiver = new UdpClient(listenerIp);
+
+            if(Receiver == null)
+            {
+                Receiver = new UdpClient(listenerIp);
+            }
+			
 			
 			
 			socketsOpen = true;
@@ -420,7 +430,7 @@ public class UDPPacketIO
 
 
 
-	void Awake() {
+	void OnEnable() {
 		//print("Opening OSC listener on port " + inPort);
 
 		OscPacketIO = new UDPPacketIO(outIP, outPort, inPort);
