@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 namespace Propolis
 {
@@ -35,6 +37,44 @@ namespace Propolis
             ConsoleLog = "";
         }
 
+        //it's static so we can call it from anywhere
+        public bool Save()
+        {
+            try
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                //Application.persistentDataPath is a string, so if you wanted you can put that into debug.log if you want to know where save games are located
+                FileStream file = File.Create(Application.persistentDataPath + "/savedGames.gd"); //you can call it anything you want
+                bf.Serialize(file, _propolisData);
+                file.Close();
+                return true;
+            }
+            catch
+            {
+                AppendToConsoleLog("Unable to write save file");
+                return false;
+            }
+ 
+        }
+
+        public bool Load()
+        {
+            if (File.Exists(Application.persistentDataPath + "/savedGames.gd"))
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                FileStream file = File.Open(Application.persistentDataPath + "/savedGames.gd", FileMode.Open);
+                //_propolisData = (PropolisData)bf.Deserialize(file);
+                file.Close();
+                _propolisData.LastEvent = _TempLastBuffer;
+                return true;
+            }
+            else
+            {
+                AppendToConsoleLog("Unable to load save file. Please save first");
+                return false;
+            }
+        }
+
         public string SendCommand(string rawCommand)
         {
             bool validCommand = false;
@@ -42,12 +82,15 @@ namespace Propolis
             Queue<string> modelParams;
             AppendToConsoleLog(rawCommand);
             _TempLastBuffer = new PropolisLastEventState();
+            _propolisData.LastEvent = new PropolisLastEventState();
             if(ParseCommand(rawCommand.ToLower(),out command, out modelParams))
             {
                 _TempLastBuffer.Action = command;
                 switch (command)
                 {
                     case PropolisActions.Create:validCommand = Create(modelParams); break;
+                    case PropolisActions.Save: validCommand = Save(); break;
+                    case PropolisActions.Load: validCommand = Load(); break;
                     case PropolisActions.Delete: validCommand = Delete(modelParams); break;
                     case PropolisActions.UpdateItemStatus: validCommand = UpdateItemStatus(modelParams); break;
                     case PropolisActions.AppStatus: validCommand = true; AppendToConsoleLog(_propolisData.ExportToJSON()); break;

@@ -4,15 +4,18 @@ using UnityEngine;
 using System.Linq;
 
 
+
 namespace Propolis
 {
     [System.Serializable]
     public class PropolisData
     {
+        [SerializeField]
         private static volatile PropolisData instance;
         private static object syncRoot = new Object();
+        [SerializeField]
         public PropolisLastEventState LastEvent { get; set; }
-
+        [SerializeField]
         public List<HexGroupData> HexGroupList{ get; set; }
  
 
@@ -22,6 +25,8 @@ namespace Propolis
             LastEvent = new PropolisLastEventState();
 
         }
+
+  
 
         public bool UpdateItemStatus(string type, int groupID, int id, int status, out string statusMessage)
         {

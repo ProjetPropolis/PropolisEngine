@@ -27,11 +27,16 @@ public class HexGroup : MonoBehaviour {
 
     }
 
+    public void SendHexDataToHiveController(int hexID, PropolisStatus status)
+    {
+        hiveGameController.SendCommand(String.Format("uis {0} {1} {2} {3}", PropolisDataTypes.HexGroup, ID, hexID, status));
+    }
+
     void OnReceiveHexStatus(OscMessage message)
     {
         Debug.Log("received");
         var value = message.values[0];
-        ChildHexsList[Convert.ToInt32(value)].Status = (PropolisStatus)Convert.ToInt32(message.values[1]);
-        //hiveGameController.SendCommand(String.Format("uis {0} {1} {2} {3}", PropolisDataTypes.HexGroup, ID, message.values[0], message.values[1]));
+        //ChildHexsList[Convert.ToInt32(value)].Status = (PropolisStatus)Convert.ToInt32(message.values[1]);
+        hiveGameController.SendCommand(String.Format("uis {0} {1} {2} {3}", PropolisDataTypes.HexGroup, ID, message.values[0], message.values[1]));
     }
 }

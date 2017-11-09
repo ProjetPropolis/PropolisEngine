@@ -89,6 +89,6 @@ public class ConsoleController : MonoBehaviour {
 
 	public void ScrollToBottom()
 	{
-		thisone.normalizedPosition = new Vector2(0, 0);
+		//  thisone.normalizedPosition = new Vector2(0, 0);
 	}
 }

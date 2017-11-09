@@ -26,9 +26,15 @@ namespace Propolis
                 case PropolisActions.Create: ProcessCreationElement();break ;
                 case PropolisActions.Delete: ProcessSupressionElement(); break;
                 case PropolisActions.UpdateItemStatus: UpdateHexGroupItemStatus(); break;
+                case PropolisActions.Load: LoadFromData(); break;
             }
         }
 
+        private void LoadFromData()
+        {
+            DeleteAllComponents();
+            propolisData.HexGroupList.ForEach(x=>InstantiateHexGroup(x.ID));
+        }
         private void UpdateHexGroupItemStatus()
         {
             //if all hex of an hexgroup have changed
@@ -66,7 +72,7 @@ namespace Propolis
         {
             switch (propolisData.LastEvent.Type)
             {
-                case PropolisDataTypes.HexGroup: InstantiateHexGroup(); break;
+                case PropolisDataTypes.HexGroup: InstantiateHexGroup(propolisData.LastEvent.ID); break;
             }
         }
 
@@ -98,10 +104,10 @@ namespace Propolis
             GameController.SendCommand(command);
         }
 
-        private void InstantiateHexGroup()
+        private void InstantiateHexGroup(int ID)
         {
 
-            HexGroupData hexGroupData = propolisData.GetHexGroupDataById(propolisData.LastEvent.ID);
+            HexGroupData hexGroupData = propolisData.GetHexGroupDataById(ID);
             if (hexGroupData != null)
             {
                 GameObject gameObject = Instantiate(hexGroupPrefab, hexGroupData.Position, Quaternion.identity);
@@ -116,6 +122,16 @@ namespace Propolis
             }
 
             
+        }
+
+        void DeleteAllComponents()
+        {
+            for (int i = ListHexGroup.Count; i >0 ; i--)
+            {
+                Destroy(ListHexGroup[i-1].gameObject);
+                ListHexGroup.RemoveAt(i-1);
+            }
+          
         }
 
         // Update is called once per frame

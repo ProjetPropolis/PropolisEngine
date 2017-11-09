@@ -9,6 +9,8 @@ namespace Propolis
         public const string Create = "create";
         public const string UpdateItemStatus = "uis";
         public const string Delete = "delete";
+        public const string Save = "save";
+        public const string Load = "load";
         public const string AppStatus = "app-status";
     }   
 }

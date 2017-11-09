@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Propolis;
+using System.Linq;
 
 
 public class Hex : MonoBehaviour {
@@ -17,13 +18,17 @@ public class Hex : MonoBehaviour {
 
         set
         {
+        
             status = value;
-			// this condition is to be remove
-			if (status == PropolisStatus.ON) {
-				TimeToLive = TimeAlive;
-			}
+            // this condition is to be remove
+            if (status == PropolisStatus.ON)
+            {
+                TimeToLive = TimeAlive;
+            }
             ChangeColor();
             SendOscMessage("/hex", ID, (int)status);
+            
+            
         }
     }
    
@@ -32,6 +37,8 @@ public class Hex : MonoBehaviour {
     public bool isCircled;
     public Collider2D otherHex;
     public OSC osc;
+    public HexGroup ParentGroup;
+    public PropolisData propolisData;
 
     private Material material;
 
@@ -39,11 +46,13 @@ public class Hex : MonoBehaviour {
     public float TimeToLive = 0.0f;
     private void Start()
     {
-       
-		material = GetComponent<Renderer>().material;
+        ParentGroup = transform.parent.GetComponent<HexGroup>();
+        propolisData = PropolisData.Instance;
+        material = GetComponent<Renderer>().material;
 		osc = transform.parent.gameObject.GetComponent<OSC>();
-		Status = PropolisStatus.OFF;
-        
+        Status = (PropolisStatus)propolisData.HexGroupList.First(x => x.ID == ParentGroup.ID).Childrens.First(x => x.ID == ID).Status;
+
+
 
     }
 
@@ -94,7 +103,9 @@ public class Hex : MonoBehaviour {
 
 			if (TimeToLive <= 0) {
 				Status = PropolisStatus.OFF;
-			}
+                ParentGroup.SendHexDataToHiveController(ID, Status);
+
+            }
 		}
 	}
 
