@@ -53,10 +53,24 @@ public class Hex : MonoBehaviour {
         switch (Status)
         {
 
-            case PropolisStatus.OFF: material.color = new Color(50, 0, 80); break;
-            case PropolisStatus.ON: material.color = new Color(75, 75, 0); break;
+            case PropolisStatus.OFF: material.color = GetColorFromHTML("#3A3459"); break;
+            case PropolisStatus.ON: material.color = GetColorFromHTML("#FDE981"); break;
+            case PropolisStatus.CORRUPTED: material.color = GetColorFromHTML("#EF5572"); break;
+            case PropolisStatus.CLEANSER: material.color = GetColorFromHTML("#0BFFE2"); break;
         }
 
+    }
+
+    Color GetColorFromHTML(string hex)
+    {
+        Color color;
+
+        if(ColorUtility.TryParseHtmlString(hex, out color))
+        {
+            return color;
+        }
+        return color;
+        
     }
 
     public void SendDataToTouchDesigner()
@@ -71,7 +85,6 @@ public class Hex : MonoBehaviour {
 
     private void SendOscMessage(string address, int value, int value2)
     {
-       // Debug.Log("sending osc: " + address + value.ToString() + " " + value2.ToString());
 
         OscMessage message = new OscMessage();
 
