@@ -9,6 +9,7 @@ public class tabsController : MonoBehaviour {
 	public GameObject[] tabs;
 	public Button initalPanel;
 	public Button[] buttonsPanel;
+	public genericUiController uiController;
 
 	private int counterMenu;
 
@@ -29,11 +30,19 @@ public class tabsController : MonoBehaviour {
 		counterMenu ++;
 		if (counterMenu >= buttonsPanel.Length) { counterMenu = 0; } 
 		UpdateSelectedTab(buttonsPanel[counterMenu]);
+	
 	}
 
 	public void UpdateSelectedTab(Button button) {
 		foreach (var aTab in tabs) {
 			if(aTab.name != button.transform.Find("Text").GetComponent<Text>().text) { aTab.SetActive (false); } else { aTab.SetActive(true); }
 		}	
+		updateCheck();
+	}
+
+	public void updateCheck() {
+		if (uiController.currentState != "null") {
+			uiController.updateInteractibles();
+		}
 	}
 }

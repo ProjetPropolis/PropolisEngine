@@ -40,6 +40,7 @@ public class ConsoleController : MonoBehaviour {
         consoleText.text = PropolisManager.ConsoleLog;
     }
 
+	// KEYBOARD SHORTCUTS
 	public void Update() {
 		//SEND TO CONSOLE ON ENTER KEY
 		if (Input.GetKeyDown("return")) {
@@ -47,6 +48,7 @@ public class ConsoleController : MonoBehaviour {
 			EventSystem.current.SetSelectedGameObject(consolefieldObj,null);
 		} 
 
+		//UP AND DOWN ON HISTORY
 		if (Input.GetKeyDown("up")) {
 			moveInHistory ("up");
 		} 
@@ -64,16 +66,26 @@ public class ConsoleController : MonoBehaviour {
 	//TERMINAL STYLE UP AND DOWN KEY TO NAVIGATE IN COMMAND HISTORY
 
 	public void moveInHistory(string direction) {
-		if (direction == "up") {
-			historyIndex--;
-		} 
-		if (direction == "down") {
-			historyIndex++;
+		
+		if (historyIndex != 0) {
+			if (direction == "up") {
+				historyIndex--;
+			} 
+			if (direction == "down") {
+				historyIndex++;
+			}
+			if (historyIndex >= consoleHistory.Count) {
+				historyIndex = consoleHistory.Count - 1;
+			} 
+			if (historyIndex <= 0) {
+				historyIndex = 0;
+				consoleinputField.text = "";
+			}
+			consoleinputField.text = consoleHistory [historyIndex];
+			consoleinputField.MoveTextEnd(false);
 		}
-		if (historyIndex >= consoleHistory.Count) { historyIndex = consoleHistory.Count - 1; } 
-		if (historyIndex <= 0) {historyIndex = 0; consoleinputField.text = ""; }
-		consoleinputField.text = consoleHistory[historyIndex];
 	}
+	//SCROLL TO BOTTOM OF CONOSOLE
 
 	public void ScrollToBottom()
 	{
