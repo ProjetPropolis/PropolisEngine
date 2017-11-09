@@ -36,16 +36,16 @@ public class Hex : MonoBehaviour {
     private void Start()
     {
        
-
+		material = GetComponent<Renderer>().material;
+		osc = transform.parent.gameObject.GetComponent<OSC>();
+		Status = PropolisStatus.OFF;
         
 
     }
 
     private void OnEnable()
     {
-        material = GetComponent<Renderer>().material;
-        osc = transform.parent.gameObject.GetComponent<OSC>();
-        Status = PropolisStatus.OFF;
+
     }
 
     void ChangeColor()
@@ -93,20 +93,5 @@ public class Hex : MonoBehaviour {
         message.values.Add(value2);
         osc.Send(message);
     }
-
- 
-
-    private void OnMouseOver()
-    {
-
-            
-    }
-
-    private void Update()
-    {
-   
-     
-    }
-
 
 }

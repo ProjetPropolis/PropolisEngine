@@ -105,7 +105,7 @@ namespace Propolis
             if (hexGroupData != null)
             {
                 GameObject gameObject = Instantiate(hexGroupPrefab, hexGroupData.Position, Quaternion.identity);
-                HexGroup hexGroup = gameObject.GetComponent<HexGroup>();
+   	              HexGroup hexGroup = gameObject.GetComponent<HexGroup>();
                 hexGroup.transform.parent = HiveViewTransform;
                 hexGroup.ID = hexGroupData.ID;
                 hexGroup.Osc.inPort = hexGroupData.InPort;
