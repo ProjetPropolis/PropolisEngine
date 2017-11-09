@@ -5,10 +5,11 @@ using UnityEngine;
 public class camSwitchController : MonoBehaviour {
 
 	private GameObject[] cams;
+	public string initialState = "Ruche";
 
 	public void Start() {
 		cams = GameObject.FindGameObjectsWithTag("aView");
-		switchCam("Ruche");
+		switchCam(initialState);
 	}
 
 	//ALL OFF
@@ -16,7 +17,7 @@ public class camSwitchController : MonoBehaviour {
 		foreach (var view in cams) {
 			if (view.transform.name != toActivateString) {
 				view.SetActive (false);
-			} else {
+			} else {				
 				view.SetActive (true);
 			}
 		}

@@ -7,6 +7,10 @@ public class genericUiController : MonoBehaviour {
 
 	public string currentState;
 
+	public void Start() {
+		UpdateInteractables ("interactableZoneRuche");
+	}
+
 	public void UpdateInteractables (string interactableTab) {
 
 		currentState = interactableTab;
@@ -25,8 +29,8 @@ public class genericUiController : MonoBehaviour {
 			}
 		}
 
-		if (interactableTab != "null") {
-			if (GameObject.FindGameObjectsWithTag (interactableTab) != null) {
+		if (interactableTab != "") {
+			if (GameObject.FindGameObjectsWithTag(interactableTab) != null) {
 				var interactableArray = GameObject.FindGameObjectsWithTag (interactableTab); 
 				foreach (var toSelect in interactableArray) {
 					toSelect.GetComponent<CanvasGroup> ().alpha = 1;
