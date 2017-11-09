@@ -18,6 +18,10 @@ public class Hex : MonoBehaviour {
         set
         {
             status = value;
+			// this condition is to be remove
+			if (status == PropolisStatus.ON) {
+				TimeToLive = TimeAlive;
+			}
             ChangeColor();
             SendOscMessage("/hex", ID, (int)status);
         }
@@ -82,6 +86,17 @@ public class Hex : MonoBehaviour {
 
     }
 
+	private void Update()
+	{
+		//this code is to be remove
+		if (status == PropolisStatus.ON) {
+			TimeToLive -= Time.deltaTime;
+
+			if (TimeToLive <= 0) {
+				Status = PropolisStatus.OFF;
+			}
+		}
+	}
 
     private void SendOscMessage(string address, int value, int value2)
     {

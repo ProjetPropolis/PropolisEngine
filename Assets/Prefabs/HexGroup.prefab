@@ -786,7 +786,7 @@ MonoBehaviour:
   isCircled: 0
   otherHex: {fileID: 0}
   osc: {fileID: 114366736888829554}
-  TimeAlive: 3
+  TimeAlive: 2
   TimeToLive: 0
 --- !u!114 &114366736888829554
 MonoBehaviour:
