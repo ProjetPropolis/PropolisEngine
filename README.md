@@ -23,13 +23,21 @@ Each part of a command must be seperated by a space. Otherwise the parser will r
 ### Item Status ###
 
 OFF = 0
+
 ON =  1
+
 CORRUPTED = 2
+
 ULTRACORRUPTED = 3
+
 CLEANSER = 4
+
 RECIPE1 = 5
+
 RECIPE2 = 6
+
 RECIPE3 = 7
+
 
 ### Command List
 
