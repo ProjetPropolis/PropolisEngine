@@ -41,16 +41,16 @@ RECIPE3 = 7
   
   ##### HexGroup
   
-  CREATE HEXGROUP [ID] [X] [Y] [Z] [IP_ADRESS] [IN_PORT] [OUT_PORT]
+  CREATE HEXGROUP [*GroupId*] [*X*] [*Y*] [*Z*] [*IP_ADDRESS*] [*IN_PORT*] [*OUT_PORT*]
   
 #### DELETE
   
   Delete a group element
-  *DELETE [type] [GroupID]*
+  DELETE [*type*] [*GroupID*]
   
   ##### HexGroup
   
-  CREATE HEXGROUP [ID]
+  CREATE HEXGROUP [*GroupID*]
   
 #### UIS
   
@@ -58,17 +58,17 @@ RECIPE3 = 7
   
   ##### Single Item
   
-  *UIS [type] [GroupID] [ItemID] [Status]*
+  UIS [*type*] [*GroupID*] [*ItemID*] [*Status*]
   
   ##### All Items
   
-  *UIS [type] [GroupID] ALL [Status]*
+  UIS [*type*] [*GroupID*] ALL [*Status*]
   
   ##### HexGroup
   
-  UIS HEXGROUP [GroupID] [ItemID] [Status] 
+  UIS HEXGROUP [*GroupID*] [*ItemID*] [*Status*] 
   
-  UIS HEXGROUP [GroupID] ALL [Status] 
+  UIS HEXGROUP [*GroupID*] ALL [*Status*] 
   
 
   
