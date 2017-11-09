@@ -131,7 +131,7 @@ namespace Propolis
                 Destroy(ListHexGroup[i-1].gameObject);
                 ListHexGroup.RemoveAt(i-1);
             }
-          
+            
         }
 
         // Update is called once per frame

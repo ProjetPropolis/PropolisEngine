@@ -19,9 +19,10 @@ public class Hex : MonoBehaviour {
         set
         {
         
+         
             status = value;
             // this condition is to be remove
-            if (status == PropolisStatus.ON)
+            if (status == PropolisStatus.ON && TimeToLive <= 0)
             {
                 TimeToLive = TimeAlive;
             }
@@ -102,8 +103,7 @@ public class Hex : MonoBehaviour {
 			TimeToLive -= Time.deltaTime;
 
 			if (TimeToLive <= 0) {
-				Status = PropolisStatus.OFF;
-                ParentGroup.SendHexDataToHiveController(ID, Status);
+                ParentGroup.SendHexDataToHiveController(ID, PropolisStatus.OFF);
 
             }
 		}
