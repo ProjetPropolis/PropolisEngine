@@ -41,7 +41,7 @@ RECIPE3 = 7
   
   ##### HexGroup
   
-  CREATE HEXGROUP [*GroupId*] [*X*] [*Y*] [*Z*] [*IP_ADDRESS*] [*IN_PORT*] [*OUT_PORT*]
+  CREATE HEXGROUP [*GroupId*] [*X*] [*Y*] [*IP_ADDRESS*] [*IN_PORT*] [*OUT_PORT*]
   
 #### DELETE
   
