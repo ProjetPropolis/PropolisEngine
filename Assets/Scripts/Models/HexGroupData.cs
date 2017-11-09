@@ -16,10 +16,10 @@ namespace Propolis
                 try
                 {
                     ID = Convert.ToInt32(modelParams[0]);
-                    Position = new Vector3(
+                    SetPosition(new Vector3(
                         float.Parse(modelParams[1]),
                         float.Parse(modelParams[2]),
-                        0);
+                        0));
 
                         
                     IP = modelParams[3];
@@ -41,11 +41,27 @@ namespace Propolis
 
             }
         }
-        public Vector3 Position { get; set; }
+        //A vector 3 is not use because it cannot be serialized
+        public Vector3 GetPosition()
+        {
+            return new Vector3(x, y, z);  
+        }
+
+        //A vector 3 is not use because it cannot be serialized
+        public void SetPosition(Vector3 position)
+        {
+            x = position.x;
+            y = position.x;
+            z = position.x;
+        }
+
+        [SerializeField]
         public List<PropolisGroupItemData> Childrens{get;set;}
         public string IP { get; set; }
         public int OutPort { get; set; }
         public int InPort { get; set; }
+        //A vector 3 is not use because it cannot be serialized
+        private float x, y, z;
     }
 }
 
