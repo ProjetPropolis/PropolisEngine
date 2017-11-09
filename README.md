@@ -20,16 +20,63 @@ The propolis engine comes with a console script. All the actions availlable in t
 
 Each part of a command must be seperated by a space. Otherwise the parser will return an error.
 
+### Item Status ###
+
+OFF = 0
+
+ON =  1
+
+CORRUPTED = 2
+
+ULTRACORRUPTED = 3
+
+CLEANSER = 4
+
+RECIPE1 = 5
+
+RECIPE2 = 6
+
+RECIPE3 = 7
+
+
 ### Command List
 
-#### CREATE
 
+#### CREATE
+  
+  Create a new group element
   *CREATE [type] [params ....]*
   
   ##### HexGroup
   
-  CREATE HEXGROUP [ID] [X] [Y] [Z] [IP_ADRESS] [IN_PORT] [OUT_PORT]
+  CREATE HEXGROUP [*GroupId*] [*X*] [*Y*] [*IP_ADDRESS*] [*IN_PORT*] [*OUT_PORT*]
   
-  ##### Hex
+#### DELETE
   
-  CREATE HEX [HEX_GROUP_ID] [ID] [STATUS]
+  Delete a group element
+  DELETE [*type*] [*GroupID*]
+  
+  ##### HexGroup
+  
+  CREATE HEXGROUP [*GroupID*]
+  
+#### UIS
+  
+  Update the status of a single item or all item of a group
+  
+  ##### Single Item
+  
+  UIS [*type*] [*GroupID*] [*ItemID*] [*Status*]
+  
+  ##### All Items
+  
+  UIS [*type*] [*GroupID*] ALL [*Status*]
+  
+  ##### HexGroup
+  
+  UIS HEXGROUP [*GroupID*] [*ItemID*] [*Status*] 
+  
+  UIS HEXGROUP [*GroupID*] ALL [*Status*] 
+  
+
+  
