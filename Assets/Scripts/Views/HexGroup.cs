@@ -29,7 +29,7 @@ public class HexGroup : MonoBehaviour {
 
     public void SendHexDataToHiveController(int hexID, PropolisStatus status)
     {
-        hiveGameController.SendCommand(String.Format("uis {0} {1} {2} {3}", PropolisDataTypes.HexGroup, ID, hexID, status));
+        hiveGameController.SendCommand(String.Format("uis {0} {1} {2} {3}", PropolisDataTypes.HexGroup, ID, hexID, (int)status));
     }
 
     void OnReceiveHexStatus(OscMessage message)

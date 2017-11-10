@@ -154,6 +154,11 @@ namespace Propolis
 
                 return instance;
             }
+
+            set
+            {
+                instance = value;   
+            }
         }
 
         public string ExportToJSON()

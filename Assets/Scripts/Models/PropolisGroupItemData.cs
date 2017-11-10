@@ -2,6 +2,7 @@
 
 
 namespace Propolis {
+    [Serializable]
     public class PropolisGroupItemData: PropolisDataType
     {
         public PropolisGroupItemData(int id ) : base()

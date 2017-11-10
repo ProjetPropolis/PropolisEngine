@@ -21,6 +21,7 @@ namespace Propolis
 
         public void UpdateFromModel()
         {
+            propolisData = PropolisData.Instance;
             switch (propolisData.LastEvent.Action)
             {
                 case PropolisActions.Create: ProcessCreationElement();break ;
@@ -110,7 +111,7 @@ namespace Propolis
             HexGroupData hexGroupData = propolisData.GetHexGroupDataById(ID);
             if (hexGroupData != null)
             {
-                GameObject gameObject = Instantiate(hexGroupPrefab, hexGroupData.Position, Quaternion.identity);
+                GameObject gameObject = Instantiate(hexGroupPrefab, hexGroupData.GetPosition(), Quaternion.identity);
    	              HexGroup hexGroup = gameObject.GetComponent<HexGroup>();
                 hexGroup.transform.parent = HiveViewTransform;
                 hexGroup.ID = hexGroupData.ID;
@@ -131,7 +132,7 @@ namespace Propolis
                 Destroy(ListHexGroup[i-1].gameObject);
                 ListHexGroup.RemoveAt(i-1);
             }
-          
+            
         }
 
         // Update is called once per frame

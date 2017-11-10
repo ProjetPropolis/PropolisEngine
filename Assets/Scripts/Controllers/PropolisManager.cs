@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using System;
 
 namespace Propolis
 {
@@ -24,7 +25,13 @@ namespace Propolis
             ConsoleLog = "";
    
             _propolisData = PropolisData.Instance;
+            
 
+        }
+
+        private void Start()
+        {
+            SendCommand("load");
         }
 
         private void AppendToConsoleLog(string line)
@@ -49,9 +56,9 @@ namespace Propolis
                 file.Close();
                 return true;
             }
-            catch
+            catch(Exception ex)
             {
-                AppendToConsoleLog("Unable to write save file");
+                AppendToConsoleLog(ex.Message);
                 return false;
             }
  
@@ -63,8 +70,9 @@ namespace Propolis
             {
                 BinaryFormatter bf = new BinaryFormatter();
                 FileStream file = File.Open(Application.persistentDataPath + "/savedGames.gd", FileMode.Open);
-                //_propolisData = (PropolisData)bf.Deserialize(file);
+                PropolisData.Instance = (PropolisData)bf.Deserialize(file);
                 file.Close();
+                _propolisData = PropolisData.Instance;
                 _propolisData.LastEvent = _TempLastBuffer;
                 return true;
             }
