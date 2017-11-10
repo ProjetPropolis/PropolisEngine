@@ -61,7 +61,15 @@ namespace Propolis
         public int OutPort { get; set; }
         public int InPort { get; set; }
         //A vector 3 is not use because it cannot be serialized
-        private float x, y, z;
+        public float x, y, z;
+
+        public void OverrideData(float _x , float _y, string _IP, int _inPort, int _OutPort)
+        {
+            x = _x;
+            y = _y;
+            InPort = _inPort;
+            OutPort = _OutPort;
+        }
     }
 }
 

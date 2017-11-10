@@ -99,6 +99,7 @@ namespace Propolis
                     case PropolisActions.Create:validCommand = Create(modelParams); break;
                     case PropolisActions.Save: validCommand = Save(); break;
                     case PropolisActions.Load: validCommand = Load(); break;
+                    case PropolisActions.Update:validCommand = UpdateGroup(modelParams);break;
                     case PropolisActions.Delete: validCommand = Delete(modelParams); break;
                     case PropolisActions.UpdateItemStatus: validCommand = UpdateItemStatus(modelParams); break;
                     case PropolisActions.AppStatus: validCommand = true; AppendToConsoleLog(_propolisData.ExportToJSON()); break;
@@ -124,7 +125,7 @@ namespace Propolis
             return GetLastConsoleEntry();
         }
 
-
+      
         private string GetLastConsoleEntry()
         {
             string[] separatorFilter = new string[] { LineFilterConsole };
@@ -155,6 +156,26 @@ namespace Propolis
 
 
             return validCreate;
+        }
+
+        private bool UpdateGroup(Queue<string> modelParams)
+        {
+            bool validUpdate = false;
+            if (modelParams.Count == 0)
+            {
+                AppendToConsoleLog("Error on update method, no update type and data passed to the manager");
+                return false;
+            }
+            string type = modelParams.Dequeue();
+            _TempLastBuffer.Type = type;
+            switch (type)
+            {
+                case PropolisDataTypes.HexGroup: validUpdate = UpdateType(type, modelParams); break;
+                default: AppendToConsoleLog("Error on update method, Invalid type : " + type); break;
+            }
+
+
+            return validUpdate;
         }
 
         private bool UpdateItemStatus(Queue<string> modelParams)
@@ -236,6 +257,8 @@ namespace Propolis
 
             return validUpdate;
         }
+
+
 
         private bool Delete(Queue<string> modelParams)
         {
@@ -360,6 +383,59 @@ namespace Propolis
             }
                
             return validCreation;
+        }
+
+        private bool UpdateType(string type, Queue<string> modelParams)
+        {
+            string statusMessage = null;
+            PropolisDataType dataType = null;
+            string[] arrayParams = modelParams.ToArray<string>();
+            bool validUpdate= true;
+
+            if (modelParams.Count == 0)
+            {
+                AppendToConsoleLog("Error on update method, no create data");
+                return false;
+            }
+
+            switch (type)
+            {
+                case PropolisDataTypes.HexGroup: dataType = new HexGroupData(arrayParams); break;
+                default: AppendToConsoleLog("Error on update method, Invalid type : " + type); break;
+            }
+
+            if (dataType == null)
+            {
+                return false;
+            }
+
+            _TempLastBuffer.ID = dataType.ID;
+
+            if (dataType.Error == true)
+            {
+                AppendToConsoleLog("Error on update " + type + ", invalid parameters"); 
+                return false;
+            }
+
+            switch (type)
+            {
+                case PropolisDataTypes.HexGroup: validUpdate = _propolisData.UpdateHexGroup((HexGroupData)dataType, out statusMessage); break;
+                default: AppendToConsoleLog("Error on update method, Invalid type : " + type); break;
+            }
+
+            if (validUpdate)
+            {
+                _propolisData.LastEvent = _TempLastBuffer;
+            }
+            else
+            {
+                if (statusMessage != null)
+                {
+                    AppendToConsoleLog(statusMessage);
+                }
+            }
+
+            return validUpdate;
         }
 
 

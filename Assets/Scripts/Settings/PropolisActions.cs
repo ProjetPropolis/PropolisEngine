@@ -11,6 +11,7 @@ namespace Propolis
         public const string Delete = "delete";
         public const string Save = "save";
         public const string Load = "load";
+        public const string Update = "update";
         public const string AppStatus = "app-status";
     }   
 }

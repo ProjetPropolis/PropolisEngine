@@ -122,6 +122,31 @@ namespace Propolis
             }
         }
 
+        public bool UpdateHexGroup(HexGroupData hexGroupData, out string statusMessage)
+        {
+            if (GetHexGroupDataById(hexGroupData.ID) != null)
+            {
+                HexGroupList.ForEach(
+                    x =>
+                    {
+                        if(x.ID == hexGroupData.ID)
+                        {
+                            x.OverrideData(hexGroupData.x, hexGroupData.y, hexGroupData.IP, hexGroupData.InPort, hexGroupData.OutPort); 
+                        }
+                    }
+
+                );
+
+                statusMessage = null;
+                return true;
+            }
+            else
+            {
+                statusMessage = "No hexgroup exist with the id: "+ hexGroupData.ID.ToString();
+                return false;
+            }
+        }
+
 
         public HexGroupData GetHexGroupDataById(int id)
         {

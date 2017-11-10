@@ -27,6 +27,7 @@ namespace Propolis
                 case PropolisActions.Create: ProcessCreationElement();break ;
                 case PropolisActions.Delete: ProcessSupressionElement(); break;
                 case PropolisActions.UpdateItemStatus: UpdateHexGroupItemStatus(); break;
+                case PropolisActions.Update: UpdateHexGroup(); break;
                 case PropolisActions.Load: LoadFromData(); break;
             }
         }
@@ -35,6 +36,23 @@ namespace Propolis
         {
             DeleteAllComponents();
             propolisData.HexGroupList.ForEach(x=>InstantiateHexGroup(x.ID));
+        }
+        private void UpdateHexGroup()
+        {
+            HexGroupData hexGroupData = propolisData.HexGroupList.FirstOrDefault(x => x.ID == propolisData.LastEvent.GroupID);
+
+            ListHexGroup.ForEach(
+                x =>
+                {
+                    if (x.ID == hexGroupData.ID)
+                    {
+                        x.transform.position = hexGroupData.GetPosition();
+                        x.Osc.inPort = hexGroupData.InPort;
+                        x.Osc.outPort = hexGroupData.OutPort;
+                        x.Osc.outIP = hexGroupData.IP;
+                    }   
+                }
+            );
         }
         private void UpdateHexGroupItemStatus()
         {
