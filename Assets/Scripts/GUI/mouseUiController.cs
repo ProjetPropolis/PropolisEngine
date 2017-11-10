@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Propolis;
 
 public class mouseUiController : MonoBehaviour {
@@ -20,7 +21,8 @@ public class mouseUiController : MonoBehaviour {
         {
             if (mouseState == "create")
             {
-                Cursor.SetCursor(cursorTextureCreate, hotSpot, cursorMode);
+                Cursor.SetCursor(cursorTextureCreate, Vector2.zero, cursorMode);
+
             }
 
             if (mouseState == "delete")
@@ -42,6 +44,7 @@ public class mouseUiController : MonoBehaviour {
         {
 
             if (mouseState != "default") {
+
                 inCongif = true;
 
                 GameObject configUI = Instantiate(Resources.Load("UI/InfoPanelConfig"), Input.mousePosition, Quaternion.identity) as GameObject;
@@ -49,7 +52,7 @@ public class mouseUiController : MonoBehaviour {
 
                 if (mouseState == "create")
                 {
-                    StartCoroutine(WaitTosend(configUI,mouseState, Input.mousePosition, "lol", "lol", "lol", "lol"));
+                    StartCoroutine(WaitTosend(configUI,mouseState, Input.mousePosition));
                 }
 
                 if (mouseState == "delete")
@@ -61,7 +64,7 @@ public class mouseUiController : MonoBehaviour {
         }
     }
 
-    IEnumerator WaitTosend(GameObject uiConfig,string lastState,Vector3 mouseposition,string id,string ip,string portIn,string portOut)
+    IEnumerator WaitTosend(GameObject uiConfig,string lastState,Vector3 mouseposition)
     {
         while (true)
         {
@@ -69,9 +72,19 @@ public class mouseUiController : MonoBehaviour {
             {
                 if (lastState == "create")
                 {
-                    var createString = "CREATE HEXGROUP " + id + " " + mouseposition.x + " " + mouseposition.y + " " + ip + " " + portIn + " " + portOut;
+                    var ID = GameObject.Find("InputFieldID").GetComponent<InputField>().text;
+                    var IP = GameObject.Find("InputFieldIP").GetComponent<InputField>().text;
+                    var portIn = GameObject.Find("InputFieldPortIN").GetComponent<InputField>().text;
+                    var portOut = GameObject.Find("InputFieldPartOut").GetComponent<InputField>().text;
+
+                    var worldPos = Camera.main.ScreenToWorldPoint(mouseposition);
+
+                    var command = "CREATE HEXGROUP " + ID + " " + worldPos.y + " " + worldPos.x + " " + IP + " " + portIn + " " + portOut;
+
+
+                    PropolisManager.SendCommand(command);
+
                     Destroy(uiConfig);
-                    print(createString);
                 }
 
                 yield break;
