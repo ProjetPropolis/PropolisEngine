@@ -1,13 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Propolis;
 
 public class mouseUiController : MonoBehaviour {
 
     public string mouseState = "default";
-    public Texture2D cursorTextureCreate,cursorTextureDelete;
+    public Texture2D cursorTextureCreate, cursorTextureDelete;
     public CursorMode cursorMode = CursorMode.Auto;
-    public Vector2 hotSpot = Vector2.zero;
+    public Vector2 hotSpot = new Vector2(80, 80);
+    public PropolisManager PropolisManager;
+    public Transform uiCanvas;
+
+    private bool inCongif = false;
 
     void OnGUI() {
 
@@ -23,18 +28,62 @@ public class mouseUiController : MonoBehaviour {
                 Cursor.SetCursor(cursorTextureDelete, hotSpot, cursorMode);
             }
 
+            if (mouseState == "edit")
+            {
+                Cursor.SetCursor(cursorTextureCreate, hotSpot, cursorMode);
+            }
+
+        } else {
+            Cursor.SetCursor(null, Vector2.zero, cursorMode);
         }
 
-        Cursor.SetCursor(null, Vector2.zero, cursorMode);
 
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
-            mouseState = "default";
+
+            if (mouseState != "default") {
+                inCongif = true;
+
+                GameObject configUI = Instantiate(Resources.Load("UI/InfoPanelConfig"), Input.mousePosition, Quaternion.identity) as GameObject;
+                configUI.transform.SetParent(uiCanvas);
+
+                if (mouseState == "create")
+                {
+                    StartCoroutine(WaitTosend(configUI,mouseState, Input.mousePosition, "lol", "lol", "lol", "lol"));
+                }
+
+                if (mouseState == "delete")
+                {
+
+                }
+                mouseState = "default";
+            }
         }
     }
 
-    public void setState(string fromUi)
+    IEnumerator WaitTosend(GameObject uiConfig,string lastState,Vector3 mouseposition,string id,string ip,string portIn,string portOut)
+    {
+        while (true)
+        {
+            if (Input.GetKeyDown("e"))
+            {
+                if (lastState == "create")
+                {
+                    var createString = "CREATE HEXGROUP " + id + " " + mouseposition.x + " " + mouseposition.y + " " + ip + " " + portIn + " " + portOut;
+                    Destroy(uiConfig);
+                    print(createString);
+                }
+
+                yield break;
+           
+            }
+         yield return null;
+        }
+    }
+
+public void setState(string fromUi)
     {
         mouseState = fromUi;
     }
+  
 }
