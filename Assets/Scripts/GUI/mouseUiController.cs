@@ -13,6 +13,8 @@ public class mouseUiController : MonoBehaviour {
     public PropolisManager PropolisManager;
     public Transform uiCanvas;
 
+    public tabsController tabCtl;
+
     private bool inCongif = false;
 
     void OnGUI() {
@@ -50,6 +52,8 @@ public class mouseUiController : MonoBehaviour {
                 GameObject configUI = Instantiate(Resources.Load("UI/InfoPanelConfig"), Input.mousePosition, Quaternion.identity) as GameObject;
                 configUI.transform.SetParent(uiCanvas);
 
+                tabCtl.sensibleToKeypress = false;
+
                 if (mouseState == "create")
                 {
                     StartCoroutine(WaitTosend(configUI,mouseState, Input.mousePosition));
@@ -85,6 +89,8 @@ public class mouseUiController : MonoBehaviour {
                     PropolisManager.SendCommand(command);
 
                     Destroy(uiConfig);
+
+                    tabCtl.sensibleToKeypress = true;
                 }
 
                 yield break;
