@@ -29,7 +29,7 @@ public class ConsoleController : MonoBehaviour {
 
     public void sendValueToConsole(string newLine) {
 		consoleinputField.placeholder.GetComponent<Text>().text = "/Enter command here...";
-        consoleinputField.text = PropolisManager.SendCommand(consoleinputField.text);
+        PropolisManager.SendCommand(consoleinputField.text);
         consoleText.text = PropolisManager.ConsoleLog;
 		consoleHistory.Add(newLine);
 		historyIndex = consoleHistory.Count;
