@@ -20,11 +20,14 @@ public class ConsoleController : MonoBehaviour {
 
 	public void Awake() {
 		consoleHistory = new List<string>();
- 
-
     }
 
-	public void sendValueToConsole(string newLine) {
+    void OnEnable()
+    {
+        consoleText.text = PropolisManager.ConsoleLog;
+    }
+
+    public void sendValueToConsole(string newLine) {
 		consoleinputField.placeholder.GetComponent<Text>().text = "/Enter command here...";
         consoleinputField.text = PropolisManager.SendCommand(consoleinputField.text);
         consoleText.text = PropolisManager.ConsoleLog;
@@ -95,6 +98,6 @@ public class ConsoleController : MonoBehaviour {
 
 	public void ScrollToBottom()
 	{
-		//  thisone.normalizedPosition = new Vector2(0, 0);
+		//thisone.normalizedPosition = new Vector2(0, 0);
 	}
 }
