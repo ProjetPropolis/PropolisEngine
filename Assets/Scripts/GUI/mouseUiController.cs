@@ -12,7 +12,7 @@ public class mouseUiController : MonoBehaviour {
     public Vector2 hotSpot = new Vector2(80, 80);
     public PropolisManager PropolisManager;
     public Transform uiCanvas;
-
+    public float keyMoveSpeed = 0.01f;
     public GameObject dummyHexGroup;
     public Camera currentCam;
     public tabsController tabCtl;
@@ -54,8 +54,8 @@ public class mouseUiController : MonoBehaviour {
 
                 if (mouseState == "create")
                 {
-                    GameObject configUI = Instantiate(Resources.Load("UI/InfoPanelConfig"), Input.mousePosition, Quaternion.identity) as GameObject;
-                    configUI.transform.SetParent(uiCanvas);
+                    GameObject configUI = Instantiate(Resources.Load("UI/InfoPanelConfig"),currentCam.ScreenToWorldPoint(Input.mousePosition), Quaternion.identity) as GameObject;
+                    configUI.transform.SetParent(uiCanvas,false);
                     StartCoroutine(WaitTosend(configUI,null,mouseState, Input.mousePosition));
                 }
                  
@@ -87,8 +87,8 @@ public class mouseUiController : MonoBehaviour {
                         var StolenId = hit.collider.gameObject.GetComponent<HexGroup>().ID;
                         var stolenIp = hit.collider.gameObject.GetComponent<OSC>().outIP;
 
-                        GameObject configUI = Instantiate(Resources.Load("UI/InfoPanelConfig"), Input.mousePosition, Quaternion.identity) as GameObject;
-                        configUI.transform.SetParent(uiCanvas);
+                        GameObject configUI = Instantiate(Resources.Load("UI/InfoPanelConfig"), currentCam.ScreenToWorldPoint(Input.mousePosition), Quaternion.identity) as GameObject;
+                        configUI.transform.SetParent(uiCanvas,false);
 
                         GameObject.Find("InputFieldID").gameObject.GetComponent<InputField>().text = StolenId.ToString();
                         GameObject.Find("InputFieldIP").gameObject.GetComponent<InputField>().text = stolenIp.ToString();
@@ -108,7 +108,39 @@ public class mouseUiController : MonoBehaviour {
     {
         while (true)
         {
-                if (Input.GetKeyDown("e"))
+
+                if (lastState == "edit")
+                {
+                    if (Input.GetKey(KeyCode.UpArrow))
+                    {
+                        Vector3 positionTemp = toedit.transform.position;
+                        positionTemp.y += keyMoveSpeed;
+                        toedit.transform.position = positionTemp;
+                    }
+
+                    if (Input.GetKey(KeyCode.DownArrow))
+                    {
+                        Vector3 positionTemp = toedit.transform.position;
+                        positionTemp.y -= keyMoveSpeed;
+                        toedit.transform.position = positionTemp;
+                }
+
+                    if (Input.GetKey(KeyCode.LeftArrow))
+                    {
+                        Vector3 positionTemp = toedit.transform.position;
+                        positionTemp.x -= keyMoveSpeed;
+                        toedit.transform.position = positionTemp;
+                }
+
+                    if (Input.GetKey(KeyCode.RightArrow))
+                    {
+                        Vector3 positionTemp = toedit.transform.position;
+                        positionTemp.x += keyMoveSpeed;
+                        toedit.transform.position = positionTemp;
+                }
+           }
+
+                if (Input.GetKeyDown(KeyCode.Return))
                 {
 
                     if (lastState == "create")
@@ -118,9 +150,9 @@ public class mouseUiController : MonoBehaviour {
                         var portIn = GameObject.Find("InputFieldPortIN").GetComponent<InputField>().text;
                         var portOut = GameObject.Find("InputFieldPartOut").GetComponent<InputField>().text;
 
-                        var worldPos = Camera.main.ScreenToWorldPoint(mouseposition);
+                        var worldPos = currentCam.ScreenToWorldPoint(mouseposition);
 
-                        var command = "CREATE HEXGROUP " + ID + " " + worldPos.y + " " + worldPos.x + " " + IP + " " + portIn + " " + portOut;
+                        var command = "CREATE HEXGROUP " + ID + " " + worldPos.x + " " + worldPos.y + " " + IP + " " + portIn + " " + portOut;
 
 
                         PropolisManager.SendCommand(command);
@@ -137,9 +169,11 @@ public class mouseUiController : MonoBehaviour {
                         var portIn = GameObject.Find("InputFieldPortIN").GetComponent<InputField>().text;
                         var portOut = GameObject.Find("InputFieldPartOut").GetComponent<InputField>().text;
 
-                        var worldPos = Camera.main.ScreenToWorldPoint(mouseposition);
+                        var worldPos = toedit.transform.position;
 
-                        var command = "UPDATE HEXGROUP " + ID + " " + worldPos.y + " " + worldPos.x + " " + IP + " " + portIn + " " + portOut;
+                        var command = "UPDATE HEXGROUP " + ID + " " + worldPos.x + " " + worldPos.y + " " + IP + " " + portIn + " " + portOut;
+
+                        print(command);
 
                         PropolisManager.SendCommand(command);
 
