@@ -9,7 +9,7 @@ namespace Propolis
         public GameController GameController;
         public PropolisData propolisData;
         public GameObject hexGroupPrefab;
-        public Transform HiveViewTransform;
+        public Transform HiveViewTransform; 
         public List<HexGroup> ListHexGroup;
 
 
