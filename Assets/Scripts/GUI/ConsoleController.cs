@@ -14,12 +14,15 @@ public class ConsoleController : MonoBehaviour {
     public PropolisManager PropolisManager;
 	public ScrollRect thisone;
 
+
 	private List<string> consoleHistory;
 	private int historyIndex;
 
 	public void Awake() {
 		consoleHistory = new List<string>();
-	}
+ 
+
+    }
 
 	public void sendValueToConsole(string newLine) {
 		consoleinputField.placeholder.GetComponent<Text>().text = "/Enter command here...";
@@ -42,26 +45,29 @@ public class ConsoleController : MonoBehaviour {
 
 	// KEYBOARD SHORTCUTS
 	public void Update() {
-		//SEND TO CONSOLE ON ENTER KEY
-		if (Input.GetKeyDown("return")) {
-			addFromField();
-			EventSystem.current.SetSelectedGameObject(consolefieldObj,null);
-		} 
 
-		//UP AND DOWN ON HISTORY
-		if (Input.GetKeyDown("up")) {
-			moveInHistory ("up");
-		} 
+		    //SEND TO CONSOLE ON ENTER KEY
+		    if (Input.GetKeyDown("return")) {
+			    addFromField();
+			    EventSystem.current.SetSelectedGameObject(consolefieldObj,null);
+		    } 
 
-		if (Input.GetKeyDown("down")) {
-			moveInHistory("down");
-		} 
+		    //UP AND DOWN ON HISTORY
+		    if (Input.GetKeyDown("up")) {
+			    moveInHistory ("up");
+		    } 
 
-		//IF NOT ENTER KEY FOCUS ON TEXT FIELD
-		if(!Input.GetKeyDown("return")){
-			EventSystem.current.SetSelectedGameObject(consolefieldObj,null);
-		}
-	}
+		    if (Input.GetKeyDown("down")) {
+			    moveInHistory("down");
+		    } 
+
+		    //IF NOT ENTER KEY FOCUS ON TEXT FIELD
+		    if(!Input.GetKeyDown("return")){
+			    EventSystem.current.SetSelectedGameObject(consolefieldObj,null);
+		    }
+
+
+    }
 		
 	//TERMINAL STYLE UP AND DOWN KEY TO NAVIGATE IN COMMAND HISTORY
 

@@ -3520,7 +3520,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 616437541}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1522.0068, y: 487.80078, z: 0}
+  m_LocalPosition: {x: 798.10156, y: 487.80078, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 98632436}
@@ -9096,8 +9096,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1430085710}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 790.5, y: 253.5, z: 0}
-  m_LocalScale: {x: 0.46944445, y: 0.46944445, z: 0.46944445}
+  m_LocalPosition: {x: 960, y: 540, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 616437542}
   - {fileID: 1529137010}
@@ -9139,6 +9139,7 @@ MonoBehaviour:
   hotSpot: {x: 0, y: 0}
   PropolisManager: {fileID: 1865805505}
   uiCanvas: {fileID: 1430085714}
+  tabCtl: {fileID: 2130413712}
 --- !u!1 &1440239092
 GameObject:
   m_ObjectHideFlags: 0
@@ -9650,7 +9651,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1529137009}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1408.3503, y: 0, z: 0}
+  m_LocalPosition: {x: -684.445, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 180257385}
@@ -10440,6 +10441,7 @@ MonoBehaviour:
   consolefieldObj: {fileID: 264407386}
   PropolisManager: {fileID: 1865805505}
   thisone: {fileID: 0}
+  sensibleToKeypress: 0
 --- !u!1 &1821386667
 GameObject:
   m_ObjectHideFlags: 0
@@ -11628,6 +11630,7 @@ MonoBehaviour:
   initalPanel: {fileID: 941649043}
   buttonsPanel: []
   uiController: {fileID: 1430085715}
+  sensibleToKeypress: 0
 --- !u!1 &2133678696
 GameObject:
   m_ObjectHideFlags: 0

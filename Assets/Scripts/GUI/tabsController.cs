@@ -10,21 +10,26 @@ public class tabsController : MonoBehaviour {
 	public Button initalPanel;
 	public Button[] buttonsPanel;
 	public genericUiController uiController;
+    public bool sensibleToKeypress;
 
-	private int counterMenu;
+    private int counterMenu;
 
 	void Start () {
 		counterMenu = 0;
 		buttonsPanel = gameObject.GetComponentsInChildren<Button>();
 		tabs = GameObject.FindGameObjectsWithTag("Tabs");
 		UpdateSelectedTab(buttonsPanel[counterMenu]);
-	}
+        sensibleToKeypress = true;
+    }
 
 	public void Update() {
-		if (Input.GetKeyDown ("tab")) {
+        if (sensibleToKeypress != false)
+        {
+            if (Input.GetKeyDown ("tab")) {
 			switchMenuKeyboard();
 		}
-	}
+        }
+    }
 
 	public void switchMenuKeyboard() {
 		counterMenu ++;
@@ -33,10 +38,11 @@ public class tabsController : MonoBehaviour {
 	
 	}
 
-	public void UpdateSelectedTab(Button button) {
-		foreach (var aTab in tabs) {
-			if(aTab.name != button.transform.Find("Text").GetComponent<Text>().text) { aTab.SetActive (false); } else { aTab.SetActive(true); }
-		}	
+    public void UpdateSelectedTab(Button button) {
+        foreach (var aTab in tabs) {
+            if (aTab.name != button.transform.Find("Text").GetComponent<Text>().text) { aTab.SetActive(false); } else { aTab.SetActive(true); }
+        }
+
 		updateCheck();
 	}
 
