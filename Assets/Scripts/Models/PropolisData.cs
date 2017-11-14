@@ -122,6 +122,17 @@ namespace Propolis
             }
         }
 
+        public int [] GetAllIdOfType(string type)
+        {
+            int[] returnArray = null;
+
+            switch (type)
+            {
+                case PropolisDataTypes.HexGroup: returnArray = HexGroupList.Select(x => x.ID).ToArray<int>(); break;
+            }
+            return returnArray; 
+        }
+
         public bool UpdateHexGroup(HexGroupData hexGroupData, out string statusMessage)
         {
             if (GetHexGroupDataById(hexGroupData.ID) != null)

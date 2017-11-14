@@ -83,7 +83,7 @@ namespace Propolis
             }
         }
 
-        public string SendCommand(string rawCommand)
+        public void SendCommand(string rawCommand)
         {
             bool validCommand = false;
             string command;
@@ -122,7 +122,6 @@ namespace Propolis
             }
 
 
-            return GetLastConsoleEntry();
         }
 
       
