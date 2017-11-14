@@ -9139,6 +9139,8 @@ MonoBehaviour:
   hotSpot: {x: 0, y: 0}
   PropolisManager: {fileID: 1865805505}
   uiCanvas: {fileID: 1430085714}
+  dummyHexGroup: {fileID: 1361878503541294, guid: 70997332bfc606b4db190ce0f5b95304,
+    type: 2}
   tabCtl: {fileID: 2130413712}
 --- !u!1 &1440239092
 GameObject:
@@ -10441,7 +10443,6 @@ MonoBehaviour:
   consolefieldObj: {fileID: 264407386}
   PropolisManager: {fileID: 1865805505}
   thisone: {fileID: 0}
-  sensibleToKeypress: 0
 --- !u!1 &1821386667
 GameObject:
   m_ObjectHideFlags: 0

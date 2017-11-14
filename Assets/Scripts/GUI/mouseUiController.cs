@@ -13,6 +13,8 @@ public class mouseUiController : MonoBehaviour {
     public PropolisManager PropolisManager;
     public Transform uiCanvas;
 
+    public GameObject dummyHexGroup;
+
     public tabsController tabCtl;
 
     private bool inCongif = false;
@@ -48,32 +50,36 @@ public class mouseUiController : MonoBehaviour {
             if (mouseState != "default") {
 
                 inCongif = true;
-
-                GameObject configUI = Instantiate(Resources.Load("UI/InfoPanelConfig"), Input.mousePosition, Quaternion.identity) as GameObject;
-                configUI.transform.SetParent(uiCanvas);
-
                 tabCtl.sensibleToKeypress = false;
 
                 if (mouseState == "create")
                 {
+                    GameObject configUI = Instantiate(Resources.Load("UI/InfoPanelConfig"), Input.mousePosition, Quaternion.identity) as GameObject;
+                    configUI.transform.SetParent(uiCanvas);
                     StartCoroutine(WaitTosend(configUI,mouseState, Input.mousePosition));
                 }
 
                 if (mouseState == "delete")
                 {
-
+                    RaycastHit hit;
+                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    if (Physics.Raycast(ray, out hit))
+                    {
+                        print(hit.collider.transform.gameObject);
+                       
+                    }
                 }
                 mouseState = "default";
             }
         }
     }
-
-    IEnumerator WaitTosend(GameObject uiConfig,string lastState,Vector3 mouseposition)
+     
+    IEnumerator WaitTosend(GameObject uiConfig ,string lastState,Vector3 mouseposition)
     {
         while (true)
         {
-            if (Input.GetKeyDown("e"))
-            {
+                if (Input.GetKeyDown("e"))
+                {
                 if (lastState == "create")
                 {
                     var ID = GameObject.Find("InputFieldID").GetComponent<InputField>().text;
