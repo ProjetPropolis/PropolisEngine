@@ -6,9 +6,9 @@ using UnityEngine;
 namespace Propolis
 {
     [System.Serializable]
-    public class HexGroupData: PropolisDataType
+    public class AbstractGroupData : PropolisDataType
     {
-        public HexGroupData(string[] modelParams) : base()
+        public AbstractGroupData(string[] modelParams) : base()
         {
             Error = true;
             if(modelParams.Length  == 6)
@@ -26,10 +26,7 @@ namespace Propolis
                     InPort = Convert.ToInt32(modelParams[4]);
                     OutPort = Convert.ToInt32(modelParams[5]);
                     Childrens = new List<PropolisGroupItemData>();
-                    for (int i = 0; i < 7; i++)
-                    {
-                        Childrens.Add(new PropolisGroupItemData(i));
-                    }
+
 
                 }
                 catch
@@ -45,6 +42,14 @@ namespace Propolis
         public Vector3 GetPosition()
         {
             return new Vector3(x, y, z);  
+        }
+
+        public void CreateChildrensForHexGroup()
+        {
+            for (int i = 0; i < 7; i++)
+            {
+                Childrens.Add(new PropolisGroupItemData(i));
+            }
         }
 
         //A vector 3 is not use because it cannot be serialized

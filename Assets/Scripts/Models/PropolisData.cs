@@ -16,12 +16,12 @@ namespace Propolis
         [SerializeField]
         public PropolisLastEventState LastEvent { get; set; }
         [SerializeField]
-        public List<HexGroupData> HexGroupList{ get; set; }
+        public List<AbstractGroupData> HexGroupList{ get; set; }
  
 
         private PropolisData() {
 
-            HexGroupList = new List<HexGroupData>();
+            HexGroupList = new List<AbstractGroupData>();
             LastEvent = new PropolisLastEventState();
 
         }
@@ -51,7 +51,7 @@ namespace Propolis
                             }).ToList<PropolisGroupItemData>();
                         }
                         return x;
-                    }).ToList<HexGroupData>();
+                    }).ToList<AbstractGroupData>();
                     break;
             }
             return true;
@@ -80,7 +80,7 @@ namespace Propolis
                             }).ToList<PropolisGroupItemData>();
                         }
                         return x;
-                    }).ToList<HexGroupData>();
+                    }).ToList<AbstractGroupData>();
                     break;
             }
             return true;
@@ -99,14 +99,14 @@ namespace Propolis
             switch (type)
             {
                 case PropolisDataTypes.HexGroup:
-                    HexGroupList = HexGroupList.Where(x => x.ID != id).ToList<HexGroupData>(); break;
+                    HexGroupList = HexGroupList.Where(x => x.ID != id).ToList<AbstractGroupData>(); break;
             }
             return true;
             
         }
 
 
-        public bool AddHexGroup(HexGroupData hexGroupData, out string statusMessage)
+        public bool AddHexGroup(AbstractGroupData hexGroupData, out string statusMessage)
         {
             if(GetHexGroupDataById(hexGroupData.ID) == null)
             {
@@ -133,7 +133,7 @@ namespace Propolis
             return returnArray; 
         }
 
-        public bool UpdateHexGroup(HexGroupData hexGroupData, out string statusMessage)
+        public bool UpdateHexGroup(AbstractGroupData hexGroupData, out string statusMessage)
         {
             if (GetHexGroupDataById(hexGroupData.ID) != null)
             {
@@ -159,9 +159,9 @@ namespace Propolis
         }
 
 
-        public HexGroupData GetHexGroupDataById(int id)
+        public AbstractGroupData GetHexGroupDataById(int id)
         {
-            HexGroupData returnValue = null;
+            AbstractGroupData returnValue = null;
 
             try
             {

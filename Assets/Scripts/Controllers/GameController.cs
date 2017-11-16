@@ -8,7 +8,7 @@ public class GameController : MonoBehaviour {
 
     List<GameObject> tuilesActives = new List<GameObject>();
     public PropolisManager propolisManager;
-    public HiveGameController hiveGameController;
+    public AbstractGameController hiveGameController;
 
 
 	void Start () {

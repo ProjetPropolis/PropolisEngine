@@ -6,7 +6,7 @@ using Propolis;
 using System.Linq;
 
 
-public class Hex : MonoBehaviour {
+public class AbstractItem : MonoBehaviour {
 
     private PropolisStatus status;
 
@@ -38,7 +38,7 @@ public class Hex : MonoBehaviour {
     public bool isCircled;
     public Collider2D otherHex;
     public OSC osc;
-    public HexGroup ParentGroup;
+    public AbstractGroup ParentGroup;
     public PropolisData propolisData;
 
     private Material material;
@@ -47,13 +47,11 @@ public class Hex : MonoBehaviour {
     public float TimeToLive = 0.0f;
     private void Start()
     {
-        ParentGroup = transform.parent.GetComponent<HexGroup>();
+        ParentGroup = transform.parent.GetComponent<AbstractGroup>();
         propolisData = PropolisData.Instance;
         material = GetComponent<Renderer>().material;
 		osc = transform.parent.gameObject.GetComponent<OSC>();
         Status = (PropolisStatus)propolisData.HexGroupList.First(x => x.ID == ParentGroup.ID).Childrens.First(x => x.ID == ID).Status;
-
-
 
     }
 

@@ -346,7 +346,7 @@ namespace Propolis
 
             switch (type)
             {
-                case PropolisDataTypes.HexGroup: dataType = new HexGroupData(arrayParams); break;
+                case PropolisDataTypes.HexGroup: dataType = new AbstractGroupData(arrayParams); ((AbstractGroupData)dataType).CreateChildrensForHexGroup(); break;
                 default: AppendToConsoleLog("Error on create method, Invalid type : " + type); break;
             }
 
@@ -365,7 +365,7 @@ namespace Propolis
 
             switch (type)
             {
-                case PropolisDataTypes.HexGroup: validCreation = _propolisData.AddHexGroup((HexGroupData)dataType,out statusMessage); break;
+                case PropolisDataTypes.HexGroup: validCreation = _propolisData.AddHexGroup((AbstractGroupData)dataType,out statusMessage); break;
                 default: AppendToConsoleLog("Error on create method, Invalid type : " + type); break;
             }
 
@@ -399,7 +399,7 @@ namespace Propolis
 
             switch (type)
             {
-                case PropolisDataTypes.HexGroup: dataType = new HexGroupData(arrayParams); break;
+                case PropolisDataTypes.HexGroup: dataType = new AbstractGroupData(arrayParams); break;
                 default: AppendToConsoleLog("Error on update method, Invalid type : " + type); break;
             }
 
@@ -418,7 +418,7 @@ namespace Propolis
 
             switch (type)
             {
-                case PropolisDataTypes.HexGroup: validUpdate = _propolisData.UpdateHexGroup((HexGroupData)dataType, out statusMessage); break;
+                case PropolisDataTypes.HexGroup: validUpdate = _propolisData.UpdateHexGroup((AbstractGroupData)dataType, out statusMessage); break;
                 default: AppendToConsoleLog("Error on update method, Invalid type : " + type); break;
             }
 

@@ -68,8 +68,8 @@ public class mouseUiController : MonoBehaviour {
                     {
                         Debug.Log(hit.collider.name);
 
-                        if(gameObject.GetComponent<HexGroup>().ID != null) { 
-                            deletecommand = "DELETE HEXGROUP " + hit.collider.gameObject.GetComponent<HexGroup>().ID;
+                        if(gameObject.GetComponent<AbstractGroup>().ID != null) { 
+                            deletecommand = "DELETE HEXGROUP " + hit.collider.gameObject.GetComponent<AbstractGroup>().ID;
                         }
                         PropolisManager.SendCommand(deletecommand);
                     }
@@ -84,7 +84,7 @@ public class mouseUiController : MonoBehaviour {
 
                         var StolenInPort = hit.collider.gameObject.GetComponent<OSC>().inPort;
                         var StolenOutPort = hit.collider.gameObject.GetComponent<OSC>().outPort;
-                        var StolenId = hit.collider.gameObject.GetComponent<HexGroup>().ID;
+                        var StolenId = hit.collider.gameObject.GetComponent<AbstractGroup>().ID;
                         var stolenIp = hit.collider.gameObject.GetComponent<OSC>().outIP;
 
                         GameObject configUI = Instantiate(Resources.Load("UI/InfoPanelConfig"), currentCam.ScreenToWorldPoint(Input.mousePosition), Quaternion.identity) as GameObject;

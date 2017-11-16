@@ -4,19 +4,19 @@ using UnityEngine;
 using System.Linq;
 namespace Propolis
 {
-    public class HiveGameController : MonoBehaviour {
+    public class AbstractGameController : MonoBehaviour {
 
         public GameController GameController;
         public PropolisData propolisData;
-        public GameObject hexGroupPrefab;
-        public Transform HiveViewTransform; 
-        public List<HexGroup> ListHexGroup;
+        public GameObject GroupsPrefab;
+        public Transform GameViewTransform; 
+        public List<AbstractGroup> ListGroups;
 
 
         // Use this for initialization
         void Start() {
             propolisData = PropolisData.Instance;
-            ListHexGroup = new List<HexGroup>();
+            ListGroups = new List<AbstractGroup>();
         }
 
         public void UpdateFromModel()
@@ -26,8 +26,8 @@ namespace Propolis
             {
                 case PropolisActions.Create: ProcessCreationElement();break ;
                 case PropolisActions.Delete: ProcessSupressionElement(); break;
-                case PropolisActions.UpdateItemStatus: UpdateHexGroupItemStatus(); break;
-                case PropolisActions.Update: UpdateHexGroup(); break;
+                case PropolisActions.UpdateItemStatus: UpdateAbstractGroupItemStatus(); break;
+                case PropolisActions.Update: UpdateAbstractGroup(); break;
                 case PropolisActions.Load: LoadFromData(); break;
             }
         }
@@ -37,11 +37,11 @@ namespace Propolis
             DeleteAllComponents();
             propolisData.HexGroupList.ForEach(x=>InstantiateHexGroup(x.ID));
         }
-        private void UpdateHexGroup()
+        private void UpdateAbstractGroup()
         {
-            HexGroupData hexGroupData = propolisData.HexGroupList.FirstOrDefault(x => x.ID == propolisData.LastEvent.GroupID);
+            AbstractGroupData hexGroupData = propolisData.HexGroupList.FirstOrDefault(x => x.ID == propolisData.LastEvent.GroupID);
 
-            ListHexGroup.ForEach(
+            ListGroups.ForEach(
                 x =>
                 {
                     if (x.ID == hexGroupData.ID)
@@ -54,22 +54,22 @@ namespace Propolis
                 }
             );
         }
-        private void UpdateHexGroupItemStatus()
+        private void UpdateAbstractGroupItemStatus()
         {
             //if all hex of an hexgroup have changed
-            HexGroupData hexGroupData = propolisData.HexGroupList.FirstOrDefault(x => x.ID == propolisData.LastEvent.GroupID);
+            AbstractGroupData abstractGroupData = propolisData.HexGroupList.FirstOrDefault(x => x.ID == propolisData.LastEvent.GroupID);
 
-            foreach (HexGroup hg in ListHexGroup)
+            foreach (AbstractGroup ag in ListGroups)
             {
-                if(hg.ID == propolisData.LastEvent.GroupID)
+                if(ag.ID == propolisData.LastEvent.GroupID)
                 {
-                    foreach (Hex hex in hg.ChildHexsList)
+                    foreach (AbstractItem  ai in ag.ChildHexsList)
                     {
-                        foreach (var hexData in hexGroupData.Childrens)
+                        foreach (var itemData in abstractGroupData.Childrens)
                         {
-                            if (hex.ID == hexData.ID)
+                            if (ai.ID == itemData.ID)
                             {
-                                hex.Status = (PropolisStatus)hexData.Status;
+                                ai.Status = (PropolisStatus)itemData.Status;
                             }
                         }
                     }
@@ -83,7 +83,7 @@ namespace Propolis
         {
             switch (propolisData.LastEvent.Type)
             {
-                case PropolisDataTypes.HexGroup: UpdateHexGroupItemStatus(); break;
+                case PropolisDataTypes.HexGroup: UpdateAbstractGroupItemStatus(); break;
             }
         }
 
@@ -107,10 +107,10 @@ namespace Propolis
         {
             try
             {
-                HexGroup hexgroup = ListHexGroup.First(x => x.ID == propolisData.LastEvent.ID);
-                ListHexGroup.Remove(hexgroup);
+                AbstractGroup abstractGroup = ListGroups.First(x => x.ID == propolisData.LastEvent.ID);
+                ListGroups.Remove(abstractGroup);
 
-                Destroy(hexgroup.transform.gameObject);
+                Destroy(abstractGroup.transform.gameObject);
             }
             catch
             {
@@ -126,17 +126,17 @@ namespace Propolis
         private void InstantiateHexGroup(int ID)
         {
 
-            HexGroupData hexGroupData = propolisData.GetHexGroupDataById(ID);
+            AbstractGroupData hexGroupData = propolisData.GetHexGroupDataById(ID);
             if (hexGroupData != null)
             {
-                GameObject gameObject = Instantiate(hexGroupPrefab, hexGroupData.GetPosition(), Quaternion.identity);
-   	              HexGroup hexGroup = gameObject.GetComponent<HexGroup>();
-                hexGroup.transform.parent = HiveViewTransform;
-                hexGroup.ID = hexGroupData.ID;
-                hexGroup.Osc.inPort = hexGroupData.InPort;
-                hexGroup.Osc.outPort = hexGroupData.OutPort;
-                hexGroup.Osc.outIP = hexGroupData.IP;
-                ListHexGroup.Add(hexGroup);
+                GameObject gameObject = Instantiate(GroupsPrefab, hexGroupData.GetPosition(), Quaternion.identity);
+   	            AbstractGroup abstractGroup = gameObject.GetComponent<AbstractGroup>();
+                abstractGroup.transform.parent = GameViewTransform.transform;
+                abstractGroup.ID = hexGroupData.ID;
+                abstractGroup.Osc.inPort = hexGroupData.InPort;
+                abstractGroup.Osc.outPort = hexGroupData.OutPort;
+                abstractGroup.Osc.outIP = hexGroupData.IP;
+                ListGroups.Add(abstractGroup);
                 gameObject.SetActive(true);
             }
 
@@ -145,10 +145,10 @@ namespace Propolis
 
         void DeleteAllComponents()
         {
-            for (int i = ListHexGroup.Count; i >0 ; i--)
+            for (int i = ListGroups.Count; i >0 ; i--)
             {
-                Destroy(ListHexGroup[i-1].gameObject);
-                ListHexGroup.RemoveAt(i-1);
+                Destroy(ListGroups[i-1].gameObject);
+                ListGroups.RemoveAt(i-1);
             }
             
         }

@@ -2454,6 +2454,11 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 403725415}
+--- !u!4 &416621424 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4951907079653904, guid: 9af485c469f3f4d498a8290ee90c7445,
+    type: 2}
+  m_PrefabInternal: {fileID: 448946814}
 --- !u!1 &421594901
 GameObject:
   m_ObjectHideFlags: 0
@@ -9230,6 +9235,7 @@ MonoBehaviour:
   hotSpot: {x: 0, y: 0}
   PropolisManager: {fileID: 1865805505}
   uiCanvas: {fileID: 1430085714}
+  keyMoveSpeed: 0.01
   dummyHexGroup: {fileID: 1361878503541294, guid: 70997332bfc606b4db190ce0f5b95304,
     type: 2}
   currentCam: {fileID: 766542303}
@@ -9838,6 +9844,17 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 114032028270490006, guid: a02e9773f95fd4048bdd45f81bc64e6e,
+        type: 2}
+      propertyPath: GroupsPrefab
+      value: 
+      objectReference: {fileID: 1361878503541294, guid: 35f6178051cc96844b6f6365efeee079,
+        type: 2}
+    - target: {fileID: 114032028270490006, guid: a02e9773f95fd4048bdd45f81bc64e6e,
+        type: 2}
+      propertyPath: GameViewTransform
+      value: 
+      objectReference: {fileID: 416621424}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a02e9773f95fd4048bdd45f81bc64e6e, type: 2}
   m_IsPrefabParent: 0
