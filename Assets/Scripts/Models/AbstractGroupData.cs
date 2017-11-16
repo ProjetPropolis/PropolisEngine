@@ -56,8 +56,8 @@ namespace Propolis
         public void SetPosition(Vector3 position)
         {
             x = position.x;
-            y = position.x;
-            z = position.x;
+            y = position.y;
+            z = position.z;
         }
 
         [SerializeField]
