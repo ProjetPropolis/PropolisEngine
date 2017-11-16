@@ -32,7 +32,7 @@ public class mouseDrag : MonoBehaviour
 
 		if (Input.GetKey(dragKey))
 		{
-			if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject () == false) {
+
 				if (Input.GetKeyDown(dragKey))
 				{
 					_groundPlane.Raycast(mouseRay, out distanceToIntersection);
@@ -45,7 +45,7 @@ public class mouseDrag : MonoBehaviour
 					Vector3 intersection = mouseRay.GetPoint(distanceToIntersection);
 					_transform.position += _dragOrigin - intersection;
 				}
-			}
+
 		}
 
 

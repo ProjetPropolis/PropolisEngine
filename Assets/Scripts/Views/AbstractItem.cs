@@ -115,13 +115,16 @@ public class AbstractItem : MonoBehaviour {
             }
 		}
 	}
-    private void OnMouseOver()
-    {
-        if(Input.GetMouseButtonDown(1))
-        {
-            ParentGroup.SendHexDataToHiveController(ID, PropolisStatus.ON);
-        }
-    }
+
+   //DEPRACIATED NOW USING MOUSE CONTROLLER TO GET CLICKS ON HEX
+   // private void OnMouseOver()
+   //{
+   //    if(Input.GetMouseButtonDown(1))
+   //     {
+   //         ParentGroup.SendHexDataToHiveController(ID, PropolisStatus.ON);
+   //    }
+   // }
+
     private void SendOscMessage(string address, int value, int value2)
     {
 

@@ -16,17 +16,18 @@ public class mouseUiController : MonoBehaviour {
     public GameObject dummyHexGroup;
     public Camera currentCam;
     public tabsController tabCtl;
+    public LayerMask layer_mask_Game,layer_mask_Ui;
+    public string GroupType;
 
     private bool inCongif = false;
 
     void OnGUI() {
-        
+
         if (mouseState != "default")
         {
             if (mouseState == "create")
             {
                 Cursor.SetCursor(cursorTextureCreate, Vector2.zero, cursorMode);
-
             }
 
             if (mouseState == "delete")
@@ -43,6 +44,10 @@ public class mouseUiController : MonoBehaviour {
             Cursor.SetCursor(null, Vector2.zero, cursorMode);
         }
 
+        if (Input.GetMouseButtonDown(1))
+        {
+            ClickInGame();
+        }
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -63,13 +68,13 @@ public class mouseUiController : MonoBehaviour {
                 {
                     var deletecommand = "";
                     Vector2 worldPoint = currentCam.ScreenToWorldPoint(Input.mousePosition);
-                    RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
+                    RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero,Mathf.Infinity,layer_mask_Ui.value);
                     if (hit.collider != null)
                     {
                         Debug.Log(hit.collider.name);
 
                         if(gameObject.GetComponent<AbstractGroup>().ID != null) { 
-                            deletecommand = "DELETE HEXGROUP " + hit.collider.gameObject.GetComponent<AbstractGroup>().ID;
+                            deletecommand = "DELETE " + GroupType + " " + hit.collider.gameObject.GetComponent<AbstractGroup>().ID;
                         }
                         PropolisManager.SendCommand(deletecommand);
                     }
@@ -78,7 +83,7 @@ public class mouseUiController : MonoBehaviour {
                 if(mouseState == "edit")
                 {
                     Vector2 worldPoint = currentCam.ScreenToWorldPoint(Input.mousePosition);
-                    RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
+                    RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero, Mathf.Infinity, layer_mask_Ui.value);
                     if (hit.collider != null)
                     {
 
@@ -152,7 +157,7 @@ public class mouseUiController : MonoBehaviour {
 
                         var worldPos = currentCam.ScreenToWorldPoint(mouseposition);
 
-                        var command = "CREATE HEXGROUP " + ID + " " + worldPos.x + " " + worldPos.y + " " + IP + " " + portIn + " " + portOut;
+                        var command = "CREATE " + GroupType + " " + ID + " " + worldPos.x + " " + worldPos.y + " " + IP + " " + portIn + " " + portOut;
 
 
                         PropolisManager.SendCommand(command);
@@ -171,7 +176,7 @@ public class mouseUiController : MonoBehaviour {
 
                         var worldPos = toedit.transform.position;
 
-                        var command = "UPDATE HEXGROUP " + ID + " " + worldPos.x + " " + worldPos.y + " " + IP + " " + portIn + " " + portOut;
+                        var command = "UPDATE " + GroupType + " " + ID + " " + worldPos.x + " " + worldPos.y + " " + IP + " " + portIn + " " + portOut;
 
                         print(command);
 
@@ -190,9 +195,27 @@ public class mouseUiController : MonoBehaviour {
         }
     }
 
-public void setState(string fromUi)
+    public void setState(string fromUi)
+
     {
         mouseState = fromUi;
     }
-  
+
+    public void ClickInGame()
+    {
+        Vector2 worldPoint = currentCam.ScreenToWorldPoint(Input.mousePosition);
+        RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero, Mathf.Infinity,layer_mask_Game.value);
+        if (hit.collider != null)
+        {
+            var abstractGroup = hit.collider.transform.parent.gameObject.GetComponent<AbstractGroup>();
+            var IDTuile = hit.collider.gameObject.GetComponent<AbstractItem>().ID;
+            var IDGroup = abstractGroup.ID;
+            var GroupType = abstractGroup.DataType;
+
+            var command = string.Format("uis {0} {1} {2} {3}", GroupType, IDGroup, IDTuile, (int)PropolisStatus.ON);
+            PropolisManager.SendCommand(command);
+        }
+
+
+    }
 }
