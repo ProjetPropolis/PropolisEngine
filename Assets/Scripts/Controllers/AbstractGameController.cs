@@ -14,7 +14,7 @@ namespace Propolis
 
 
         // Use this for initialization
-        void Start() {
+        void Awake() {
             propolisData = PropolisData.Instance;
             ListGroups = new List<AbstractGroup>();
         }
@@ -71,7 +71,7 @@ namespace Propolis
                             {
                                 ai.Status = (PropolisStatus)itemData.Status;
                             }
-                        }
+                        }   
                     }
                 }
               

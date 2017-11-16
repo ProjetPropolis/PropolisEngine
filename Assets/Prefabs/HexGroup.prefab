@@ -932,7 +932,8 @@ MonoBehaviour:
   Osc: {fileID: 114366736888829554}
   ID: 0
   ChildHexsList: []
-  hiveGameController: {fileID: 0}
+  parentGameController: {fileID: 0}
+  DataType: hexgroup
 --- !u!212 &212340254583507616
 SpriteRenderer:
   m_ObjectHideFlags: 1
