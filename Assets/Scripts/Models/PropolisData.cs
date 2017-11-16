@@ -32,7 +32,7 @@ namespace Propolis
         {
             statusMessage = null;
 
-            if (GetHexGroupDataById(groupID) == null)
+            if (GetGroupDataById(groupID,type) == null)
             {
                 statusMessage = "No " + type + " with the id " + groupID + " can be found";
                 return false;
@@ -62,7 +62,7 @@ namespace Propolis
         {
             statusMessage = null;
 
-            if (GetHexGroupDataById(groupID) == null)
+            if (GetGroupDataById(groupID, type) == null)
             {
                 statusMessage = "No " + type + " with the id " + groupID + " can be found";
                 return false;
@@ -91,7 +91,7 @@ namespace Propolis
         public bool DeleteDataGroup(string type, int id, out string statusMessage)
         {
             statusMessage = null;
-            if (GetHexGroupDataById(id) == null)
+            if (GetGroupDataById(id, type) == null)
             {
                 statusMessage = "No " + type + " with the id " + id + " can be found";
                 return false;
@@ -106,11 +106,15 @@ namespace Propolis
         }
 
 
-        public bool AddHexGroup(AbstractGroupData hexGroupData, out string statusMessage)
+        public bool AddGroup(AbstractGroupData abstractGroupData, string type, out string statusMessage)
         {
-            if(GetHexGroupDataById(hexGroupData.ID) == null)
+            if(GetGroupDataById(abstractGroupData.ID,type) == null)
             {
-                HexGroupList.Add(hexGroupData);
+                switch (type)
+                {
+                    case PropolisDataTypes.HexGroup: HexGroupList.Add(abstractGroupData);break;
+                }
+                
                 
                 statusMessage = null;
                 return true;
@@ -133,21 +137,26 @@ namespace Propolis
             return returnArray; 
         }
 
-        public bool UpdateHexGroup(AbstractGroupData hexGroupData, out string statusMessage)
+        public bool UpdateGroup(AbstractGroupData hexGroupData, string type, out string statusMessage)
         {
-            if (GetHexGroupDataById(hexGroupData.ID) != null)
+            if (GetGroupDataById(hexGroupData.ID, type) != null)
             {
-                HexGroupList.ForEach(
-                    x =>
-                    {
-                        if(x.ID == hexGroupData.ID)
-                        {
-                            x.OverrideData(hexGroupData.x, hexGroupData.y, hexGroupData.IP, hexGroupData.InPort, hexGroupData.OutPort); 
-                        }
-                    }
+                switch (type)
+                {
+                    case PropolisDataTypes.HexGroup:
+                        HexGroupList.ForEach(
+                                x =>
+                                {
+                                    if (x.ID == hexGroupData.ID)
+                                    {
+                                        x.OverrideData(hexGroupData.x, hexGroupData.y, hexGroupData.IP, hexGroupData.InPort, hexGroupData.OutPort);
+                                    }
+                                }
 
-                );
-
+                        );
+                        break;
+                }
+                
                 statusMessage = null;
                 return true;
             }
@@ -159,13 +168,17 @@ namespace Propolis
         }
 
 
-        public AbstractGroupData GetHexGroupDataById(int id)
+        public AbstractGroupData GetGroupDataById(int id,string type)
         {
             AbstractGroupData returnValue = null;
 
             try
             {
-                returnValue = HexGroupList.First(x => x.ID == id);
+                switch (type)
+                {
+                    case PropolisDataTypes.HexGroup: returnValue = HexGroupList.First(x => x.ID == id);break;
+                }
+                
             }
             catch
             {

@@ -36,8 +36,9 @@ public class AbstractGroup : MonoBehaviour {
     void OnReceiveHexStatus(OscMessage message)
     {
         Debug.Log("received");
-        var value = message.values[0];
-        //ChildHexsList[Convert.ToInt32(value)].Status = (PropolisStatus)Convert.ToInt32(message.values[1]);
-        parentGameController.SendCommand(String.Format("uis {0} {1} {2} {3}", DataType, ID, message.values[0], message.values[1]));
+        parentGameController.SendItemData(ID, Convert.ToInt32(
+            message.values[0]),
+            (PropolisStatus)Convert.ToInt32(message.values[1]
+        ));
     }
 }

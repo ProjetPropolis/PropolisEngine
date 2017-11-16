@@ -1,27 +1,33 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 namespace Propolis
 {
-    public class AbstractGameController : MonoBehaviour {
+    public abstract class AbstractGameController : MonoBehaviour {
 
         public GameController GameController;
         public PropolisData propolisData;
         public GameObject GroupsPrefab;
         public Transform GameViewTransform; 
-        public List<AbstractGroup> ListGroups;
+        public List<AbstractGroup> ListOfGroups;
+        public string GroupDataType;
 
 
         // Use this for initialization
         void Awake() {
             propolisData = PropolisData.Instance;
-            ListGroups = new List<AbstractGroup>();
+            ListOfGroups = new List<AbstractGroup>();
+            GroupDataType = GroupsPrefab.GetComponent<AbstractGroup>().DataType;
         }
 
         public void UpdateFromModel()
         {
             propolisData = PropolisData.Instance;
+            if (propolisData.LastEvent.Type != GroupDataType && propolisData.LastEvent.Type != String.Empty)
+                return;
+
             switch (propolisData.LastEvent.Action)
             {
                 case PropolisActions.Create: ProcessCreationElement();break ;
@@ -39,27 +45,40 @@ namespace Propolis
         }
         private void UpdateAbstractGroup()
         {
-            AbstractGroupData hexGroupData = propolisData.HexGroupList.FirstOrDefault(x => x.ID == propolisData.LastEvent.GroupID);
+            AbstractGroupData abstractGroupData = null;
+            if(GroupDataType == PropolisDataTypes.HexGroup)
+            {
+                abstractGroupData = propolisData.HexGroupList.FirstOrDefault(x => x.ID == propolisData.LastEvent.GroupID);
+            }
 
-            ListGroups.ForEach(
+            if(abstractGroupData != null)
+            {
+                ListOfGroups.ForEach(
                 x =>
                 {
-                    if (x.ID == hexGroupData.ID)
+                    if (x.ID == abstractGroupData.ID)
                     {
-                        x.transform.position = hexGroupData.GetPosition();
-                        x.Osc.inPort = hexGroupData.InPort;
-                        x.Osc.outPort = hexGroupData.OutPort;
-                        x.Osc.outIP = hexGroupData.IP;
-                    }   
+                        x.transform.position = abstractGroupData.GetPosition();
+                        x.Osc.inPort = abstractGroupData.InPort;
+                        x.Osc.outPort = abstractGroupData.OutPort;
+                        x.Osc.outIP = abstractGroupData.IP;
+                    }
                 }
             );
+            }      
+            
         }
+        protected abstract void UpdateGameLogic();
+      
         private void UpdateAbstractGroupItemStatus()
         {
-            //if all hex of an hexgroup have changed
-            AbstractGroupData abstractGroupData = propolisData.HexGroupList.FirstOrDefault(x => x.ID == propolisData.LastEvent.GroupID);
+            AbstractGroupData abstractGroupData = null;
+            if (GroupDataType == PropolisDataTypes.HexGroup)
+            {
+                abstractGroupData = propolisData.HexGroupList.FirstOrDefault(x => x.ID == propolisData.LastEvent.GroupID);
+            }
 
-            foreach (AbstractGroup ag in ListGroups)
+            foreach (AbstractGroup ag in ListOfGroups)
             {
                 if(ag.ID == propolisData.LastEvent.GroupID)
                 {
@@ -99,16 +118,16 @@ namespace Propolis
         {
             switch (propolisData.LastEvent.Type)
             {
-                case PropolisDataTypes.HexGroup: DeleteHexGroup(); break;
+                case PropolisDataTypes.HexGroup: DeleteGroup(); break;
             }
         }
 
-        private void DeleteHexGroup()
+        private void DeleteGroup()
         {
             try
             {
-                AbstractGroup abstractGroup = ListGroups.First(x => x.ID == propolisData.LastEvent.ID);
-                ListGroups.Remove(abstractGroup);
+                 AbstractGroup abstractGroup = ListOfGroups.First(x => x.ID == propolisData.LastEvent.ID);
+                ListOfGroups.Remove(abstractGroup);
 
                 Destroy(abstractGroup.transform.gameObject);
             }
@@ -126,17 +145,17 @@ namespace Propolis
         private void InstantiateHexGroup(int ID)
         {
 
-            AbstractGroupData hexGroupData = propolisData.GetHexGroupDataById(ID);
-            if (hexGroupData != null)
+            AbstractGroupData abstractGroupData = propolisData.GetGroupDataById(ID,GroupDataType);
+            if (abstractGroupData != null)
             {
-                GameObject gameObject = Instantiate(GroupsPrefab, hexGroupData.GetPosition(), Quaternion.identity);
+                GameObject gameObject = Instantiate(GroupsPrefab, abstractGroupData.GetPosition(), Quaternion.identity);
    	            AbstractGroup abstractGroup = gameObject.GetComponent<AbstractGroup>();
-                abstractGroup.transform.parent = GameViewTransform.transform;
-                abstractGroup.ID = hexGroupData.ID;
-                abstractGroup.Osc.inPort = hexGroupData.InPort;
-                abstractGroup.Osc.outPort = hexGroupData.OutPort;
-                abstractGroup.Osc.outIP = hexGroupData.IP;
-                ListGroups.Add(abstractGroup);
+                //  abstractGroup.transform.parent = GameViewTransform.transform;
+                abstractGroup.ID = abstractGroupData.ID;
+                abstractGroup.Osc.inPort = abstractGroupData.InPort;
+                abstractGroup.Osc.outPort = abstractGroupData.OutPort;
+                abstractGroup.Osc.outIP = abstractGroupData.IP;
+                ListOfGroups.Add(abstractGroup);
                 gameObject.SetActive(true);
             }
 
@@ -145,17 +164,19 @@ namespace Propolis
 
         void DeleteAllComponents()
         {
-            for (int i = ListGroups.Count; i >0 ; i--)
+            for (int i = ListOfGroups.Count; i > 0; i--)
             {
-                Destroy(ListGroups[i-1].gameObject);
-                ListGroups.RemoveAt(i-1);
+                Destroy(ListOfGroups[i - 1].gameObject);
+                ListOfGroups.RemoveAt(i - 1);
             }
-            
-        }
-
-        // Update is called once per frame
-        void Update() {
 
         }
+
+        public void SendItemData(int groupID, int itemID, PropolisStatus status)
+        {
+            GameController.SendCommand(String.Format("uis {0} {1} {2} {3}", GroupDataType, groupID, itemID, (int)status));
+
+        }
+
     }
 }

@@ -51,7 +51,15 @@ public class AbstractItem : MonoBehaviour {
         propolisData = PropolisData.Instance;
         material = GetComponent<Renderer>().material;
 		osc = transform.parent.gameObject.GetComponent<OSC>();
-        Status = (PropolisStatus)propolisData.HexGroupList.First(x => x.ID == ParentGroup.ID).Childrens.First(x => x.ID == ID).Status;
+        if(ParentGroup.DataType == PropolisDataTypes.HexGroup)
+        {
+            Status = (PropolisStatus)propolisData.HexGroupList.First(x => x.ID == ParentGroup.ID).Childrens.First(x => x.ID == ID).Status;
+        }
+        else
+        {
+            Status = (PropolisStatus)propolisData.HexGroupList.First(x => x.ID == ParentGroup.ID).Childrens.First(x => x.ID == ID).Status;
+        }
+    
 
     }
 

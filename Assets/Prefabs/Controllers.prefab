@@ -20,8 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4156677189815566}
   - component: {fileID: 114785162741016296}
-  - component: {fileID: 114032028270490006}
   - component: {fileID: 114138853543124672}
+  - component: {fileID: 114808596420459798}
+  - component: {fileID: 114498831683773736}
   m_Layer: 0
   m_Name: Controllers
   m_TagString: Untagged
@@ -42,20 +43,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114032028270490006
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1282458792374670}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1abaf9b7c7f2960468555397f8860ba6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GameController: {fileID: 114138853543124672}
-  hexGroupPrefab: {fileID: 1361878503541294, guid: 35f6178051cc96844b6f6365efeee079,
-    type: 2}
 --- !u!114 &114138853543124672
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -68,7 +55,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   propolisManager: {fileID: 114785162741016296}
-  hiveGameController: {fileID: 114032028270490006}
+  hiveGameController: {fileID: 114808596420459798}
+--- !u!114 &114498831683773736
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1282458792374670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be5fa7fab14b7fd44b9b39d37973c4fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameController: {fileID: 114138853543124672}
+  GroupsPrefab: {fileID: 1997473113684288, guid: b4b524ec37ecf534fb287c5e5031af30,
+    type: 2}
+  GameViewTransform: {fileID: 0}
+  ListOfGroups: []
+  GroupDataType: 
 --- !u!114 &114785162741016296
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -82,3 +86,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ConsoleLog: 
   GameController: {fileID: 114138853543124672}
+--- !u!114 &114808596420459798
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1282458792374670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f9408f246cfbc243a000edb4b83fdb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameController: {fileID: 114138853543124672}
+  GroupsPrefab: {fileID: 1361878503541294, guid: 35f6178051cc96844b6f6365efeee079,
+    type: 2}
+  GameViewTransform: {fileID: 4951907079653904, guid: 9af485c469f3f4d498a8290ee90c7445,
+    type: 2}
+  ListOfGroups: []
+  GroupDataType: 
