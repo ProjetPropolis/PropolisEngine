@@ -9,9 +9,10 @@ public class GameController : MonoBehaviour {
     List<GameObject> tuilesActives = new List<GameObject>();
     public PropolisManager propolisManager;
     public AbstractGameController hiveGameController;
+    public AbstractGameController molecularGameController;
 
 
-	void Start () {
+    void Start () {
 
 
     }
@@ -24,6 +25,7 @@ public class GameController : MonoBehaviour {
     public void UpdateFromModel()
     {
         hiveGameController.UpdateFromModel();
+        molecularGameController.UpdateFromModel();
     }
 
     

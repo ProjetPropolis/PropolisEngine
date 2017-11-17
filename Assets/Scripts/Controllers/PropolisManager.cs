@@ -74,6 +74,8 @@ namespace Propolis
                 file.Close();
                 _propolisData = PropolisData.Instance;
                 _propolisData.LastEvent = _TempLastBuffer;
+                if (_propolisData.AtomGroupList == null)
+                    _propolisData.AtomGroupList = new List<AbstractGroupData>();
                 return true;
             }
             else
