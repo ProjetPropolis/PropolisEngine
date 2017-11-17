@@ -27,7 +27,7 @@ public class ConsoleController : MonoBehaviour {
 
     public void Awake() {
 		consoleHistory = new List<string>();
-        InvokeRepeating("updateConsole", 0f, 0.8f);
+        InvokeRepeating("updateConsole", 0f, 2f);
     }
 
 

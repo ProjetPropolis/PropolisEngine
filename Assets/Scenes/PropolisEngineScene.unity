@@ -6785,12 +6785,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 988913038}
---- !u!114 &1008117682 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114498831683773736, guid: a02e9773f95fd4048bdd45f81bc64e6e,
-    type: 2}
-  m_PrefabInternal: {fileID: 1520807776}
-  m_Script: {fileID: 11500000, guid: be5fa7fab14b7fd44b9b39d37973c4fa, type: 3}
 --- !u!1 &1011491004
 GameObject:
   m_ObjectHideFlags: 0
@@ -10260,17 +10254,6 @@ Prefab:
       propertyPath: GameViewTransform
       value: 
       objectReference: {fileID: 1912037456}
-    - target: {fileID: 114808596420459798, guid: a02e9773f95fd4048bdd45f81bc64e6e,
-        type: 2}
-      propertyPath: GroupsPrefab
-      value: 
-      objectReference: {fileID: 1361878503541294, guid: 35f6178051cc96844b6f6365efeee079,
-        type: 2}
-    - target: {fileID: 114138853543124672, guid: a02e9773f95fd4048bdd45f81bc64e6e,
-        type: 2}
-      propertyPath: molecularGameController
-      value: 
-      objectReference: {fileID: 1008117682}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a02e9773f95fd4048bdd45f81bc64e6e, type: 2}
   m_IsPrefabParent: 0
