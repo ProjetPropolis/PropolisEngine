@@ -17,10 +17,12 @@ namespace Propolis
         public PropolisLastEventState LastEvent { get; set; }
         [SerializeField]
         public List<AbstractGroupData> HexGroupList{ get; set; }
- 
+        public List<AbstractGroupData> AtomGroupList { get; set; }
+
 
         private PropolisData() {
 
+            AtomGroupList = new List<AbstractGroupData>();
             HexGroupList = new List<AbstractGroupData>();
             LastEvent = new PropolisLastEventState();
 
@@ -46,6 +48,20 @@ namespace Propolis
                         {
                             x.Childrens = x.Childrens.Select(c => {
                                 if(c.ID == id)
+                                    c.Status = status;
+                                return c;
+                            }).ToList<PropolisGroupItemData>();
+                        }
+                        return x;
+                    }).ToList<AbstractGroupData>();
+                    break;
+
+                case PropolisDataTypes.AtomGroup:
+                    AtomGroupList = AtomGroupList.Select(x => {
+                        if (x.ID == groupID)
+                        {
+                            x.Childrens = x.Childrens.Select(c => {
+                                if (c.ID == id)
                                     c.Status = status;
                                 return c;
                             }).ToList<PropolisGroupItemData>();
@@ -82,6 +98,18 @@ namespace Propolis
                         return x;
                     }).ToList<AbstractGroupData>();
                     break;
+                case PropolisDataTypes.AtomGroup:
+                    AtomGroupList = AtomGroupList.Select(x => {
+                        if (x.ID == groupID)
+                        {
+                            x.Childrens = x.Childrens.Select(c => {
+                                c.Status = status;
+                                return c;
+                            }).ToList<PropolisGroupItemData>();
+                        }
+                        return x;
+                    }).ToList<AbstractGroupData>();
+                    break;
             }
             return true;
             
@@ -100,6 +128,8 @@ namespace Propolis
             {
                 case PropolisDataTypes.HexGroup:
                     HexGroupList = HexGroupList.Where(x => x.ID != id).ToList<AbstractGroupData>(); break;
+                case PropolisDataTypes.AtomGroup:
+                    AtomGroupList = AtomGroupList.Where(x => x.ID != id).ToList<AbstractGroupData>(); break;
             }
             return true;
             
@@ -113,6 +143,7 @@ namespace Propolis
                 switch (type)
                 {
                     case PropolisDataTypes.HexGroup: HexGroupList.Add(abstractGroupData);break;
+                    case PropolisDataTypes.AtomGroup: AtomGroupList.Add(abstractGroupData); break;
                 }
                 
                 
@@ -133,13 +164,14 @@ namespace Propolis
             switch (type)
             {
                 case PropolisDataTypes.HexGroup: returnArray = HexGroupList.Select(x => x.ID).ToArray<int>(); break;
+                case PropolisDataTypes.AtomGroup: returnArray = AtomGroupList.Select(x => x.ID).ToArray<int>(); break;
             }
             return returnArray; 
         }
 
-        public bool UpdateGroup(AbstractGroupData hexGroupData, string type, out string statusMessage)
+        public bool UpdateGroup(AbstractGroupData abstractGroupData, string type, out string statusMessage)
         {
-            if (GetGroupDataById(hexGroupData.ID, type) != null)
+            if (GetGroupDataById(abstractGroupData.ID, type) != null)
             {
                 switch (type)
                 {
@@ -147,9 +179,21 @@ namespace Propolis
                         HexGroupList.ForEach(
                                 x =>
                                 {
-                                    if (x.ID == hexGroupData.ID)
+                                    if (x.ID == abstractGroupData.ID)
                                     {
-                                        x.OverrideData(hexGroupData.x, hexGroupData.y, hexGroupData.IP, hexGroupData.InPort, hexGroupData.OutPort);
+                                        x.OverrideData(abstractGroupData.x, abstractGroupData.y, abstractGroupData.IP, abstractGroupData.InPort, abstractGroupData.OutPort);
+                                    }
+                                }
+
+                        );
+                        break;
+                    case PropolisDataTypes.AtomGroup:
+                        AtomGroupList.ForEach(
+                                x =>
+                                {
+                                    if (x.ID == abstractGroupData.ID)
+                                    {
+                                        x.OverrideData(abstractGroupData.x, abstractGroupData.y, abstractGroupData.IP, abstractGroupData.InPort, abstractGroupData.OutPort);
                                     }
                                 }
 
@@ -162,7 +206,7 @@ namespace Propolis
             }
             else
             {
-                statusMessage = "No hexgroup exist with the id: "+ hexGroupData.ID.ToString();
+                statusMessage = "No hexgroup exist with the id: "+ abstractGroupData.ID.ToString();
                 return false;
             }
         }
@@ -177,6 +221,7 @@ namespace Propolis
                 switch (type)
                 {
                     case PropolisDataTypes.HexGroup: returnValue = HexGroupList.First(x => x.ID == id);break;
+                    case PropolisDataTypes.AtomGroup: returnValue = AtomGroupList.First(x => x.ID == id); break;
                 }
                 
             }

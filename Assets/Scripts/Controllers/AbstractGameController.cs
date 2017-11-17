@@ -41,17 +41,20 @@ namespace Propolis
         private void LoadFromData()
         {
             DeleteAllComponents();
-            propolisData.HexGroupList.ForEach(x=>InstantiateHexGroup(x.ID));
+            propolisData.HexGroupList.ForEach(x=> InstantiateAbstractGroupGroup(x.ID));
         }
         private void UpdateAbstractGroup()
         {
             AbstractGroupData abstractGroupData = null;
-            if(GroupDataType == PropolisDataTypes.HexGroup)
+            switch (GroupDataType)
             {
-                abstractGroupData = propolisData.HexGroupList.FirstOrDefault(x => x.ID == propolisData.LastEvent.GroupID);
+                case PropolisDataTypes.HexGroup: abstractGroupData = propolisData.HexGroupList.FirstOrDefault(x => x.ID == propolisData.LastEvent.GroupID); break;
+                case PropolisDataTypes.AtomGroup: abstractGroupData = propolisData.AtomGroupList.FirstOrDefault(x => x.ID == propolisData.LastEvent.GroupID); break;
+
             }
 
-            if(abstractGroupData != null)
+
+            if (abstractGroupData != null)
             {
                 ListOfGroups.ForEach(
                 x =>
@@ -73,9 +76,11 @@ namespace Propolis
         private void UpdateAbstractGroupItemStatus()
         {
             AbstractGroupData abstractGroupData = null;
-            if (GroupDataType == PropolisDataTypes.HexGroup)
+            switch (GroupDataType)
             {
-                abstractGroupData = propolisData.HexGroupList.FirstOrDefault(x => x.ID == propolisData.LastEvent.GroupID);
+                case PropolisDataTypes.HexGroup: abstractGroupData = propolisData.HexGroupList.FirstOrDefault(x => x.ID == propolisData.LastEvent.GroupID);break;
+                case PropolisDataTypes.AtomGroup: abstractGroupData = propolisData.AtomGroupList.FirstOrDefault(x => x.ID == propolisData.LastEvent.GroupID); break;
+
             }
 
             foreach (AbstractGroup ag in ListOfGroups)
@@ -103,6 +108,7 @@ namespace Propolis
             switch (propolisData.LastEvent.Type)
             {
                 case PropolisDataTypes.HexGroup: UpdateAbstractGroupItemStatus(); break;
+                case PropolisDataTypes.AtomGroup: UpdateAbstractGroupItemStatus(); break;
             }
         }
 
@@ -110,7 +116,8 @@ namespace Propolis
         {
             switch (propolisData.LastEvent.Type)
             {
-                case PropolisDataTypes.HexGroup: InstantiateHexGroup(propolisData.LastEvent.ID); break;
+                case PropolisDataTypes.HexGroup: InstantiateAbstractGroupGroup(propolisData.LastEvent.ID); break;
+                case PropolisDataTypes.AtomGroup: InstantiateAbstractGroupGroup(propolisData.LastEvent.ID); break;
             }
         }
 
@@ -119,6 +126,7 @@ namespace Propolis
             switch (propolisData.LastEvent.Type)
             {
                 case PropolisDataTypes.HexGroup: DeleteGroup(); break;
+                case PropolisDataTypes.AtomGroup: DeleteGroup(); break;
             }
         }
 
@@ -142,7 +150,7 @@ namespace Propolis
             GameController.SendCommand(command);
         }
 
-        private void InstantiateHexGroup(int ID)
+        private void InstantiateAbstractGroupGroup(int ID)
         {
 
             AbstractGroupData abstractGroupData = propolisData.GetGroupDataById(ID,GroupDataType);
