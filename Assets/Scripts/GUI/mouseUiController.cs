@@ -191,6 +191,12 @@ public class mouseUiController : MonoBehaviour {
                 yield break;
            
             }
+
+            if(Input.GetKeyDown(KeyCode.Escape))
+            {
+                Destroy(uiConfig);
+                yield break;
+            }
          yield return null;
         }
     }

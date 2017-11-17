@@ -3760,7 +3760,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 616437541}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1356.1547, y: 487.80078, z: 0}
+  m_LocalPosition: {x: 971.0597, y: 487.80078, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 98632436}
@@ -9589,8 +9589,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1430085710}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 953, y: 339, z: 0}
-  m_LocalScale: {x: 0.62777776, y: 0.62777776, z: 0.62777776}
+  m_LocalPosition: {x: 652.5, y: 311, z: 0}
+  m_LocalScale: {x: 0.57592595, y: 0.57592595, z: 0.57592595}
   m_Children:
   - {fileID: 616437542}
   - {fileID: 1529137010}
@@ -10289,7 +10289,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1529137009}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1242.498, y: 0, z: 0}
+  m_LocalPosition: {x: -857.40314, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 180257385}
@@ -11348,7 +11348,7 @@ MonoBehaviour:
   consoleinputField: {fileID: 264407388}
   consolefieldObj: {fileID: 264407386}
   PropolisManager: {fileID: 1865805505}
-  thisone: {fileID: 0}
+  thisone: {fileID: 505983661}
 --- !u!1 &1821386667
 GameObject:
   m_ObjectHideFlags: 0

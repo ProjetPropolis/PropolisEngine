@@ -18,14 +18,18 @@ public class ConsoleController : MonoBehaviour {
 	private List<string> consoleHistory;
 	private int historyIndex;
 
-	public void Awake() {
-		consoleHistory = new List<string>();
-    }
 
-    void OnEnable()
+    public void updateConsole()
     {
         consoleText.text = PropolisManager.ConsoleLog;
+        ScrollToBottom();
     }
+
+    public void Awake() {
+		consoleHistory = new List<string>();
+        InvokeRepeating("updateConsole", 0f, 0.8f);
+    }
+
 
     public void sendValueToConsole(string newLine) {
 		consoleinputField.placeholder.GetComponent<Text>().text = "/Enter command here...";
@@ -34,6 +38,7 @@ public class ConsoleController : MonoBehaviour {
 		consoleHistory.Add(newLine);
 		historyIndex = consoleHistory.Count;
 		ScrollToBottom();
+
     }
 
 	public void addFromField() {
@@ -98,6 +103,6 @@ public class ConsoleController : MonoBehaviour {
 
 	public void ScrollToBottom()
 	{
-		//thisone.normalizedPosition = new Vector2(0, 0);
+		thisone.normalizedPosition = new Vector2(0, 0);
 	}
 }
