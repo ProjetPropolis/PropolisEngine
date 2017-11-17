@@ -7,14 +7,33 @@ public class camSwitchController : MonoBehaviour {
 	private GameObject[] cams;
 	public string initialState = "Ruche";
     public mouseUiController MouseController;
+    public genericUiController genericUi;
 
 	public void Start() {
 		cams = GameObject.FindGameObjectsWithTag("aView");
 		switchCam(initialState);
 	}
 
-	//ALL OFF
-	public void switchCam(string toActivateString) {
+    public void Update()
+    {
+     if(Input.GetKeyDown(KeyCode.R))
+        {
+            switchCam("Ruche");
+            genericUi.UpdateInteractables("interactableZoneRuche");
+        }
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            switchCam("ChampsMoléculaires");
+            genericUi.UpdateInteractables("interactableZoneChamps");
+        }
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            genericUi.UpdateInteractables("");
+        }
+    }
+
+    //ALL OFF
+    public void switchCam(string toActivateString) {
 
         if(toActivateString == "ChampsMoléculaires") { MouseController.GroupType = "ATOMGROUP"; }
         if (toActivateString == "Ruche") { MouseController.GroupType = "HEXGROUP"; }
