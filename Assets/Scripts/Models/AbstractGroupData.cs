@@ -52,6 +52,14 @@ namespace Propolis
             }
         }
 
+        public void CreateChildrensForAtomGroup()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                Childrens.Add(new PropolisGroupItemData(i));
+            }
+        }
+
         //A vector 3 is not use because it cannot be serialized
         public void SetPosition(Vector3 position)
         {

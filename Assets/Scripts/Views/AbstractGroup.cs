@@ -38,7 +38,7 @@ public class AbstractGroup : MonoBehaviour {
         Debug.Log("received");
         parentGameController.SendItemData(ID, Convert.ToInt32(
             message.values[0]),
-            (PropolisStatus)Convert.ToInt32(message.values[1]
-        ));
+            (PropolisStatus)Convert.ToInt32(message.values[1])
+        );
     }
 }
