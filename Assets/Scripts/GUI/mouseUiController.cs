@@ -44,7 +44,7 @@ public class mouseUiController : MonoBehaviour {
             Cursor.SetCursor(null, Vector2.zero, cursorMode);
         }
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButton(1))
         {
             ClickInGame();
         }
