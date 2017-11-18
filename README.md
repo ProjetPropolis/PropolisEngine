@@ -100,18 +100,26 @@ PLAY
   
 #### STOP
 Stop the gameplay
+
 STOP
+
 
 #### LOAD
 Load the last saved engine state
+
 LOAD
-  
+
+
 #### SAVE
 Save the last saved engine state
+
 SAVE
+
 
 #### UBL
 Update the battery level. Only values from 0.0 to 1.0 are accepted as level values
+
 UBL [*BatteryLevel*]
+
 
   
