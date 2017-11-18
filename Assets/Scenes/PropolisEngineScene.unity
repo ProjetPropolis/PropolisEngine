@@ -3760,7 +3760,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 616437541}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1356.1547, y: 487.80078, z: 0}
+  m_LocalPosition: {x: 971.0597, y: 487.80078, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 98632436}
@@ -7818,17 +7818,17 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1127204418}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.000030517578, y: 0.000030517578, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.9999966, y: 0.9999966, z: 0.9999966}
   m_Children:
   - {fileID: 1608346784}
   m_Father: {fileID: 505983658}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000030517578, y: 0.000030517578}
-  m_SizeDelta: {x: -30, y: -30}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 450, y: 734}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1127204421
 CanvasRenderer:
@@ -9589,8 +9589,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1430085710}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 953, y: 339, z: 0}
-  m_LocalScale: {x: 0.62777776, y: 0.62777776, z: 0.62777776}
+  m_LocalPosition: {x: 652.5, y: 311, z: 0}
+  m_LocalScale: {x: 0.57592595, y: 0.57592595, z: 0.57592595}
   m_Children:
   - {fileID: 616437542}
   - {fileID: 1529137010}
@@ -10254,12 +10254,6 @@ Prefab:
       propertyPath: GameViewTransform
       value: 
       objectReference: {fileID: 1912037456}
-    - target: {fileID: 114808596420459798, guid: a02e9773f95fd4048bdd45f81bc64e6e,
-        type: 2}
-      propertyPath: GroupsPrefab
-      value: 
-      objectReference: {fileID: 1361878503541294, guid: 35f6178051cc96844b6f6365efeee079,
-        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a02e9773f95fd4048bdd45f81bc64e6e, type: 2}
   m_IsPrefabParent: 0
@@ -10289,7 +10283,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1529137009}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1242.498, y: 0, z: 0}
+  m_LocalPosition: {x: -857.40314, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 180257385}
@@ -10467,7 +10461,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1608346783}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.10769653, z: 0}
+  m_LocalPosition: {x: 0, y: -0.19232178, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1127204419}
@@ -11348,7 +11342,7 @@ MonoBehaviour:
   consoleinputField: {fileID: 264407388}
   consolefieldObj: {fileID: 264407386}
   PropolisManager: {fileID: 1865805505}
-  thisone: {fileID: 0}
+  thisone: {fileID: 505983661}
 --- !u!1 &1821386667
 GameObject:
   m_ObjectHideFlags: 0

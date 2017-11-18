@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour {
 
     List<GameObject> tuilesActives = new List<GameObject>();
     public PropolisManager propolisManager;
+
     public AbstractGameController hiveGameController, molecularGameController;
     public PropolisData propolisData;
     private IEnumerator GameLoopCoroutine;
@@ -39,6 +40,7 @@ public class GameController : MonoBehaviour {
 
         hiveGameController.UpdateFromModel();
         molecularGameController.UpdateFromModel();
+
     }
 
     private void  StartGame()
@@ -60,6 +62,7 @@ public class GameController : MonoBehaviour {
 
             yield return new WaitForSeconds(PropolisGameSettings.DefaultGameTickTime);
         }
+
     }
 
     private void ProcessGameEventToBatteryLevel()

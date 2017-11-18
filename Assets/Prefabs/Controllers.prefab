@@ -56,6 +56,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   propolisManager: {fileID: 114785162741016296}
   hiveGameController: {fileID: 114808596420459798}
+  molecularGameController: {fileID: 114498831683773736}
 --- !u!114 &114498831683773736
 MonoBehaviour:
   m_ObjectHideFlags: 1
