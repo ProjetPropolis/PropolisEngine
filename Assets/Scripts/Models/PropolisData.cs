@@ -18,6 +18,8 @@ namespace Propolis
         [SerializeField]
         public List<AbstractGroupData> HexGroupList{ get; set; }
         public List<AbstractGroupData> AtomGroupList { get; set; }
+        public float BatteryLevel { get; set; }
+        public bool IsGamePlaying { get; set; }
 
 
         private PropolisData() {
@@ -25,6 +27,8 @@ namespace Propolis
             AtomGroupList = new List<AbstractGroupData>();
             HexGroupList = new List<AbstractGroupData>();
             LastEvent = new PropolisLastEventState();
+            IsGamePlaying = false;
+            BatteryLevel = 0.0f;
 
         }
 
@@ -133,6 +137,18 @@ namespace Propolis
             }
             return true;
             
+        }
+
+        public void ResetGameData()
+        {
+            IsGamePlaying = false;
+            BatteryLevel = 0.0f;
+            if (HexGroupList == null)
+                HexGroupList = new List<AbstractGroupData>();
+            HexGroupList.ForEach(x => x.Childrens.ForEach(y => y.Status = (int)PropolisStatus.OFF));
+            if (AtomGroupList == null)
+                AtomGroupList = new List<AbstractGroupData>();
+            AtomGroupList.ForEach(x => x.Childrens.ForEach(y => y.Status = (int)PropolisStatus.OFF));
         }
 
 

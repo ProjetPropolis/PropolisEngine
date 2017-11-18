@@ -13,5 +13,8 @@ namespace Propolis
         public const string Load = "load";
         public const string Update = "update";
         public const string AppStatus = "app-status";
+        public const string SetBatteryLevel = "sbl";
+        public const string Play = "Play";
+        public const string Stop = "Stop";
     }   
 }

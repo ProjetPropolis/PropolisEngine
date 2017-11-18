@@ -71,7 +71,7 @@ namespace Propolis
             }      
             
         }
-        protected abstract void UpdateGameLogic();
+        public abstract void UpdateGameLogic();
       
         private void UpdateAbstractGroupItemStatus()
         {

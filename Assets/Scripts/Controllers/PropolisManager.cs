@@ -8,9 +8,6 @@ using System;
 
 namespace Propolis
 {
-
-
-   
     public class PropolisManager:MonoBehaviour
     {
         public const char CommandSeparator = ' ';
@@ -47,6 +44,7 @@ namespace Propolis
         //it's static so we can call it from anywhere
         public bool Save()
         {
+            _propolisData.ResetGameData();
             try
             {
                 BinaryFormatter bf = new BinaryFormatter();
@@ -73,6 +71,7 @@ namespace Propolis
                 PropolisData.Instance = (PropolisData)bf.Deserialize(file);
                 file.Close();
                 _propolisData = PropolisData.Instance;
+                _propolisData.ResetGameData();
                 _propolisData.LastEvent = _TempLastBuffer;
                 return true;
             }
@@ -102,7 +101,10 @@ namespace Propolis
                     case PropolisActions.Update:validCommand = UpdateGroup(modelParams);break;
                     case PropolisActions.Delete: validCommand = Delete(modelParams); break;
                     case PropolisActions.UpdateItemStatus: validCommand = UpdateItemStatus(modelParams); break;
-                    case PropolisActions.AppStatus: validCommand = true; AppendToConsoleLog(_propolisData.ExportToJSON()); break;
+                    case PropolisActions.SetBatteryLevel: validCommand = SetBatteryLevel(modelParams); break;
+                    case PropolisActions.Play: validCommand = PlayGame(); break;
+                    case PropolisActions.Stop: validCommand = StopGame(); break;
+                    //case PropolisActions.AppStatus: validCommand = true; AppendToConsoleLog(_propolisData.ExportToJSON()); break;
                     default: AppendToConsoleLog("Error unknown command: " + rawCommand); break;
                 }
 
@@ -124,7 +126,49 @@ namespace Propolis
 
         }
 
-      
+
+        private bool PlayGame()
+        {
+            _propolisData.LastEvent = _TempLastBuffer;
+            _propolisData.IsGamePlaying = true;
+            return true;
+        }
+
+        private bool StopGame()
+        {
+            _propolisData.LastEvent = _TempLastBuffer;
+            _propolisData.IsGamePlaying = false;
+            return true;
+        }
+
+        private bool SetBatteryLevel(Queue<string> modelParams)
+        {
+            float batteryValue = 0 ;
+            if (modelParams.Count != 1)
+            {
+                AppendToConsoleLog("Error on sbl method, incorrect set of parameter, looking for [BatteryLevel]");
+                return false;
+            }
+
+            try
+            {
+                batteryValue = (float)Convert.ToDouble(modelParams.Dequeue());
+                if (batteryValue < 0.0f && batteryValue > 1.0f)
+                {
+                    throw new FormatException();
+                }               
+            }
+            catch
+            {
+                AppendToConsoleLog("Error on sbl method, incorrect set of parameter, looking for a float value between 0.0 and 1.0");
+                return false;
+            }
+            _propolisData.BatteryLevel = batteryValue;
+            _propolisData.LastEvent = _TempLastBuffer;
+
+            return true;
+        }
+
         private string GetLastConsoleEntry()
         {
             string[] separatorFilter = new string[] { LineFilterConsole };

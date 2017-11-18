@@ -73,10 +73,11 @@ public class AbstractItem : MonoBehaviour {
         switch (Status)
         {
 
-            case PropolisStatus.OFF: material.color = GetColorFromHTML("#3A3459"); break;
-            case PropolisStatus.ON: material.color = GetColorFromHTML("#FDE981"); break;
-            case PropolisStatus.CORRUPTED: material.color = GetColorFromHTML("#EF5572"); break;
-            case PropolisStatus.CLEANSER: material.color = GetColorFromHTML("#0BFFE2"); break;
+            case PropolisStatus.OFF: material.color = PropolisColors.Dark; break;
+            case PropolisStatus.ON: material.color = PropolisColors.Yellow; break;
+            case PropolisStatus.CORRUPTED: material.color = PropolisColors.Purple; break;
+            case PropolisStatus.CLEANSER: material.color = PropolisColors.Blue; break;
+            case PropolisStatus.ULTRACORRUPTED: material.color = PropolisColors.Red; break;
         }
 
     }
@@ -110,7 +111,7 @@ public class AbstractItem : MonoBehaviour {
 			TimeToLive -= Time.deltaTime;
 
 			if (TimeToLive <= 0) {
-                ParentGroup.SendHexDataToHiveController(ID, PropolisStatus.OFF);
+                ParentGroup.SendHexDataToHiveController(ID, PropolisStatus.CORRUPTED);
 
             }
 		}
