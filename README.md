@@ -53,6 +53,10 @@ RECIPE3 = 7
   
   CREATE HEXGROUP [*GroupId*] [*X*] [*Y*] [*IP_ADDRESS*] [*IN_PORT*] [*OUT_PORT*]
   
+  ##### AtomGroup
+  
+  CREATE ATOMGROUP [*GroupId*] [*X*] [*Y*] [*IP_ADDRESS*] [*IN_PORT*] [*OUT_PORT*]
+  
 #### DELETE
   
   Delete a group element
@@ -60,7 +64,11 @@ RECIPE3 = 7
   
   ##### HexGroup
   
-  CREATE HEXGROUP [*GroupID*]
+  DELETE HEXGROUP [*GroupID*]
+  
+  ##### AtomGroup
+  
+  DELETE ATOMGROUP [*GroupID*]
   
 #### UIS
   
@@ -74,11 +82,36 @@ RECIPE3 = 7
   
   UIS [*type*] [*GroupID*] ALL [*Status*]
   
-  ##### HexGroup
+  ##### AtomGroup
   
-  UIS HEXGROUP [*GroupID*] [*ItemID*] [*Status*] 
+  UIS ATOMGROUP [*GroupID*] [*ItemID*] [*Status*] 
   
-  UIS HEXGROUP [*GroupID*] ALL [*Status*] 
+  UIS ATOMGROUP [*GroupID*] ALL [*Status*] 
   
+    ##### HexGroup
+  
+  UIS ATOMGROUP [*GroupID*] [*ItemID*] [*Status*] 
+  
+  UIS ATOMGROUP [*GroupID*] ALL [*Status*]
+  
+#### PLAY
+Start the gameplay
+PLAY
+  
+#### STOP
+Stop the gameplay
+STOP
+
+#### LOAD
+Load the last saved engine state
+LOAD
+  
+#### SAVE
+Save the last saved engine state
+SAVE
+
+#### UBL
+Update the battery level. Only values from 0.0 to 1.0 are accepted as level values
+UBL [*BatteryLevel*]
 
   
