@@ -47,28 +47,30 @@ RECIPE3 = 7
 #### CREATE
   
   Create a new group element
-  *CREATE [type] [params ....]*
+  
+    CREATE [type] [params ....]
   
   ##### HexGroup
   
-  CREATE HEXGROUP [*GroupId*] [*X*] [*Y*] [*IP_ADDRESS*] [*IN_PORT*] [*OUT_PORT*]
+    CREATE HEXGROUP [*GroupId*] [*X*] [*Y*] [*IP_ADDRESS*] [*IN_PORT*] [*OUT_PORT*]
   
   ##### AtomGroup
   
-  CREATE ATOMGROUP [*GroupId*] [*X*] [*Y*] [*IP_ADDRESS*] [*IN_PORT*] [*OUT_PORT*]
+    CREATE ATOMGROUP [*GroupId*] [*X*] [*Y*] [*IP_ADDRESS*] [*IN_PORT*] [*OUT_PORT*]
   
 #### DELETE
   
   Delete a group element
-  DELETE [*type*] [*GroupID*]
+    
+    DELETE [*type*] [*GroupID*]
   
   ##### HexGroup
   
-  DELETE HEXGROUP [*GroupID*]
+    DELETE HEXGROUP [*GroupID*]
   
   ##### AtomGroup
   
-  DELETE ATOMGROUP [*GroupID*]
+    DELETE ATOMGROUP [*GroupID*]
   
 #### UIS
   
@@ -76,50 +78,51 @@ RECIPE3 = 7
   
   ##### Single Item
   
-  UIS [*type*] [*GroupID*] [*ItemID*] [*Status*]
+    UIS [*type*] [*GroupID*] [*ItemID*] [*Status*]
   
   ##### All Items
   
-  UIS [*type*] [*GroupID*] ALL [*Status*]
+    UIS [*type*] [*GroupID*] ALL [*Status*]
   
   ##### AtomGroup
   
-  UIS ATOMGROUP [*GroupID*] [*ItemID*] [*Status*] 
+    UIS ATOMGROUP [*GroupID*] [*ItemID*] [*Status*] 
   
-  UIS ATOMGROUP [*GroupID*] ALL [*Status*] 
+    UIS ATOMGROUP [*GroupID*] ALL [*Status*] 
   
-    ##### HexGroup
+  ##### HexGroup
   
-  UIS ATOMGROUP [*GroupID*] [*ItemID*] [*Status*] 
+    UIS ATOMGROUP [*GroupID*] [*ItemID*] [*Status*] 
   
-  UIS ATOMGROUP [*GroupID*] ALL [*Status*]
+    UIS ATOMGROUP [*GroupID*] ALL [*Status*]
   
 #### PLAY
 Start the gameplay
-PLAY
+ 
+  PLAY
   
 #### STOP
 Stop the gameplay
 
-STOP
+  STOP
 
 
 #### LOAD
 Load the last saved engine state
 
-LOAD
+  LOAD
 
 
 #### SAVE
 Save the last saved engine state
 
-SAVE
+  SAVE
 
 
 #### UBL
 Update the battery level. Only values from 0.0 to 1.0 are accepted as level values
 
-UBL [*BatteryLevel*]
+  UBL [*BatteryLevel*]
 
 
   
