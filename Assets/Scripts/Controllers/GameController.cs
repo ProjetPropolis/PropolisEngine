@@ -33,8 +33,8 @@ public class GameController : MonoBehaviour {
             {
 
                 case PropolisActions.UpdateItemStatus: ProcessGameEventToBatteryLevel(); break;
-                case PropolisActions.Play: break;
-                case PropolisActions.Stop: break;
+                case PropolisActions.Play:StartGame(); break;
+                case PropolisActions.Stop:StopGame(); break;
             }
         
 
@@ -45,11 +45,13 @@ public class GameController : MonoBehaviour {
 
     private void  StartGame()
     {
+        Debug.Log("play");
         StartCoroutine(GameLoopCoroutine);
     }
 
     private void StopGame()
     {
+        Debug.Log("stop");
         StopCoroutine(GameLoopCoroutine);
     }
 
@@ -59,7 +61,7 @@ public class GameController : MonoBehaviour {
         {
             hiveGameController.UpdateGameLogic();
             molecularGameController.UpdateGameLogic();
-
+            Debug.Log("looping game loop");
             yield return new WaitForSeconds(PropolisGameSettings.DefaultGameTickTime);
         }
 
