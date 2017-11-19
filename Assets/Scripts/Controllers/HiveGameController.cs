@@ -10,4 +10,8 @@ public class HiveGameController : AbstractGameController
     {
 
     }
+    //private AbstractItem GetNeighboorOfHex(AbstractItem hex)
+    //{
+       
+    //}
 }

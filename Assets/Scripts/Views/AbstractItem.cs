@@ -21,11 +21,6 @@ public class AbstractItem : MonoBehaviour {
         
          
             status = value;
-            // this condition is to be remove
-            if (status == PropolisStatus.ON && TimeToLive <= 0)
-            {
-                TimeToLive = TimeAlive;
-            }
             ChangeColor();
             SendOscMessage("/hex", ID, (int)status);
             
@@ -34,17 +29,11 @@ public class AbstractItem : MonoBehaviour {
     }
    
     public int ID;
-    public float lifeTime;
-    public bool isCircled;
-    public Collider2D otherHex;
     public OSC osc;
     public AbstractGroup ParentGroup;
     public PropolisData propolisData;
-
     private Material material;
 
-    public float TimeAlive = 3.0f;
-    public float TimeToLive = 0.0f;
     private void Start()
     {
         ParentGroup = transform.parent.GetComponent<AbstractGroup>();
@@ -106,15 +95,7 @@ public class AbstractItem : MonoBehaviour {
 	private void Update()
 	{
         
-		//this code is to be remove
-		if (status == PropolisStatus.ON) {
-			TimeToLive -= Time.deltaTime;
 
-			if (TimeToLive <= 0) {
-                ParentGroup.SendHexDataToHiveController(ID, PropolisStatus.CORRUPTED);
-
-            }
-		}
 	}
 
    //DEPRACIATED NOW USING MOUSE CONTROLLER TO GET CLICKS ON HEX
