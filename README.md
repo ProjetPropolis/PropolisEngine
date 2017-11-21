@@ -8,14 +8,14 @@ Propolis Game Engine in Unity
 
 The Control Panel in the engine is divided in 3 sections:
 
-### Console :
+* ### Console :
 In the console mode, you can see all commands behing send to the PropolisEngine and send some manual commands. 
 (See documentations above on how to format commands)
   
-### Animations
+* ### Animations
 All animations used in game represented as buttons to trigger them manualy.
   
-### Configure
+* ### Configure
 All tools needed to modify and configure the visual representation of the Ruche and the Champs Moléculaires.
 The 3 main tools are :
   
