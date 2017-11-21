@@ -14,19 +14,22 @@ public class HiveGameController : AbstractGameController
     //To be used instead of Update or FixedUpdate. 
     public override void UpdateGameLogic()
     {
-        if(IndexProcess%2 == 0)
+        if(IndexProcess%4 == 0)
         {
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 5; i++)
             {
                 ProcessCorruptionOnEdge();
             }
             
             
         }
-
-        ProcessCorruption();
+        for (int i = 0; i < 4; i++)
+        {
+            ProcessCorruption();
+        }
+        ;
         IndexProcess++;
-        IndexProcess = IndexProcess % 10;
+        IndexProcess = IndexProcess % 30;
     }
 
     public override void InitOnPlay()
@@ -64,30 +67,32 @@ public class HiveGameController : AbstractGameController
     private void ProcessCorruption()
     {
 
-        
+        //AbstractItem hexToCorrupted = x.Neighbors
+        //                .First(y => y.Status == PropolisStatus.OFF || y.Status == PropolisStatus.ON);
+        //CorruptHex(hexToCorrupted);
 
-                List<AbstractItem> CorrupedHexs = new List<AbstractItem>();
-                ListOfGroups.ForEach(x => x.ChildHexsList.Where(y => y.Status == PropolisStatus.CORRUPTED).ToList<AbstractItem>().ForEach(z => CorrupedHexs.Add(z)));
+        List<AbstractItem> CorrupedHexs = new List<AbstractItem>();
+        ListOfGroups
+            .ForEach(x => x.ChildHexsList.Where(y => y.Status == PropolisStatus.CORRUPTED && (y.CountNeighborsWithStatus(PropolisStatus.ON) > 0 || y.CountNeighborsWithStatus(PropolisStatus.OFF) > 0))
+            .ToList<AbstractItem>()
+            .ForEach(z => CorrupedHexs.Add(z)));
 
-                
-                CorrupedHexs.ForEach(x => {
-                    try
-                    {
-                        AbstractItem hexToCorrupted = x.Neighbors
-                        .First(y => y.Status == PropolisStatus.OFF || y.Status == PropolisStatus.ON);
-                        CorruptHex(hexToCorrupted);
-                    }
-                    catch (Exception)
-                    {
+        if (CorrupedHexs.Count > 0) {
+            try
+            {
+                AbstractItem HexToCorrupted = CorrupedHexs.ElementAt(random.Next(CorrupedHexs.Count)).Neighbors.First(x => x.Status == PropolisStatus.ON || x.Status == PropolisStatus.OFF );
+                CorruptHex(HexToCorrupted);
+            }
+            catch (Exception)
+            {
 
-                    }
                
+            }
 
-                });
-                
+        }
 
-       
-        
+
+
     }
 
 

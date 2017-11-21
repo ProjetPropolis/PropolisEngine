@@ -145,7 +145,7 @@ namespace Propolis
             BatteryLevel = 0.0f;
             if (HexGroupList == null)
                 HexGroupList = new List<AbstractGroupData>();
-            HexGroupList.ForEach(x => x.Childrens.ForEach(y => y.Status = (int)PropolisStatus.OFF));
+            HexGroupList.ForEach(x => x.Childrens.ForEach(y => y.Status = (int)PropolisStatus.ON));
             if (AtomGroupList == null)
                 AtomGroupList = new List<AbstractGroupData>();
             AtomGroupList.ForEach(x => x.Childrens.ForEach(y => y.Status = (int)PropolisStatus.OFF));

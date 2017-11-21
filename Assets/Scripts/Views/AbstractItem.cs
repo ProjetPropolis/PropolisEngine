@@ -85,6 +85,19 @@ public class AbstractItem : MonoBehaviour {
 
     }
 
+    public int CountNeighborsWithStatus(PropolisStatus status)
+    {
+        try
+        {
+            return Neighbors.Where(x => x.status == status).Count();
+        }
+        catch
+        {
+            return 0;
+        }
+        
+    }
+
     Color GetColorFromHTML(string hex)
     {
         Color color;
