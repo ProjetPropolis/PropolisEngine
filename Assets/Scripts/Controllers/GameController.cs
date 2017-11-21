@@ -73,7 +73,7 @@ public class GameController : MonoBehaviour {
     }
 
    
-    private void IncrementBatteryLevel(float increment)
+    public void IncrementBatteryLevel(float increment)
     {
         SendCommand(string.Format("{0} {1}",PropolisActions.SetBatteryLevel,propolisData.BatteryLevel + increment));
     }
