@@ -10,8 +10,13 @@ public class HiveGameController : AbstractGameController
     {
 
     }
+
+    public override void InitOnPlay()
+    {
+        base.InitOnPlay();
+    }
     //private AbstractItem GetNeighboorOfHex(AbstractItem hex)
     //{
-       
+
     //}
 }

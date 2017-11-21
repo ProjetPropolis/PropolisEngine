@@ -46,6 +46,8 @@ public class GameController : MonoBehaviour {
     private void  StartGame()
     {
         Debug.Log("play");
+        hiveGameController.InitOnPlay();
+        molecularGameController.InitOnPlay();
         StartCoroutine(GameLoopCoroutine);
     }
 

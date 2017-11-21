@@ -18,18 +18,32 @@ public class AbstractItem : MonoBehaviour {
 
         set
         {
-        
-         
+
+
             status = value;
             ChangeColor();
-            SendOscMessage("/hex", ID, (int)status);
-            
-            
+            //SendOscMessage("/hex", ID, (int)status);
+
+
         }
     }
-   
+
+    public List<AbstractItem> Neighbors;
+    public LayerMask ItemLayerMask;
+     
+
+    public void CalculateNeighborsList()
+    {
+        Neighbors = Physics2D.OverlapCircleAll((Vector2)transform.position, NeighborsDist)
+            .Where(x=>x.GetComponent<AbstractItem>() != null)
+            .Select(x => x.GetComponent<AbstractItem>())
+            .Where(x=>x.ID != ID || x.ParentGroup.ID != ParentGroup.ID)
+            .ToList<AbstractItem>();
+    }
+
     public int ID;
     public OSC osc;
+    public float NeighborsDist;
     public AbstractGroup ParentGroup;
     public PropolisData propolisData;
     private Material material;
@@ -88,7 +102,7 @@ public class AbstractItem : MonoBehaviour {
         
         OscMessage message = new OscMessage();
 
-        SendOscMessage("/hex", ID, (int)Status);
+       // SendOscMessage("/hex", ID, (int)Status);
 
     }
 

@@ -17,7 +17,7 @@ public class AbstractGroup : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        Osc.SetAddressHandler("/hex", OnReceiveHexStatus);
+        //Osc.SetAddressHandler("/hex", OnReceiveHexStatus);
         ChildHexsList = transform.GetComponentsInChildren<AbstractItem>().ToList<AbstractItem>();
         parentGameController = GameObject.Find("Controllers").GetComponent<AbstractGameController>();
     }
