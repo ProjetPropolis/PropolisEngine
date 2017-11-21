@@ -22,7 +22,7 @@ public class AbstractItem : MonoBehaviour {
 
             status = value;
             ChangeColor();
-            //SendOscMessage("/hex", ID, (int)status);
+            //hexToCorruptedSendOscMessage("/hex", ID, (int)status);
 
 
         }
