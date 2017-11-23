@@ -40,7 +40,7 @@ public class GameController : MonoBehaviour {
 
             if (newItemData.Status == (int)PropolisStatus.ON || newItemData.Status == (int)PropolisStatus.CLEANSING)
             {
-                switch (previousItemData.Status)
+                switch (previousItemData.PrevState)
                 {
                     case PropolisStatus.ON: IncrementBatteryLevel(PropolisGameSettings.ScorePressOnActiveHex);break;
                     case PropolisStatus.CORRUPTED: IncrementBatteryLevel(PropolisGameSettings.ScorePressOnCorruptedHex); break;
@@ -56,13 +56,10 @@ public class GameController : MonoBehaviour {
     public void UpdateFromModel()
     {
         propolisData = PropolisData.Instance;
-            
-            UpdateBattery();
+                     
             BatteryLevel = propolisData.BatteryLevel;
             switch (propolisData.LastEvent.Action)
             {
-
-                case PropolisActions.UpdateItemStatus: ProcessGameEventToBatteryLevel(); break;
                 case PropolisActions.Play:StartGame(); break;
                 case PropolisActions.Stop:StopGame(); break;
             }
@@ -70,6 +67,8 @@ public class GameController : MonoBehaviour {
 
         hiveGameController.UpdateFromModel();
         molecularGameController.UpdateFromModel();
+        UpdateBattery();
+
 
     }
 
@@ -99,10 +98,6 @@ public class GameController : MonoBehaviour {
 
     }
 
-    private void ProcessGameEventToBatteryLevel()
-    {
-
-    }
 
    
     public void IncrementBatteryLevel(float increment)

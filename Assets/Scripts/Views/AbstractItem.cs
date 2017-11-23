@@ -9,6 +9,7 @@ using System.Linq;
 public class AbstractItem : MonoBehaviour {
 
     private PropolisStatus status;
+    public  PropolisStatus PrevState { get; set; }
 
     public PropolisStatus Status {
         get
@@ -19,7 +20,7 @@ public class AbstractItem : MonoBehaviour {
         set
         {
 
-
+            PrevState = status;
             status = value;
             ChangeColor();
             //hexToCorruptedSendOscMessage("/hex", ID, (int)status);
@@ -57,10 +58,12 @@ public class AbstractItem : MonoBehaviour {
         if(ParentGroup.DataType == PropolisDataTypes.HexGroup)
         {
             Status = (PropolisStatus)propolisData.HexGroupList.First(x => x.ID == ParentGroup.ID).Childrens.First(x => x.ID == ID).Status;
+            PrevState = Status;
         }
         else
         {
             Status = (PropolisStatus)propolisData.HexGroupList.First(x => x.ID == ParentGroup.ID).Childrens.First(x => x.ID == ID).Status;
+            PrevState = Status;
         }
     
 
