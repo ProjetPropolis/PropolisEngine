@@ -101,6 +101,39 @@ public class AbstractItem : MonoBehaviour {
         
     }
 
+    public List<AbstractItem> GetNeighborsWithStatus(PropolisStatus status)
+    {
+        try
+        {
+            return Neighbors.Where(x => x.status == status).ToList<AbstractItem>();
+        }
+        catch
+        {
+            return new List<AbstractItem>();
+        }
+
+    }
+
+    public List<AbstractItem> GetNeighborsWithStatus(PropolisStatus[] status)
+    {
+        try
+        {
+            List<AbstractItem> returnList = new List<AbstractItem>();
+            foreach (var s in status)
+            {
+                returnList = returnList.Concat(GetNeighborsWithStatus(s)).ToList<AbstractItem>();
+            }
+
+            return returnList;
+                
+        }
+        catch
+        {
+            return new List<AbstractItem>();
+        }
+
+    }
+
     Color GetColorFromHTML(string hex)
     {
         Color color;

@@ -16,30 +16,27 @@ public class HiveGameController : AbstractGameController
     {
         if(IndexProcess%4 == 0)
         {
-            for (int i = 0; i < 5; i++)
-            {
-                ProcessCorruptionOnEdge();
-            }
-            
-            
+            ProcessCorruptionOnEdge();
         }
-        for (int i = 0; i < 4; i++)
+        else
         {
+         
             ProcessCorruption();
+
         }
-        ;
+
+   
+        
         IndexProcess++;
         IndexProcess = IndexProcess % 30;
     }
 
     public override void InitOnPlay()
     {
-        base.InitOnPlay();
+        base.InitOnPlay();        // va calculer chaque neighbors 
         random = new System.Random();
         GenerateEdgeHexList();
-        IndexProcess = 0;
-        // EdgeHexList.ForEach(x=> SendItemData(x.ParentGroup.i))
-        //EdgeHexList.ForEach(x => SendItemData(x.ParentGroup.ID, x.ID, PropolisStatus.CLEANSER));
+        IndexProcess = 0; // nous donne le nombre de clics 
 
     }
 
@@ -62,14 +59,24 @@ public class HiveGameController : AbstractGameController
     {
         AbstractItem hexToCorrupted = EdgeHexList.ElementAt(random.Next(EdgeHexList.Count));
         CorruptHex(hexToCorrupted);
+        List<AbstractItem> NeighborsToCorrupt = 
+        hexToCorrupted.GetNeighborsWithStatus(new PropolisStatus[]{PropolisStatus.ON,PropolisStatus.OFF });
+
+        int numberOfHexToProcess = Mathf.Clamp(NeighborsToCorrupt.Count, 0, PropolisGameSettings.MaxEdgeHexNeighborsCorruption);
+
+        for (int i = 0; i < numberOfHexToProcess; i++)
+        {
+            AbstractItem hexNeighborsToCorrupted = NeighborsToCorrupt.ElementAt(random.Next(NeighborsToCorrupt.Count));
+            CorruptHex(hexNeighborsToCorrupted);
+            NeighborsToCorrupt.Remove(hexNeighborsToCorrupted);
+        }
+
+
     }
 
     private void ProcessCorruption()
     {
 
-        //AbstractItem hexToCorrupted = x.Neighbors
-        //                .First(y => y.Status == PropolisStatus.OFF || y.Status == PropolisStatus.ON);
-        //CorruptHex(hexToCorrupted);
 
         List<AbstractItem> CorrupedHexs = new List<AbstractItem>();
         ListOfGroups
@@ -98,8 +105,5 @@ public class HiveGameController : AbstractGameController
 
 
 
-    //private AbstractItem GetNeighboorOfHex(AbstractItem hex)
-    //{
-
-    //}
+   
 }
