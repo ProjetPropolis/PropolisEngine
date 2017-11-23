@@ -218,7 +218,7 @@ public class mouseUiController : MonoBehaviour {
             var IDGroup = abstractGroup.ID;
             var GroupType = abstractGroup.DataType;
             //@TODO once the gameplay is more advanced remove the corrupted part of this algorythm
-            var command = string.Format("uis {0} {1} {2} {3}", GroupType, IDGroup, IDTuile, IDTuile != 6 ?(int)PropolisStatus.ON:(int)PropolisStatus.ULTRACORRUPTED);
+            var command = string.Format("uis {0} {1} {2} {3}", GroupType, IDGroup, IDTuile,(int)PropolisStatus.ON);
             PropolisManager.SendCommand(command);
         }
 

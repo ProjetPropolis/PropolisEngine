@@ -12,6 +12,7 @@ namespace Propolis
     {
         public const char CommandSeparator = ' ';
         public const string LineFilterConsole = "\r\n";
+        [SerializeField]
         public PropolisData _propolisData;
         public string ConsoleLog;
         private PropolisLastEventState _TempLastBuffer;
