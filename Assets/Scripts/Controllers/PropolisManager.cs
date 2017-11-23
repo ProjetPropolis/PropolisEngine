@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using System;
+using System.Text.RegularExpressions;
 
 namespace Propolis
 {
@@ -35,6 +36,9 @@ namespace Propolis
         private void AppendToConsoleLog(string line)
         {
             ConsoleLog += line + LineFilterConsole;
+            var linesString = Regex.Split(ConsoleLog, "\r\n|\r|\n");
+            var lines  = linesString
+            ConsoleLog = string.Join(Environment.NewLine, lines.ToArray());
         }
 
         public void ClearConsole()
