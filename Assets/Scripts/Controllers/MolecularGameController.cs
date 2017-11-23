@@ -10,4 +10,8 @@ public class MolecularGameController : AbstractGameController
     {
 
     }
+    public override void InitOnPlay()
+    {
+            base.InitOnPlay();
+    }
 }

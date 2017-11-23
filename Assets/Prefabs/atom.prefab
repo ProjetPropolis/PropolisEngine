@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4600395423533560}
   - component: {fileID: 212507797569671052}
   - component: {fileID: 114974041808627746}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: atom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,14 +52,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Neighbors: []
+  ItemLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   ID: 0
-  lifeTime: 0
-  isCircled: 0
-  otherHex: {fileID: 0}
   osc: {fileID: 0}
+  NeighborsDist: 0
   ParentGroup: {fileID: 0}
-  TimeAlive: 3
-  TimeToLive: 0
 --- !u!212 &212507797569671052
 SpriteRenderer:
   m_ObjectHideFlags: 1

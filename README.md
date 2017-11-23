@@ -4,6 +4,33 @@ Propolis Game Engine in Unity
 
 ![alt text](https://github.com/ProjetPropolis/PropolisEngine/blob/master/UI.png?raw=true)
 
+## UI Usage
+
+  The Control Panel in the engine is divided in 3 sections:
+
+* ### Console :
+    In the console mode, you can see all commands behing send to the PropolisEngine and send some manual commands. 
+    (See documentations above on how to format commands)
+
+* ### Animations
+    All animations used in game represented as buttons to trigger them manualy.
+
+* ### Configure
+    All tools needed to modify and configure the visual representation of the Ruche and the Champs Moléculaires.
+    The 3 main tools are :
+
+  #### Delete
+    Simply click on delete then click on the group you want to delete.
+  #### Create
+    Click on delete then click where you want to instanciate a group. A popup window will apear
+    where you can enter the follwing info : ID, Ip , PortIn and Port Out.
+  #### Setup
+    Simply click on edit then click on the group you want to modify. A popup window will apear
+    where you can enter the follwing info : ID, Ip , PortIn and Port Out.
+    At this pont you can use you keyboard arrows to move the group around.
+
+  Following all modification please use the save button on the bottom of the Setup Panel.
+  
 ## Keybaord Shortcuts in UI
 
 Esc - Open/Close Control Panel

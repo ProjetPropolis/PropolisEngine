@@ -62,9 +62,9 @@ namespace Propolis
                     if (x.ID == abstractGroupData.ID)
                     {
                         x.transform.position = abstractGroupData.GetPosition();
-                        x.Osc.inPort = abstractGroupData.InPort;
-                        x.Osc.outPort = abstractGroupData.OutPort;
-                        x.Osc.outIP = abstractGroupData.IP;
+                        //x.Osc.inPort = abstractGroupData.InPort;
+                        //x.Osc.outPort = abstractGroupData.OutPort;
+                        //x.Osc.outIP = abstractGroupData.IP;
                     }
                 }
             );
@@ -72,7 +72,11 @@ namespace Propolis
             
         }
         public abstract void UpdateGameLogic();
-      
+        public virtual void InitOnPlay()
+        {
+            ListOfGroups.ForEach(x => x.ChildHexsList.ForEach(y => y.CalculateNeighborsList()));
+        }
+
         private void UpdateAbstractGroupItemStatus()
         {
             AbstractGroupData abstractGroupData = null;

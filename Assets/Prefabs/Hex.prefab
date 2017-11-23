@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 50457253743338470}
   - component: {fileID: 114810211730260450}
   - component: {fileID: 60867131017819746}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Hex
   m_TagString: Hex
   m_Icon: {fileID: 0}
@@ -120,14 +120,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Neighbors: []
+  ItemLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   ID: 0
-  lifeTime: 2
-  isCircled: 0
-  otherHex: {fileID: 0}
   osc: {fileID: 0}
+  NeighborsDist: 0
   ParentGroup: {fileID: 0}
-  TimeAlive: 3
-  TimeToLive: 0
 --- !u!212 &212788538101397852
 SpriteRenderer:
   m_ObjectHideFlags: 1

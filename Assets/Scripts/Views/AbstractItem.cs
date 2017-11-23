@@ -9,6 +9,7 @@ using System.Linq;
 public class AbstractItem : MonoBehaviour {
 
     private PropolisStatus status;
+    public  PropolisStatus PrevState { get; set; }
 
     public PropolisStatus Status {
         get
@@ -18,18 +19,32 @@ public class AbstractItem : MonoBehaviour {
 
         set
         {
-        
-         
+
+            PrevState = status;
             status = value;
             ChangeColor();
-            SendOscMessage("/hex", ID, (int)status);
-            
-            
+            //hexToCorruptedSendOscMessage("/hex", ID, (int)status);
+
+
         }
     }
-   
+
+    public List<AbstractItem> Neighbors;
+    public LayerMask ItemLayerMask;
+     
+
+    public void CalculateNeighborsList()
+    {
+        Neighbors = Physics2D.OverlapCircleAll((Vector2)transform.position, NeighborsDist)
+            .Where(x=>x.GetComponent<AbstractItem>() != null)
+            .Select(x => x.GetComponent<AbstractItem>())
+            .Where(x=>x.ID != ID || x.ParentGroup.ID != ParentGroup.ID)
+            .ToList<AbstractItem>();
+    }
+
     public int ID;
     public OSC osc;
+    public float NeighborsDist;
     public AbstractGroup ParentGroup;
     public PropolisData propolisData;
     private Material material;
@@ -43,10 +58,12 @@ public class AbstractItem : MonoBehaviour {
         if(ParentGroup.DataType == PropolisDataTypes.HexGroup)
         {
             Status = (PropolisStatus)propolisData.HexGroupList.First(x => x.ID == ParentGroup.ID).Childrens.First(x => x.ID == ID).Status;
+            PrevState = Status;
         }
         else
         {
             Status = (PropolisStatus)propolisData.HexGroupList.First(x => x.ID == ParentGroup.ID).Childrens.First(x => x.ID == ID).Status;
+            PrevState = Status;
         }
     
 
@@ -71,6 +88,19 @@ public class AbstractItem : MonoBehaviour {
 
     }
 
+    public int CountNeighborsWithStatus(PropolisStatus status)
+    {
+        try
+        {
+            return Neighbors.Where(x => x.status == status).Count();
+        }
+        catch
+        {
+            return 0;
+        }
+        
+    }
+
     Color GetColorFromHTML(string hex)
     {
         Color color;
@@ -88,7 +118,7 @@ public class AbstractItem : MonoBehaviour {
         
         OscMessage message = new OscMessage();
 
-        SendOscMessage("/hex", ID, (int)Status);
+       // SendOscMessage("/hex", ID, (int)Status);
 
     }
 

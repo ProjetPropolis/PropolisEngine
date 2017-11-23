@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212818096878760550}
   - component: {fileID: 50941381951029828}
   - component: {fileID: 114164971816795814}
-  - component: {fileID: 60921361027818430}
+  - component: {fileID: 58918422344399206}
   m_Layer: 8
   m_Name: Hex3
   m_TagString: Hex
@@ -60,7 +60,7 @@ GameObject:
   - component: {fileID: 212876099412944230}
   - component: {fileID: 50320415532741120}
   - component: {fileID: 114950889589718076}
-  - component: {fileID: 60416690898269896}
+  - component: {fileID: 58597397395979288}
   m_Layer: 8
   m_Name: Hex7
   m_TagString: Hex
@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 212829128546738752}
   - component: {fileID: 50946193101201884}
   - component: {fileID: 114239766088370954}
-  - component: {fileID: 60941936221834478}
+  - component: {fileID: 58940763106046544}
   m_Layer: 8
   m_Name: Hex1
   m_TagString: Hex
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 212340254583507616}
   - component: {fileID: 50185264381463006}
   - component: {fileID: 114375586934728794}
-  - component: {fileID: 60832590958752036}
+  - component: {fileID: 58391826324767036}
   m_Layer: 8
   m_Name: Hex6
   m_TagString: Hex
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 212416991235089084}
   - component: {fileID: 50845997205304442}
   - component: {fileID: 114018546840295354}
-  - component: {fileID: 60054410929205680}
+  - component: {fileID: 58740875848105270}
   m_Layer: 8
   m_Name: Hex5
   m_TagString: Hex
@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 212533464884338840}
   - component: {fileID: 50348493907129052}
   - component: {fileID: 114868724291734944}
-  - component: {fileID: 60235782572218446}
+  - component: {fileID: 58659478675470504}
   m_Layer: 8
   m_Name: Hex4
   m_TagString: Hex
@@ -155,7 +155,7 @@ GameObject:
   - component: {fileID: 212673957711884620}
   - component: {fileID: 50501603438556768}
   - component: {fileID: 114677225290470002}
-  - component: {fileID: 60723183838405592}
+  - component: {fileID: 58395353400001380}
   m_Layer: 8
   m_Name: Hex2
   m_TagString: Hex
@@ -434,6 +434,51 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!58 &58391826324767036
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1438897815040702}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.000061035156, y: -0.00024414062}
+  serializedVersion: 2
+  m_Radius: 1.1550002
+--- !u!58 &58395353400001380
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1500863587766528}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.00012207031, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.1550002
+--- !u!58 &58597397395979288
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1394985892003806}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.000061035156, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.1550002
 --- !u!58 &58643994918658870
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -449,54 +494,8 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 2.86
---- !u!60 &60054410929205680
-PolygonCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1443279096423534}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2.31}
-    newSize: {x: 2, y: 2.31}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.84897965, y: -0.6280533}
-      - {x: 0.8789366, y: -0.60378}
-      - {x: 0.9236155, y: -0.5582957}
-      - {x: 1.1091524, y: -0.024981469}
-      - {x: 0.9211677, y: 0.5382957}
-      - {x: 0.537439, y: 0.94117683}
-      - {x: 0.083615914, y: 1.0664878}
-      - {x: -0.002448164, y: 1.0882956}
-      - {x: -0.068192124, y: 1.0882956}
-      - {x: -0.13212806, y: 1.0301037}
-      - {x: -0.5732957, y: 0.9484084}
-      - {x: -0.89723164, y: 0.58255184}
-      - {x: -0.93935966, y: 0.5404237}
-      - {x: -1.1002598, y: -0.03836304}
-      - {x: -0.9454237, y: -0.5443596}
-      - {x: -0.56851226, y: -0.9456402}
-      - {x: -0.2632957, y: -0.9889358}
-      - {x: -0.12, y: -1.0179754}
-      - {x: -0.021807946, y: -1.0761677}
-      - {x: 0.049999997, y: -1.0519116}
-      - {x: 0.12329556, y: -1.026488}
-      - {x: 0.5927683, y: -0.9698961}
---- !u!60 &60235782572218446
-PolygonCollider2D:
+--- !u!58 &58659478675470504
+CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -504,183 +503,29 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2.31}
-    newSize: {x: 2, y: 2.31}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.84897965, y: -0.6280533}
-      - {x: 0.8789366, y: -0.60378}
-      - {x: 0.9236155, y: -0.5582957}
-      - {x: 1.1091524, y: -0.024981469}
-      - {x: 0.9211677, y: 0.5382957}
-      - {x: 0.537439, y: 0.94117683}
-      - {x: 0.083615914, y: 1.0664878}
-      - {x: -0.002448164, y: 1.0882956}
-      - {x: -0.068192124, y: 1.0882956}
-      - {x: -0.13212806, y: 1.0301037}
-      - {x: -0.5732957, y: 0.9484084}
-      - {x: -0.89723164, y: 0.58255184}
-      - {x: -0.93935966, y: 0.5404237}
-      - {x: -1.1002598, y: -0.03836304}
-      - {x: -0.9454237, y: -0.5443596}
-      - {x: -0.56851226, y: -0.9456402}
-      - {x: -0.2632957, y: -0.9889358}
-      - {x: -0.12, y: -1.0179754}
-      - {x: -0.021807946, y: -1.0761677}
-      - {x: 0.049999997, y: -1.0519116}
-      - {x: 0.12329556, y: -1.026488}
-      - {x: 0.5927683, y: -0.9698961}
---- !u!60 &60416690898269896
-PolygonCollider2D:
+  m_Offset: {x: -0.000061035156, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.1550002
+--- !u!58 &58740875848105270
+CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1394985892003806}
+  m_GameObject: {fileID: 1443279096423534}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2.31}
-    newSize: {x: 2, y: 2.31}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.84897965, y: -0.6280533}
-      - {x: 0.8789366, y: -0.60378}
-      - {x: 0.9236155, y: -0.5582957}
-      - {x: 1.1091524, y: -0.024981469}
-      - {x: 0.9211677, y: 0.5382957}
-      - {x: 0.537439, y: 0.94117683}
-      - {x: 0.083615914, y: 1.0664878}
-      - {x: -0.002448164, y: 1.0882956}
-      - {x: -0.068192124, y: 1.0882956}
-      - {x: -0.13212806, y: 1.0301037}
-      - {x: -0.5732957, y: 0.9484084}
-      - {x: -0.89723164, y: 0.58255184}
-      - {x: -0.93935966, y: 0.5404237}
-      - {x: -1.1002598, y: -0.03836304}
-      - {x: -0.9454237, y: -0.5443596}
-      - {x: -0.56851226, y: -0.9456402}
-      - {x: -0.2632957, y: -0.9889358}
-      - {x: -0.12, y: -1.0179754}
-      - {x: -0.021807946, y: -1.0761677}
-      - {x: 0.049999997, y: -1.0519116}
-      - {x: 0.12329556, y: -1.026488}
-      - {x: 0.5927683, y: -0.9698961}
---- !u!60 &60723183838405592
-PolygonCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1500863587766528}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2.31}
-    newSize: {x: 2, y: 2.31}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.84897965, y: -0.6280533}
-      - {x: 0.8789366, y: -0.60378}
-      - {x: 0.9236155, y: -0.5582957}
-      - {x: 1.1091524, y: -0.024981469}
-      - {x: 0.9211677, y: 0.5382957}
-      - {x: 0.537439, y: 0.94117683}
-      - {x: 0.083615914, y: 1.0664878}
-      - {x: -0.002448164, y: 1.0882956}
-      - {x: -0.068192124, y: 1.0882956}
-      - {x: -0.13212806, y: 1.0301037}
-      - {x: -0.5732957, y: 0.9484084}
-      - {x: -0.89723164, y: 0.58255184}
-      - {x: -0.93935966, y: 0.5404237}
-      - {x: -1.1002598, y: -0.03836304}
-      - {x: -0.9454237, y: -0.5443596}
-      - {x: -0.56851226, y: -0.9456402}
-      - {x: -0.2632957, y: -0.9889358}
-      - {x: -0.12, y: -1.0179754}
-      - {x: -0.021807946, y: -1.0761677}
-      - {x: 0.049999997, y: -1.0519116}
-      - {x: 0.12329556, y: -1.026488}
-      - {x: 0.5927683, y: -0.9698961}
---- !u!60 &60832590958752036
-PolygonCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1438897815040702}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2.31}
-    newSize: {x: 2, y: 2.31}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.84897965, y: -0.6280533}
-      - {x: 0.8789366, y: -0.60378}
-      - {x: 0.9236155, y: -0.5582957}
-      - {x: 1.1091524, y: -0.024981469}
-      - {x: 0.9211677, y: 0.5382957}
-      - {x: 0.537439, y: 0.94117683}
-      - {x: 0.083615914, y: 1.0664878}
-      - {x: -0.002448164, y: 1.0882956}
-      - {x: -0.068192124, y: 1.0882956}
-      - {x: -0.13212806, y: 1.0301037}
-      - {x: -0.5732957, y: 0.9484084}
-      - {x: -0.89723164, y: 0.58255184}
-      - {x: -0.93935966, y: 0.5404237}
-      - {x: -1.1002598, y: -0.03836304}
-      - {x: -0.9454237, y: -0.5443596}
-      - {x: -0.56851226, y: -0.9456402}
-      - {x: -0.2632957, y: -0.9889358}
-      - {x: -0.12, y: -1.0179754}
-      - {x: -0.021807946, y: -1.0761677}
-      - {x: 0.049999997, y: -1.0519116}
-      - {x: 0.12329556, y: -1.026488}
-      - {x: 0.5927683, y: -0.9698961}
---- !u!60 &60921361027818430
-PolygonCollider2D:
+  m_Offset: {x: 0, y: -0.00024414062}
+  serializedVersion: 2
+  m_Radius: 1.1550002
+--- !u!58 &58918422344399206
+CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -688,45 +533,14 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2.31}
-    newSize: {x: 2, y: 2.31}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.84897965, y: -0.6280533}
-      - {x: 0.8789366, y: -0.60378}
-      - {x: 0.9236155, y: -0.5582957}
-      - {x: 1.1091524, y: -0.024981469}
-      - {x: 0.9211677, y: 0.5382957}
-      - {x: 0.537439, y: 0.94117683}
-      - {x: 0.083615914, y: 1.0664878}
-      - {x: -0.002448164, y: 1.0882956}
-      - {x: -0.068192124, y: 1.0882956}
-      - {x: -0.13212806, y: 1.0301037}
-      - {x: -0.5732957, y: 0.9484084}
-      - {x: -0.89723164, y: 0.58255184}
-      - {x: -0.93935966, y: 0.5404237}
-      - {x: -1.1002598, y: -0.03836304}
-      - {x: -0.9454237, y: -0.5443596}
-      - {x: -0.56851226, y: -0.9456402}
-      - {x: -0.2632957, y: -0.9889358}
-      - {x: -0.12, y: -1.0179754}
-      - {x: -0.021807946, y: -1.0761677}
-      - {x: 0.049999997, y: -1.0519116}
-      - {x: 0.12329556, y: -1.026488}
-      - {x: 0.5927683, y: -0.9698961}
---- !u!60 &60941936221834478
-PolygonCollider2D:
+  m_Offset: {x: -0.000061035156, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.1550002
+--- !u!58 &58940763106046544
+CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -734,43 +548,12 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2.31}
-    newSize: {x: 2, y: 2.31}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.84897965, y: -0.6280533}
-      - {x: 0.8789366, y: -0.60378}
-      - {x: 0.9236155, y: -0.5582957}
-      - {x: 1.1091524, y: -0.024981469}
-      - {x: 0.9211677, y: 0.5382957}
-      - {x: 0.537439, y: 0.94117683}
-      - {x: 0.083615914, y: 1.0664878}
-      - {x: -0.002448164, y: 1.0882956}
-      - {x: -0.068192124, y: 1.0882956}
-      - {x: -0.13212806, y: 1.0301037}
-      - {x: -0.5732957, y: 0.9484084}
-      - {x: -0.89723164, y: 0.58255184}
-      - {x: -0.93935966, y: 0.5404237}
-      - {x: -1.1002598, y: -0.03836304}
-      - {x: -0.9454237, y: -0.5443596}
-      - {x: -0.56851226, y: -0.9456402}
-      - {x: -0.2632957, y: -0.9889358}
-      - {x: -0.12, y: -1.0179754}
-      - {x: -0.021807946, y: -1.0761677}
-      - {x: 0.049999997, y: -1.0519116}
-      - {x: 0.12329556, y: -1.026488}
-      - {x: 0.5927683, y: -0.9698961}
+  serializedVersion: 2
+  m_Radius: 1.1550002
 --- !u!114 &114018546840295354
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -782,14 +565,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Neighbors: []
+  ItemLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
   ID: 4
-  lifeTime: 2
-  isCircled: 0
-  otherHex: {fileID: 0}
   osc: {fileID: 114366736888829554}
+  NeighborsDist: 0.5
   ParentGroup: {fileID: 0}
-  TimeAlive: 2
-  TimeToLive: 0
 --- !u!114 &114164971816795814
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -801,14 +584,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Neighbors: []
+  ItemLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
   ID: 2
-  lifeTime: 2
-  isCircled: 0
-  otherHex: {fileID: 0}
   osc: {fileID: 114366736888829554}
+  NeighborsDist: 0.5
   ParentGroup: {fileID: 0}
-  TimeAlive: 2
-  TimeToLive: 0
 --- !u!114 &114239766088370954
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -820,14 +603,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Neighbors: []
+  ItemLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
   ID: 0
-  lifeTime: 2
-  isCircled: 0
-  otherHex: {fileID: 0}
   osc: {fileID: 114366736888829554}
+  NeighborsDist: 0.5
   ParentGroup: {fileID: 0}
-  TimeAlive: 2
-  TimeToLive: 0
 --- !u!114 &114366736888829554
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -853,14 +636,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Neighbors: []
+  ItemLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
   ID: 5
-  lifeTime: 2
-  isCircled: 0
-  otherHex: {fileID: 0}
   osc: {fileID: 114366736888829554}
+  NeighborsDist: 0.5
   ParentGroup: {fileID: 0}
-  TimeAlive: 2
-  TimeToLive: 0
 --- !u!114 &114677225290470002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -872,14 +655,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Neighbors: []
+  ItemLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
   ID: 1
-  lifeTime: 2
-  isCircled: 0
-  otherHex: {fileID: 0}
   osc: {fileID: 114366736888829554}
+  NeighborsDist: 0.5
   ParentGroup: {fileID: 0}
-  TimeAlive: 2
-  TimeToLive: 0
 --- !u!114 &114868724291734944
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -891,14 +674,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Neighbors: []
+  ItemLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
   ID: 3
-  lifeTime: 2
-  isCircled: 0
-  otherHex: {fileID: 0}
   osc: {fileID: 114366736888829554}
+  NeighborsDist: 0.5
   ParentGroup: {fileID: 0}
-  TimeAlive: 2
-  TimeToLive: 0
 --- !u!114 &114950889589718076
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -910,14 +693,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Neighbors: []
+  ItemLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
   ID: 6
-  lifeTime: 2
-  isCircled: 0
-  otherHex: {fileID: 0}
   osc: {fileID: 114366736888829554}
+  NeighborsDist: 0.5
   ParentGroup: {fileID: 0}
-  TimeAlive: 2
-  TimeToLive: 0
 --- !u!114 &114994773525748030
 MonoBehaviour:
   m_ObjectHideFlags: 1
