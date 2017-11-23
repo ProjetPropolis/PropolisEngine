@@ -18,6 +18,7 @@ namespace Propolis
         public string ConsoleLog;
         private PropolisLastEventState _TempLastBuffer;
         public GameController GameController;
+        public BatteryUiController BatteryUi;
         
         private void Awake()
         {
@@ -36,9 +37,10 @@ namespace Propolis
         private void AppendToConsoleLog(string line)
         {
             ConsoleLog += line + LineFilterConsole;
-            var linesString = Regex.Split(ConsoleLog, "\r\n|\r|\n");
-            var lines  = linesString
-            ConsoleLog = string.Join(Environment.NewLine, lines.ToArray());
+            //TO DELETE
+            //var linesString = Regex.Split(ConsoleLog, "\r\n|\r|\n");
+            //var lines = linesString;
+            //ConsoleLog = string.Join(Environment.NewLine, lines.ToArray());
         }
 
         public void ClearConsole()
@@ -549,6 +551,10 @@ namespace Propolis
         private void UpdateAllModules()
         {
             GameController.UpdateFromModel();
+            if (PropolisData.Instance.LastEvent.Action == PropolisActions.SetBatteryLevel)
+            {
+                BatteryUi.BatteryValueUpdate(PropolisData.Instance.BatteryLevel);
+            }
         }
 
         private bool ParseCommand(string rawCommand, out string command, out Queue<string> parsedCommand)

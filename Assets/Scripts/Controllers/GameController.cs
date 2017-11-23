@@ -92,7 +92,7 @@ public class GameController : MonoBehaviour {
         {
             hiveGameController.UpdateGameLogic();
             molecularGameController.UpdateGameLogic();
-            Debug.Log("looping game loop");
+            //Debug.Log("looping game loop");
             yield return new WaitForSeconds(PropolisGameSettings.DefaultGameTickTime);
         }
 
