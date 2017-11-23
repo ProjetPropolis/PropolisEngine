@@ -14,7 +14,7 @@ public class HiveGameController : AbstractGameController
     //To be used instead of Update or FixedUpdate. 
     public override void UpdateGameLogic()
     {
-        if(IndexProcess%4 == 0)
+        if(IndexProcess%2 == 0)
         {
             ProcessCorruptionOnEdge();
         }
@@ -77,33 +77,57 @@ public class HiveGameController : AbstractGameController
     private void ProcessCorruption()
     {
 
-
         List<AbstractItem> CorrupedHexs = new List<AbstractItem>();
         ListOfGroups
             .ForEach(x => x.ChildHexsList.Where(y => y.Status == PropolisStatus.CORRUPTED && (y.CountNeighborsWithStatus(PropolisStatus.ON) > 0 || y.CountNeighborsWithStatus(PropolisStatus.OFF) > 0))
             .ToList<AbstractItem>()
             .ForEach(z => CorrupedHexs.Add(z)));
 
-        if (CorrupedHexs.Count > 0) {
-            try
-            {
-                AbstractItem HexToCorrupted = CorrupedHexs.ElementAt(random.Next(CorrupedHexs.Count)).Neighbors.First(x => x.Status == PropolisStatus.ON || x.Status == PropolisStatus.OFF );
-                CorruptHex(HexToCorrupted);
-            }
-            catch (Exception)
-            {
+        int HexCountToCorrupt = Mathf.Clamp(PropolisGameSettings.MaxOfTilesToCorruptExtend, 0, CorrupedHexs.Count);
 
-               
+        AbstractItem CorruptorHex = CorrupedHexs.ElementAt(random.Next(CorrupedHexs.Count));
+        int i = 0;
+        while (i < HexCountToCorrupt && CorruptorHex != null && CorrupedHexs.Count > 0)
+        {
+            List<AbstractItem> NeighborsToCorrupt = CorruptorHex.GetNeighborsWithStatus(new PropolisStatus[] { PropolisStatus.ON, PropolisStatus.OFF });
+            if(NeighborsToCorrupt.Count > 0)
+            {
+                AbstractItem ToBeCorrupted = NeighborsToCorrupt.ElementAt(random.Next(NeighborsToCorrupt.Count));
+                CorruptHex(ToBeCorrupted);
+                CorrupedHexs.Remove(CorruptorHex);
+                CorruptorHex = GetFarthestHexFrom(ToBeCorrupted, CorrupedHexs);
+            }
+            else
+            {
+                CorrupedHexs = null;
             }
 
+
+            i++;
         }
+          
 
-
-
+        
     }
 
-
-
-
+    private AbstractItem GetFarthestHexFrom (AbstractItem target, List <AbstractItem> searchList)
+    {
+        try
+        {
+            AbstractItem FarthestHex = searchList.OrderBy(t => Vector3.Distance(target.transform.position, t.transform.position)).First();
+            if (Vector3.Distance(target.transform.position, FarthestHex.transform.position) > PropolisGameSettings.MinPropraggationCorruptionDistance)
+            {
+                return FarthestHex;
+            }
+            else
+            {
+                return null; 
+            }
+        }
+        catch (Exception)
+        {
+            return null;
+        }      
+    } 
    
 }
