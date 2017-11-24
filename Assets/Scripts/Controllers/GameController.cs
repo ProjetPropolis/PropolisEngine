@@ -51,6 +51,7 @@ public class GameController : MonoBehaviour {
 
         }
 
+
     }
 
     public void UpdateFromModel()
@@ -102,7 +103,17 @@ public class GameController : MonoBehaviour {
    
     public void IncrementBatteryLevel(float increment)
     {
-        SendCommand(string.Format("{0} {1}",PropolisActions.SetBatteryLevel,propolisData.BatteryLevel + increment));
+        float futureBatteryLevel = propolisData.BatteryLevel + increment;
+        if (futureBatteryLevel >= 1)
+        {
+            SendCommand(string.Format("{0} {1}", PropolisActions.SetBatteryLevel, 0));
+            //@TODO ADD TRIGGER FOR FULL BATTERY
+        }
+        else
+        {
+            SendCommand(string.Format("{0} {1}", PropolisActions.SetBatteryLevel, propolisData.BatteryLevel + increment));
+        }
+        
     }
     
 	void Update () {

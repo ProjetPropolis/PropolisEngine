@@ -60,7 +60,7 @@ public class HiveGameController : AbstractGameController
         AbstractItem hexToCorrupted = EdgeHexList.ElementAt(random.Next(EdgeHexList.Count));
         CorruptHex(hexToCorrupted);
         List<AbstractItem> NeighborsToCorrupt = 
-        hexToCorrupted.GetNeighborsWithStatus(new PropolisStatus[]{PropolisStatus.ON,PropolisStatus.OFF });
+        hexToCorrupted.GetNeighborsWithStatus(PropolisGameSettings.StatusFreeToBeCorrupted);
 
         int numberOfHexToProcess = Mathf.Clamp(NeighborsToCorrupt.Count, 0, PropolisGameSettings.MaxEdgeHexNeighborsCorruption);
 
@@ -83,51 +83,50 @@ public class HiveGameController : AbstractGameController
             .ToList<AbstractItem>()
             .ForEach(z => CorrupedHexs.Add(z)));
 
-        int HexCountToCorrupt = Mathf.Clamp(PropolisGameSettings.MaxOfTilesToCorruptExtend, 0, CorrupedHexs.Count);
-
-        AbstractItem CorruptorHex = CorrupedHexs.ElementAt(random.Next(CorrupedHexs.Count));
+        int HexCountToCorrupt = Mathf.Clamp(PropolisGameSettings.MaxEdgeHexNeighborsCorruption, 0, CorrupedHexs.Count);
         int i = 0;
-        while (i < HexCountToCorrupt && CorruptorHex != null && CorrupedHexs.Count > 0)
-        {
-            List<AbstractItem> NeighborsToCorrupt = CorruptorHex.GetNeighborsWithStatus(new PropolisStatus[] { PropolisStatus.ON, PropolisStatus.OFF });
-            if(NeighborsToCorrupt.Count > 0)
-            {
-                AbstractItem ToBeCorrupted = NeighborsToCorrupt.ElementAt(random.Next(NeighborsToCorrupt.Count));
-                CorruptHex(ToBeCorrupted);
-                CorrupedHexs.Remove(CorruptorHex);
-                CorruptorHex = GetFarthestHexFrom(ToBeCorrupted, CorrupedHexs);
-            }
-            else
-            {
-                CorrupedHexs = null;
-            }
 
+        while (i < HexCountToCorrupt && CorrupedHexs.Count > 0)
+        {
+            AbstractItem Corruptor = CorrupedHexs.ElementAt(random.Next(CorrupedHexs.Count));
+            List<AbstractItem> FreeToBeCorruptedHex = Corruptor.GetNeighborsWithStatus(PropolisGameSettings.StatusFreeToBeCorrupted);
+            if (FreeToBeCorruptedHex.Count > 0)
+            {
+                AbstractItem HexToBeCorrupted = FreeToBeCorruptedHex.ElementAt(random.Next(FreeToBeCorruptedHex.Count));
+                CorruptHex(HexToBeCorrupted);
+                CorrupedHexs.Remove(Corruptor);
+            }
+     
 
             i++;
         }
+   
+
+       
+        
           
 
         
     }
 
-    private AbstractItem GetFarthestHexFrom (AbstractItem target, List <AbstractItem> searchList)
-    {
-        try
-        {
-            AbstractItem FarthestHex = searchList.OrderBy(t => Vector3.Distance(target.transform.position, t.transform.position)).First();
-            if (Vector3.Distance(target.transform.position, FarthestHex.transform.position) > PropolisGameSettings.MinPropraggationCorruptionDistance)
-            {
-                return FarthestHex;
-            }
-            else
-            {
-                return null; 
-            }
-        }
-        catch (Exception)
-        {
-            return null;
-        }      
-    } 
+    //private AbstractItem GetFarthestHexFrom (AbstractItem target, List <AbstractItem> searchList)
+    //{
+    //    try
+    //    {
+    //        AbstractItem FarthestHex = searchList.OrderBy(t => Vector3.Distance(target.transform.position, t.transform.position)).First();
+    //        if (Vector3.Distance(target.transform.position, FarthestHex.transform.position) > PropolisGameSettings.MinPropraggationCorruptionDistance)
+    //        {
+    //            return FarthestHex;
+    //        }
+    //        else
+    //        {
+    //            return null; 
+    //        }
+    //    }
+    //    catch (Exception)
+    //    {
+    //        return null;
+    //    }      
+    //} 
    
 }
