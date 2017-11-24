@@ -32,6 +32,20 @@ namespace Propolis
         private void Start()
         {
             SendCommand("load");
+            StartCoroutine(CleanConsole());
+        }
+
+        private void OnDestroy()
+        {
+            StopCoroutine(CleanConsole());
+        }
+        public IEnumerator CleanConsole()
+        {
+            while (true)
+            {
+                ConsoleLog = "";
+                yield return new WaitForSeconds(PropolisGameSettings.DeltaTimeBetweenConsoleClean);
+            }
         }
 
         private void AppendToConsoleLog(string line)
@@ -124,7 +138,6 @@ namespace Propolis
             }
 
             if (validCommand) {
-                AppendToConsoleLog("Action Successful");
                 UpdateAllModules();
             }                
             else
