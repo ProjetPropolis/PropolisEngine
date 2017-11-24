@@ -8,12 +8,15 @@ using System;
 public class HiveGameController : AbstractGameController
 {
     List<AbstractItem> EdgeHexList;
+    List<AbstractItem> PotentialUtraCorrupt;
     System.Random random;
     private int IndexProcess;
+    private int NumOfUltraCorruped = 1;
 
     //To be used instead of Update or FixedUpdate. 
     public override void UpdateGameLogic()
     {
+
         if(IndexProcess%2 == 0)
         {
             ProcessCorruptionOnEdge();
@@ -29,6 +32,7 @@ public class HiveGameController : AbstractGameController
         
         IndexProcess++;
         IndexProcess = IndexProcess % 30;
+
     }
 
     public override void InitOnPlay()
@@ -100,14 +104,24 @@ public class HiveGameController : AbstractGameController
 
             i++;
         }
-   
-
-       
-        
-          
-
-        
+  
     }
+
+    private void CreateRed()
+    {
+        PotentialUtraCorrupt = new List<AbstractItem>();
+        ListOfGroups.ForEach(x => x.ChildHexsList.ForEach(y => { if ((y.Neighbors.Count == 6)&&(y.Status == PropolisStatus.ON || y.Status == PropolisStatus.OFF || y.Status == PropolisStatus.CORRUPTED) && (y.GetNeighborsWithStatus(PropolisStatus.ULTRACORRUPTED)== null)) { PotentialUtraCorrupt.Add(y); } }));
+
+        int HexCountToUltraCorrupt = Mathf.Clamp(NumOfUltraCorruped, 0, PotentialUtraCorrupt.Count);
+        int i = 0;
+
+        while (i < HexCountToUltraCorrupt && PotentialUtraCorrupt.Count > 0)
+        {
+            AbstractItem UtraCorrupedHex =  PotentialUtraCorrupt.ElementAt(random.Next(PotentialUtraCorrupt.Count));
+            i++;
+        }
+
+  
 
     //private AbstractItem GetFarthestHexFrom (AbstractItem target, List <AbstractItem> searchList)
     //{
@@ -128,5 +142,5 @@ public class HiveGameController : AbstractGameController
     //        return null;
     //    }      
     //} 
-   
+
 }
