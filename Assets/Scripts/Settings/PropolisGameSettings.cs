@@ -13,6 +13,7 @@ namespace Propolis
         public const float DeltaTimeBetweenConsoleClean = 5;
         public const int MaxOfTilesToCorruptExtend = 2;
         public const float TimeBetweenAnimationSpawn = 0.1f;
+        public const float IntervalProcessUltraCorrupted = 0.3f;
         public static PropolisStatus[] StatusFreeToBeCorrupted = new PropolisStatus[] { PropolisStatus.ON, PropolisStatus.OFF };
     }
 

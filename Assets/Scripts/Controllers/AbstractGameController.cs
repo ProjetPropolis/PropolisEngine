@@ -77,6 +77,11 @@ namespace Propolis
             ListOfGroups.ForEach(x => x.ChildHexsList.ForEach(y => y.CalculateNeighborsList()));
         }
 
+        public virtual void Stop()
+        {
+
+        }
+
         private void UpdateAbstractGroupItemStatus()
         {
             AbstractGroupData abstractGroupData = null;
