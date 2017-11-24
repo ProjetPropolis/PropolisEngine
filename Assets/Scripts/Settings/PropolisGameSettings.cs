@@ -12,7 +12,9 @@ namespace Propolis
         public const int MaxEdgeHexNeighborsCorruption = 3;
         public const int MaxOfTilesToCorruptExtend = 3;
         public const float MinPropraggationCorruptionDistance = 1f;
-
+        public static PropolisStatus[] StatusFreeToBeCorrupted = new PropolisStatus[] { PropolisStatus.ON, PropolisStatus.OFF };
     }
+
+}
 }
 

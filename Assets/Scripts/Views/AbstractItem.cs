@@ -101,6 +101,25 @@ public class AbstractItem : MonoBehaviour {
         
     }
 
+
+    public int CountNeighborsWithStatus(PropolisStatus[] status)
+    {
+        try
+        {
+            int count = 0 ;
+            foreach (var s in status)
+            {
+                count += CountNeighborsWithStatus(s);
+            }
+            return count;
+        }
+        catch
+        {
+            return 0;
+        }
+
+    }
+
     public List<AbstractItem> GetNeighborsWithStatus(PropolisStatus status)
     {
         try
@@ -132,18 +151,6 @@ public class AbstractItem : MonoBehaviour {
             return new List<AbstractItem>();
         }
 
-    }
-
-    Color GetColorFromHTML(string hex)
-    {
-        Color color;
-
-        if(ColorUtility.TryParseHtmlString(hex, out color))
-        {
-            return color;
-        }
-        return color;
-        
     }
 
     public void SendDataToTouchDesigner()
