@@ -48,7 +48,7 @@ GameObject:
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1394985892003806
 GameObject:
   m_ObjectHideFlags: 0
@@ -622,9 +622,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aef1600830a31ed4e89536029937c2c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inPort: 6969
+  inPort: 21
   outIP: 127.0.0.1
-  outPort: 6161
+  outPort: 21
 --- !u!114 &114375586934728794
 MonoBehaviour:
   m_ObjectHideFlags: 1

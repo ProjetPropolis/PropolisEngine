@@ -199,7 +199,7 @@ GameObject:
   m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4004794137941058
 Transform:
   m_ObjectHideFlags: 1
@@ -399,14 +399,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Neighbors: []
+  ItemLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   ID: 0
-  lifeTime: 0
-  isCircled: 0
-  otherHex: {fileID: 0}
   osc: {fileID: 0}
+  NeighborsDist: 0
   ParentGroup: {fileID: 114623869153305540}
-  TimeAlive: 3
-  TimeToLive: 0
 --- !u!114 &114160066693130692
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -418,14 +418,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Neighbors: []
+  ItemLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   ID: 0
-  lifeTime: 0
-  isCircled: 0
-  otherHex: {fileID: 0}
   osc: {fileID: 0}
+  NeighborsDist: 0
   ParentGroup: {fileID: 114623869153305540}
-  TimeAlive: 3
-  TimeToLive: 0
 --- !u!114 &114162554485754256
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -437,14 +437,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Neighbors: []
+  ItemLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   ID: 0
-  lifeTime: 0
-  isCircled: 0
-  otherHex: {fileID: 0}
   osc: {fileID: 0}
+  NeighborsDist: 0
   ParentGroup: {fileID: 114623869153305540}
-  TimeAlive: 3
-  TimeToLive: 0
 --- !u!114 &114197812721218454
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -470,14 +470,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Neighbors: []
+  ItemLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   ID: 0
-  lifeTime: 0
-  isCircled: 0
-  otherHex: {fileID: 0}
   osc: {fileID: 0}
+  NeighborsDist: 0
   ParentGroup: {fileID: 114623869153305540}
-  TimeAlive: 3
-  TimeToLive: 0
 --- !u!114 &114401727756219830
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -489,14 +489,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Neighbors: []
+  ItemLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   ID: 0
-  lifeTime: 0
-  isCircled: 0
-  otherHex: {fileID: 0}
   osc: {fileID: 0}
+  NeighborsDist: 0
   ParentGroup: {fileID: 114623869153305540}
-  TimeAlive: 3
-  TimeToLive: 0
 --- !u!114 &114623869153305540
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -524,14 +524,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Neighbors: []
+  ItemLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   ID: 0
-  lifeTime: 0
-  isCircled: 0
-  otherHex: {fileID: 0}
   osc: {fileID: 0}
+  NeighborsDist: 0
   ParentGroup: {fileID: 114623869153305540}
-  TimeAlive: 3
-  TimeToLive: 0
 --- !u!114 &114698937923312946
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -543,14 +543,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Neighbors: []
+  ItemLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   ID: 0
-  lifeTime: 0
-  isCircled: 0
-  otherHex: {fileID: 0}
   osc: {fileID: 114197812721218454}
+  NeighborsDist: 0
   ParentGroup: {fileID: 114623869153305540}
-  TimeAlive: 3
-  TimeToLive: 0
 --- !u!114 &114705725766545020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -562,14 +562,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Neighbors: []
+  ItemLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   ID: 0
-  lifeTime: 0
-  isCircled: 0
-  otherHex: {fileID: 0}
   osc: {fileID: 0}
+  NeighborsDist: 0
   ParentGroup: {fileID: 114623869153305540}
-  TimeAlive: 3
-  TimeToLive: 0
 --- !u!114 &114766637527594580
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -581,14 +581,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Neighbors: []
+  ItemLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   ID: 0
-  lifeTime: 0
-  isCircled: 0
-  otherHex: {fileID: 0}
   osc: {fileID: 0}
+  NeighborsDist: 0
   ParentGroup: {fileID: 114623869153305540}
-  TimeAlive: 3
-  TimeToLive: 0
 --- !u!114 &114954150770589620
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -600,14 +600,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Neighbors: []
+  ItemLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   ID: 0
-  lifeTime: 0
-  isCircled: 0
-  otherHex: {fileID: 0}
   osc: {fileID: 0}
+  NeighborsDist: 0
   ParentGroup: {fileID: 114623869153305540}
-  TimeAlive: 3
-  TimeToLive: 0
 --- !u!212 &212224546420116792
 SpriteRenderer:
   m_ObjectHideFlags: 1

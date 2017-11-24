@@ -80,6 +80,7 @@ namespace Propolis
         {
             x = _x;
             y = _y;
+            IP = _IP;
             InPort = _inPort;
             OutPort = _OutPort;
         }

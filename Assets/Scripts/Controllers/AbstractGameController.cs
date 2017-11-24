@@ -48,8 +48,8 @@ namespace Propolis
             AbstractGroupData abstractGroupData = null;
             switch (GroupDataType)
             {
-                case PropolisDataTypes.HexGroup: abstractGroupData = propolisData.HexGroupList.FirstOrDefault(x => x.ID == propolisData.LastEvent.GroupID); break;
-                case PropolisDataTypes.AtomGroup: abstractGroupData = propolisData.AtomGroupList.FirstOrDefault(x => x.ID == propolisData.LastEvent.GroupID); break;
+                case PropolisDataTypes.HexGroup: abstractGroupData = propolisData.HexGroupList.FirstOrDefault(x => x.ID == propolisData.LastEvent.ID); break;
+                case PropolisDataTypes.AtomGroup: abstractGroupData = propolisData.AtomGroupList.FirstOrDefault(x => x.ID == propolisData.LastEvent.ID); break;
 
             }
 
@@ -62,9 +62,9 @@ namespace Propolis
                     if (x.ID == abstractGroupData.ID)
                     {
                         x.transform.position = abstractGroupData.GetPosition();
-                        //x.Osc.inPort = abstractGroupData.InPort;
-                        //x.Osc.outPort = abstractGroupData.OutPort;
-                        //x.Osc.outIP = abstractGroupData.IP;
+                        x.Osc.inPort = abstractGroupData.InPort;
+                        x.Osc.outPort = abstractGroupData.OutPort;
+                        x.Osc.outIP = abstractGroupData.IP;
                     }
                 }
             );
@@ -89,22 +89,23 @@ namespace Propolis
 
             foreach (AbstractGroup ag in ListOfGroups)
             {
-                if(ag.ID == propolisData.LastEvent.GroupID)
+                if (ag.ID == propolisData.LastEvent.GroupID)
                 {
-                    foreach (AbstractItem  ai in ag.ChildHexsList)
+                    foreach (AbstractItem ai in ag.ChildHexsList)
                     {
-                        foreach (var itemData in abstractGroupData.Childrens)
+                    
+                        if (ai.ID == propolisData.LastEvent.ID)
                         {
-                            if (ai.ID == itemData.ID)
-                            {
-                                ai.Status = (PropolisStatus)itemData.Status;
-                            }
-                        }   
+                            ai.Status = (PropolisStatus)abstractGroupData.Childrens.FirstOrDefault(x=>x.ID == ai.ID).Status;
+                        }
+                        
                     }
                 }
-              
-            }  
-            
+
+            }
+
+
+
         }
 
         private void ProcessUpdateItemStatus()
@@ -162,7 +163,7 @@ namespace Propolis
             {
                 GameObject gameObject = Instantiate(GroupsPrefab, abstractGroupData.GetPosition(), Quaternion.identity);
    	            AbstractGroup abstractGroup = gameObject.GetComponent<AbstractGroup>();
-                //  abstractGroup.transform.parent = GameViewTransform.transform;
+                //gameObject.transform.parent = GameViewTransform.transform;
                 abstractGroup.ID = abstractGroupData.ID;
                 abstractGroup.Osc.inPort = abstractGroupData.InPort;
                 abstractGroup.Osc.outPort = abstractGroupData.OutPort;
