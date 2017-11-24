@@ -9,6 +9,7 @@ public class HiveGameController : AbstractGameController
 {
     List<AbstractItem> EdgeHexList;
     List<AbstractItem> PotentialUtraCorrupt;
+    List<AbstractItem> UltraCorruptedList;
     System.Random random;
     private int IndexProcess;
     private int NumOfUltraCorruped = 1;
@@ -21,15 +22,23 @@ public class HiveGameController : AbstractGameController
         {
             StartCoroutine(ProcessCorruptionOnEdge());
         }
+
         else
         {
          
             StartCoroutine(ProcessCorruption());
+        
 
         }
 
-   
-        
+        if (IndexProcess % 4 == 0)
+        {
+            StartCoroutine(CreateRed());
+            StartCoroutine(SpeadThatCorruption());
+        }
+
+
+
         IndexProcess++;
         IndexProcess = IndexProcess % 30;
 
@@ -41,6 +50,14 @@ public class HiveGameController : AbstractGameController
         random = new System.Random();
         GenerateEdgeHexList();
         IndexProcess = 0; // nous donne le nombre de clics 
+        UltraCorruptedList = new List<AbstractItem>();
+        StartCoroutine(ProcessDeleteUltraCorrupted());
+
+    }
+
+    public override void Stop()
+    {
+       StopCoroutine(ProcessDeleteUltraCorrupted());
 
     }
 
@@ -58,7 +75,30 @@ public class HiveGameController : AbstractGameController
             SendItemData(abstractItem.ParentGroup.ID, abstractItem.ID, PropolisStatus.CORRUPTED);
         }
     }
-
+    private void UltraCorruptHex(AbstractItem abstractItem)
+    {
+        if (abstractItem.Status == PropolisStatus.OFF || abstractItem.Status == PropolisStatus.ON || abstractItem.Status == PropolisStatus.CORRUPTED)
+        {
+            SendItemData(abstractItem.ParentGroup.ID, abstractItem.ID, PropolisStatus.ULTRACORRUPTED);
+            UltraCorruptedList.Add(abstractItem);
+        }
+    }
+    private IEnumerator ProcessDeleteUltraCorrupted()
+    {
+        while (true)
+        {
+            for (int i = UltraCorruptedList.Count -1; i >=0; i--)
+            {
+                AbstractItem HexToProcesss = UltraCorruptedList[i];
+                if (HexToProcesss.CountNeighborsWithStatus(PropolisStatus.ON) == 6)
+                {
+                    SendItemData(HexToProcesss.ParentGroup.ID, HexToProcesss.ID, PropolisStatus.ON);
+                    UltraCorruptedList.Remove(HexToProcesss);
+                }
+            }
+            yield return new WaitForSeconds(PropolisGameSettings.IntervalProcessUltraCorrupted);
+        }
+    }
     private IEnumerator ProcessCorruptionOnEdge()
     {
         AbstractItem hexToCorrupted = EdgeHexList.ElementAt(random.Next(EdgeHexList.Count));
@@ -109,24 +149,44 @@ public class HiveGameController : AbstractGameController
   
     }
 
-    private void CreateRed()
+    private IEnumerator CreateRed()
     {
         PotentialUtraCorrupt = new List<AbstractItem>();
-        ListOfGroups.ForEach(x => x.ChildHexsList.ForEach(y => { if ((y.Neighbors.Count == 6)&&(y.Status == PropolisStatus.ON || y.Status == PropolisStatus.OFF || y.Status == PropolisStatus.CORRUPTED) && (y.GetNeighborsWithStatus(PropolisStatus.ULTRACORRUPTED)== null)) { PotentialUtraCorrupt.Add(y); } }));
+        ListOfGroups.ForEach(x => x.ChildHexsList.ForEach(y => { if ((y.Neighbors.Count == 6)&&(y.Status == PropolisStatus.ON || y.Status == PropolisStatus.OFF || y.Status == PropolisStatus.CORRUPTED) && (y.CountNeighborsWithStatus(PropolisStatus.ULTRACORRUPTED)== 0)) { PotentialUtraCorrupt.Add(y); } }));
 
         int HexCountToUltraCorrupt = Mathf.Clamp(NumOfUltraCorruped, 0, PotentialUtraCorrupt.Count);
         int i = 0;
 
         while (i < HexCountToUltraCorrupt && PotentialUtraCorrupt.Count > 0)
         {
-            AbstractItem UtraCorrupedHex =  PotentialUtraCorrupt.ElementAt(random.Next(PotentialUtraCorrupt.Count));
+            if (PotentialUtraCorrupt.Count > 0) { 
+            AbstractItem UtraCorruptor =  PotentialUtraCorrupt.ElementAt(random.Next(PotentialUtraCorrupt.Count));
+            UltraCorruptHex(UtraCorruptor);
+            PotentialUtraCorrupt.Remove(UtraCorruptor);
+            }
             i++;
+            yield return new WaitForSeconds(PropolisGameSettings.TimeBetweenAnimationSpawn);
         }
 
-  
+      
+    }
 
-}
+    private IEnumerator SpeadThatCorruption()
+    {
+       
+        List<AbstractItem> NeighborsToCorrupt = new List<AbstractItem>();
+        UltraCorruptedList.ForEach(x => x.Neighbors.ForEach(y => { if (y.Status != PropolisStatus.CORRUPTED) { NeighborsToCorrupt.Add(y); } }));
 
+        while (NeighborsToCorrupt.Count > 0)
+        {
+            AbstractItem hexToCorrupt = NeighborsToCorrupt.ElementAt(random.Next(NeighborsToCorrupt.Count));
+            CorruptHex(hexToCorrupt);
+            NeighborsToCorrupt.Remove(hexToCorrupt);
+            yield return new WaitForSeconds(PropolisGameSettings.TimeBetweenAnimationSpawn*0.5f);
+        }
+   
+      
+    }
 
 
     //private AbstractItem GetFarthestHexFrom (AbstractItem target, List <AbstractItem> searchList)

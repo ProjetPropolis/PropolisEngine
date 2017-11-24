@@ -84,7 +84,10 @@ public class GameController : MonoBehaviour {
     private void StopGame()
     {
         Debug.Log("stop");
+        hiveGameController.Stop();
+        molecularGameController.Stop();
         StopCoroutine(GameLoopCoroutine);
+
     }
 
     public IEnumerator ProcessGameLoop()
