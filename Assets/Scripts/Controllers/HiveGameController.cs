@@ -19,12 +19,12 @@ public class HiveGameController : AbstractGameController
 
         if(IndexProcess%2 == 0)
         {
-            ProcessCorruptionOnEdge();
+            StartCoroutine(ProcessCorruptionOnEdge());
         }
         else
         {
          
-            ProcessCorruption();
+            StartCoroutine(ProcessCorruption());
 
         }
 
@@ -59,7 +59,7 @@ public class HiveGameController : AbstractGameController
         }
     }
 
-    private void ProcessCorruptionOnEdge()
+    private IEnumerator ProcessCorruptionOnEdge()
     {
         AbstractItem hexToCorrupted = EdgeHexList.ElementAt(random.Next(EdgeHexList.Count));
         CorruptHex(hexToCorrupted);
@@ -73,12 +73,13 @@ public class HiveGameController : AbstractGameController
             AbstractItem hexNeighborsToCorrupted = NeighborsToCorrupt.ElementAt(random.Next(NeighborsToCorrupt.Count));
             CorruptHex(hexNeighborsToCorrupted);
             NeighborsToCorrupt.Remove(hexNeighborsToCorrupted);
+            yield return new WaitForSeconds(PropolisGameSettings.TimeBetweenAnimationSpawn);
         }
 
 
     }
 
-    private void ProcessCorruption()
+    private IEnumerator ProcessCorruption()
     {
 
         List<AbstractItem> CorrupedHexs = new List<AbstractItem>();
@@ -90,6 +91,7 @@ public class HiveGameController : AbstractGameController
         int HexCountToCorrupt = Mathf.Clamp(PropolisGameSettings.MaxEdgeHexNeighborsCorruption, 0, CorrupedHexs.Count);
         int i = 0;
 
+
         while (i < HexCountToCorrupt && CorrupedHexs.Count > 0)
         {
             AbstractItem Corruptor = CorrupedHexs.ElementAt(random.Next(CorrupedHexs.Count));
@@ -100,9 +102,9 @@ public class HiveGameController : AbstractGameController
                 CorruptHex(HexToBeCorrupted);
                 CorrupedHexs.Remove(Corruptor);
             }
-     
-
+       
             i++;
+            yield return new WaitForSeconds(PropolisGameSettings.TimeBetweenAnimationSpawn);
         }
   
     }
@@ -122,6 +124,10 @@ public class HiveGameController : AbstractGameController
         }
 
   
+
+}
+
+
 
     //private AbstractItem GetFarthestHexFrom (AbstractItem target, List <AbstractItem> searchList)
     //{
@@ -143,4 +149,6 @@ public class HiveGameController : AbstractGameController
     //    }      
     //} 
 
+
 }
+
