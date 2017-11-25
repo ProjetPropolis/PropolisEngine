@@ -41,4 +41,35 @@ public class AbstractGroup : MonoBehaviour {
             (PropolisStatus)Convert.ToInt32(message.values[1])
         );
     }
+
+    public int CountChildrenWithStatus(PropolisStatus status)
+    {
+        try
+        {
+            return ChildHexsList.Where(x => x.Status == status).Count();
+        }
+        catch
+        {
+            return 0;
+        }
+
+    }
+
+    public int CountChildrenWithStatus(PropolisStatus[] status)
+    {
+        try
+        {
+            int count = 0;
+            foreach (var s in status)
+            {
+                count += CountChildrenWithStatus(s);
+            }
+            return count;
+        }
+        catch
+        {
+            return 0;
+        }
+
+    }
 }
