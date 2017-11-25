@@ -49,17 +49,17 @@ While the game is running Propolis Export send the following OSC commands
 
 ### Hex Status ###
 
-     /hex [*HEX_ID*] [*STATUS*]
+    /hex [**GROUP_ID**] [**HEX_ID**] [**STATUS**]
   
 ### Atom Status ###
 
-    /atom [*ATOM_ID*] [*STATUS*]
+    /atom [**GROUP_ID**] [**ATOM_ID**] [**STATUS**]
   
 ### Battery Status ###
 
 *Please note that the status will be a float value between 0.0 and 1.0*
 
-    /battery [*STATUS*]
+    /battery [**STATUS**]
   
 
 ## Propolis Engine Console Script
