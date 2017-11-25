@@ -43,6 +43,25 @@ M - Switch to Champ Moléculaires View
 
 A - Switch to All View
 
+## Propolis Export
+
+While the game is running Propolis Export send the following OSC commands
+
+### Hex Status ###
+
+  /hex [*HEX_ID*] [*STATUS*]
+  
+### Atom Status ###
+
+  /atom [*ATOM_ID*] [*STATUS*]
+  
+### Battery Status ###
+
+*Please note that the status will be a float value between 0.0 and 1.0*
+
+  /battery [*STATUS*]
+  
+
 ## Propolis Engine Console Script
 
 The propolis engine comes with a console script. All the actions availlable in the engine can be done.
