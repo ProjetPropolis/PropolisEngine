@@ -10,6 +10,10 @@ public class MolecularGameController : AbstractGameController
     {
 
     }
+    public override void ProcessUserInteraction(AbstractItem item, PropolisUserInteractions userAction)
+    {
+        throw new System.NotImplementedException();
+    }
     public override void InitOnPlay()
     {
             base.InitOnPlay();

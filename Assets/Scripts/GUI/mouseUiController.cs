@@ -11,6 +11,7 @@ public class mouseUiController : MonoBehaviour {
     public CursorMode cursorMode = CursorMode.Auto;
     public Vector2 hotSpot = new Vector2(80, 80);
     public PropolisManager PropolisManager;
+    public GameController GameController;
     public Transform uiCanvas;
     public float keyMoveSpeed = 0.01f;
     public Camera currentCam;
@@ -211,12 +212,10 @@ public class mouseUiController : MonoBehaviour {
         if (hit.collider != null)
         {
             var abstractGroup = hit.collider.transform.parent.gameObject.GetComponent<AbstractGroup>();
-            var IDTuile = hit.collider.gameObject.GetComponent<AbstractItem>().ID;
-            var IDGroup = abstractGroup.ID;
+            var abstractItem = hit.collider.gameObject.GetComponent<AbstractItem>();
             var GroupType = abstractGroup.DataType;
             //@TODO once the gameplay is more advanced remove the corrupted part of this algorythm
-            var command = string.Format("uis {0} {1} {2} {3}", GroupType, IDGroup, IDTuile,(int)PropolisStatus.ON);
-            PropolisManager.SendCommand(command);
+            GameController.ProcessUserInteraction(GroupType, abstractItem, PropolisUserInteractions.PRESS);
         }
 
 

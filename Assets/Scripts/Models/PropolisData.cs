@@ -227,6 +227,11 @@ namespace Propolis
             }
         }
 
+        public PropolisGroupItemData GetItemDataById(int groupID, int id, string type)
+        {
+            return GetGroupDataById(groupID, type).Childrens.FirstOrDefault(x=>x.ID == id);
+        }
+
 
         public AbstractGroupData GetGroupDataById(int id,string type)
         {

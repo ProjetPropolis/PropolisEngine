@@ -14,7 +14,19 @@ public class HiveGameController : AbstractGameController
     private int IndexProcess;
     bool readyCleanser;
 
-
+    public override void ProcessUserInteraction(AbstractItem item, PropolisUserInteractions userAction)
+    {
+        if(userAction == PropolisUserInteractions.PRESS)
+        {
+            switch (item.Status)
+            {
+                case PropolisStatus.OFF: SendItemData(item.ParentGroup.ID, item.ID, PropolisStatus.ON);break;
+                case PropolisStatus.CORRUPTED: SendItemData(item.ParentGroup.ID, item.ID, PropolisStatus.ON); break;
+                default: SendItemData(item.ParentGroup.ID, item.ID,item.Status);break;
+            }
+            
+        }
+    }
     //To be used instead of Update or FixedUpdate. 
     public override void UpdateGameLogic()
     {
@@ -25,11 +37,8 @@ public class HiveGameController : AbstractGameController
         }
 
         else
-        {
-         
+        {      
             StartCoroutine(ProcessCorruption());
-        
-
         }
 
         if (IndexProcess % 4 == 0)
@@ -37,7 +46,6 @@ public class HiveGameController : AbstractGameController
             StartCoroutine(CreateRed());
             StartCoroutine(SpeadThatCorruption());
         }
-
 
 
         IndexProcess++;

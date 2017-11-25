@@ -72,6 +72,7 @@ namespace Propolis
             
         }
         public abstract void UpdateGameLogic();
+        public abstract void ProcessUserInteraction(AbstractItem item, PropolisUserInteractions userAction);
         public virtual void InitOnPlay()
         {
             ListOfGroups.ForEach(x => x.ChildHexsList.ForEach(y => y.CalculateNeighborsList()));

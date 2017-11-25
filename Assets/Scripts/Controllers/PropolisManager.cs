@@ -19,6 +19,7 @@ namespace Propolis
         private PropolisLastEventState _TempLastBuffer;
         public GameController GameController;
         public BatteryUiController BatteryUi;
+        public PropolisExport PropolisExport;
         
         private void Awake()
         {
@@ -563,6 +564,7 @@ namespace Propolis
 
         private void UpdateAllModules()
         {
+            PropolisExport.ExportFromModel();
             GameController.UpdateFromModel();
             if (PropolisData.Instance.LastEvent.Action == PropolisActions.SetBatteryLevel)
             {

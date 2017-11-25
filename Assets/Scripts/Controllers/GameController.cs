@@ -118,6 +118,15 @@ public class GameController : MonoBehaviour {
         }
         
     }
+
+    public void ProcessUserInteraction(string type, AbstractItem item, PropolisUserInteractions userAction)
+    {
+        switch (type)
+        {
+            case PropolisDataTypes.HexGroup: hiveGameController.ProcessUserInteraction(item, userAction);break;
+            case PropolisDataTypes.AtomGroup: molecularGameController.ProcessUserInteraction(item, userAction);break;
+        }
+    }
     
 	void Update () {
     
