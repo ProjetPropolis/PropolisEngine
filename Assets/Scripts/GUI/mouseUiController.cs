@@ -214,8 +214,12 @@ public class mouseUiController : MonoBehaviour {
             var abstractGroup = hit.collider.transform.parent.gameObject.GetComponent<AbstractGroup>();
             var abstractItem = hit.collider.gameObject.GetComponent<AbstractItem>();
             var GroupType = abstractGroup.DataType;
-            //@TODO once the gameplay is more advanced remove the corrupted part of this algorythm
-            GameController.ProcessUserInteraction(GroupType, abstractItem, PropolisUserInteractions.PRESS);
+
+            if(abstractItem != null)
+            {
+                GameController.ProcessUserInteraction(GroupType, abstractItem, PropolisUserInteractions.PRESS);
+            }
+
         }
 
 

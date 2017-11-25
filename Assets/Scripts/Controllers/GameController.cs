@@ -36,7 +36,7 @@ public class GameController : MonoBehaviour {
                propolisData.LastEvent.Type).Childrens.FirstOrDefault(x=> x.ID == propolisData.LastEvent.ID);
 
             AbstractItem previousItemData = hiveGameController.ListOfGroups.FirstOrDefault(x => x.ID == propolisData.LastEvent.GroupID)
-                .ChildHexsList.FirstOrDefault(x=>x.ID == propolisData.LastEvent.ID);
+                .ChildItemsList.FirstOrDefault(x=>x.ID == propolisData.LastEvent.ID);
 
             if (newItemData.Status == (int)PropolisStatus.ON || newItemData.Status == (int)PropolisStatus.CLEANSING)
             {

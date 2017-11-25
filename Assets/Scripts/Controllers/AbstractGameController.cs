@@ -22,6 +22,11 @@ namespace Propolis
             GroupDataType = GroupsPrefab.GetComponent<AbstractGroup>().DataType;
         }
 
+        public AbstractItem GetAbstractItemFromIDS(int groupID, int itemID)
+        {
+            return ListOfGroups.FirstOrDefault(x => x.ID == groupID).ChildItemsList.FirstOrDefault(x => x.ID == itemID);
+        }
+
         public void UpdateFromModel()
         {
             propolisData = PropolisData.Instance;
@@ -75,7 +80,7 @@ namespace Propolis
         public abstract void ProcessUserInteraction(AbstractItem item, PropolisUserInteractions userAction);
         public virtual void InitOnPlay()
         {
-            ListOfGroups.ForEach(x => x.ChildHexsList.ForEach(y => y.CalculateNeighborsList()));
+            ListOfGroups.ForEach(x => x.ChildItemsList.ForEach(y => y.CalculateNeighborsList()));
         }
 
         public virtual void Stop()
@@ -97,7 +102,7 @@ namespace Propolis
             {
                 if (ag.ID == propolisData.LastEvent.GroupID)
                 {
-                    foreach (AbstractItem ai in ag.ChildHexsList)
+                    foreach (AbstractItem ai in ag.ChildItemsList)
                     {
                     
                         if (ai.ID == propolisData.LastEvent.ID)

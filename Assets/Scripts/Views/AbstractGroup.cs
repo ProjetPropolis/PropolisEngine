@@ -11,14 +11,14 @@ public class AbstractGroup : MonoBehaviour {
     public int ID;
 
     [SerializeField]
-    public List<AbstractItem> ChildHexsList;
+    public List<AbstractItem> ChildItemsList;
     public AbstractGameController parentGameController;
     public string DataType;
 
     // Use this for initialization
     void Start () {
         Osc.SetAddressHandler("/status", OnReceiveHexStatus);
-        ChildHexsList = transform.GetComponentsInChildren<AbstractItem>().ToList<AbstractItem>();
+        ChildItemsList = transform.GetComponentsInChildren<AbstractItem>().ToList<AbstractItem>();
         parentGameController = GameObject.Find("Controllers").GetComponent<AbstractGameController>();
     }
 	
@@ -46,7 +46,7 @@ public class AbstractGroup : MonoBehaviour {
     {
         try
         {
-            return ChildHexsList.Where(x => x.Status == status).Count();
+            return ChildItemsList.Where(x => x.Status == status).Count();
         }
         catch
         {

@@ -9995,7 +9995,7 @@ MonoBehaviour:
   cursorMode: 1
   hotSpot: {x: 0, y: 0}
   PropolisManager: {fileID: 1865805505}
-  GameController: {fileID: 0}
+  GameController: {fileID: 1782982169}
   uiCanvas: {fileID: 1430085714}
   keyMoveSpeed: 0.01
   currentCam: {fileID: 766542303}
@@ -10621,6 +10621,11 @@ Prefab:
       propertyPath: BatteryUi
       value: 
       objectReference: {fileID: 827483821}
+    - target: {fileID: 114785162741016296, guid: a02e9773f95fd4048bdd45f81bc64e6e,
+        type: 2}
+      propertyPath: PropolisExport
+      value: 
+      objectReference: {fileID: 1782982166}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a02e9773f95fd4048bdd45f81bc64e6e, type: 2}
   m_IsPrefabParent: 0
@@ -11401,7 +11406,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26a5c68aeb2c87844bd928c6122ef6a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SoundMaxOsc: {fileID: 0}
+  SoundMaxOsc: {fileID: 1782982165}
+--- !u!114 &1782982169 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114138853543124672, guid: a02e9773f95fd4048bdd45f81bc64e6e,
+    type: 2}
+  m_PrefabInternal: {fileID: 1520807776}
+  m_Script: {fileID: 11500000, guid: 1b219c16686e7594ca0816237f4bb420, type: 3}
 --- !u!1 &1786670971
 GameObject:
   m_ObjectHideFlags: 0
