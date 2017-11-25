@@ -188,7 +188,7 @@ public class AbstractItem : MonoBehaviour {
         message.address = address;
         message.values.Add(value);
         message.values.Add(value2);
-        //osc.Send(message);
+        osc.Send(message);
     }
 
 }
