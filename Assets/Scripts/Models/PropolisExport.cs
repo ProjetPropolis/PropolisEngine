@@ -39,7 +39,7 @@ namespace Propolis
                 }
                 else if (PropolisData.Instance.LastEvent.Action == PropolisActions.SetBatteryLevel)
                 {
-                    SendMessage("/battery",PropolisData.Instance.BatteryLevel);
+                    //SendMessage("/battery",PropolisData.Instance.BatteryLevel);
                 }
 
             }

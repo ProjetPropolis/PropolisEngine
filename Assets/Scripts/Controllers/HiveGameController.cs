@@ -145,7 +145,7 @@ public class HiveGameController : AbstractGameController
     private IEnumerator ProcessCleanserExplosion(int groupID, int itemID)
     {
         AbstractItem cleanser = GetAbstractItemFromIDS(groupID, itemID);
-        List<AbstractItem> hexstoBeCleanned = cleanser.Neighbors;
+        List<AbstractItem> hexstoBeCleanned = new List<AbstractItem>(cleanser.Neighbors);
         int i=0;
         List<AbstractItem> hexCleannedOrderList = new List<AbstractItem>();
 
@@ -156,6 +156,7 @@ public class HiveGameController : AbstractGameController
             AbstractItem hex = hexstoBeCleanned.ElementAt(random.Next(hexstoBeCleanned.Count)) ;
             SendItemData(hex.ParentGroup.ID, hex.ID, PropolisStatus.CLEANSING);
             hexCleannedOrderList.Add(hex);
+            hexstoBeCleanned.Remove(hex);
             yield return new WaitForSecondsRealtime(PropolisGameSettings.TimeBetweenAnimationSpawn);
             i++;
         }
