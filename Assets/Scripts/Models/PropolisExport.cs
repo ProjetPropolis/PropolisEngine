@@ -10,7 +10,7 @@ namespace Propolis
     {
 
         public OSC SoundMaxOsc;
-        public OSC BatteryOsc;
+       // public OSC BatteryOsc;
 
 
     // Use this for initialization
@@ -64,7 +64,7 @@ namespace Propolis
 
             message.address = address;
             message.values.Add(value);
-            BatteryOsc.Send(message);
+           // BatteryOsc.Send(message);
         }
     }
 
