@@ -10,7 +10,7 @@ namespace Propolis
     {
 
         public OSC SoundMaxOsc;
-       // public OSC BatteryOsc;
+        public OSC BatteryOsc;
 
 
     // Use this for initialization
@@ -39,7 +39,7 @@ namespace Propolis
                 }
                 else if (PropolisData.Instance.LastEvent.Action == PropolisActions.SetBatteryLevel)
                 {
-                    //SendMessage("/battery",PropolisData.Instance.BatteryLevel);
+                    SendBatteryOscMessage("/battery",PropolisData.Instance.BatteryLevel);
                 }
 
             }
@@ -57,14 +57,14 @@ namespace Propolis
             SoundMaxOsc.Send(message);
         }
 
-        private void SendOscMessage(string address, int value)
+        private void SendBatteryOscMessage(string address, float value)
         {
 
             OscMessage message = new OscMessage();
 
             message.address = address;
             message.values.Add(value);
-           // BatteryOsc.Send(message);
+            BatteryOsc.Send(message);
         }
     }
 

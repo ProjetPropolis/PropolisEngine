@@ -76,7 +76,21 @@ public class AbstractItem : MonoBehaviour {
 
     private void OnEnable()
     {
+        //StartCoroutine(PulseStatus());
+    }
 
+    private IEnumerator PulseStatus()
+    {
+        while (true)
+        {
+           SendOscMessage("/status", ID, (int)status);
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        //StopCoroutine(PulseStatus());
     }
 
     void ChangeColor()

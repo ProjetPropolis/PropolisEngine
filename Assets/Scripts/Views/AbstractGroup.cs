@@ -35,11 +35,13 @@ public class AbstractGroup : MonoBehaviour {
 
     void OnReceiveHexStatus(OscMessage message)
     {
-        Debug.Log("received");
+        
         try
         {
             AbstractItem item = ChildItemsList.First(x => x.ID == Convert.ToInt32(message.values[0]));
             parentGameController.ProcessUserInteraction(item, (PropolisUserInteractions)Convert.ToInt32(message.values[1]));
+
+            Debug.Log(String.Format("received  from {0}:  {1} {2}", ID, message.values[0], message.values[1 ]));
         }
         catch (Exception)
         {
