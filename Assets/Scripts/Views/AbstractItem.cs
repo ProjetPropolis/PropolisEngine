@@ -23,7 +23,10 @@ public class AbstractItem : MonoBehaviour {
             PrevState = status;
             status = value;
             ChangeColor();
+
+         
             SendOscMessage("/status", ID, (int)status);
+          
 
 
         }

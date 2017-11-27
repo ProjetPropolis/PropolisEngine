@@ -117,7 +117,7 @@ public class HiveGameController : AbstractGameController
                     InstanciateCleanser();
                 }
             }
-            yield return new WaitForSecondsRealtime(PropolisGameSettings.IntervalProcessUltraCorrupted);
+            yield return new WaitForSeconds(PropolisGameSettings.IntervalProcessUltraCorrupted);
         }
     }
     private IEnumerator ProcessCorruptionOnEdge()
@@ -134,7 +134,7 @@ public class HiveGameController : AbstractGameController
             AbstractItem hexNeighborsToCorrupted = NeighborsToCorrupt.ElementAt(random.Next(NeighborsToCorrupt.Count));
             CorruptHex(hexNeighborsToCorrupted);
             NeighborsToCorrupt.Remove(hexNeighborsToCorrupted);
-            yield return new WaitForSecondsRealtime(PropolisGameSettings.TimeBetweenAnimationSpawn);
+            yield return new WaitForSeconds(PropolisGameSettings.TimeBetweenAnimationSpawn);
         }
 
 
@@ -157,18 +157,18 @@ public class HiveGameController : AbstractGameController
             SendItemData(hex.ParentGroup.ID, hex.ID, PropolisStatus.CLEANSING);
             hexCleannedOrderList.Add(hex);
             hexstoBeCleanned.Remove(hex);
-            yield return new WaitForSecondsRealtime(PropolisGameSettings.TimeBetweenAnimationSpawn);
+            yield return new WaitForSeconds(PropolisGameSettings.TimeBetweenAnimationSpawn);
             i++;
         }
 
-        yield return new WaitForSecondsRealtime(PropolisGameSettings.CleansingStateDuration);
+        yield return new WaitForSeconds(PropolisGameSettings.CleansingStateDuration);
 
         SendItemData(cleanser.ParentGroup.ID, cleanser.ID, PropolisStatus.ON);
 
         foreach (var hex in hexCleannedOrderList)
         {
             SendItemData(hex.ParentGroup.ID, hex.ID, PropolisStatus.ON);
-            yield return new WaitForSecondsRealtime(PropolisGameSettings.TimeBetweenAnimationSpawn);
+            yield return new WaitForSeconds(PropolisGameSettings.TimeBetweenAnimationSpawn);
         }
 
     }
@@ -198,7 +198,7 @@ public class HiveGameController : AbstractGameController
             }
        
             i++;
-            yield return new WaitForSecondsRealtime(PropolisGameSettings.TimeBetweenAnimationSpawn);
+            yield return new WaitForSeconds(PropolisGameSettings.TimeBetweenAnimationSpawn);
         }
   
     }
@@ -221,7 +221,7 @@ public class HiveGameController : AbstractGameController
             PotentialUtraCorrupt.Remove(UtraCorruptor);
             }
             i++;
-            yield return new WaitForSecondsRealtime(PropolisGameSettings.TimeBetweenAnimationSpawn);
+            yield return new WaitForSeconds(PropolisGameSettings.TimeBetweenAnimationSpawn);
         }
 
       
@@ -238,7 +238,7 @@ public class HiveGameController : AbstractGameController
             AbstractItem hexToCorrupt = NeighborsToCorrupt.ElementAt(random.Next(NeighborsToCorrupt.Count));
             CorruptHex(hexToCorrupt);
             NeighborsToCorrupt.Remove(hexToCorrupt);
-            yield return new WaitForSecondsRealtime(PropolisGameSettings.TimeBetweenAnimationSpawn*0.5f);
+            yield return new WaitForSeconds(PropolisGameSettings.TimeBetweenAnimationSpawn*0.5f);
         }
    
       
