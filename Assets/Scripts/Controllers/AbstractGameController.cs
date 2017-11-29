@@ -43,6 +43,18 @@ namespace Propolis
             }
         }
 
+
+        protected void SetAllItemsTo(PropolisStatus status)
+        {
+            foreach (var group in ListOfGroups)
+            {
+                foreach (var item in group.ChildItemsList)
+                {
+                    SendItemData(group.ID, item.ID, status);
+                }
+            }
+        }
+
         private void LoadFromData()
         {
             DeleteAllComponents();

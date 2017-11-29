@@ -356,7 +356,7 @@ public class OscMessage
         }
         else
         {
-            Debug.Log("Wrong type");
+            //Debug.Log("Wrong type");
             return 0;
         }
     }
@@ -378,7 +378,7 @@ public class OscMessage
         }
         else
         {
-            Debug.Log("Wrong type");
+           // Debug.Log("Wrong type");
             return 0f;
         }
     }

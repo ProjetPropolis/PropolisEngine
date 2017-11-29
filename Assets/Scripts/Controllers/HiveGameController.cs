@@ -63,10 +63,8 @@ public class HiveGameController : AbstractGameController
     {
         base.InitOnPlay();        // va calculer chaque neighbors 
         random = new System.Random();
-        GenerateEdgeHexList();
-        IndexProcess = 0; // nous donne le nombre de clics 
-        UltraCorruptedList = new List<AbstractItem>();
-        StartCoroutine(ProcessDeleteUltraCorrupted());
+        Reset();
+
 
     }
 
@@ -80,6 +78,16 @@ public class HiveGameController : AbstractGameController
     {
         EdgeHexList = new List<AbstractItem>();
         ListOfGroups.ForEach(x=>x.ChildItemsList.ForEach(y=> { if (y.Neighbors.Count < 6) { EdgeHexList.Add(y); } }));
+    }
+
+    private void Reset()
+    {
+        GenerateEdgeHexList();
+        IndexProcess = 0; // nous donne le nombre de clics 
+        UltraCorruptedList = new List<AbstractItem>();
+        SetAllItemsTo(PropolisStatus.OFF);
+        StopCoroutine(ProcessDeleteUltraCorrupted());
+        StartCoroutine(ProcessDeleteUltraCorrupted());
     }
 
 
