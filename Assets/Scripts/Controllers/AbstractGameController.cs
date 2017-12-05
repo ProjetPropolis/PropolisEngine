@@ -14,7 +14,7 @@ namespace Propolis
         public GameObject GroupsPrefab;
         public Transform GameViewTransform; 
         public List<AbstractGroup> ListOfGroups;
-        public Rect molecularGameArea;
+        public Rect GameArea;
         public string GroupDataType;
 
 
@@ -71,12 +71,12 @@ namespace Propolis
 
         private void CalculateGameRectArea()
         {
-            float left = ListOfGroups.Min(x => x.ChildItemsList.Min(y => y.transform.position.x));
-            float right = ListOfGroups.Min(x => x.ChildItemsList.Max(y => y.transform.position.x));
-            float top = ListOfGroups.Min(x => x.ChildItemsList.Min(y =>  y.transform.position.y));
-            float bottom = ListOfGroups.Min(x => x.ChildItemsList.Max(y => x.transform.position.y + y.transform.position.y));
+            float left = (float)ListOfGroups.Min(x => x.transform.position.x - x.GetComponent<CircleCollider2D>().bounds.size.x * 0.5f);
+            float right = (float)ListOfGroups.Max(x => x.transform.position.x + x.GetComponent<CircleCollider2D>().bounds.size.x * 0.5f);
+            float top = (float)ListOfGroups.Max(x => x.transform.position.y - x.GetComponent<CircleCollider2D>().bounds.size.y * 0.5f);
+            float bottom = (float)ListOfGroups.Max(x => x.transform.position.y + x.GetComponent<CircleCollider2D>().bounds.size.y * 0.5f);
 
-            molecularGameArea = new Rect(left, top, Math.Abs(right - left), Math.Abs(bottom - top));
+            GameArea = new Rect(left, top, Math.Abs(right - left), Math.Abs(bottom - top));
 
 
         }

@@ -5,7 +5,14 @@ using Propolis;
 
 public class MolecularGameController : AbstractGameController
 {
-    //To be used instead of Update or FixedUpdate. 
+    public GameObject WaveGameObject;
+    private GameObject WaveGameObjectInstance;
+    //To be used instead of Update or FixedUpdate.
+
+    private void Start()
+    {
+        WaveGameObjectInstance = Instantiate(WaveGameObject);
+    }
     public   override void UpdateGameLogic()
     {
 
@@ -28,6 +35,25 @@ public class MolecularGameController : AbstractGameController
     }
     public override void InitOnPlay()
     {
-            base.InitOnPlay();
+        base.InitOnPlay();
+
+        GenerateWaveGameController();
+    }
+
+    private void GenerateWaveGameController()
+    {
+
+
+
+
+        WaveGameObjectInstance.transform.position = new Vector3(GameArea.x + GameArea.width, GameArea.y + GameArea.height * .5f);
+
+        WaveGameObjectInstance.transform.localScale = new Vector3(1, GameArea.height, 1);
+
+
+        BoxCollider2D waveBoxCollider = WaveGameObjectInstance.GetComponent<BoxCollider2D>();
+        waveBoxCollider.size = new Vector2(1.0f, GameArea.height);
+       
+
     }
 }

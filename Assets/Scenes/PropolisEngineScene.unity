@@ -3214,7 +3214,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1865805505}
-        m_MethodName: SendCommand
+        m_MethodName: SendMessage
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8874,7 +8874,6 @@ GameObject:
   - component: {fileID: 1276349319}
   - component: {fileID: 1276349321}
   - component: {fileID: 1276349320}
-  - component: {fileID: 1276349322}
   m_Layer: 5
   m_Name: Animations
   m_TagString: Tabs
@@ -8935,17 +8934,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1276349318}
---- !u!114 &1276349322
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1276349318}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a966bb3be5164c379330e72e07c9fc3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1276635489
 GameObject:
   m_ObjectHideFlags: 0
@@ -10009,8 +9997,8 @@ MonoBehaviour:
   cursorTextureDelete: {fileID: 2800000, guid: 23f8ed90ddf7ce44fac36ada07ea32a7, type: 3}
   cursorMode: 1
   hotSpot: {x: 0, y: 0}
-  PropolisManager: {fileID: 1865805505}
-  GameController: {fileID: 1782982169}
+  PropolisManager: {fileID: 0}
+  GameController: {fileID: 0}
   uiCanvas: {fileID: 1430085714}
   keyMoveSpeed: 0.01
   currentCam: {fileID: 766542303}
@@ -10234,7 +10222,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1865805505}
+      - m_Target: {fileID: 0}
         m_MethodName: SendCommand
         m_Mode: 5
         m_Arguments:
@@ -10657,6 +10645,12 @@ Prefab:
       propertyPath: GroupDataType
       value: atomgroup
       objectReference: {fileID: 0}
+    - target: {fileID: 114498831683773736, guid: a02e9773f95fd4048bdd45f81bc64e6e,
+        type: 2}
+      propertyPath: WaveGameObject
+      value: 
+      objectReference: {fileID: 1092874307193986, guid: 29f3ddc2355b43f458c40cd26af6315f,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a02e9773f95fd4048bdd45f81bc64e6e, type: 2}
   m_IsPrefabParent: 0
@@ -11455,12 +11449,6 @@ MonoBehaviour:
   inPort: 22222
   outIP: 132.208.122.156
   outPort: 18001
---- !u!114 &1782982169 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114138853543124672, guid: a02e9773f95fd4048bdd45f81bc64e6e,
-    type: 2}
-  m_PrefabInternal: {fileID: 1520807776}
-  m_Script: {fileID: 11500000, guid: 1b219c16686e7594ca0816237f4bb420, type: 3}
 --- !u!1 &1786670971
 GameObject:
   m_ObjectHideFlags: 0
@@ -11611,7 +11599,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1865805505}
+      - m_Target: {fileID: 0}
         m_MethodName: SendCommand
         m_Mode: 5
         m_Arguments:
