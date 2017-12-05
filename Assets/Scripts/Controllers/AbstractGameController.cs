@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityOSC;
 namespace Propolis
 {
     public abstract class AbstractGameController : MonoBehaviour {
@@ -79,9 +80,7 @@ namespace Propolis
                     if (x.ID == abstractGroupData.ID)
                     {
                         x.transform.position = abstractGroupData.GetPosition();
-                        x.Osc.inPort = abstractGroupData.InPort;
-                        x.Osc.outPort = abstractGroupData.OutPort;
-                        x.Osc.outIP = abstractGroupData.IP;
+                        x.SetOSCSettings(abstractGroupData.IP, abstractGroupData.OutPort);
                     }
                 }
             );
@@ -90,6 +89,21 @@ namespace Propolis
         }
         public abstract void UpdateGameLogic();
         public abstract void ProcessUserInteraction(AbstractItem item, PropolisUserInteractions userAction);
+        public void ProcessPacketFromOsc(List<object> data)
+        {
+            try
+            {
+                AbstractItem item = ListOfGroups.First<AbstractGroup>(x => x.ID == Convert.ToInt32(data[0]))
+                    .ChildItemsList.First<AbstractItem>(x => x.ID == Convert.ToInt32(data[1]));
+
+                ProcessUserInteraction(item, (PropolisUserInteractions)Convert.ToInt32(data[2]));
+            }
+            catch (Exception ex)
+            {
+                Debug.Log(ex.Message);
+            }
+           
+        }
         public virtual void InitOnPlay()
         {
             ListOfGroups.ForEach(x => x.ChildItemsList.ForEach(y => y.CalculateNeighborsList()));
@@ -186,11 +200,9 @@ namespace Propolis
             {
                 GameObject gameObject = Instantiate(GroupsPrefab, abstractGroupData.GetPosition(), Quaternion.identity);
    	            AbstractGroup abstractGroup = gameObject.GetComponent<AbstractGroup>();
+                abstractGroup.SetOSCSettings(abstractGroupData.IP, abstractGroupData.OutPort);
                 //gameObject.transform.parent = GameViewTransform.transform;
                 abstractGroup.ID = abstractGroupData.ID;
-                abstractGroup.Osc.inPort = abstractGroupData.InPort;
-                abstractGroup.Osc.outPort = abstractGroupData.OutPort;
-                abstractGroup.Osc.outIP = abstractGroupData.IP;
                 ListOfGroups.Add(abstractGroup);
                 gameObject.SetActive(true);
             }

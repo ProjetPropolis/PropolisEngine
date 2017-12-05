@@ -85,17 +85,17 @@ public class mouseUiController : MonoBehaviour {
                     if (hit.collider != null)
                     {
 
-                        var StolenInPort = hit.collider.gameObject.GetComponent<OSC>().inPort;
-                        var StolenOutPort = hit.collider.gameObject.GetComponent<OSC>().outPort;
+                        var StolenInPort = 123456; // dummy in port to prevent a code's refactor
+                        //var StolenOutPort = hit.collider.gameObject.GetComponent<AbstractGroup>().OSC.Port;
                         var StolenId = hit.collider.gameObject.GetComponent<AbstractGroup>().ID;
-                        var stolenIp = hit.collider.gameObject.GetComponent<OSC>().outIP;
+                        //var stolenIp = hit.collider.gameObject.GetComponent<AbstractGroup>().OSC.IP;
 
                         GameObject configUI = Instantiate(Resources.Load("UI/InfoPanelConfig"), currentCam.ScreenToWorldPoint(Input.mousePosition), Quaternion.identity) as GameObject;
                         configUI.transform.SetParent(uiCanvas,false);
 
                         GameObject.Find("InputFieldID").gameObject.GetComponent<InputField>().text = StolenId.ToString();
-                        GameObject.Find("InputFieldIP").gameObject.GetComponent<InputField>().text = stolenIp.ToString();
-                        GameObject.Find("InputFieldPartOut").gameObject.GetComponent<InputField>().text = StolenOutPort.ToString();
+                        //GameObject.Find("InputFieldIP").gameObject.GetComponent<InputField>().text = stolenIp.ToString();
+                        //GameObject.Find("InputFieldPartOut").gameObject.GetComponent<InputField>().text = StolenOutPort.ToString();
                         GameObject.Find("InputFieldPortIN").gameObject.GetComponent<InputField>().text = StolenInPort.ToString();
 
                         StartCoroutine(WaitTosend(configUI, hit.collider.gameObject, mouseState, Input.mousePosition));

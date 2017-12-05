@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 using Propolis;
+using UnityOSC;
 
 public class GameController : MonoBehaviour {
 
@@ -14,11 +15,54 @@ public class GameController : MonoBehaviour {
     public PropolisData propolisData;
     private IEnumerator GameLoopCoroutine;
     public float BatteryLevel = 0.0f;
+    OSCServer server;
+    object ThreadLock = new object();
+    bool _mustReadData ;
 
 
 	void Start () {
+        _mustReadData = false;
         propolisData = PropolisData.Instance;
         GameLoopCoroutine = ProcessGameLoop();
+        server = new OSCServer(14001);
+        server.PacketReceivedEvent += ProcessPacketReceived;
+        server.Connect();
+
+    }
+
+    private void OnDestroy()
+    {
+        server.PacketReceivedEvent -= ProcessPacketReceived;
+        server.Close();
+    }
+
+    private void ProcessPacketReceived(OSCServer sender, OSCPacket packet)
+    {
+        if (propolisData.IsGamePlaying && packet.Data.Count == 3)
+        {
+            //lock (ThreadLock)
+            //{
+                _mustReadData = true;
+           // }
+        }
+    }
+
+    private void Update()
+    {
+
+        //lock (ThreadLock)
+        //{
+            if (_mustReadData)
+            {
+                _mustReadData = false;
+                switch (server.LastReceivedPacket.Address.Replace(@"/", ""))
+                {
+                    case PropolisDataTypes.HexGroup: hiveGameController.ProcessPacketFromOsc(server.LastReceivedPacket.Data);break;
+                    case PropolisDataTypes.AtomGroup: molecularGameController.ProcessPacketFromOsc(server.LastReceivedPacket.Data); break;
+                }
+            }
+        //}
+    
     }
 
     public void SendCommand(string command)
@@ -127,10 +171,7 @@ public class GameController : MonoBehaviour {
             case PropolisDataTypes.AtomGroup: molecularGameController.ProcessUserInteraction(item, userAction);break;
         }
     }
-    
-	void Update () {
-    
-    }
+   
 
  
 }
