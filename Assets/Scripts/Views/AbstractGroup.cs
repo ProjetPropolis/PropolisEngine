@@ -4,23 +4,27 @@ using UnityEngine;
 using System.Linq;
 using System;
 using Propolis;
+using UnityOSC;
+using System.Net;
 
 public class AbstractGroup : MonoBehaviour {
 
-    public OSC Osc;
     public int ID;
 
     [SerializeField]
     public List<AbstractItem> ChildItemsList;
     public AbstractGameController parentGameController;
     public string DataType;
+    public OSCClient OSC;
+    //public OSCClient OSC;
 
     // Use this for initialization
     void Start () {
-        Osc.SetAddressHandler("/status", OnReceiveHexStatus);
+        //Osc.SetAddressHandler("/status", OnReceiveHexStatus);
         ChildItemsList = transform.GetComponentsInChildren<AbstractItem>().ToList<AbstractItem>();
         parentGameController = GameObject.Find("Controllers").GetComponent<AbstractGameController>();
     }
+
 	
 	// Update is called once per frame
 	void Update () {
@@ -28,30 +32,43 @@ public class AbstractGroup : MonoBehaviour {
 
     }
 
+    public void SetOSCSettings(string ip, int port)
+    {
+        try
+        {
+            IPAddress address;
+            IPAddress.TryParse(ip,out address);
+            OSC = new OSCClient(address, port);
+        }catch(Exception ex)
+        {
+            Debug.Log(ex.Message);
+        }     
+       
+    }
+
     public void SendHexDataToHiveController(int hexID, PropolisStatus status)
     {
         parentGameController.SendCommand(String.Format("uis {0} {1} {2} {3}", DataType, ID, hexID, (int)status));
     }
 
-    void OnReceiveHexStatus(OscMessage message)
-    {
-        
-        try
-        {
-            AbstractItem item = ChildItemsList.First(x => x.ID == Convert.ToInt32(message.values[0]));
-            parentGameController.ProcessUserInteraction(item, (PropolisUserInteractions)Convert.ToInt32(message.values[1]));
+    //@TODO replace by new osc
+    //void OnReceiveHexStatus(OscMessage message)
+    //{
 
-            Debug.Log(String.Format("received  from {0}:  {1} {2}", ID, message.values[0], message.values[1 ]));
-        }
-        catch (Exception)
-        {
-            Debug.LogError("Error received ID :" + message.values[0].ToString());
-        }
-       
+    //    try
+    //    {
+    //        AbstractItem item = ChildItemsList.First(x => x.ID == Convert.ToInt32(message.values[0]));
+    //        parentGameController.ProcessUserInteraction(item, (PropolisUserInteractions)Convert.ToInt32(message.values[1]));
 
-      
+    //        Debug.Log(String.Format("received  from {0}:  {1} {2}", ID, message.values[0], message.values[1 ]));
+    //    }
+    //    catch (Exception)
+    //    {
+    //        Debug.LogError("Error received ID :" + message.values[0].ToString());
+    //    }
 
-    }
+
+    //}
 
     public int CountChildrenWithStatus(PropolisStatus status)
     {

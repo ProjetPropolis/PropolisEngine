@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 using Propolis;
 using System.Linq;
+using UnityOSC;
 
 
 public class AbstractItem : MonoBehaviour {
@@ -24,8 +24,8 @@ public class AbstractItem : MonoBehaviour {
             status = value;
             ChangeColor();
 
-         
-            SendOscMessage("/status", ID, (int)status);
+            if(ParentGroup.OSC != null)
+                SendOscMessage("/status", ID, (int)status);
           
 
 
@@ -46,7 +46,6 @@ public class AbstractItem : MonoBehaviour {
     }
 
     public int ID;
-    public OSC osc;
     public float NeighborsDist;
     public AbstractGroup ParentGroup;
     public PropolisData propolisData;
@@ -58,7 +57,6 @@ public class AbstractItem : MonoBehaviour {
         ParentGroup = transform.parent.GetComponent<AbstractGroup>();
         propolisData = PropolisData.Instance;
         material = GetComponent<Renderer>().material;
-		osc = transform.parent.gameObject.GetComponent<OSC>();
         StatusLocked = false;
         if (ParentGroup.DataType == PropolisDataTypes.HexGroup)
         {
@@ -74,24 +72,6 @@ public class AbstractItem : MonoBehaviour {
 
     }
 
-    private void OnEnable()
-    {
-        //StartCoroutine(PulseStatus());
-    }
-
-    private IEnumerator PulseStatus()
-    {
-        while (true)
-        {
-           SendOscMessage("/status", ID, (int)status);
-            yield return new WaitForSeconds(0.5f);
-        }
-    }
-
-    private void OnDestroy()
-    {
-        //StopCoroutine(PulseStatus());
-    }
 
     void ChangeColor()
     {
@@ -173,15 +153,6 @@ public class AbstractItem : MonoBehaviour {
 
     }
 
-    public void SendDataToTouchDesigner()
-    {
-        
-        OscMessage message = new OscMessage();
-
-       // SendOscMessage("/hex", ID, (int)Status);
-
-    }
-
 	private void Update()
 	{
         
@@ -199,13 +170,12 @@ public class AbstractItem : MonoBehaviour {
 
     private void SendOscMessage(string address, int value, int value2)
     {
+        OSCMessage message = new OSCMessage(address);
+        message.Append<int>(value);
+        message.Append<int>(value2);
+        ParentGroup.OSC.Send(message);
 
-        OscMessage message = new OscMessage();
 
-        message.address = address;
-        message.values.Add(value);
-        message.values.Add(value2);
-        osc.Send(message);
     }
 
 }

@@ -4,15 +4,28 @@ using UnityEngine;
 using Propolis;
 using System.Linq;
 using System;
+using UnityOSC;
 
 public class HiveGameController : AbstractGameController
 {
     List<AbstractItem> EdgeHexList;
     List<AbstractItem> PotentialUtraCorrupt;
     List<AbstractItem> UltraCorruptedList;
+
     System.Random random;
     private int IndexProcess;
     bool readyCleanser;
+
+
+    private void Start()
+    {
+
+    }
+
+    private void OnDestroy()
+    {
+        
+    }
 
     public override void ProcessUserInteraction(AbstractItem item, PropolisUserInteractions userAction)
     {
@@ -59,6 +72,7 @@ public class HiveGameController : AbstractGameController
         
 
     }
+
     public override void InitOnPlay()
     {
         base.InitOnPlay();        // va calculer chaque neighbors 

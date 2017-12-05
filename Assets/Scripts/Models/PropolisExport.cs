@@ -9,8 +9,6 @@ namespace Propolis
     public class PropolisExport : MonoBehaviour
     {
 
-        public OSC SoundMaxOsc;
-        public OSC BatteryOsc;
 
 
     // Use this for initialization
@@ -48,23 +46,13 @@ namespace Propolis
         private void SendOscMessage(string address, int value, int value2, int value3)
         {
 
-            OscMessage message = new OscMessage();
 
-            message.address = address;
-            message.values.Add(value);
-            message.values.Add(value2);
-            message.values.Add(value3);
-            SoundMaxOsc.Send(message);
         }
 
         private void SendBatteryOscMessage(string address, float value)
         {
 
-            OscMessage message = new OscMessage();
 
-            message.address = address;
-            message.values.Add(value);
-            BatteryOsc.Send(message);
         }
     }
 
