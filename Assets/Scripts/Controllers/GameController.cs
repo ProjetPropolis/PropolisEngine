@@ -78,21 +78,35 @@ public class GameController : MonoBehaviour {
         {
            PropolisGroupItemData newItemData =propolisData.GetGroupDataById(propolisData.LastEvent.GroupID, 
                propolisData.LastEvent.Type).Childrens.FirstOrDefault(x=> x.ID == propolisData.LastEvent.ID);
-
-            AbstractItem previousItemData = hiveGameController.ListOfGroups.FirstOrDefault(x => x.ID == propolisData.LastEvent.GroupID)
-                .ChildItemsList.FirstOrDefault(x=>x.ID == propolisData.LastEvent.ID);
-
-            if (newItemData.Status == (int)PropolisStatus.ON || newItemData.Status == (int)PropolisStatus.CLEANSING)
+            AbstractItem previousItemData =null;
+            switch (propolisData.LastEvent.Type)
             {
-                switch (previousItemData.PrevState)
-                {
-                    case PropolisStatus.ON: IncrementBatteryLevel(PropolisGameSettings.ScorePressOnActiveHex);break;
-                    case PropolisStatus.CORRUPTED: IncrementBatteryLevel(PropolisGameSettings.ScorePressOnCorruptedHex); break;
-                    case PropolisStatus.ULTRACORRUPTED: IncrementBatteryLevel(PropolisGameSettings.ScoreOnCleanUltraCorruptedHex); break;
-                    case PropolisStatus.CLEANSER: IncrementBatteryLevel(PropolisGameSettings.ScorePressOnCleannerHex); break;
-                }
+                case PropolisDataTypes.HexGroup:
+                     previousItemData = hiveGameController.ListOfGroups.FirstOrDefault(x => x.ID == propolisData.LastEvent.GroupID)
+                    .ChildItemsList.FirstOrDefault(x => x.ID == propolisData.LastEvent.ID);
+                    break;
+                case PropolisDataTypes.AtomGroup:
+                    previousItemData = molecularGameController.ListOfGroups.FirstOrDefault(x => x.ID == propolisData.LastEvent.GroupID)
+                   .ChildItemsList.FirstOrDefault(x => x.ID == propolisData.LastEvent.ID);
+                    break;
             }
 
+            if (previousItemData != null)
+            {
+                if (newItemData.Status == (int)PropolisStatus.ON || newItemData.Status == (int)PropolisStatus.CLEANSING)
+                {
+                    switch (previousItemData.PrevState)
+                    {
+                        case PropolisStatus.ON: IncrementBatteryLevel(PropolisGameSettings.ScorePressOnActiveHex); break;
+                        case PropolisStatus.CORRUPTED: IncrementBatteryLevel(PropolisGameSettings.ScorePressOnCorruptedHex); break;
+                        case PropolisStatus.ULTRACORRUPTED: IncrementBatteryLevel(PropolisGameSettings.ScoreOnCleanUltraCorruptedHex); break;
+                        case PropolisStatus.CLEANSER: IncrementBatteryLevel(PropolisGameSettings.ScorePressOnCleannerHex); break;
+                    }
+                }
+
+                
+            }
+           
         }
 
 

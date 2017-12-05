@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityOSC;
+
 namespace Propolis
 {
     public abstract class AbstractGameController : MonoBehaviour {
@@ -13,6 +14,7 @@ namespace Propolis
         public GameObject GroupsPrefab;
         public Transform GameViewTransform; 
         public List<AbstractGroup> ListOfGroups;
+        public Rect molecularGameArea;
         public string GroupDataType;
 
 
@@ -59,7 +61,24 @@ namespace Propolis
         private void LoadFromData()
         {
             DeleteAllComponents();
-            propolisData.HexGroupList.ForEach(x=> InstantiateAbstractGroupGroup(x.ID));
+            switch (GroupDataType) {
+
+                case PropolisDataTypes.HexGroup: propolisData.HexGroupList.ForEach(x => InstantiateAbstractGroupGroup(x.ID)); break;
+                case PropolisDataTypes.AtomGroup: propolisData.AtomGroupList.ForEach(x => InstantiateAbstractGroupGroup(x.ID)); break;
+
+            }   
+        }
+
+        private void CalculateGameRectArea()
+        {
+            float left = ListOfGroups.Min(x => x.ChildItemsList.Min(y => y.transform.position.x));
+            float right = ListOfGroups.Min(x => x.ChildItemsList.Max(y => y.transform.position.x));
+            float top = ListOfGroups.Min(x => x.ChildItemsList.Min(y =>  y.transform.position.y));
+            float bottom = ListOfGroups.Min(x => x.ChildItemsList.Max(y => x.transform.position.y + y.transform.position.y));
+
+            molecularGameArea = new Rect(left, top, Math.Abs(right - left), Math.Abs(bottom - top));
+
+
         }
         private void UpdateAbstractGroup()
         {
@@ -107,6 +126,7 @@ namespace Propolis
         public virtual void InitOnPlay()
         {
             ListOfGroups.ForEach(x => x.ChildItemsList.ForEach(y => y.CalculateNeighborsList()));
+            CalculateGameRectArea();
         }
 
         public virtual void Stop()

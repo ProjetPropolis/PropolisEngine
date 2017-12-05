@@ -16,7 +16,7 @@ public class AbstractGroup : MonoBehaviour {
     public AbstractGameController parentGameController;
     public string DataType;
     public OSCClient OSC;
-    //public OSCClient OSC;
+
 
     // Use this for initialization
     void Start () {
@@ -24,7 +24,22 @@ public class AbstractGroup : MonoBehaviour {
         //Osc.SetAddressHandler("/status", OnReceiveHexStatus);
 
         ChildItemsList = transform.GetComponentsInChildren<AbstractItem>().ToList<AbstractItem>();
-        parentGameController = GameObject.Find("Controllers").GetComponent<AbstractGameController>();
+        switch (DataType)
+        {
+            case PropolisDataTypes.HexGroup: parentGameController = GameObject.Find("Controllers").GetComponent<HiveGameController>(); break;
+            case PropolisDataTypes.AtomGroup: parentGameController = GameObject.Find("Controllers").GetComponent<MolecularGameController>(); break;
+        }
+
+        
+        if(DataType == PropolisDataTypes.AtomGroup)
+        {
+           /* transform.Rotate(0, 0, 180);
+            //Patch for emery street
+            if(ID == 102)
+            {
+                transform.Rotate(0, 0, -20);
+            }*/
+        }
     }
 
 	

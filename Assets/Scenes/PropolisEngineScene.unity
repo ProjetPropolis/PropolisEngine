@@ -10641,6 +10641,22 @@ Prefab:
       propertyPath: PropolisExport
       value: 
       objectReference: {fileID: 1782982166}
+    - target: {fileID: 114498831683773736, guid: a02e9773f95fd4048bdd45f81bc64e6e,
+        type: 2}
+      propertyPath: GroupsPrefab
+      value: 
+      objectReference: {fileID: 1879395145267394, guid: b4b524ec37ecf534fb287c5e5031af30,
+        type: 2}
+    - target: {fileID: 114808596420459798, guid: a02e9773f95fd4048bdd45f81bc64e6e,
+        type: 2}
+      propertyPath: GroupDataType
+      value: hexgroup
+      objectReference: {fileID: 0}
+    - target: {fileID: 114498831683773736, guid: a02e9773f95fd4048bdd45f81bc64e6e,
+        type: 2}
+      propertyPath: GroupDataType
+      value: atomgroup
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a02e9773f95fd4048bdd45f81bc64e6e, type: 2}
   m_IsPrefabParent: 0
@@ -11421,8 +11437,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26a5c68aeb2c87844bd928c6122ef6a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SoundMaxOsc: {fileID: 1782982165}
-  BatteryOsc: {fileID: 1782982167}
+  BatteryPort: 18001
+  SoundPort: 17001
+  BatteryAddress: 132.208.122.156
+  SoundAddress: 132.208.122.185
 --- !u!114 &1782982167
 MonoBehaviour:
   m_ObjectHideFlags: 0

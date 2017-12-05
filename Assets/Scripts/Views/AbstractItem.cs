@@ -10,6 +10,7 @@ public class AbstractItem : MonoBehaviour {
 
     private PropolisStatus status;
     public  PropolisStatus PrevState { get; set; }
+    public bool IsShield = false;
 
     public PropolisStatus Status {
         get
@@ -55,6 +56,10 @@ public class AbstractItem : MonoBehaviour {
     private void Start()
     {
         ParentGroup = transform.parent.GetComponent<AbstractGroup>();
+        if(ParentGroup == null)
+        {
+            ParentGroup = transform.parent.parent.GetComponent<AbstractGroup>();
+        }
         propolisData = PropolisData.Instance;
         material = GetComponent<Renderer>().material;
         StatusLocked = false;
@@ -65,7 +70,7 @@ public class AbstractItem : MonoBehaviour {
         }
         else
         {
-            Status = (PropolisStatus)propolisData.HexGroupList.First(x => x.ID == ParentGroup.ID).Childrens.First(x => x.ID == ID).Status;
+            Status = (PropolisStatus)propolisData.AtomGroupList.First(x => x.ID == ParentGroup.ID).Childrens.First(x => x.ID == ID).Status;
             PrevState = Status;
         }
     
@@ -83,7 +88,9 @@ public class AbstractItem : MonoBehaviour {
             case PropolisStatus.CORRUPTED: material.color = PropolisColors.Purple; break;
             case PropolisStatus.CLEANSER: material.color = PropolisColors.Blue; break;
             case PropolisStatus.ULTRACORRUPTED: material.color = PropolisColors.Red; break;
-            case PropolisStatus.CLEANSING: material.color = PropolisColors.White; break;
+            case PropolisStatus.RECIPE1: material.color = PropolisColors.Blue; break;
+            case PropolisStatus.RECIPE2: material.color = PropolisColors.Red; break;
+            case PropolisStatus.RECIPE3: material.color = PropolisColors.Yellow; break;
         }
 
     }

@@ -12,6 +12,7 @@ public class HiveGameController : AbstractGameController
     List<AbstractItem> PotentialUtraCorrupt;
     List<AbstractItem> UltraCorruptedList;
 
+
     System.Random random;
     private int IndexProcess;
     bool readyCleanser;
@@ -41,6 +42,7 @@ public class HiveGameController : AbstractGameController
             
         }
     }
+
     //To be used instead of Update or FixedUpdate. 
     public override void UpdateGameLogic()
     {
