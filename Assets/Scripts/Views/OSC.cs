@@ -452,12 +452,13 @@ public class OSC : MonoBehaviour
 
         messagesReceived = new ArrayList();
 
-        buffer = new byte[1000];
+        buffer = new byte[16000];
 
 
         ReadThread = new Thread(Read);
         ReaderRunning = true;
         ReadThread.IsBackground = true;
+        ReadThread.Priority = System.Threading.ThreadPriority.Lowest;
         ReadThread.Start();
 
 #if UNITY_EDITOR
@@ -610,7 +611,7 @@ public class OSC : MonoBehaviour
 
                 }
                 else
-                    Thread.Sleep(5);
+                    Thread.Sleep(2);
             }
         }
 

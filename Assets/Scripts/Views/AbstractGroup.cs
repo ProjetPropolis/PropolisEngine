@@ -17,7 +17,7 @@ public class AbstractGroup : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        Osc.SetAddressHandler("/status", OnReceiveHexStatus);
+        Osc.SetAddressHandler("/hexgroup", OnReceiveHexStatus);
         ChildItemsList = transform.GetComponentsInChildren<AbstractItem>().ToList<AbstractItem>();
         parentGameController = GameObject.Find("Controllers").GetComponent<AbstractGameController>();
     }
@@ -38,10 +38,11 @@ public class AbstractGroup : MonoBehaviour {
         
         try
         {
-            AbstractItem item = ChildItemsList.First(x => x.ID == Convert.ToInt32(message.values[0]));
-            parentGameController.ProcessUserInteraction(item, (PropolisUserInteractions)Convert.ToInt32(message.values[1]));
+            AbstractItem item = ChildItemsList.First(x => x.ID == Convert.ToInt32(message.values[1]));
+            parentGameController.ProcessUserInteraction(item, (PropolisUserInteractions)Convert.ToInt32(message.values[2]));
 
-            Debug.Log(String.Format("received  from {0}:  {1} {2}", ID, message.values[0], message.values[1 ]));
+
+            Debug.Log(String.Format("received  from {0}:  {1} {2}", ID, message.values[1], message.values[2 ]));
         }
         catch (Exception)
         {

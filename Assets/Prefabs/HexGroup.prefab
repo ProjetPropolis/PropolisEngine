@@ -570,9 +570,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   ID: 4
-  osc: {fileID: 114366736888829554}
+  osc: {fileID: 0}
   NeighborsDist: 0.5
   ParentGroup: {fileID: 0}
+  StatusLocked: 0
 --- !u!114 &114164971816795814
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -589,9 +590,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   ID: 2
-  osc: {fileID: 114366736888829554}
+  osc: {fileID: 0}
   NeighborsDist: 0.5
   ParentGroup: {fileID: 0}
+  StatusLocked: 0
 --- !u!114 &114239766088370954
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -608,9 +610,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   ID: 0
-  osc: {fileID: 114366736888829554}
+  osc: {fileID: 0}
   NeighborsDist: 0.5
   ParentGroup: {fileID: 0}
+  StatusLocked: 0
 --- !u!114 &114366736888829554
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -641,9 +644,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   ID: 5
-  osc: {fileID: 114366736888829554}
+  osc: {fileID: 0}
   NeighborsDist: 0.5
   ParentGroup: {fileID: 0}
+  StatusLocked: 0
 --- !u!114 &114677225290470002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -660,9 +664,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   ID: 1
-  osc: {fileID: 114366736888829554}
+  osc: {fileID: 0}
   NeighborsDist: 0.5
   ParentGroup: {fileID: 0}
+  StatusLocked: 0
 --- !u!114 &114868724291734944
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -679,9 +684,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   ID: 3
-  osc: {fileID: 114366736888829554}
+  osc: {fileID: 0}
   NeighborsDist: 0.5
   ParentGroup: {fileID: 0}
+  StatusLocked: 0
 --- !u!114 &114950889589718076
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -698,9 +704,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   ID: 6
-  osc: {fileID: 114366736888829554}
+  osc: {fileID: 0}
   NeighborsDist: 0.5
   ParentGroup: {fileID: 0}
+  StatusLocked: 0
 --- !u!114 &114994773525748030
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -714,7 +721,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Osc: {fileID: 114366736888829554}
   ID: 0
-  ChildHexsList: []
+  ChildItemsList: []
   parentGameController: {fileID: 0}
   DataType: hexgroup
 --- !u!212 &212340254583507616
