@@ -9,13 +9,8 @@ public class WaveController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        if (PropolisData.Instance.WaveActivated)
-        {          
-            if(PropolisData.Instance.WaveProgress <= 0.0f)
-            {
+        MolecularGameController = GameObject.Find("Controllers").GetComponent<MolecularGameController>();
 
-            }
-        }
     }
 
     public void  ResetPosition()
@@ -23,19 +18,35 @@ public class WaveController : MonoBehaviour {
 
     }
 
-    private void OnTriggerEnter2D(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
+        AbstractItem atom = other.GetComponent<AbstractItem>();
 
+        if(atom != null)
+        {
+            MolecularGameController.CorruptedAtomWithWave(atom);
+        }
     }
 
-    public void  SetWavePosition(float position)
-    {
-        position = Mathf.Clamp(position, 0.0f, 1.0f);
-        MolecularGameController.SendCommand(string.Format("{0} {1}", PropolisActions.SetWavePosition, position));
-    }
 
     // Update is called once per frame
-    void Update () {
-		
-	}
+    public void UpdateMovement () {
+        if (PropolisData.Instance.WaveActivated)
+        {
+            MolecularGameController.SetWavePosition(PropolisData.Instance.WaveProgress +  PropolisGameSettings.WaveSpeed);
+            transform.position = new Vector3(
+                Mathf.Lerp(
+                    MolecularGameController.GameArea.x + MolecularGameController.GameArea.width,
+                    MolecularGameController.GameArea.x,
+                    PropolisData.Instance.WaveProgress
+            ),
+            transform.position.y,
+            transform.position.z);
+            if(PropolisData.Instance.WaveProgress >= 1.0f)
+            {
+                MolecularGameController.SetWaveActiveStatus(false);
+            }
+           
+        }
+    }
 }

@@ -16,11 +16,12 @@ public class AbstractGroup : MonoBehaviour {
     public AbstractGameController parentGameController;
     public string DataType;
     public OSCClient OSC;
+    public bool IsLocked { get; set; }
 
 
     // Use this for initialization
     void Start () {
-
+        IsLocked = false;
         //Osc.SetAddressHandler("/status", OnReceiveHexStatus);
 
         ChildItemsList = transform.GetComponentsInChildren<AbstractItem>().ToList<AbstractItem>();

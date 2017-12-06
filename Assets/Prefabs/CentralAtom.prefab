@@ -124,9 +124,9 @@ MonoBehaviour:
     m_Bits: 0
   ID: 9
   NeighborsDist: 0
-  ParentGroup: {fileID: 114623869153305540, guid: b4b524ec37ecf534fb287c5e5031af30,
-    type: 2}
+  ParentGroup: {fileID: 0}
   StatusLocked: 0
+  IsShield: 1
 --- !u!212 &212353371713629942
 SpriteRenderer:
   m_ObjectHideFlags: 1

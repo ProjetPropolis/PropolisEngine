@@ -7,11 +7,14 @@ public class MolecularGameController : AbstractGameController
 {
     public GameObject WaveGameObject;
     private GameObject WaveGameObjectInstance;
+    private WaveController WaveController;
+    private System.Random random;
     //To be used instead of Update or FixedUpdate.
 
     private void Start()
     {
         WaveGameObjectInstance = Instantiate(WaveGameObject);
+        WaveController = WaveGameObjectInstance.GetComponent<WaveController>();
     }
     public   override void UpdateGameLogic()
     {
@@ -36,8 +39,43 @@ public class MolecularGameController : AbstractGameController
     public override void InitOnPlay()
     {
         base.InitOnPlay();
+        Reset();       
+    }
 
+    private void Reset()
+    {
+        SetAllItemsTo(PropolisStatus.OFF);
         GenerateWaveGameController();
+        StartCoroutine(ProcessWaveTrigger());
+        StartCoroutine(ProcessWaveMovement());
+    }
+
+    public override void Stop()
+    {
+        StopCoroutine(ProcessWaveTrigger());
+        StartCoroutine(ProcessWaveMovement());
+
+    }
+
+    public void SetWavePosition(float position)
+    {
+        position = Mathf.Clamp(position, 0.0f, 1.0f);
+        SendCommand(string.Format("{0} {1}", PropolisActions.SetWavePosition, position));
+    }
+
+    public void SetWaveActiveStatus(bool status)
+    {
+        SendCommand(string.Format("{0} {1}", PropolisActions.SetWaveActiveStatus, status));
+    }
+
+    private IEnumerator ProcessWaveTrigger()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(PropolisGameSettings.IntervalBetweenWaves);
+            SetWavePosition(0.0f);
+            SetWaveActiveStatus(true);
+        }
     }
 
     private void GenerateWaveGameController()
@@ -52,5 +90,29 @@ public class MolecularGameController : AbstractGameController
         waveBoxCollider.size = new Vector2(1.0f, GameArea.height);
        
 
+    }   
+
+    public void CorruptedAtomWithWave(AbstractItem atom)
+    {
+        if(!atom.IsShield && !atom.ParentGroup.IsLocked)
+        {
+            StartCoroutine(ProcessAtomCorruptionProgress(atom));
+        }
     }
+
+    public IEnumerator ProcessAtomCorruptionProgress(AbstractItem atom)
+    {
+        SendItemData(atom.ParentGroup.ID, atom.ID, PropolisStatus.WAVECORRUPTED);
+        yield return new WaitForSeconds(PropolisGameSettings.AtomSaturationCorruptionTime);
+        SendItemData(atom.ParentGroup.ID, atom.ID, PropolisStatus.CORRUPTED);
+    }
+
+    private IEnumerator ProcessWaveMovement()
+    {
+        while (true) { 
+            WaveController.UpdateMovement();
+            yield return new WaitForSeconds(0.03f);
+        }
+    }
+
 }

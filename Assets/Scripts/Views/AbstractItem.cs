@@ -10,7 +10,7 @@ public class AbstractItem : MonoBehaviour {
 
     private PropolisStatus status;
     public  PropolisStatus PrevState { get; set; }
-    public bool IsShield = false;
+    
 
     public PropolisStatus Status {
         get
@@ -51,7 +51,8 @@ public class AbstractItem : MonoBehaviour {
     public AbstractGroup ParentGroup;
     public PropolisData propolisData;
     private Material material;
-    public bool StatusLocked;
+    public bool StatusLocked = false;
+    public bool IsShield = false;
 
     private void Start()
     {
@@ -91,6 +92,8 @@ public class AbstractItem : MonoBehaviour {
             case PropolisStatus.RECIPE1: material.color = PropolisColors.Blue; break;
             case PropolisStatus.RECIPE2: material.color = PropolisColors.Red; break;
             case PropolisStatus.RECIPE3: material.color = PropolisColors.Yellow; break;
+            case PropolisStatus.WAVECORRUPTED: material.color = PropolisColors.Fushia; break;
+            case PropolisStatus.CLEANSING: material.color = PropolisColors.White; break;
         }
 
     }
