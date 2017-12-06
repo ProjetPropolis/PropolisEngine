@@ -9997,8 +9997,8 @@ MonoBehaviour:
   cursorTextureDelete: {fileID: 2800000, guid: 23f8ed90ddf7ce44fac36ada07ea32a7, type: 3}
   cursorMode: 1
   hotSpot: {x: 0, y: 0}
-  PropolisManager: {fileID: 0}
-  GameController: {fileID: 0}
+  PropolisManager: {fileID: 1865805505}
+  GameController: {fileID: 1782982170}
   uiCanvas: {fileID: 1430085714}
   keyMoveSpeed: 0.01
   currentCam: {fileID: 766542303}
@@ -11449,6 +11449,12 @@ MonoBehaviour:
   inPort: 22222
   outIP: 132.208.122.156
   outPort: 18001
+--- !u!114 &1782982170 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114138853543124672, guid: a02e9773f95fd4048bdd45f81bc64e6e,
+    type: 2}
+  m_PrefabInternal: {fileID: 1520807776}
+  m_Script: {fileID: 11500000, guid: 1b219c16686e7594ca0816237f4bb420, type: 3}
 --- !u!1 &1786670971
 GameObject:
   m_ObjectHideFlags: 0

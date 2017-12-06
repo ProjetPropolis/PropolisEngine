@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212497321517255068}
   - component: {fileID: 61838788250841778}
   - component: {fileID: 50120323975766512}
-  - component: {fileID: 114199954530891150}
+  - component: {fileID: 114095777508818376}
   m_Layer: 0
   m_Name: Wave
   m_TagString: Untagged
@@ -88,7 +88,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 12.78}
   m_EdgeRadius: 0
---- !u!114 &114199954530891150
+--- !u!114 &114095777508818376
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -96,9 +96,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1092874307193986}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 902c85cf4ad489c4dad6023d964c20a3, type: 3}
+  m_Script: {fileID: 11500000, guid: 3269f203c40e7c84db329fbc323bae74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MolecularGameController: {fileID: 0}
 --- !u!212 &212497321517255068
 SpriteRenderer:
   m_ObjectHideFlags: 1

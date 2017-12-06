@@ -43,9 +43,6 @@ public class MolecularGameController : AbstractGameController
     private void GenerateWaveGameController()
     {
 
-
-
-
         WaveGameObjectInstance.transform.position = new Vector3(GameArea.x + GameArea.width, GameArea.y + GameArea.height * .5f);
 
         WaveGameObjectInstance.transform.localScale = new Vector3(1, GameArea.height, 1);

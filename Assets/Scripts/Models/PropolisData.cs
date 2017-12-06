@@ -20,6 +20,8 @@ namespace Propolis
         public List<AbstractGroupData> AtomGroupList { get; set; }
         public float BatteryLevel { get; set; }
         public bool IsGamePlaying { get; set; }
+        public float WaveProgress { get; set; }
+        public bool WaveActivated { get; set; }
 
 
         private PropolisData() {
@@ -29,7 +31,9 @@ namespace Propolis
             LastEvent = new PropolisLastEventState();
             IsGamePlaying = false;
             BatteryLevel = 0.0f;
-
+            WaveProgress = 0.0f;
+            WaveActivated = false;
+            
         }
 
   

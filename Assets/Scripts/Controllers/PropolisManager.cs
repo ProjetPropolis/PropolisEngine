@@ -97,6 +97,7 @@ namespace Propolis
                 _propolisData.LastEvent = _TempLastBuffer;
                 if (_propolisData.AtomGroupList == null)
                     _propolisData.AtomGroupList = new List<AbstractGroupData>();
+                
                 return true;
             }
             else
@@ -126,6 +127,8 @@ namespace Propolis
                     case PropolisActions.Delete: validCommand = Delete(modelParams); break;
                     case PropolisActions.UpdateItemStatus: validCommand = UpdateItemStatus(modelParams); break;
                     case PropolisActions.SetBatteryLevel: validCommand = SetBatteryLevel(modelParams); break;
+                    case PropolisActions.SetWavePosition: validCommand = SetWavePosition(modelParams); break;
+                    case PropolisActions.SetWaveActiveStatus: validCommand = SetWaveActiveStatus(modelParams); break;
                     case PropolisActions.Play: validCommand = PlayGame(); break;
                     case PropolisActions.Stop: validCommand = StopGame(); break;
                     //case PropolisActions.AppStatus: validCommand = true; AppendToConsoleLog(_propolisData.ExportToJSON()); break;
@@ -192,6 +195,58 @@ namespace Propolis
             return true;
         }
 
+        private bool SetWavePosition(Queue<string> modelParams)
+        {
+            float wavePosition = .0f;
+            if (modelParams.Count != 1)
+            {
+                AppendToConsoleLog("Error on sbl method, incorrect set of parameter, looking for [BatteryLevel]");
+                return false;
+            }
+
+            try
+            {
+                wavePosition = (float)Convert.ToDouble(modelParams.Dequeue());
+                if (wavePosition < 0.0f && wavePosition > 1.0f)
+                {
+                    throw new FormatException();
+                }
+            }
+            catch
+            {
+                AppendToConsoleLog("Error on sbl method, incorrect set of parameter, looking for a float value between 0.0 and 1.0");
+                return false;
+            }
+            _propolisData.WaveProgress = wavePosition;
+            _propolisData.LastEvent = _TempLastBuffer;
+
+            return true;
+        }
+
+        private bool SetWaveActiveStatus(Queue<string> modelParams)
+        {
+            bool waveActiveStatus = false;
+            if (modelParams.Count != 1)
+            {
+                AppendToConsoleLog("Error on sbl method, incorrect set of parameter, looking for [BatteryLevel]");
+                return false;
+            }
+
+            try
+            {
+                waveActiveStatus = Convert.ToBoolean(modelParams.Dequeue());
+
+            }
+            catch
+            {
+                AppendToConsoleLog("Error on sbl method, incorrect set of parameter, looking for a float value between 0.0 and 1.0");
+                return false;
+            }
+            _propolisData.WaveActivated = waveActiveStatus;
+            _propolisData.LastEvent = _TempLastBuffer;
+
+            return true;
+        }
         private string GetLastConsoleEntry()
         {
             string[] separatorFilter = new string[] { LineFilterConsole };

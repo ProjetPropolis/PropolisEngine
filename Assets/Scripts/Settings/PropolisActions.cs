@@ -16,5 +16,7 @@ namespace Propolis
         public const string SetBatteryLevel = "sbl";
         public const string Play = "play";
         public const string Stop = "stop";
+        public const string SetWaveActiveStatus = "swas";
+        public const string SetWavePosition = "swp";
     }   
 }
