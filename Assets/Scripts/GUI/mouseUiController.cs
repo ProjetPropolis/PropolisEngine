@@ -44,8 +44,14 @@ public class mouseUiController : MonoBehaviour {
 
         if (Input.GetMouseButtonUp(1))
         {
+            PullOffActionGame();
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
             ClickInGame();
         }
+
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -203,6 +209,28 @@ public class mouseUiController : MonoBehaviour {
 
     {
         mouseState = fromUi;
+    }
+
+    public void PullOffActionGame()
+    {
+        Vector2 worldPoint = currentCam.ScreenToWorldPoint(Input.mousePosition);
+        RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero, Mathf.Infinity, layer_mask_Game.value);
+        if (hit.collider != null)
+        {
+            var abstractGroup = hit.collider.transform.parent.gameObject.GetComponent<AbstractGroup>();
+            if (abstractGroup == null)
+            {
+                abstractGroup = hit.collider.transform.parent.parent.gameObject.GetComponent<AbstractGroup>();
+            }
+            var abstractItem = hit.collider.gameObject.GetComponent<AbstractItem>();
+            var GroupType = abstractGroup.DataType;
+
+            if (abstractItem != null)
+            {
+                GameController.ProcessUserInteraction(GroupType, abstractItem,PropolisUserInteractions.PULL_OFF);
+            }
+
+        }
     }
 
     public void ClickInGame()

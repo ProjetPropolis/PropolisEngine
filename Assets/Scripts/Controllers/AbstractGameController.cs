@@ -23,6 +23,7 @@ namespace Propolis
             propolisData = PropolisData.Instance;
             ListOfGroups = new List<AbstractGroup>();
             GroupDataType = GroupsPrefab.GetComponent<AbstractGroup>().DataType;
+
         }
 
         public AbstractItem GetAbstractItemFromIDS(int groupID, int itemID)
@@ -30,7 +31,7 @@ namespace Propolis
             return ListOfGroups.FirstOrDefault(x => x.ID == groupID).ChildItemsList.FirstOrDefault(x => x.ID == itemID);
         }
 
-        public void UpdateFromModel()
+        public virtual void UpdateFromModel()
         {
             propolisData = PropolisData.Instance;
             if (propolisData.LastEvent.Type != GroupDataType && propolisData.LastEvent.Type != String.Empty)

@@ -94,6 +94,8 @@ public class AbstractItem : MonoBehaviour {
             case PropolisStatus.RECIPE3: material.color = PropolisColors.Yellow; break;
             case PropolisStatus.WAVECORRUPTED: material.color = PropolisColors.Fushia; break;
             case PropolisStatus.CLEANSING: material.color = PropolisColors.White; break;
+            case PropolisStatus.SHIELD_ON: material.color = PropolisColors.Blue; break;
+            case PropolisStatus.SHIELD_OFF: material.color = PropolisColors.DarkBlue; break;
         }
 
     }
@@ -185,7 +187,7 @@ public class AbstractItem : MonoBehaviour {
         message.Append<int>(value2);
         ParentGroup.OSC.Send(message);
 
-
     }
+
 
 }
