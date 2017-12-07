@@ -39,7 +39,20 @@ public class HiveGameController : AbstractGameController
                 case PropolisStatus.CLEANSER: StartCoroutine(ProcessCleanserExplosion(item.ParentGroup.ID,item.ID));break;
                 default: SendItemData(item.ParentGroup.ID, item.ID,item.Status);break;
             }
-            
+
+            if (item.Status == PropolisStatus.ON || item.Status == PropolisStatus.CLEANSING)
+            {
+                item.StatusLocked = true;
+            }
+
+
+        }
+        else
+        {
+            if (item.Status == PropolisStatus.ON || item.Status == PropolisStatus.CLEANSING)
+            {
+                item.StatusLocked = false;
+            }
         }
     }
 
@@ -109,7 +122,7 @@ public class HiveGameController : AbstractGameController
 
     private void CorruptHex(AbstractItem abstractItem)
     {
-        if(abstractItem.Status == PropolisStatus.OFF || abstractItem.Status == PropolisStatus.ON)
+        if((abstractItem.Status == PropolisStatus.OFF || abstractItem.Status == PropolisStatus.ON && !abstractItem.StatusLocked))
         {
             SendItemData(abstractItem.ParentGroup.ID, abstractItem.ID, PropolisStatus.CORRUPTED);
         }
@@ -121,7 +134,7 @@ public class HiveGameController : AbstractGameController
     }
     private void UltraCorruptHex(AbstractItem abstractItem)
     {
-        if (abstractItem.Status == PropolisStatus.OFF || abstractItem.Status == PropolisStatus.ON || abstractItem.Status == PropolisStatus.CORRUPTED)
+        if ((abstractItem.Status == PropolisStatus.OFF || abstractItem.Status == PropolisStatus.ON || abstractItem.Status == PropolisStatus.CORRUPTED) && !abstractItem.StatusLocked)
         {
             SendItemData(abstractItem.ParentGroup.ID, abstractItem.ID, PropolisStatus.ULTRACORRUPTED);
             UltraCorruptedList.Add(abstractItem);

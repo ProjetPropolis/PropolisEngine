@@ -8928,7 +8928,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "v 0.9 F\xE9lix Loco"
+  m_Text: "v 0.9 F\xE9lix Loko"
 --- !u!222 &1245978113
 CanvasRenderer:
   m_ObjectHideFlags: 0

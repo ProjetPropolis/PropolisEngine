@@ -9,7 +9,7 @@ using UnityOSC;
 public class AbstractItem : MonoBehaviour {
 
     private PropolisStatus status;
-    public  PropolisStatus PrevState { get; set; }
+    public PropolisStatus PrevState { get; set; }
     
 
     public PropolisStatus Status {
