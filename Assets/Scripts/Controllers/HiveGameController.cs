@@ -114,7 +114,7 @@ public class HiveGameController : AbstractGameController
         GenerateEdgeHexList();
         IndexProcess = 0; // nous donne le nombre de clics 
         UltraCorruptedList = new List<AbstractItem>();
-        SetAllItemsTo(PropolisStatus.OFF);
+        SetAllItemsTo(PropolisStatus.OFF);       
         StopCoroutine(ProcessDeleteUltraCorrupted());
         StartCoroutine(ProcessDeleteUltraCorrupted());
     }

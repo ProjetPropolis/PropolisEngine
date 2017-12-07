@@ -82,16 +82,14 @@ public class MolecularGameController : AbstractGameController
     {
         SetAllItemsTo(PropolisStatus.OFF);
         GenerateWaveGameController();
-        StopCoroutine(ProcessWaveTrigger());
-        StopCoroutine(ProcessWaveMovement());
+        StopAllCoroutines();
         StartCoroutine(ProcessWaveTrigger());
         StartCoroutine(ProcessWaveMovement());
     }
 
     public override void Stop()
     {
-        StopCoroutine(ProcessWaveTrigger());
-        StopCoroutine(ProcessWaveMovement());
+        StopAllCoroutines();
 
     }
 

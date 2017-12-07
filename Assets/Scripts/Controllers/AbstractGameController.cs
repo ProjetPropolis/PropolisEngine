@@ -117,6 +117,8 @@ namespace Propolis
                     .ChildItemsList.First<AbstractItem>(x => x.ID == Convert.ToInt32(data[1]));
 
                 ProcessUserInteraction(item, (PropolisUserInteractions)Convert.ToInt32(data[2]));
+
+                Debug.Log(string.Format("Received: {0} {1} {2} {3}", item.ParentGroup.DataType, Convert.ToInt32(data[0]), Convert.ToInt32(data[1]), Convert.ToInt32(data[2])));
             }
             catch (Exception ex)
             {
@@ -128,6 +130,7 @@ namespace Propolis
         {
             ListOfGroups.ForEach(x => x.ChildItemsList.ForEach(y => y.CalculateNeighborsList()));
             CalculateGameRectArea();
+            ListOfGroups.ForEach(x => x.ChildItemsList.ForEach(y => y.StatusLocked = false));
         }
 
         public virtual void Stop()
