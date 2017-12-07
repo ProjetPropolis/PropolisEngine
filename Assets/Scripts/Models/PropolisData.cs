@@ -16,13 +16,13 @@ namespace Propolis
         [SerializeField]
         public PropolisLastEventState LastEvent { get; set; }
         [SerializeField]
-        public List<AbstractGroupData> HexGroupList{ get; set; }
+        public List<AbstractGroupData> HexGroupList { get; set; }
         public List<AbstractGroupData> AtomGroupList { get; set; }
         public float BatteryLevel { get; set; }
         public bool IsGamePlaying { get; set; }
         public float WaveProgress { get; set; }
         public bool WaveActivated { get; set; }
-
+        public Queue<PropolisRecipe> RecipeStack {get;set;}
 
         private PropolisData() {
 
@@ -33,11 +33,29 @@ namespace Propolis
             BatteryLevel = 0.0f;
             WaveProgress = 0.0f;
             WaveActivated = false;
-            
+            RecipeStack = new Queue<PropolisRecipe>();
+
         }
 
-  
 
+        public bool PushRecipe(PropolisRecipe recipe)
+        {
+            try
+            {
+                if (RecipeStack.Count >= 3)
+                {
+                    RecipeStack.Dequeue();
+                    RecipeStack.Enqueue(recipe);
+                }
+            }
+            catch (System.Exception)
+            {
+
+                return false;
+            }
+
+            return true;
+        }
         public bool UpdateItemStatus(string type, int groupID, int id, int status, out string statusMessage)
         {
             statusMessage = null;

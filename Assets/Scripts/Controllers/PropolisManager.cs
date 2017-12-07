@@ -97,6 +97,10 @@ namespace Propolis
                 _propolisData.LastEvent = _TempLastBuffer;
                 if (_propolisData.AtomGroupList == null)
                     _propolisData.AtomGroupList = new List<AbstractGroupData>();
+                if (_propolisData.RecipeStack == null)
+                {
+                    _propolisData.RecipeStack = new Queue<PropolisRecipe>();
+                }
                 
                 return true;
             }
@@ -131,6 +135,7 @@ namespace Propolis
                     case PropolisActions.SetWaveActiveStatus: validCommand = SetWaveActiveStatus(modelParams); break;
                     case PropolisActions.Play: validCommand = PlayGame(); break;
                     case PropolisActions.Stop: validCommand = StopGame(); break;
+                    case PropolisActions.PushRecipe: validCommand = PushRecipe(modelParams); break;
                     //case PropolisActions.AppStatus: validCommand = true; AppendToConsoleLog(_propolisData.ExportToJSON()); break;
                     default: AppendToConsoleLog("Error unknown command: " + rawCommand); break;
                 }
@@ -243,6 +248,35 @@ namespace Propolis
                 return false;
             }
             _propolisData.WaveActivated = waveActiveStatus;
+            _propolisData.LastEvent = _TempLastBuffer;
+
+            return true;
+        }
+
+        private bool PushRecipe(Queue<string> modelParams)
+        {
+            if (modelParams.Count != 3)
+            {
+                AppendToConsoleLog("Error on sbl method, incorrect set of parameter, looking for [BatteryLevel]");
+                return false;
+            }
+
+            PropolisRecipe recipe = null;
+
+            try
+            {
+                int rep1 = Convert.ToInt32(modelParams.Dequeue());
+                int rep2 = Convert.ToInt32(modelParams.Dequeue());
+                int rep3 = Convert.ToInt32(modelParams.Dequeue());
+                recipe = new PropolisRecipe(rep1, rep2, rep3);
+            }
+            catch
+            {
+                AppendToConsoleLog("Error on sbl method, incorrect set of parameter, looking for a float value between 0.0 and 1.0");
+                return false;
+            }
+
+            _propolisData.PushRecipe(recipe);
             _propolisData.LastEvent = _TempLastBuffer;
 
             return true;
