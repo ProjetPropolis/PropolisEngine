@@ -11,8 +11,7 @@ public class BatteryUiController : MonoBehaviour {
     public Image fill, backgroud;
 
 	void Start () {
-        fill.color = PropolisColors.Purple;
-        backgroud.color = PropolisColors.Dark;
+
     }
 
     public void BatteryValueUpdate(float BatteryLevel)
