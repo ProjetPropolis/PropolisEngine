@@ -16,11 +16,27 @@ public class AbstractGroup : MonoBehaviour {
     public AbstractGameController parentGameController;
     public string DataType;
     public OSCClient OSC;
+    private bool _IsLocked;
+    public bool IsLocked
+    {
+        get { return _IsLocked; }
+        set {
+            _IsLocked = value;
+            if(Shield != null)
+            {
+                Shield.SetActive(_IsLocked);
+            }
+
+        }
+    }
+    private GameObject Shield;
 
 
     // Use this for initialization
     void Start () {
-
+       
+        Shield = GameObject.Find("Shield");
+        IsLocked = false;
         //Osc.SetAddressHandler("/status", OnReceiveHexStatus);
 
         ChildItemsList = transform.GetComponentsInChildren<AbstractItem>().ToList<AbstractItem>();

@@ -17,6 +17,9 @@ namespace Propolis
         public const int NumOfUltraCorruped = 1;
         public const int MaxNumOfUltraCorruped = 2;
         public const float CleansingStateDuration = 1.5f;
+        public const float IntervalBetweenWaves = 90.0f;
+        public const float WaveSpeed = 0.001f;
+        public const float AtomSaturationCorruptionTime = 0.8f;
         public static PropolisStatus[] StatusFreeToBeCorrupted = new PropolisStatus[] { PropolisStatus.ON, PropolisStatus.OFF };
     }
 

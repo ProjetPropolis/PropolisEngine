@@ -14,7 +14,7 @@ namespace Propolis
         public GameObject GroupsPrefab;
         public Transform GameViewTransform; 
         public List<AbstractGroup> ListOfGroups;
-        public Rect molecularGameArea;
+        public Rect GameArea;
         public string GroupDataType;
 
 
@@ -23,6 +23,7 @@ namespace Propolis
             propolisData = PropolisData.Instance;
             ListOfGroups = new List<AbstractGroup>();
             GroupDataType = GroupsPrefab.GetComponent<AbstractGroup>().DataType;
+
         }
 
         public AbstractItem GetAbstractItemFromIDS(int groupID, int itemID)
@@ -30,7 +31,7 @@ namespace Propolis
             return ListOfGroups.FirstOrDefault(x => x.ID == groupID).ChildItemsList.FirstOrDefault(x => x.ID == itemID);
         }
 
-        public void UpdateFromModel()
+        public virtual void UpdateFromModel()
         {
             propolisData = PropolisData.Instance;
             if (propolisData.LastEvent.Type != GroupDataType && propolisData.LastEvent.Type != String.Empty)
@@ -71,12 +72,12 @@ namespace Propolis
 
         private void CalculateGameRectArea()
         {
-            float left = ListOfGroups.Min(x => x.ChildItemsList.Min(y => y.transform.position.x));
-            float right = ListOfGroups.Min(x => x.ChildItemsList.Max(y => y.transform.position.x));
-            float top = ListOfGroups.Min(x => x.ChildItemsList.Min(y =>  y.transform.position.y));
-            float bottom = ListOfGroups.Min(x => x.ChildItemsList.Max(y => x.transform.position.y + y.transform.position.y));
+            float left = (float)ListOfGroups.Min(x => x.transform.position.x - x.GetComponent<CircleCollider2D>().bounds.size.x * 0.5f);
+            float right = (float)ListOfGroups.Max(x => x.transform.position.x + x.GetComponent<CircleCollider2D>().bounds.size.x * 0.5f);
+            float top = (float)ListOfGroups.Max(x => x.transform.position.y - x.GetComponent<CircleCollider2D>().bounds.size.y * 0.5f);
+            float bottom = (float)ListOfGroups.Max(x => x.transform.position.y + x.GetComponent<CircleCollider2D>().bounds.size.y * 0.5f);
 
-            molecularGameArea = new Rect(left, top, Math.Abs(right - left), Math.Abs(bottom - top));
+            GameArea = new Rect(left, top, Math.Abs(right - left), Math.Abs(bottom - top));
 
 
         }
@@ -116,6 +117,8 @@ namespace Propolis
                     .ChildItemsList.First<AbstractItem>(x => x.ID == Convert.ToInt32(data[1]));
 
                 ProcessUserInteraction(item, (PropolisUserInteractions)Convert.ToInt32(data[2]));
+
+                Debug.Log(string.Format("Received: {0} {1} {2} {3}", item.ParentGroup.DataType, Convert.ToInt32(data[0]), Convert.ToInt32(data[1]), Convert.ToInt32(data[2])));
             }
             catch (Exception ex)
             {
@@ -127,6 +130,7 @@ namespace Propolis
         {
             ListOfGroups.ForEach(x => x.ChildItemsList.ForEach(y => y.CalculateNeighborsList()));
             CalculateGameRectArea();
+            ListOfGroups.ForEach(x => x.ChildItemsList.ForEach(y => y.StatusLocked = false));
         }
 
         public virtual void Stop()

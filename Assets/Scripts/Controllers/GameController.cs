@@ -18,9 +18,11 @@ public class GameController : MonoBehaviour {
     OSCServer server;
     object ThreadLock = new object();
     bool _mustReadData ;
+    private System.Random random;
 
 
 	void Start () {
+        random = new System.Random();
         _mustReadData = false;
         propolisData = PropolisData.Instance;
         GameLoopCoroutine = ProcessGameLoop();
@@ -137,6 +139,25 @@ public class GameController : MonoBehaviour {
         hiveGameController.InitOnPlay();
         molecularGameController.InitOnPlay();
         StartCoroutine(GameLoopCoroutine);
+        GenerateRecipe();
+
+    }
+
+    public void GenerateRecipe()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            PushRecipe();
+        }
+    }
+
+
+    private void PushRecipe()
+    {
+        int r1 =random.Next(3) + (int)PropolisStatus.RECIPE1;
+        int r2 = random.Next(3) + (int)PropolisStatus.RECIPE1;
+        int r3 = random.Next(3) + (int)PropolisStatus.RECIPE1;
+        SendCommand(string.Format("{0} {1} {2} {3}", PropolisActions.PushRecipe, r1, r2, r3));
     }
 
     private void StopGame()

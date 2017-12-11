@@ -26,8 +26,8 @@ public class tabsController : MonoBehaviour {
         if (sensibleToKeypress != false)
         {
             if (Input.GetKeyDown ("tab")) {
-			switchMenuKeyboard();
-		}
+			    switchMenuKeyboard();
+		    }
         }
     }
 
@@ -40,7 +40,7 @@ public class tabsController : MonoBehaviour {
 
     public void UpdateSelectedTab(Button button) {
         foreach (var aTab in tabs) {
-            if (aTab.name != button.transform.Find("Text").GetComponent<Text>().text) { aTab.SetActive(false); } else { aTab.SetActive(true); }
+            if (aTab.name.ToLower() != button.transform.Find("Text").GetComponent<Text>().text.ToLower()) { aTab.SetActive(false); } else { aTab.SetActive(true); }
         }
 
 		updateCheck();
