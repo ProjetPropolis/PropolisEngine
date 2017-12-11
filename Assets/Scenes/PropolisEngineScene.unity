@@ -2137,6 +2137,7 @@ GameObject:
   - component: {fileID: 338197061}
   - component: {fileID: 338197063}
   - component: {fileID: 338197062}
+  - component: {fileID: 338197064}
   m_Layer: 5
   m_Name: RecipeUI2
   m_TagString: Untagged
@@ -2195,6 +2196,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 338197060}
+--- !u!114 &338197064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 338197060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: add7f65de78096742a912cf6c5013ab9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recipeID: 1
 --- !u!1 &372769082
 GameObject:
   m_ObjectHideFlags: 0
@@ -10767,6 +10780,7 @@ GameObject:
   - component: {fileID: 1516653846}
   - component: {fileID: 1516653848}
   - component: {fileID: 1516653847}
+  - component: {fileID: 1516653849}
   m_Layer: 5
   m_Name: RecipeUI3
   m_TagString: Untagged
@@ -10825,6 +10839,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1516653845}
+--- !u!114 &1516653849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1516653845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: add7f65de78096742a912cf6c5013ab9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recipeID: 2
 --- !u!1001 &1520807776
 Prefab:
   m_ObjectHideFlags: 0
@@ -12199,6 +12225,7 @@ GameObject:
   - component: {fileID: 1818742166}
   - component: {fileID: 1818742168}
   - component: {fileID: 1818742167}
+  - component: {fileID: 1818742169}
   m_Layer: 5
   m_Name: RecipeUI1
   m_TagString: Untagged
@@ -12257,6 +12284,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1818742165}
+--- !u!114 &1818742169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1818742165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: add7f65de78096742a912cf6c5013ab9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recipeID: 0
 --- !u!1 &1821386667
 GameObject:
   m_ObjectHideFlags: 0
