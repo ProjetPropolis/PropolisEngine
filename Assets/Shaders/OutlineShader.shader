@@ -19,7 +19,7 @@ Shader "Sprites/Outline"
 	{
 		"Queue" = "Transparent"
 		"IgnoreProjector" = "True"
-		"RenderType" = "Transparent"
+		"RenderType" = "Opaque"
 		"PreviewType" = "Plane"
 		"CanUseSpriteAtlas" = "True"
 	}
@@ -99,7 +99,7 @@ Shader "Sprites/Outline"
 
 		// If one of the neighbouring pixels is invisible, we render an outline.
 		if (pixelUp.a * pixelDown.a * pixelRight.a * pixelLeft.a == 0) {
-			c.rgba = fixed4(1, 1, 1, 1) * _OutlineColor;
+			c.rgba = fixed4(1, 1, 1, 1);
 		}
 	}
 

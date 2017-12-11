@@ -45,8 +45,10 @@ namespace Propolis
                 if (RecipeStack.Count >= 3)
                 {
                     RecipeStack.Dequeue();
-                    RecipeStack.Enqueue(recipe);
+                    
                 }
+
+                RecipeStack.Enqueue(recipe);
             }
             catch (System.Exception)
             {
