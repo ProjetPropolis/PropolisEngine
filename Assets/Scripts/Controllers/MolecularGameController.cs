@@ -9,6 +9,7 @@ public class MolecularGameController : AbstractGameController
     private GameObject WaveGameObjectInstance;
     private WaveController WaveController;
     private System.Random random;
+    public PropolisAlertUIController AlertController;
     //To be used instead of Update or FixedUpdate.
 
     private void Start()
@@ -98,7 +99,7 @@ public class MolecularGameController : AbstractGameController
             }
         }
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
         foreach (var item in group.ChildItemsList)
 
         {
@@ -110,10 +111,22 @@ public class MolecularGameController : AbstractGameController
 
 
     }
-    private void ValidateRecipe(AbstractGroup group)
+    private void RandomizeAtoms()
     {
-       
+        foreach (var group in ListOfGroups)
+        {
+            foreach (var item in group.ChildItemsList)
+
+            {
+                if (item.ID != 9)
+                {
+                    SendItemData(group.ID, item.ID, random.Next(3) + PropolisStatus.RECIPE1);
+                }
+            }
+        }
+
     }
+
     public override void ProcessUserInteraction(AbstractItem item, PropolisUserInteractions userAction)
     {
         if (userAction == PropolisUserInteractions.PRESS)
@@ -143,11 +156,12 @@ public class MolecularGameController : AbstractGameController
                             ProcessLevel2Climax(group, recipe);
                             GameController.PushRecipe();
                             GameController.ProcessSuccessfulRecipe(compareResult);
+                            AlertController.Show("Propolis Event", "Climax Molecular level 3");
                         }
                         else
                         {
                             ProcessLevel2Climax(group, recipe);
-                            GameController.PushRecipe();
+                            AlertController.Show("Propolis Event", "Climax Molecular level 2");
                             GameController.ProcessSuccessfulRecipe(PropolisRecipeCompareStatus.IMPERFECT);
                         }
                     }
@@ -187,7 +201,7 @@ public class MolecularGameController : AbstractGameController
     private void Reset()
     {
         SetAllItemsTo(PropolisStatus.OFF);
-        ListOfGroups.ForEach(x => x.ChildItemsList.ForEach(y => { if (y.ID == 9) { SendItemData(x.ID, y.ID, PropolisStatus.SHIELD_OFF); } }));
+        RandomizeAtoms();
         GenerateWaveGameController();
         StopAllCoroutines();
         StartCoroutine(ProcessWaveTrigger());
