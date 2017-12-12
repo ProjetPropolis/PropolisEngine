@@ -6,14 +6,15 @@ namespace Propolis
 {
     public static class PropolisColors
     {
-        public static Color Dark { get { return GetColorFromHTML("#222222"); } }
-        public static Color Red { get { return GetColorFromHTML("#EF5572"); } }
-        public static Color Purple { get { return GetColorFromHTML("#3A3459"); } }
+        public static Color Dark { get { return GetColorFromHTML("#302b49"); } }
+        public static Color Red { get { return GetColorFromHTML("#ff5061"); } }
+        public static Color Purple { get { return GetColorFromHTML("#887fd5"); } }
         public static Color Yellow { get { return GetColorFromHTML("#FDE981"); } }
-        public static Color Blue { get { return GetColorFromHTML("#0BFFE2"); } }
+        public static Color Blue { get { return GetColorFromHTML("#0bffe3"); } }
         public static Color White { get { return GetColorFromHTML("#FFFFFF"); } }
-        public static Color Fushia { get { return GetColorFromHTML("#FF0080"); } }
-        public static Color DarkBlue { get { return GetColorFromHTML("#0000FF"); } }
+        public static Color Fushia { get { return GetColorFromHTML("#ff33bc"); } }
+        public static Color DarkBlue { get { return GetColorFromHTML("#005af9"); } }
+        public static Color Orange { get { return GetColorFromHTML("#ff7550"); } }
 
 
         private static Color GetColorFromHTML(string hex)
