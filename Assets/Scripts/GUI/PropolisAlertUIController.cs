@@ -23,6 +23,7 @@ public class PropolisAlertUIController : MonoBehaviour {
     {
         TitleTextUI.text = TitleText;
         ContentTextUI.text = ContentText;
+        CanvasGroup.alpha = 0;
         StopCoroutine(StartShowing());
         StartCoroutine(StartShowing());
     }

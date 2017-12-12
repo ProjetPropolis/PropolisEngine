@@ -20,6 +20,7 @@ namespace Propolis
         public GameController GameController;
         public BatteryUiController BatteryUi;
         public PropolisExport PropolisExport;
+        public PropolisAlertUIController AlertController;
         
         private void Awake()
         {
@@ -74,6 +75,7 @@ namespace Propolis
                 FileStream file = File.Create(Application.persistentDataPath + "/savedGames.gd"); //you can call it anything you want
                 bf.Serialize(file, _propolisData);
                 file.Close();
+                AlertController.Show("Propolis Event", "Engine Data Saved");
                 return true;
             }
             catch(Exception ex)
@@ -101,7 +103,7 @@ namespace Propolis
                 {
                     _propolisData.RecipeStack = new Queue<PropolisRecipe>();
                 }
-                
+                AlertController.Show("Propolis Event", "Engine Data Loaded");
                 return true;
             }
             else
@@ -278,7 +280,8 @@ namespace Propolis
 
             _propolisData.PushRecipe(recipe);
             _propolisData.LastEvent = _TempLastBuffer;
-
+            if(_propolisData.RecipeStack.Count == 3)
+                AlertController.Show("Propolis Event", "Recipe Created");
             return true;
         }
         private string GetLastConsoleEntry()
@@ -310,7 +313,7 @@ namespace Propolis
                 default: AppendToConsoleLog("Error on create method, Invalid type : " + type); break;
             }
 
-
+            AlertController.Show("Propolis Event", string.Format("{0} Created", type));
             return validCreate;
         }
 

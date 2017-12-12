@@ -156,7 +156,7 @@ public class GameController : MonoBehaviour {
         StopCoroutine(GameLoopCoroutine);
         StartCoroutine(GameLoopCoroutine);
         GenerateRecipe();
-        AlertUiController.Show("Propolis Engine Event", "Gameplay Started");
+        AlertUiController.Show("Propolis Event", "Gameplay Started");
 
     }
 
@@ -185,7 +185,7 @@ public class GameController : MonoBehaviour {
         hiveGameController.Stop();
         molecularGameController.Stop();
         StopCoroutine(GameLoopCoroutine);
-        AlertUiController.Show("Propolis Engine Event", "Gameplay Stopped");
+        AlertUiController.Show("Propolis Event", "Gameplay Stopped");
 
     }
 
