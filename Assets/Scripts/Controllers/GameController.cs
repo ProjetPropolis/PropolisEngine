@@ -152,6 +152,7 @@ public class GameController : MonoBehaviour {
         Debug.Log("play");
         hiveGameController.InitOnPlay();
         molecularGameController.InitOnPlay();
+        StopCoroutine(GameLoopCoroutine);
         StartCoroutine(GameLoopCoroutine);
         GenerateRecipe();
 
