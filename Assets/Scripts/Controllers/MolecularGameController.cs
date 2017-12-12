@@ -112,6 +112,7 @@ public class MolecularGameController : AbstractGameController
     private void Reset()
     {
         SetAllItemsTo(PropolisStatus.OFF);
+        ListOfGroups.ForEach(x => x.ChildItemsList.ForEach(y => { if (y.ID == 9) { SendItemData(x.ID, y.ID, PropolisStatus.SHIELD_OFF); } }));
         GenerateWaveGameController();
         StopAllCoroutines();
         StartCoroutine(ProcessWaveTrigger());

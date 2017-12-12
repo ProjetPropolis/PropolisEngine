@@ -17,15 +17,13 @@ public class AbstractGroup : MonoBehaviour {
     public string DataType;
     public OSCClient OSC;
     private bool _IsLocked;
+    public GameObject EnvironnementalRepresentation;
     public bool IsLocked
     {
         get { return _IsLocked; }
         set {
             _IsLocked = value;
-            if(Shield != null)
-            {
-                Shield.SetActive(_IsLocked);
-            }
+          
 
         }
     }
@@ -61,7 +59,14 @@ public class AbstractGroup : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        
+        if (EnvironnementalRepresentation != null)
+        {
+            if(ChildItemsList.Count == 10)
+            {
+                EnvironnementalRepresentation.SetActive(ChildItemsList[9].status == PropolisStatus.SHIELD_ON);
+            }
+            
+        }
 
     }
 

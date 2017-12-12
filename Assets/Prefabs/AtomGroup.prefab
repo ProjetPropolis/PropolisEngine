@@ -479,7 +479,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1943034122652534
 GameObject:
   m_ObjectHideFlags: 1
@@ -1363,6 +1363,7 @@ MonoBehaviour:
   ChildItemsList: []
   parentGameController: {fileID: 0}
   DataType: atomgroup
+  EnvironnementalRepresentation: {fileID: 1926265851536484}
 --- !u!114 &114484570153755940
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1374,6 +1375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  status: 0
   Neighbors: []
   ItemLayerMask:
     serializedVersion: 2
@@ -1394,6 +1396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  status: 0
   Neighbors: []
   ItemLayerMask:
     serializedVersion: 2
@@ -1414,6 +1417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  status: 0
   Neighbors: []
   ItemLayerMask:
     serializedVersion: 2
@@ -1434,6 +1438,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  status: 0
   Neighbors: []
   ItemLayerMask:
     serializedVersion: 2
@@ -1454,6 +1459,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  status: 0
   Neighbors: []
   ItemLayerMask:
     serializedVersion: 2
@@ -1474,6 +1480,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  status: 0
   Neighbors: []
   ItemLayerMask:
     serializedVersion: 2
@@ -1494,6 +1501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  status: 0
   Neighbors: []
   ItemLayerMask:
     serializedVersion: 2
@@ -1514,6 +1522,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  status: 0
   Neighbors: []
   ItemLayerMask:
     serializedVersion: 2
@@ -1534,6 +1543,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  status: 0
   Neighbors: []
   ItemLayerMask:
     serializedVersion: 2
@@ -1554,6 +1564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  status: 0
   Neighbors: []
   ItemLayerMask:
     serializedVersion: 2
