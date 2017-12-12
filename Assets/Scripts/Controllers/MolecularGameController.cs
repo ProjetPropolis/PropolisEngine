@@ -97,6 +97,8 @@ public class MolecularGameController : AbstractGameController
                 yield return new WaitForSeconds(0.02f);
             }
         }
+
+        yield return new WaitForSeconds(0.5f);
         foreach (var item in group.ChildItemsList)
 
         {
@@ -146,7 +148,7 @@ public class MolecularGameController : AbstractGameController
                         {
                             ProcessLevel2Climax(group, recipe);
                             GameController.PushRecipe();
-                            GameController.ProcessSuccessfulRecipe(compareResult);
+                            GameController.ProcessSuccessfulRecipe(PropolisRecipeCompareStatus.IMPERFECT);
                         }
                     }
 
