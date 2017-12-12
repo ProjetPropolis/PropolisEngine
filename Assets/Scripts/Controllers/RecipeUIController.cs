@@ -27,9 +27,9 @@ public class RecipeUIController : MonoBehaviour {
 
                     switch ((PropolisStatus)recipeElement)
                     {
-                        case PropolisStatus.RECIPE1: material.SetColor(PropolisColors.Blue); break;
-                        case PropolisStatus.RECIPE2: material.SetColor(PropolisColors.Red); break;
-                        case PropolisStatus.RECIPE3: material.SetColor(PropolisColors.Yellow); break;
+                        case PropolisStatus.RECIPE1: material.SetColor(PropolisColors.Orange); break;
+                        case PropolisStatus.RECIPE2: material.SetColor(PropolisColors.Fushia); break;
+                        case PropolisStatus.RECIPE3: material.SetColor(PropolisColors.DarkBlue); break;
                     }
                 }
             }
