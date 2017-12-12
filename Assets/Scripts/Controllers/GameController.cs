@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour {
 
     List<GameObject> tuilesActives = new List<GameObject>();
     public PropolisManager propolisManager;
+    public PropolisAlertUIController AlertUiController;
 
     public AbstractGameController hiveGameController, molecularGameController;
     public PropolisData propolisData;
@@ -155,6 +156,7 @@ public class GameController : MonoBehaviour {
         StopCoroutine(GameLoopCoroutine);
         StartCoroutine(GameLoopCoroutine);
         GenerateRecipe();
+        AlertUiController.Show("Propolis Engine Event", "Gameplay Started");
 
     }
 
@@ -183,6 +185,7 @@ public class GameController : MonoBehaviour {
         hiveGameController.Stop();
         molecularGameController.Stop();
         StopCoroutine(GameLoopCoroutine);
+        AlertUiController.Show("Propolis Engine Event", "Gameplay Stopped");
 
     }
 
