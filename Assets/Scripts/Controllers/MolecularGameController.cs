@@ -39,35 +39,74 @@ public class MolecularGameController : AbstractGameController
             {
                 Debug.Log("Invalid shield atom id");
             }
-        }else if(PropolisData.Instance.LastEvent.Type == PropolisDataTypes.AtomGroup && PropolisData.Instance.LastEvent.Action == PropolisActions.UpdateItemStatus)
-        {
-            try
-            {
-                PropolisRecipeCompareStatus compareResult = PropolisData.Instance.RecipeStack.ToArray()[1].CompareTo(PropolisRecipe.ParseRecipe(ListOfGroups.Find(x => x.ID == PropolisData.Instance.LastEvent.GroupID)));
-                switch (compareResult)
-                {
-                    case PropolisRecipeCompareStatus.DIFFERENT:
-                        break;
-                    case PropolisRecipeCompareStatus.IMPERFECT:
-                        GameController.PushRecipe();
-                        GameController.ProcessSuccessfulRecipe(compareResult);
-                        break;
-                    case PropolisRecipeCompareStatus.PERFECT:
-                        GameController.PushRecipe();
-                        GameController.ProcessSuccessfulRecipe(compareResult);
-                        break;
-                    default:
-                        break;
-                }
-            }
-            catch (System.Exception)
-            {
-
-
-            }
-            
         }
         
+    }
+
+    private void ProcessLevel2Climax(AbstractGroup group, PropolisRecipe recipe)
+    {
+        StopCoroutine(PlayLevel2Climax(group, recipe));
+        StartCoroutine(PlayLevel2Climax(group, recipe));
+    }
+
+
+
+    private IEnumerator PlayLevel2Climax(AbstractGroup group, PropolisRecipe recipe)
+    {
+        foreach (var item in group.ChildItemsList)
+
+        {
+            if (item.ID != 9)
+            {
+                SendItemData(group.ID, item.ID,PropolisStatus.OFF);
+                yield return new WaitForSeconds(0.05f);
+            }
+        }
+        for (int i = 0; i < 3; i++)
+        {
+            foreach (var item in group.ChildItemsList)
+
+            {
+                if (item.ID != 9)
+                {
+                    SendItemData(group.ID, item.ID, (PropolisStatus)recipe.GetItem(i));
+                    yield return new WaitForSeconds(0.02f);
+                }
+            }
+
+            yield return new WaitForSeconds(0.05f);
+
+            foreach (var item in group.ChildItemsList)
+
+            {
+                if (item.ID != 9)
+                {
+                    SendItemData(group.ID, item.ID, PropolisStatus.OFF);
+                    yield return new WaitForSeconds(0.02f);
+                }
+            }
+
+        }
+        yield return new WaitForSeconds(0.05f);
+        foreach (var item in group.ChildItemsList)
+
+        {
+            if (item.ID != 9)
+            {
+                SendItemData(group.ID, item.ID, PropolisStatus.CLEANSER);
+                yield return new WaitForSeconds(0.02f);
+            }
+        }
+        foreach (var item in group.ChildItemsList)
+
+        {
+            if (item.ID != 9)
+            {
+                SendItemData(group.ID, item.ID, random.Next(3)+PropolisStatus.RECIPE1);
+            }
+        }
+
+
     }
     private void ValidateRecipe(AbstractGroup group)
     {
@@ -88,6 +127,39 @@ public class MolecularGameController : AbstractGameController
                     case PropolisStatus.RECIPE3: SendItemData(item.ParentGroup.ID, item.ID, PropolisStatus.RECIPE1); break;
                     default: SendItemData(item.ParentGroup.ID, item.ID, item.Status); break;
                 }
+
+                try
+                {
+                    AbstractGroup group = ListOfGroups.Find(x => x.ID == PropolisData.Instance.LastEvent.GroupID);
+                    PropolisRecipe recipe = PropolisRecipe.ParseRecipe(group);
+                    PropolisRecipeCompareStatus compareResult = PropolisData.Instance.RecipeStack.ToArray()[1].CompareTo(recipe);
+
+                    if(recipe != null)
+                    {
+                        if (compareResult == PropolisRecipeCompareStatus.PERFECT)
+                        {
+                            ProcessLevel2Climax(group, recipe);
+                            GameController.PushRecipe();
+                            GameController.ProcessSuccessfulRecipe(compareResult);
+                        }
+                        else
+                        {
+                            ProcessLevel2Climax(group, recipe);
+                            GameController.PushRecipe();
+                            GameController.ProcessSuccessfulRecipe(compareResult);
+                        }
+                    }
+
+                 
+                   
+                    
+                }
+                catch (System.Exception)
+                {
+
+
+                }
+
             }
             else
             {
@@ -106,6 +178,7 @@ public class MolecularGameController : AbstractGameController
     public override void InitOnPlay()
     {
         base.InitOnPlay();
+        random = new System.Random();
         Reset();       
     }
 

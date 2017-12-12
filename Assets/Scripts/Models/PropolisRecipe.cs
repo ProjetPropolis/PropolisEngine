@@ -84,7 +84,7 @@ namespace Propolis
 
             for (int i = 0; i < 3; i++)
             {
-                if (items[i*3] == items[i * 3 + 1] && items[i * 3] == items[i * 3 + 2])
+                if (items[i*3] == items[i * 3 + 1] && items[i * 3] == items[i * 3 + 2] && (items[i * 3] == PropolisStatus.RECIPE1 || items[i * 3] == PropolisStatus.RECIPE2 || items[i * 3] == PropolisStatus.RECIPE3))
                 {
                     recipe.SetItem(items[i* 3], i);
                 }

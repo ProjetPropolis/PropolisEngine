@@ -252,6 +252,8 @@ namespace Propolis
             _propolisData.WaveActivated = waveActiveStatus;
             _propolisData.LastEvent = _TempLastBuffer;
 
+            AlertController.Show("Propolis Event", waveActiveStatus ? "Wave Started" : "Wave Stopped");
+
             return true;
         }
 

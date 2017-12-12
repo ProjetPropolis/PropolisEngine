@@ -89,10 +89,10 @@ public class AbstractItem : MonoBehaviour {
             case PropolisStatus.CORRUPTED: material.color = PropolisColors.Purple; break;
             case PropolisStatus.CLEANSER: material.color = PropolisColors.Blue; break;
             case PropolisStatus.ULTRACORRUPTED: material.color = PropolisColors.Red; break;
-            case PropolisStatus.RECIPE1: material.color = PropolisColors.Blue; break;
-            case PropolisStatus.RECIPE2: material.color = PropolisColors.Red; break;
-            case PropolisStatus.RECIPE3: material.color = PropolisColors.Yellow; break;
-            case PropolisStatus.WAVECORRUPTED: material.color = PropolisColors.Fushia; break;
+            case PropolisStatus.RECIPE1: material.color = PropolisColors.Orange; break;
+            case PropolisStatus.RECIPE2: material.color = PropolisColors.Fushia; break;
+            case PropolisStatus.RECIPE3: material.color = PropolisColors.DarkBlue; break;
+            case PropolisStatus.WAVECORRUPTED: material.color = PropolisColors.Red; break;
             case PropolisStatus.CLEANSING: material.color = PropolisColors.White; break;
             case PropolisStatus.SHIELD_ON: material.color = PropolisColors.Blue; break;
             case PropolisStatus.SHIELD_OFF: material.color = PropolisColors.Blue; break;

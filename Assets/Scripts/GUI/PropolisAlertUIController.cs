@@ -22,11 +22,14 @@ public class PropolisAlertUIController : MonoBehaviour {
     public void Show(string TitleText, string ContentText)
     {
         TitleTextUI.text = TitleText;
-        ContentTextUI.text = ContentText;
+        ContentTextUI.text = ContentText+"...";
         CanvasGroup.alpha = 0;
         StopCoroutine(StartShowing());
         StartCoroutine(StartShowing());
     }
+
+
+    
 
 
     private IEnumerator StartShowing()
