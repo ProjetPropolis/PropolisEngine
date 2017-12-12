@@ -39,8 +39,39 @@ public class MolecularGameController : AbstractGameController
             {
                 Debug.Log("Invalid shield atom id");
             }
+        }else if(PropolisData.Instance.LastEvent.Type == PropolisDataTypes.AtomGroup && PropolisData.Instance.LastEvent.Action == PropolisActions.UpdateItemStatus)
+        {
+            try
+            {
+                PropolisRecipeCompareStatus compareResult = PropolisData.Instance.RecipeStack.ToArray()[1].CompareTo(PropolisRecipe.ParseRecipe(ListOfGroups.Find(x => x.ID == PropolisData.Instance.LastEvent.GroupID)));
+                switch (compareResult)
+                {
+                    case PropolisRecipeCompareStatus.DIFFERENT:
+                        break;
+                    case PropolisRecipeCompareStatus.IMPERFECT:
+                        GameController.PushRecipe();
+                        GameController.ProcessSuccessfulRecipe(compareResult);
+                        break;
+                    case PropolisRecipeCompareStatus.PERFECT:
+                        GameController.PushRecipe();
+                        GameController.ProcessSuccessfulRecipe(compareResult);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            catch (System.Exception)
+            {
+
+
+            }
+            
         }
         
+    }
+    private void ValidateRecipe(AbstractGroup group)
+    {
+       
     }
     public override void ProcessUserInteraction(AbstractItem item, PropolisUserInteractions userAction)
     {

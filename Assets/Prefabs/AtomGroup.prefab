@@ -93,7 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4188583567349122}
   m_Layer: 0
-  m_Name: Atom (4)
+  m_Name: Atom1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -108,7 +108,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4332949857156886}
   m_Layer: 0
-  m_Name: Atom
+  m_Name: Atom6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -123,7 +123,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4580085213954762}
   m_Layer: 0
-  m_Name: Atom (6)
+  m_Name: Atom3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -221,7 +221,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4932221666789550}
   m_Layer: 0
-  m_Name: Atom (2)
+  m_Name: Atom8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -255,7 +255,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4483721421594564}
   m_Layer: 0
-  m_Name: Atom (8)
+  m_Name: Atom5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -305,7 +305,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4241958119667472}
   m_Layer: 0
-  m_Name: Atom (7)
+  m_Name: Atom4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -351,7 +351,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4776734524464188}
   m_Layer: 0
-  m_Name: Atom (3)
+  m_Name: Atom0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -385,7 +385,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4226144371129292}
   m_Layer: 0
-  m_Name: Atom (5)
+  m_Name: Atom2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -524,7 +524,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4850238699400346}
   m_Layer: 0
-  m_Name: Atom (1)
+  m_Name: Atom7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -592,15 +592,15 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children:
-  - {fileID: 4332949857156886}
-  - {fileID: 4850238699400346}
-  - {fileID: 4932221666789550}
   - {fileID: 4776734524464188}
   - {fileID: 4188583567349122}
   - {fileID: 4226144371129292}
   - {fileID: 4580085213954762}
   - {fileID: 4241958119667472}
   - {fileID: 4483721421594564}
+  - {fileID: 4332949857156886}
+  - {fileID: 4850238699400346}
+  - {fileID: 4932221666789550}
   - {fileID: 4322670487559770}
   - {fileID: 4545751335298012}
   m_Father: {fileID: 0}
@@ -619,7 +619,7 @@ Transform:
   - {fileID: 4202882099695708}
   - {fileID: 4882479888017094}
   m_Father: {fileID: 4184577050225268}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -225.56999}
 --- !u!4 &4202882099695708
 Transform:
@@ -647,7 +647,7 @@ Transform:
   - {fileID: 4021825982611024}
   - {fileID: 4541624687859400}
   m_Father: {fileID: 4184577050225268}
-  m_RootOrder: 5
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -225.56999}
 --- !u!4 &4238651442929754
 Transform:
@@ -675,7 +675,7 @@ Transform:
   - {fileID: 4169456143346254}
   - {fileID: 4535198218448886}
   m_Father: {fileID: 4184577050225268}
-  m_RootOrder: 7
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -315.57}
 --- !u!4 &4322670487559770
 Transform:
@@ -704,7 +704,7 @@ Transform:
   - {fileID: 4043230461325316}
   - {fileID: 4417303345041802}
   m_Father: {fileID: 4184577050225268}
-  m_RootOrder: 0
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90.57001}
 --- !u!4 &4335147306453480
 Transform:
@@ -758,7 +758,7 @@ Transform:
   - {fileID: 4850173087133500}
   - {fileID: 4848778310979128}
   m_Father: {fileID: 4184577050225268}
-  m_RootOrder: 8
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -315.57}
 --- !u!4 &4496164499351282
 Transform:
@@ -838,7 +838,7 @@ Transform:
   - {fileID: 4335147306453480}
   - {fileID: 4496164499351282}
   m_Father: {fileID: 4184577050225268}
-  m_RootOrder: 6
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -315.57}
 --- !u!4 &4742901088965134
 Transform:
@@ -879,7 +879,7 @@ Transform:
   - {fileID: 4346976214872016}
   - {fileID: 4163772194244074}
   m_Father: {fileID: 4184577050225268}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -225.56999}
 --- !u!4 &4848778310979128
 Transform:
@@ -920,7 +920,7 @@ Transform:
   - {fileID: 4742901088965134}
   - {fileID: 4238651442929754}
   m_Father: {fileID: 4184577050225268}
-  m_RootOrder: 1
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90.57001}
 --- !u!4 &4859593954873416
 Transform:
@@ -961,7 +961,7 @@ Transform:
   - {fileID: 4746332273015890}
   - {fileID: 4574703508835616}
   m_Father: {fileID: 4184577050225268}
-  m_RootOrder: 2
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90.57001}
 --- !u!50 &50155155701170142
 Rigidbody2D:
@@ -1378,7 +1378,7 @@ MonoBehaviour:
   ItemLayerMask:
     serializedVersion: 2
     m_Bits: 0
-  ID: 8
+  ID: 5
   NeighborsDist: 0
   ParentGroup: {fileID: 114328549014662232}
   StatusLocked: 0
@@ -1398,7 +1398,7 @@ MonoBehaviour:
   ItemLayerMask:
     serializedVersion: 2
     m_Bits: 0
-  ID: 7
+  ID: 4
   NeighborsDist: 0
   ParentGroup: {fileID: 114328549014662232}
   StatusLocked: 0
@@ -1418,7 +1418,7 @@ MonoBehaviour:
   ItemLayerMask:
     serializedVersion: 2
     m_Bits: 0
-  ID: 2
+  ID: 8
   NeighborsDist: 0
   ParentGroup: {fileID: 114328549014662232}
   StatusLocked: 0
@@ -1438,7 +1438,7 @@ MonoBehaviour:
   ItemLayerMask:
     serializedVersion: 2
     m_Bits: 0
-  ID: 6
+  ID: 3
   NeighborsDist: 0
   ParentGroup: {fileID: 114328549014662232}
   StatusLocked: 0
@@ -1458,7 +1458,7 @@ MonoBehaviour:
   ItemLayerMask:
     serializedVersion: 2
     m_Bits: 0
-  ID: 1
+  ID: 7
   NeighborsDist: 0
   ParentGroup: {fileID: 114328549014662232}
   StatusLocked: 0
@@ -1478,7 +1478,7 @@ MonoBehaviour:
   ItemLayerMask:
     serializedVersion: 2
     m_Bits: 0
-  ID: 5
+  ID: 2
   NeighborsDist: 0
   ParentGroup: {fileID: 114328549014662232}
   StatusLocked: 0
@@ -1498,7 +1498,7 @@ MonoBehaviour:
   ItemLayerMask:
     serializedVersion: 2
     m_Bits: 0
-  ID: 3
+  ID: 0
   NeighborsDist: 0
   ParentGroup: {fileID: 114328549014662232}
   StatusLocked: 0
@@ -1518,7 +1518,7 @@ MonoBehaviour:
   ItemLayerMask:
     serializedVersion: 2
     m_Bits: 0
-  ID: 0
+  ID: 6
   NeighborsDist: 0
   ParentGroup: {fileID: 114328549014662232}
   StatusLocked: 0
@@ -1538,7 +1538,7 @@ MonoBehaviour:
   ItemLayerMask:
     serializedVersion: 2
     m_Bits: 0
-  ID: 4
+  ID: 1
   NeighborsDist: 0
   ParentGroup: {fileID: 114328549014662232}
   StatusLocked: 0

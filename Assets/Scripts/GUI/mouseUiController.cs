@@ -42,15 +42,7 @@ public class mouseUiController : MonoBehaviour {
             Cursor.SetCursor(null, Vector2.zero, cursorMode);
         }
 
-        if (Input.GetMouseButtonUp(1))
-        {
-            PullOffActionGame();
-        }
-
-        if (Input.GetMouseButtonDown(1))
-        {
-            ClickInGame();
-        }
+    
 
 
         if (Input.GetMouseButtonDown(0))
@@ -255,5 +247,18 @@ public class mouseUiController : MonoBehaviour {
         }
 
 
+    }
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonUp(1))
+        {
+            PullOffActionGame();
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            ClickInGame();
+        }
     }
 }

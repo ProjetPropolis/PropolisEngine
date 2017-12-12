@@ -1,4 +1,5 @@
 ﻿using System;
+
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -83,9 +84,9 @@ namespace Propolis
 
             for (int i = 0; i < 3; i++)
             {
-                if (items[i] == items[i + 1] && items[i] == items[i + 2])
+                if (items[i*3] == items[i * 3 + 1] && items[i * 3] == items[i * 3 + 2])
                 {
-                    recipe.SetItem(items[i], i);
+                    recipe.SetItem(items[i* 3], i);
                 }
                 else {
                     return null;
@@ -111,19 +112,24 @@ namespace Propolis
             }
             else
             {
-                Queue<int> recipeStack = new Queue<int>(_recipe);
+                List<int> recipeStack = new List<int>(_recipe);
 
                 for(int i = 0; i < 3; i++)
                 {
                     try
                     {
-                        if (recipe._recipe.Contains(GetItem(i)))
+                        if (recipeStack.IndexOf(recipe.GetItem(i)) != -1)
                         {
-                            recipeStack.Dequeue();
+                            recipeStack.Remove(recipe.GetItem(i));
                         }
                         else
                         {
+
                             return PropolisRecipeCompareStatus.DIFFERENT;
+                        }
+                        if(recipeStack.Count == 0)
+                        {
+                            return PropolisRecipeCompareStatus.IMPERFECT;
                         }
                     }
                     catch (Exception)
@@ -137,7 +143,7 @@ namespace Propolis
 
 
 
-            return PropolisRecipeCompareStatus.PERFECT;
+            return PropolisRecipeCompareStatus.DIFFERENT;
 
         }
     }

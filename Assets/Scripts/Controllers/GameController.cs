@@ -133,6 +133,20 @@ public class GameController : MonoBehaviour {
 
     }
 
+    public void ProcessSuccessfulRecipe(PropolisRecipeCompareStatus status)
+    {
+        if(status == PropolisRecipeCompareStatus.IMPERFECT)
+        {
+            ((HiveGameController)hiveGameController).InstanciateCleanser();
+        }else if(status == PropolisRecipeCompareStatus.PERFECT)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                ((HiveGameController)hiveGameController).InstanciateCleanser();
+            }
+        }
+    }
+
     private void  StartGame()
     {
         Debug.Log("play");
@@ -152,7 +166,9 @@ public class GameController : MonoBehaviour {
     }
 
 
-    private void PushRecipe()
+
+
+    public void PushRecipe()
     {
         int r1 =random.Next(3) + (int)PropolisStatus.RECIPE1;
         int r2 = random.Next(3) + (int)PropolisStatus.RECIPE1;

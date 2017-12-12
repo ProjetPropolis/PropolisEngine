@@ -284,7 +284,7 @@ public class HiveGameController : AbstractGameController
 
 
 
-    private void InstanciateCleanser()
+    public void InstanciateCleanser()
     {
         
         var TileToCorrupt = 
