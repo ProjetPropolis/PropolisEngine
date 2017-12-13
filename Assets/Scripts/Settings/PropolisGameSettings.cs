@@ -16,7 +16,7 @@ namespace Propolis
         public const float IntervalProcessUltraCorrupted = 0.3f;
         public const int NumOfUltraCorruped = 1;
         public const int MaxNumOfUltraCorruped = 2;
-        public const float CleansingStateDuration = 1.5f;
+        public const float CleansingStateDuration = 0.7f;
         public const float IntervalBetweenWaves = 30.0f;
         public const float WaveSpeed = 0.004f;
         public const float AtomSaturationCorruptionTime = 0.8f;
