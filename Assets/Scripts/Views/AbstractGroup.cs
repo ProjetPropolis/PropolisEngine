@@ -18,6 +18,7 @@ public class AbstractGroup : MonoBehaviour {
     public OSCClient OSC;
     private bool _IsLocked;
     public GameObject EnvironnementalRepresentation;
+    public bool IsPlayingAnimation;
     public bool IsLocked
     {
         get { return _IsLocked; }
@@ -32,7 +33,7 @@ public class AbstractGroup : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-       
+        IsPlayingAnimation = false;
         Shield = GameObject.Find("Shield");
         IsLocked = false;
         //Osc.SetAddressHandler("/status", OnReceiveHexStatus);

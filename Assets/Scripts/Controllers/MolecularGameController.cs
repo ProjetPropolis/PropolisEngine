@@ -54,6 +54,7 @@ public class MolecularGameController : AbstractGameController
 
     private IEnumerator PlayLevel2Climax(AbstractGroup group, PropolisRecipe recipe)
     {
+        group.IsPlayingAnimation = true;
         foreach (var item in group.ChildItemsList)
 
         {
@@ -109,7 +110,7 @@ public class MolecularGameController : AbstractGameController
             }
         }
 
-
+        group.IsPlayingAnimation = false;
     }
     private void RandomizeAtoms()
     {
@@ -129,7 +130,7 @@ public class MolecularGameController : AbstractGameController
 
     public override void ProcessUserInteraction(AbstractItem item, PropolisUserInteractions userAction)
     {
-        if (userAction == PropolisUserInteractions.PRESS)
+        if (userAction == PropolisUserInteractions.PRESS && !item.ParentGroup.IsPlayingAnimation)
         {
             if (!item.IsShield)
             {
@@ -251,7 +252,7 @@ public class MolecularGameController : AbstractGameController
 
     public void CorruptedAtomWithWave(AbstractItem atom)
     {
-        if(!atom.IsShield && !atom.ParentGroup.IsLocked)
+        if(!atom.IsShield && !atom.ParentGroup.IsLocked && !atom.ParentGroup.IsPlayingAnimation)
         {
             StartCoroutine(ProcessAtomCorruptionProgress(atom));
         }
