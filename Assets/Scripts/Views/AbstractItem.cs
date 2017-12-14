@@ -20,15 +20,13 @@ public class AbstractItem : MonoBehaviour {
 
         set
         {
-
             PrevState = status;
             status = value;
             ChangeColor();
 
-            if(ParentGroup.OSC != null)
+            if(ParentGroup.OSC != null) {
                 SendOscMessage("/status", ID, (int)status);
-          
-
+            }                   
 
         }
     }
