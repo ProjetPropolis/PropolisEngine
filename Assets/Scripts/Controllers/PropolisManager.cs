@@ -286,6 +286,36 @@ namespace Propolis
                 AlertController.Show("Propolis Event", "Recipe Created");
             return true;
         }
+
+        public void RestartAllPythonScripts()
+        {
+            PropolisPIOperations.RestartPythonScript(AlertController,55);
+
+            //foreach (var device in PropolisData.Instance.HexGroupList)
+            //{
+            //    PropolisPIOperations.RestartPythonScript(device.ID);
+            //}
+
+            //foreach (var device in PropolisData.Instance.AtomGroupList)
+            //{
+            //    PropolisPIOperations.RestartPythonScript(device.ID);
+            //}
+        }
+        public void ShutdownAllDevice()
+        {
+            AlertController.Show("Propolis Device Communication", "Will close devices");
+            PropolisPIOperations.Close(AlertController,55);
+            //foreach (var device in PropolisData.Instance.HexGroupList)
+            //{
+            //    PropolisPIOperations.Close(device.ID);
+            //}
+
+            //foreach (var device in PropolisData.Instance.AtomGroupList)
+            //{
+            //    PropolisPIOperations.Close(device.ID);
+            //}
+        }
+
         private string GetLastConsoleEntry()
         {
             string[] separatorFilter = new string[] { LineFilterConsole };

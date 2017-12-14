@@ -51,7 +51,7 @@ public class PropolisAlertUIController : MonoBehaviour {
             yield return new WaitForSeconds(0.005f);
 
         }
-    }
+    } 
 
     private IEnumerator FadeOut()
     {
