@@ -158,11 +158,13 @@ public class MolecularGameController : AbstractGameController
                             GameController.PushRecipe();
                             GameController.ProcessSuccessfulRecipe(compareResult);
                             AlertController.Show("Propolis Event", "Climax Molecular level 3");
+                            GameController.PropolisExport.SendRecipeEventToHUDS(group.ID, 3);
                         }
                         else
                         {
                             ProcessLevel2Climax(group, recipe);
                             AlertController.Show("Propolis Event", "Climax Molecular level 2");
+                            GameController.PropolisExport.SendRecipeEventToHUDS(group.ID,2);
                             GameController.ProcessSuccessfulRecipe(PropolisRecipeCompareStatus.IMPERFECT);
                         }
                     }

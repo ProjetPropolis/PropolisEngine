@@ -30,7 +30,7 @@ public class HiveGameController : AbstractGameController
 
     public override void ProcessUserInteraction(AbstractItem item, PropolisUserInteractions userAction)
     {
-        if(userAction == PropolisUserInteractions.PRESS)
+        if(userAction == PropolisUserInteractions.PRESS && item.ParentGroup.DataType == PropolisDataTypes.HexGroup)
         {
             switch (item.Status)
             {
@@ -47,7 +47,7 @@ public class HiveGameController : AbstractGameController
 
 
         }
-        else
+        else if(item.ParentGroup.DataType == PropolisDataTypes.HexGroup)
         {
             if (item.Status == PropolisStatus.ON || item.Status == PropolisStatus.CLEANSING)
             {

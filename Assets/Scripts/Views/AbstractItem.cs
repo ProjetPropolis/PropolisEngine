@@ -40,7 +40,7 @@ public class AbstractItem : MonoBehaviour {
         Neighbors = Physics2D.OverlapCircleAll((Vector2)transform.position, NeighborsDist)
             .Where(x=>x.GetComponent<AbstractItem>() != null)
             .Select(x => x.GetComponent<AbstractItem>())
-            .Where(x=>x.ID != ID || x.ParentGroup.ID != ParentGroup.ID)
+            .Where(x=>(x.ID != ID || x.ParentGroup.ID != ParentGroup.ID) && x.ParentGroup.DataType == PropolisDataTypes.HexGroup)
             .ToList<AbstractItem>();
     }
 
@@ -67,7 +67,7 @@ public class AbstractItem : MonoBehaviour {
             Status = (PropolisStatus)propolisData.HexGroupList.First(x => x.ID == ParentGroup.ID).Childrens.First(x => x.ID == ID).Status;
             PrevState = Status;
         }
-        else
+        else if (ParentGroup.DataType == PropolisDataTypes.AtomGroup)
         {
             Status = (PropolisStatus)propolisData.AtomGroupList.First(x => x.ID == ParentGroup.ID).Childrens.First(x => x.ID == ID).Status;
             PrevState = Status;

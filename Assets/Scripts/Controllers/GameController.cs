@@ -11,7 +11,12 @@ public class GameController : MonoBehaviour {
     List<GameObject> tuilesActives = new List<GameObject>();
     public PropolisManager propolisManager;
     public PropolisAlertUIController AlertUiController;
-
+    public PropolisExport PropolisExport {
+        get
+        {
+            return propolisManager.PropolisExport;
+        }
+    }
     public AbstractGameController hiveGameController, molecularGameController;
     public PropolisData propolisData;
     private IEnumerator GameLoopCoroutine;

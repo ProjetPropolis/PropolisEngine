@@ -4055,7 +4055,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 616437541}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1133.379, y: 487.80078, z: 0}
+  m_LocalPosition: {x: 809.2, y: 487.80078, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 98632436}
@@ -4255,7 +4255,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 648753570}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1087.5574, y: 204.2, z: 0}
+  m_LocalPosition: {x: 763.3783, y: 204.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1807786772}
@@ -5991,7 +5991,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 827483817}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1086.379, y: 339.7, z: 0}
+  m_LocalPosition: {x: 762.2001, y: 339.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 991733360}
@@ -10726,8 +10726,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1430085710}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 478, y: 201, z: 0}
-  m_LocalScale: {x: 0.37222221, y: 0.37222221, z: 0.37222221}
+  m_LocalPosition: {x: 960, y: 540, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 616437542}
   - {fileID: 1529137010}
@@ -11550,7 +11550,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1529137009}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1008.6241, y: 0, z: 0}
+  m_LocalPosition: {x: -684.445, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 180257385}
@@ -12561,8 +12561,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BatteryPort: 18001
   SoundPort: 17001
+  MolecularHUDPort: 19001
   BatteryAddress: 10.0.1.105
   SoundAddress: 10.0.1.136
+  MolecularHUDAddress: 127.0.0.1
 --- !u!114 &1782982170 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114138853543124672, guid: a02e9773f95fd4048bdd45f81bc64e6e,
