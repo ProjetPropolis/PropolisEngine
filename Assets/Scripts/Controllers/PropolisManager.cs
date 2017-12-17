@@ -99,6 +99,8 @@ namespace Propolis
                 _propolisData.LastEvent = _TempLastBuffer;
                 if (_propolisData.AtomGroupList == null)
                     _propolisData.AtomGroupList = new List<AbstractGroupData>();
+                if (_propolisData.RecipeGroupList == null)
+                    _propolisData.RecipeGroupList = new List<AbstractGroupData>();
                 if (_propolisData.RecipeStack == null)
                 {
                     _propolisData.RecipeStack = new Queue<PropolisRecipe>();
@@ -342,6 +344,7 @@ namespace Propolis
             {
                 case PropolisDataTypes.HexGroup: validCreate= CreateType(type, modelParams); break;
                 case PropolisDataTypes.AtomGroup: validCreate = CreateType(type, modelParams); break;
+                case PropolisDataTypes.RecipeGroup: validCreate = CreateType(type, modelParams); break;
                 default: AppendToConsoleLog("Error on create method, Invalid type : " + type); break;
             }
 
@@ -363,6 +366,7 @@ namespace Propolis
             {
                 case PropolisDataTypes.HexGroup: validUpdate = UpdateType(type, modelParams); break;
                 case PropolisDataTypes.AtomGroup: validUpdate = UpdateType(type, modelParams); break;
+                case PropolisDataTypes.RecipeGroup: validUpdate = UpdateType(type, modelParams); break;
                 default: AppendToConsoleLog("Error on update method, Invalid type : " + type); break;
             }
 
@@ -415,7 +419,7 @@ namespace Propolis
                 {
                     case PropolisDataTypes.HexGroup: validUpdate = _propolisData.UpdateItemStatus(PropolisDataTypes.HexGroup, _TempLastBuffer.GroupID, status, out statusMessage); break;
                     case PropolisDataTypes.AtomGroup: validUpdate = _propolisData.UpdateItemStatus(PropolisDataTypes.AtomGroup, _TempLastBuffer.GroupID, status, out statusMessage); break;
-
+                    case PropolisDataTypes.RecipeGroup: validUpdate = _propolisData.UpdateItemStatus(PropolisDataTypes.RecipeGroup, _TempLastBuffer.GroupID, status, out statusMessage); break;
                     default: AppendToConsoleLog("Error on create method, Invalid type : " + type); break;
                 }
             }
@@ -434,6 +438,8 @@ namespace Propolis
                 {
                     case PropolisDataTypes.HexGroup: validUpdate = _propolisData.UpdateItemStatus(PropolisDataTypes.HexGroup, _TempLastBuffer.GroupID, _TempLastBuffer.ID, status, out statusMessage); break;
                     case PropolisDataTypes.AtomGroup: validUpdate = _propolisData.UpdateItemStatus(PropolisDataTypes.AtomGroup, _TempLastBuffer.GroupID, _TempLastBuffer.ID, status, out statusMessage); break;
+                    case PropolisDataTypes.RecipeGroup: validUpdate = _propolisData.UpdateItemStatus(PropolisDataTypes.RecipeGroup, _TempLastBuffer.GroupID, _TempLastBuffer.ID, status, out statusMessage); break;
+
 
                     default: AppendToConsoleLog("Error on create method, Invalid type : " + type); break;
                 }
@@ -547,6 +553,7 @@ namespace Propolis
             {
                 case PropolisDataTypes.HexGroup: dataType = new AbstractGroupData(arrayParams); ((AbstractGroupData)dataType).CreateChildrensForHexGroup(); break;
                 case PropolisDataTypes.AtomGroup: dataType = new AbstractGroupData(arrayParams); ((AbstractGroupData)dataType).CreateChildrensForAtomGroup (); break;
+                case PropolisDataTypes.RecipeGroup: dataType = new AbstractGroupData(arrayParams); ((AbstractGroupData)dataType).CreateChildrensForRecipeGroup(); break;
 
                 default: AppendToConsoleLog("Error on create method, Invalid type : " + type); break;
             }
@@ -568,6 +575,7 @@ namespace Propolis
             {
                 case PropolisDataTypes.HexGroup: validCreation = _propolisData.AddGroup((AbstractGroupData)dataType,PropolisDataTypes.HexGroup ,out statusMessage); break;
                 case PropolisDataTypes.AtomGroup: validCreation = _propolisData.AddGroup((AbstractGroupData)dataType, PropolisDataTypes.AtomGroup, out statusMessage); break;
+                case PropolisDataTypes.RecipeGroup: validCreation = _propolisData.AddGroup((AbstractGroupData)dataType, PropolisDataTypes.RecipeGroup, out statusMessage); break;
 
                 default: AppendToConsoleLog("Error on create method, Invalid type : " + type); break;
             }
@@ -604,6 +612,7 @@ namespace Propolis
             {
                 case PropolisDataTypes.HexGroup: dataType = new AbstractGroupData(arrayParams); break;
                 case PropolisDataTypes.AtomGroup: dataType = new AbstractGroupData(arrayParams); break;
+                case PropolisDataTypes.RecipeGroup: dataType = new AbstractGroupData(arrayParams); break;
                 default: AppendToConsoleLog("Error on update method, Invalid type : " + type); break;
             }
 
@@ -624,6 +633,7 @@ namespace Propolis
             {
                 case PropolisDataTypes.HexGroup: validUpdate = _propolisData.UpdateGroup((AbstractGroupData)dataType,PropolisDataTypes.HexGroup, out statusMessage); break;
                 case PropolisDataTypes.AtomGroup: validUpdate = _propolisData.UpdateGroup((AbstractGroupData)dataType, PropolisDataTypes.AtomGroup, out statusMessage); break;
+                case PropolisDataTypes.RecipeGroup: validUpdate = _propolisData.UpdateGroup((AbstractGroupData)dataType, PropolisDataTypes.RecipeGroup, out statusMessage); break;
 
                 default: AppendToConsoleLog("Error on update method, Invalid type : " + type); break;
             }

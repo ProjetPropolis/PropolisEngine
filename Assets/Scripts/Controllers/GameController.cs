@@ -17,7 +17,7 @@ public class GameController : MonoBehaviour {
             return propolisManager.PropolisExport;
         }
     }
-    public AbstractGameController hiveGameController, molecularGameController;
+    public AbstractGameController hiveGameController, molecularGameController, recipeGameController;
     public PropolisData propolisData;
     private IEnumerator GameLoopCoroutine;
     public float BatteryLevel = 0.0f;
@@ -67,6 +67,7 @@ public class GameController : MonoBehaviour {
                 {
                     case PropolisDataTypes.HexGroup: hiveGameController.ProcessPacketFromOsc(server.LastReceivedPacket.Data);break;
                     case PropolisDataTypes.AtomGroup: molecularGameController.ProcessPacketFromOsc(server.LastReceivedPacket.Data); break;
+                    case PropolisDataTypes.RecipeGroup: recipeGameController.ProcessPacketFromOsc(server.LastReceivedPacket.Data); break;
                 }
             }
         //}
@@ -97,6 +98,10 @@ public class GameController : MonoBehaviour {
                     previousItemData = molecularGameController.ListOfGroups.FirstOrDefault(x => x.ID == propolisData.LastEvent.GroupID)
                    .ChildItemsList.FirstOrDefault(x => x.ID == propolisData.LastEvent.ID);
                     break;
+                case PropolisDataTypes.RecipeGroup:
+                    previousItemData = recipeGameController.ListOfGroups.FirstOrDefault(x => x.ID == propolisData.LastEvent.GroupID)
+                   .ChildItemsList.FirstOrDefault(x => x.ID == propolisData.LastEvent.ID);
+                    break;
             }
 
             if (previousItemData != null)
@@ -120,6 +125,7 @@ public class GameController : MonoBehaviour {
 
     }
 
+
     public void UpdateFromModel()
     {
         propolisData = PropolisData.Instance;
@@ -134,6 +140,7 @@ public class GameController : MonoBehaviour {
 
         hiveGameController.UpdateFromModel();
         molecularGameController.UpdateFromModel();
+        recipeGameController.UpdateFromModel();
         UpdateBattery();
 
 
@@ -158,6 +165,7 @@ public class GameController : MonoBehaviour {
         Debug.Log("play");
         hiveGameController.InitOnPlay();
         molecularGameController.InitOnPlay();
+        recipeGameController.InitOnPlay();
         StopCoroutine(GameLoopCoroutine);
         StartCoroutine(GameLoopCoroutine);
         GenerateRecipe();
@@ -182,6 +190,8 @@ public class GameController : MonoBehaviour {
         int r2 = random.Next(3) + (int)PropolisStatus.RECIPE1;
         int r3 = random.Next(3) + (int)PropolisStatus.RECIPE1;
         SendCommand(string.Format("{0} {1} {2} {3}", PropolisActions.PushRecipe, r1, r2, r3));
+        ((RecipeGameController)recipeGameController).UpdateFromNewRecipe();
+       
     }
 
     private void StopGame()
@@ -189,6 +199,7 @@ public class GameController : MonoBehaviour {
         Debug.Log("stop");
         hiveGameController.Stop();
         molecularGameController.Stop();
+        recipeGameController.Stop();
         StopCoroutine(GameLoopCoroutine);
         AlertUiController.Show("Propolis Event", "Gameplay Stopped");
 
@@ -200,6 +211,7 @@ public class GameController : MonoBehaviour {
         {
             hiveGameController.UpdateGameLogic();
             molecularGameController.UpdateGameLogic();
+            recipeGameController.UpdateGameLogic();
             //Debug.Log("looping game loop");
             yield return new WaitForSeconds(PropolisGameSettings.DefaultGameTickTime);
         }
@@ -229,6 +241,7 @@ public class GameController : MonoBehaviour {
         {
             case PropolisDataTypes.HexGroup: hiveGameController.ProcessUserInteraction(item, userAction);break;
             case PropolisDataTypes.AtomGroup: molecularGameController.ProcessUserInteraction(item, userAction);break;
+            case PropolisDataTypes.RecipeGroup: recipeGameController.ProcessUserInteraction(item, userAction); break;
         }
     }
    

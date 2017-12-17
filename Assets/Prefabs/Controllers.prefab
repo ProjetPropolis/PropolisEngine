@@ -22,7 +22,9 @@ GameObject:
   - component: {fileID: 114785162741016296}
   - component: {fileID: 114138853543124672}
   - component: {fileID: 114808596420459798}
+  - component: {fileID: 114284565043113564}
   - component: {fileID: 114498831683773736}
+  - component: {fileID: 114304258551401574}
   m_Layer: 0
   m_Name: Controllers
   m_TagString: Untagged
@@ -55,8 +57,50 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   propolisManager: {fileID: 114785162741016296}
+  AlertUiController: {fileID: 0}
   hiveGameController: {fileID: 114808596420459798}
   molecularGameController: {fileID: 114498831683773736}
+  recipeGameController: {fileID: 0}
+  BatteryLevel: 0
+--- !u!114 &114284565043113564
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1282458792374670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ef06d48886bf8f4581e5fd89c6b5262, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameController: {fileID: 114138853543124672}
+  GroupsPrefab: {fileID: 0}
+  GameViewTransform: {fileID: 0}
+  ListOfGroups: []
+  GameArea:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  GroupDataType: recipegroup
+--- !u!114 &114304258551401574
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1282458792374670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26a5c68aeb2c87844bd928c6122ef6a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BatteryPort: 18001
+  SoundPort: 17001
+  MolecularHUDPort: 19001
+  BatteryAddress: 10.0.1.105
+  SoundAddress: 10.0.1.136
+  MolecularHUDAddress: 127.0.0.1
 --- !u!114 &114498831683773736
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -69,11 +113,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameController: {fileID: 114138853543124672}
-  GroupsPrefab: {fileID: 1997473113684288, guid: b4b524ec37ecf534fb287c5e5031af30,
+  GroupsPrefab: {fileID: 1879395145267394, guid: b4b524ec37ecf534fb287c5e5031af30,
     type: 2}
   GameViewTransform: {fileID: 0}
   ListOfGroups: []
-  GroupDataType: 
+  GameArea:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  GroupDataType: atomgroup
+  WaveGameObject: {fileID: 1092874307193986, guid: 29f3ddc2355b43f458c40cd26af6315f,
+    type: 2}
+  AlertController: {fileID: 0}
 --- !u!114 &114785162741016296
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -87,6 +140,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ConsoleLog: 
   GameController: {fileID: 114138853543124672}
+  BatteryUi: {fileID: 0}
+  PropolisExport: {fileID: 114304258551401574}
+  AlertController: {fileID: 0}
 --- !u!114 &114808596420459798
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -104,4 +160,10 @@ MonoBehaviour:
   GameViewTransform: {fileID: 4951907079653904, guid: 9af485c469f3f4d498a8290ee90c7445,
     type: 2}
   ListOfGroups: []
-  GroupDataType: 
+  GameArea:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  GroupDataType: hexgroup

@@ -35,8 +35,7 @@ public class camSwitchController : MonoBehaviour {
     //ALL OFF
     public void switchCam(string toActivateString) {
 
-        if(toActivateString == "ChampsMoléculaires") { MouseController.GroupType = "ATOMGROUP"; }
-        if (toActivateString == "Ruche") { MouseController.GroupType = "HEXGROUP"; }
+
 
         foreach (var view in cams) {
 			if (view.transform.name != toActivateString) {

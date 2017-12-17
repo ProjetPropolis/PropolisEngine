@@ -18,6 +18,10 @@ public class mouseUiController : MonoBehaviour {
     public tabsController tabCtl;
     public LayerMask layer_mask_Game,layer_mask_Ui;
     public string GroupType;
+    public void SetGroupType(string type)
+    {
+        GroupType = type;
+    }
 
     void OnGUI() {
 

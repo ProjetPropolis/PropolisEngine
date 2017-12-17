@@ -66,6 +66,7 @@ namespace Propolis
 
                 case PropolisDataTypes.HexGroup: propolisData.HexGroupList.ForEach(x => InstantiateAbstractGroupGroup(x.ID)); break;
                 case PropolisDataTypes.AtomGroup: propolisData.AtomGroupList.ForEach(x => InstantiateAbstractGroupGroup(x.ID)); break;
+                case PropolisDataTypes.RecipeGroup: propolisData.RecipeGroupList.ForEach(x => InstantiateAbstractGroupGroup(x.ID)); break;
 
             }   
         }
@@ -88,6 +89,7 @@ namespace Propolis
             {
                 case PropolisDataTypes.HexGroup: abstractGroupData = propolisData.HexGroupList.FirstOrDefault(x => x.ID == propolisData.LastEvent.ID); break;
                 case PropolisDataTypes.AtomGroup: abstractGroupData = propolisData.AtomGroupList.FirstOrDefault(x => x.ID == propolisData.LastEvent.ID); break;
+                case PropolisDataTypes.RecipeGroup: abstractGroupData = propolisData.RecipeGroupList.FirstOrDefault(x => x.ID == propolisData.LastEvent.ID); break;
 
             }
 
@@ -145,6 +147,7 @@ namespace Propolis
             {
                 case PropolisDataTypes.HexGroup: abstractGroupData = propolisData.HexGroupList.FirstOrDefault(x => x.ID == propolisData.LastEvent.GroupID);break;
                 case PropolisDataTypes.AtomGroup: abstractGroupData = propolisData.AtomGroupList.FirstOrDefault(x => x.ID == propolisData.LastEvent.GroupID); break;
+                case PropolisDataTypes.RecipeGroup: abstractGroupData = propolisData.RecipeGroupList.FirstOrDefault(x => x.ID == propolisData.LastEvent.GroupID); break;
 
             }
 
@@ -175,6 +178,7 @@ namespace Propolis
             {
                 case PropolisDataTypes.HexGroup: UpdateAbstractGroupItemStatus(); break;
                 case PropolisDataTypes.AtomGroup: UpdateAbstractGroupItemStatus(); break;
+                case PropolisDataTypes.RecipeGroup: UpdateAbstractGroupItemStatus(); break;
             }
         }
 
@@ -184,6 +188,7 @@ namespace Propolis
             {
                 case PropolisDataTypes.HexGroup: InstantiateAbstractGroupGroup(propolisData.LastEvent.ID); break;
                 case PropolisDataTypes.AtomGroup: InstantiateAbstractGroupGroup(propolisData.LastEvent.ID); break;
+                case PropolisDataTypes.RecipeGroup: InstantiateAbstractGroupGroup(propolisData.LastEvent.ID); break;
             }
         }
 
@@ -193,6 +198,7 @@ namespace Propolis
             {
                 case PropolisDataTypes.HexGroup: DeleteGroup(); break;
                 case PropolisDataTypes.AtomGroup: DeleteGroup(); break;
+                case PropolisDataTypes.RecipeGroup: DeleteGroup(); break;
             }
         }
 

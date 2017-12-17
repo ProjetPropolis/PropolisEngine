@@ -17,6 +17,9 @@ TagManager:
   - aView
   - interactableZoneRuche
   - interactableZoneChamps
+  - hexgroup
+  - atomgroup
+  - recipegroup
   layers:
   - Default
   - TransparentFX
