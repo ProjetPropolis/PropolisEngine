@@ -11364,7 +11364,7 @@ MonoBehaviour:
   PropolisManager: {fileID: 1865805505}
   GameController: {fileID: 1782982170}
   uiCanvas: {fileID: 1529137010}
-  keyMoveSpeed: 0.01
+  keyMoveSpeed: 0.001
   currentCam: {fileID: 0}
   tabCtl: {fileID: 2130413712}
   layer_mask_Game:
