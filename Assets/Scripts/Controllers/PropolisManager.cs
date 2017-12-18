@@ -6,7 +6,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using System;
 using System.Text.RegularExpressions;
-
+using SFB;
 namespace Propolis
 {
     public class PropolisManager:MonoBehaviour
@@ -86,12 +86,64 @@ namespace Propolis
  
         }
 
+        public bool SaveAs()
+        {
+            try
+            {
+                string path = StandaloneFileBrowser.SaveFilePanel("Save Propolis map as", "", "propolismap", "pmap");
+                BinaryFormatter bf = new BinaryFormatter();
+                //Application.persistentDataPath is a string, so if you wanted you can put that into debug.log if you want to know where save games are located
+                FileStream file = File.Create(path); //you can call it anything you want
+                bf.Serialize(file, _propolisData);
+                file.Close();
+                AlertController.Show("Propolis Event", "Engine Data Saved");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                AppendToConsoleLog(ex.Message);
+                return false;
+            }
+
+        }
+
         public bool Load()
         {
             if (File.Exists(Application.persistentDataPath + "/savedGames.gd"))
             {
                 BinaryFormatter bf = new BinaryFormatter();
                 FileStream file = File.Open(Application.persistentDataPath + "/savedGames.gd", FileMode.Open);
+                PropolisData.Instance = (PropolisData)bf.Deserialize(file);
+                file.Close();
+                _propolisData = PropolisData.Instance;
+                _propolisData.ResetGameData();
+                _propolisData.LastEvent = _TempLastBuffer;
+                if (_propolisData.AtomGroupList == null)
+                    _propolisData.AtomGroupList = new List<AbstractGroupData>();
+                if (_propolisData.RecipeGroupList == null)
+                    _propolisData.RecipeGroupList = new List<AbstractGroupData>();
+                if (_propolisData.RecipeStack == null)
+                {
+                    _propolisData.RecipeStack = new Queue<PropolisRecipe>();
+                }
+                AlertController.Show("Propolis Event", "Engine Data Loaded");
+                return true;
+            }
+            else
+            {
+                AppendToConsoleLog("Unable to load save file. Please save first");
+                return false;
+            }
+        }
+
+        public bool LoadAs()
+        {
+            string[] paths = StandaloneFileBrowser.OpenFilePanel("Load Propolis map","","pmap",false);
+            string path = paths[0];
+            if (File.Exists(path))
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                FileStream file = File.Open(path, FileMode.Open);
                 PropolisData.Instance = (PropolisData)bf.Deserialize(file);
                 file.Close();
                 _propolisData = PropolisData.Instance;
@@ -130,6 +182,8 @@ namespace Propolis
                 {
                     case PropolisActions.Create:validCommand = Create(modelParams); break;
                     case PropolisActions.Save: validCommand = Save(); break;
+                    case PropolisActions.SaveAs: validCommand = SaveAs(); break;
+                    case PropolisActions.LoadAs: validCommand = LoadAs(); break;
                     case PropolisActions.Load: validCommand = Load(); break;
                     case PropolisActions.Update:validCommand = UpdateGroup(modelParams);break;
                     case PropolisActions.Delete: validCommand = Delete(modelParams); break;

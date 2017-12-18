@@ -60,7 +60,7 @@ MonoBehaviour:
   AlertUiController: {fileID: 0}
   hiveGameController: {fileID: 114808596420459798}
   molecularGameController: {fileID: 114498831683773736}
-  recipeGameController: {fileID: 0}
+  recipeGameController: {fileID: 114284565043113564}
   BatteryLevel: 0
 --- !u!114 &114284565043113564
 MonoBehaviour:
@@ -74,7 +74,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameController: {fileID: 114138853543124672}
-  GroupsPrefab: {fileID: 0}
+  GroupsPrefab: {fileID: 1375432796044844, guid: 353ac02972b7d7f489ec17af8b88ab2f,
+    type: 2}
   GameViewTransform: {fileID: 0}
   ListOfGroups: []
   GameArea:
@@ -99,7 +100,7 @@ MonoBehaviour:
   SoundPort: 17001
   MolecularHUDPort: 19001
   BatteryAddress: 10.0.1.105
-  SoundAddress: 10.0.1.136
+  SoundAddress: 10.0.1.127
   MolecularHUDAddress: 127.0.0.1
 --- !u!114 &114498831683773736
 MonoBehaviour:

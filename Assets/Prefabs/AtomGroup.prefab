@@ -1364,6 +1364,7 @@ MonoBehaviour:
   parentGameController: {fileID: 0}
   DataType: atomgroup
   EnvironnementalRepresentation: {fileID: 1926265851536484}
+  IsPlayingAnimation: 0
 --- !u!114 &114484570153755940
 MonoBehaviour:
   m_ObjectHideFlags: 1

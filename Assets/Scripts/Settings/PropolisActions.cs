@@ -19,5 +19,7 @@ namespace Propolis
         public const string SetWaveActiveStatus = "swas";
         public const string SetWavePosition = "swp";
         public const string PushRecipe = "pr";
+        public const string SaveAs = "saveas";
+        public const string LoadAs = "loadas";
     }   
 }

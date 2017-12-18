@@ -44,6 +44,7 @@ namespace Propolis
                 case PropolisActions.UpdateItemStatus: UpdateAbstractGroupItemStatus(); break;
                 case PropolisActions.Update: UpdateAbstractGroup(); break;
                 case PropolisActions.Load: LoadFromData(); break;
+                case PropolisActions.LoadAs: LoadFromData(); break;
             }
         }
 
@@ -73,12 +74,16 @@ namespace Propolis
 
         private void CalculateGameRectArea()
         {
-            float left = (float)ListOfGroups.Min(x => x.transform.position.x - x.GetComponent<CircleCollider2D>().bounds.size.x * 0.5f);
-            float right = (float)ListOfGroups.Max(x => x.transform.position.x + x.GetComponent<CircleCollider2D>().bounds.size.x * 0.5f);
-            float top = (float)ListOfGroups.Max(x => x.transform.position.y - x.GetComponent<CircleCollider2D>().bounds.size.y * 0.5f);
-            float bottom = (float)ListOfGroups.Max(x => x.transform.position.y + x.GetComponent<CircleCollider2D>().bounds.size.y * 0.5f);
+            if(ListOfGroups.Count > 0 && GroupDataType != PropolisDataTypes.RecipeGroup)
+            {
+                float left = (float)ListOfGroups.Min(x => x.transform.position.x - x.GetComponent<CircleCollider2D>().bounds.size.x * 0.5f);
+                float right = (float)ListOfGroups.Max(x => x.transform.position.x + x.GetComponent<CircleCollider2D>().bounds.size.x * 0.5f);
+                float top = (float)ListOfGroups.Max(x => x.transform.position.y - x.GetComponent<CircleCollider2D>().bounds.size.y * 0.5f);
+                float bottom = (float)ListOfGroups.Max(x => x.transform.position.y + x.GetComponent<CircleCollider2D>().bounds.size.y * 0.5f);
 
-            GameArea = new Rect(left, top, Math.Abs(right - left), Math.Abs(bottom - top));
+                GameArea = new Rect(left, top, Math.Abs(right - left), Math.Abs(bottom - top));
+            }
+
 
 
         }

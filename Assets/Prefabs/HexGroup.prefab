@@ -565,15 +565,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  status: 0
   Neighbors: []
   ItemLayerMask:
     serializedVersion: 2
     m_Bits: 256
   ID: 4
-  osc: {fileID: 0}
   NeighborsDist: 0.5
   ParentGroup: {fileID: 0}
   StatusLocked: 0
+  IsShield: 0
 --- !u!114 &114164971816795814
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -585,15 +586,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  status: 0
   Neighbors: []
   ItemLayerMask:
     serializedVersion: 2
     m_Bits: 256
   ID: 2
-  osc: {fileID: 0}
   NeighborsDist: 0.5
   ParentGroup: {fileID: 0}
   StatusLocked: 0
+  IsShield: 0
 --- !u!114 &114239766088370954
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -605,15 +607,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  status: 0
   Neighbors: []
   ItemLayerMask:
     serializedVersion: 2
     m_Bits: 256
   ID: 0
-  osc: {fileID: 0}
   NeighborsDist: 0.5
   ParentGroup: {fileID: 0}
   StatusLocked: 0
+  IsShield: 0
 --- !u!114 &114366736888829554
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -639,15 +642,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  status: 0
   Neighbors: []
   ItemLayerMask:
     serializedVersion: 2
     m_Bits: 256
   ID: 5
-  osc: {fileID: 0}
   NeighborsDist: 0.5
   ParentGroup: {fileID: 0}
   StatusLocked: 0
+  IsShield: 0
 --- !u!114 &114677225290470002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -659,15 +663,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  status: 0
   Neighbors: []
   ItemLayerMask:
     serializedVersion: 2
     m_Bits: 256
   ID: 1
-  osc: {fileID: 0}
   NeighborsDist: 0.5
   ParentGroup: {fileID: 0}
   StatusLocked: 0
+  IsShield: 0
 --- !u!114 &114868724291734944
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -679,15 +684,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  status: 0
   Neighbors: []
   ItemLayerMask:
     serializedVersion: 2
     m_Bits: 256
   ID: 3
-  osc: {fileID: 0}
   NeighborsDist: 0.5
   ParentGroup: {fileID: 0}
   StatusLocked: 0
+  IsShield: 0
 --- !u!114 &114950889589718076
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -699,15 +705,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c102010c12d7f04d91dbcdd9d09c7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  status: 0
   Neighbors: []
   ItemLayerMask:
     serializedVersion: 2
     m_Bits: 256
   ID: 6
-  osc: {fileID: 0}
   NeighborsDist: 0.5
   ParentGroup: {fileID: 0}
   StatusLocked: 0
+  IsShield: 0
 --- !u!114 &114994773525748030
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -719,11 +726,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3eaed0470a6dc6f41906c148469b0e60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Osc: {fileID: 114366736888829554}
   ID: 0
   ChildItemsList: []
   parentGameController: {fileID: 0}
   DataType: hexgroup
+  EnvironnementalRepresentation: {fileID: 0}
+  IsPlayingAnimation: 0
 --- !u!212 &212340254583507616
 SpriteRenderer:
   m_ObjectHideFlags: 1
