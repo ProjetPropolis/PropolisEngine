@@ -220,6 +220,7 @@ namespace Propolis
         {
             _propolisData.LastEvent = _TempLastBuffer;
             _propolisData.IsGamePlaying = true;
+            PropolisExport.ExportAllGroupPosition();
             return true;
         }
 

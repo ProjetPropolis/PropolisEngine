@@ -62,6 +62,8 @@ namespace Propolis
                         "/" + lastEvent.Type,
                         lastEvent.GroupID, lastEvent.ID,
                         PropolisData.Instance.GetItemDataById(lastEvent.GroupID, lastEvent.ID, lastEvent.Type).Status);
+                    
+
                 }
                 else if (PropolisData.Instance.LastEvent.Action == PropolisActions.SetBatteryLevel)
                 {
@@ -93,6 +95,13 @@ namespace Propolis
             }
             
         }
+
+        public void ExportAllGroupPosition()
+        {
+            PropolisData.Instance.HexGroupList.ForEach(x => SendAbstractGroupPosition("/hexgroup_pos",x.ID,x.GetPosition().x,x.GetPosition().y));
+            //PropolisData.Instance.AtomGroupList.ForEach(x => SendAbstractGroupPosition("/atomgroup_pos", x.ID, x.GetPosition().x, x.GetPosition().y));
+            //PropolisData.Instance.RecipeGroupList.ForEach(x => SendAbstractGroupPosition("/recipegroup_pos", x.ID, x.GetPosition().x, x.GetPosition().y));
+        }
         public void SendRecipeEventToHUDS(int groupId,int lvl)
         {
             SendHUDMessage(string.Format("/recipe_lvl{1}_{0}", groupId,lvl),1);
@@ -107,6 +116,15 @@ namespace Propolis
             message.Append<int>(value3);
             SoundOSC.Send(message);
 
+        }
+
+        private void SendAbstractGroupPosition(string address, int groupId, float x, float y)
+        {
+            OSCMessage message = new OSCMessage(address);
+            message.Append<int>(groupId);
+            message.Append<float>(x);
+            message.Append<float>(y);
+            SoundOSC.Send(message);
         }
 
         private void SendHUDMessage(string address, float value)
