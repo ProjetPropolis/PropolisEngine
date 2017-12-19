@@ -186,27 +186,27 @@ public class HiveGameController : AbstractGameController
         int i=0;
         List<AbstractItem> hexCleannedOrderList = new List<AbstractItem>();
 
-        SendItemData(cleanser.ParentGroup.ID, cleanser.ID, PropolisStatus.CLEANSING);
+        SendItemData(cleanser.ParentGroup.ID, cleanser.ID, PropolisStatus.ON);
 
         while (i < cleanser.Neighbors.Count && hexstoBeCleanned.Count>0)
         {
             AbstractItem hex = hexstoBeCleanned.ElementAt(random.Next(hexstoBeCleanned.Count)) ;
-            SendItemData(hex.ParentGroup.ID, hex.ID, PropolisStatus.CLEANSING);
+            SendItemData(hex.ParentGroup.ID, hex.ID, PropolisStatus.ON);
             hexCleannedOrderList.Add(hex);
             hexstoBeCleanned.Remove(hex);
             yield return new WaitForSeconds(PropolisGameSettings.TimeBetweenAnimationSpawn);
             i++;
         }
 
-        yield return new WaitForSeconds(PropolisGameSettings.CleansingStateDuration);
+        //yield return new WaitForSeconds(PropolisGameSettings.CleansingStateDuration);
 
-        SendItemData(cleanser.ParentGroup.ID, cleanser.ID, PropolisStatus.ON);
+        //SendItemData(cleanser.ParentGroup.ID, cleanser.ID, PropolisStatus.ON);
 
-        foreach (var hex in hexCleannedOrderList)
-        {
-            SendItemData(hex.ParentGroup.ID, hex.ID, PropolisStatus.ON);
-            yield return new WaitForSeconds(PropolisGameSettings.TimeBetweenAnimationSpawn);
-        }
+        //foreach (var hex in hexCleannedOrderList)
+        //{
+        //    SendItemData(hex.ParentGroup.ID, hex.ID, PropolisStatus.ON);
+        //    yield return new WaitForSeconds(PropolisGameSettings.TimeBetweenAnimationSpawn);
+        //}
 
     }
 
