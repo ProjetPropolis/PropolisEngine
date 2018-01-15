@@ -93,7 +93,7 @@ public class AbstractItem : MonoBehaviour {
             case PropolisStatus.WAVECORRUPTED: material.color = PropolisColors.Red; break;
             case PropolisStatus.CLEANSING: material.color = PropolisColors.White; break;
             case PropolisStatus.SHIELD_ON: material.color = PropolisColors.Blue; break;
-            case PropolisStatus.SHIELD_OFF: material.color = PropolisColors.Blue; break;
+            case PropolisStatus.SHIELD_OFF: material.color = PropolisColors.DarkBlue; break;
         }
 
     }

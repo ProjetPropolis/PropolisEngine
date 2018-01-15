@@ -35,8 +35,6 @@ public class camSwitchController : MonoBehaviour {
     //ALL OFF
     public void switchCam(string toActivateString) {
 
-
-
         foreach (var view in cams) {
 			if (view.transform.name != toActivateString) {
 				view.SetActive (false);

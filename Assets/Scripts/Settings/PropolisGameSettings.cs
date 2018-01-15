@@ -4,7 +4,7 @@ namespace Propolis
 { 
     public static class PropolisGameSettings
     {
-        public const float DefaultGameTickTime = 3.0f;
+        public const float DefaultGameTickTime = 5.0f;
         public const float ScorePressOnActiveHex = 0.005f;
         public const float ScorePressOnCorruptedHex = 0.010f;
         public const float ScoreOnCleanUltraCorruptedHex = 0.100f;

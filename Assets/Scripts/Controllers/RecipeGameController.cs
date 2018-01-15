@@ -12,6 +12,7 @@ public class RecipeGameController : AbstractGameController
 
 
     System.Random random;
+    public MolecularGameController molecularGameController;
 
 
     private void Start()
@@ -33,7 +34,6 @@ public class RecipeGameController : AbstractGameController
     {
         if(userAction == PropolisUserInteractions.PRESS && item.ParentGroup.DataType == PropolisDataTypes.RecipeGroup)
         {
-            
 
         }
         else if(item.ParentGroup.DataType == PropolisDataTypes.RecipeGroup)
@@ -72,8 +72,6 @@ public class RecipeGameController : AbstractGameController
     {
         base.InitOnPlay();        // va calculer chaque neighbors 
         Reset();
-
-
     }
 
     public override void Stop()
