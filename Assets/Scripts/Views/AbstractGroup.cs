@@ -71,6 +71,7 @@ public class AbstractGroup : MonoBehaviour {
 
     }
 
+
     public void SetOSCSettings(string ip, int port)
     {
         try

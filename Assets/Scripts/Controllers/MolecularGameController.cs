@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Propolis;
+using System.Linq;
+using System;
 
 public class MolecularGameController : AbstractGameController
 {
@@ -128,9 +130,72 @@ public class MolecularGameController : AbstractGameController
 
     }
 
+    private PropolisStatus ConvertRecipeToBlinking(PropolisStatus status)
+    {
+        return (PropolisStatus)(status + 5);
+    }
+
+    public void ReceivedRecipeInteracton(int parentID, int itemId, PropolisStatus status)
+    {
+        StartCoroutine(AnimateBlinking(parentID, itemId, status));
+    }
+
+    private IEnumerator AnimateBlinking(int parentID, int itemId, PropolisStatus status)
+    {
+
+        AbstractGroup group = ListOfGroups.First<AbstractGroup>(x => x.ID == parentID);
+        List<AbstractItem> items = group.ChildItemsList.Where<AbstractItem>(x => x.ID >= (itemId * 3)  && x.ID <= (itemId * 3 + 2)).ToList<AbstractItem>();
+        List<PropolisStatus> previousStatus = new List<PropolisStatus>();
+
+
+        foreach (var item in items)
+        {
+            previousStatus.Add((PropolisStatus)item.status);
+            item.StatusBackup = ((PropolisStatus)item.status == PropolisStatus.WAVECORRUPTED ? PropolisStatus.CORRUPTED : (PropolisStatus)item.status);
+            SendItemData(group.ID, item.ID, ConvertRecipeToBlinking(status));
+            item.StatusLocked = true;
+        }
+
+        yield return new WaitForSeconds(0.7f);
+
+        for (int i = 0; i < items.Count; i++)
+        {
+            SendItemData(group.ID, items[i].ID, (PropolisStatus)items[i].StatusBackup);
+            items[i].StatusLocked = false;
+        }
+    }
+
+    public void ReceiveShieldInteractionFromHive(int itemId, PropolisUserInteractions action)
+    {
+        try
+        {
+            AbstractGroup group = ListOfGroups.First<AbstractGroup>(x => x.ID == itemId);
+            AbstractItem item  = group.ChildItemsList.First<AbstractItem>(x=>x.ID == 9);
+
+            if(action == PropolisUserInteractions.PRESS)
+            {
+                item.StatusLocked = true ;
+                SendItemData(item.ParentGroup.ID, item.ID, PropolisStatus.SHIELD_ON);
+            }
+            else
+            {
+                item.StatusLocked = false;
+                SendItemData(item.ParentGroup.ID, item.ID, PropolisStatus.SHIELD_OFF);
+            }
+
+
+        }
+        catch (System.Exception)
+        {
+
+
+        }
+
+    }
+
     public override void ProcessUserInteraction(AbstractItem item, PropolisUserInteractions userAction)
     {
-        if (userAction == PropolisUserInteractions.PRESS && !item.ParentGroup.IsPlayingAnimation)
+        if (userAction == PropolisUserInteractions.PRESS && !item.ParentGroup.IsPlayingAnimation && !item.StatusLocked)
         {
             if (!item.IsShield)
             {
@@ -171,8 +236,7 @@ public class MolecularGameController : AbstractGameController
                         }
                     }
 
-                 
-                   
+
                     
                 }
                 catch (System.Exception)
@@ -188,7 +252,7 @@ public class MolecularGameController : AbstractGameController
             }
 
 
-        }else if(userAction == PropolisUserInteractions.PULL_OFF)
+        }else if(userAction == PropolisUserInteractions.PULL_OFF &&  !item.StatusLocked)
         {
             if (item.IsShield)
             {
@@ -244,14 +308,10 @@ public class MolecularGameController : AbstractGameController
     {
 
         WaveGameObjectInstance.transform.position = new Vector3(GameArea.x + GameArea.width, GameArea.y + GameArea.height * .5f);
-
         WaveGameObjectInstance.transform.localScale = new Vector3(1, GameArea.height, 1);
-
 
         BoxCollider2D waveBoxCollider = WaveGameObjectInstance.GetComponent<BoxCollider2D>();
         waveBoxCollider.size = new Vector2(1.0f, GameArea.height);
-       
-
     }   
 
     public void CorruptedAtomWithWave(AbstractItem atom)
@@ -264,9 +324,16 @@ public class MolecularGameController : AbstractGameController
 
     public IEnumerator ProcessAtomCorruptionProgress(AbstractItem atom)
     {
-        SendItemData(atom.ParentGroup.ID, atom.ID, PropolisStatus.WAVECORRUPTED);
-        yield return new WaitForSeconds(PropolisGameSettings.AtomSaturationCorruptionTime);
-        SendItemData(atom.ParentGroup.ID, atom.ID, PropolisStatus.CORRUPTED);
+        if (!atom.StatusLocked)
+        {
+            SendItemData(atom.ParentGroup.ID, atom.ID, PropolisStatus.WAVECORRUPTED);
+            yield return new WaitForSeconds(PropolisGameSettings.AtomSaturationCorruptionTime);
+            SendItemData(atom.ParentGroup.ID, atom.ID, PropolisStatus.CORRUPTED);
+        }
+        else {
+            atom.StatusBackup = PropolisStatus.CORRUPTED;
+        }
+
     }
 
     private IEnumerator ProcessWaveMovement()

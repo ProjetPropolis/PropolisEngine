@@ -33,6 +33,7 @@ public class AbstractItem : MonoBehaviour {
 
     public List<AbstractItem> Neighbors;
     public LayerMask ItemLayerMask;
+    public PropolisStatus StatusBackup;
      
 
     public void CalculateNeighborsList()
@@ -94,6 +95,9 @@ public class AbstractItem : MonoBehaviour {
             case PropolisStatus.CLEANSING: material.color = PropolisColors.White; break;
             case PropolisStatus.SHIELD_ON: material.color = PropolisColors.Blue; break;
             case PropolisStatus.SHIELD_OFF: material.color = PropolisColors.DarkBlue; break;
+            case PropolisStatus.BLINKRECIPE1: material.color = PropolisColors.Orange; break;
+            case PropolisStatus.BLINKRECIPE2: material.color = PropolisColors.Fushia; break;
+            case PropolisStatus.BLINKRECIPE3: material.color = PropolisColors.DarkBlue; break;
         }
 
     }

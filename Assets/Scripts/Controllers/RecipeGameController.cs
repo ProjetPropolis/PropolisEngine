@@ -34,11 +34,27 @@ public class RecipeGameController : AbstractGameController
     {
         if(userAction == PropolisUserInteractions.PRESS && item.ParentGroup.DataType == PropolisDataTypes.RecipeGroup)
         {
-
+            if (!item.IsShield)
+            {
+                molecularGameController.ReceivedRecipeInteracton(item.ParentGroup.ID - 100,item.ID,(PropolisStatus) item.status);
+            }
+            else
+            {
+                SendItemData(item.ParentGroup.ID, item.ID, PropolisStatus.SHIELD_ON);
+                molecularGameController.ReceiveShieldInteractionFromHive(item.ParentGroup.ID - 100, PropolisUserInteractions.PRESS);
+            }
         }
         else if(item.ParentGroup.DataType == PropolisDataTypes.RecipeGroup)
         {
-           
+            if (!item.IsShield)
+            {
+
+            }
+            else
+            {
+                SendItemData(item.ParentGroup.ID, item.ID, PropolisStatus.SHIELD_OFF);
+                molecularGameController.ReceiveShieldInteractionFromHive(item.ParentGroup.ID - 100, PropolisUserInteractions.PULL_OFF);
+            }
         }
     }
 

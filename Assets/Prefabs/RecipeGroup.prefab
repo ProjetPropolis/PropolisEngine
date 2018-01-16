@@ -391,7 +391,7 @@ MonoBehaviour:
   NeighborsDist: 0.5
   ParentGroup: {fileID: 0}
   StatusLocked: 0
-  IsShield: 1
+  IsShield: 0
 --- !u!114 &114325500589349318
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -464,7 +464,7 @@ MonoBehaviour:
   NeighborsDist: 0.5
   ParentGroup: {fileID: 0}
   StatusLocked: 0
-  IsShield: 0
+  IsShield: 1
 --- !u!212 &212331965527280852
 SpriteRenderer:
   m_ObjectHideFlags: 1
