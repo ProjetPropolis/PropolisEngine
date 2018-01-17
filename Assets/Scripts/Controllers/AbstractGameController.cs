@@ -16,6 +16,7 @@ namespace Propolis
         public List<AbstractGroup> ListOfGroups;
         public Rect GameArea;
         public string GroupDataType;
+        public List<AbstractItem> ListOfItems;
 
 
         // Use this for initialization
@@ -138,6 +139,7 @@ namespace Propolis
             ListOfGroups.ForEach(x => x.ChildItemsList.ForEach(y => y.CalculateNeighborsList()));
             CalculateGameRectArea();
             ListOfGroups.ForEach(x => x.ChildItemsList.ForEach(y => y.StatusLocked = false));
+            ListOfItems = GetAbstratItemsListFromController();
         }
 
         public virtual void Stop()
@@ -259,6 +261,16 @@ namespace Propolis
         {
             GameController.SendCommand(String.Format("uis {0} {1} {2} {3}", GroupDataType, groupID, itemID, (int)status));
 
+        }
+
+        public List<AbstractItem> GetAbstratItemsListFromController()
+        {
+            return ListOfGroups.SelectMany(x => x.ChildItemsList).ToList<AbstractItem>();
+        }
+
+        public float GetRatioOfGivenPropolisStatus(PropolisStatus status)
+        {
+            return (float)ListOfItems.Where(x => x.status == status).Count() / (float)ListOfItems.Count;
         }
 
     }

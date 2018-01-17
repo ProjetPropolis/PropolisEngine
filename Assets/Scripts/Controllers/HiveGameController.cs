@@ -63,6 +63,7 @@ public class HiveGameController : AbstractGameController
         if(IndexProcess%3 == 0)
         {
             StartCoroutine(ProcessCorruptionOnEdge());
+            StartCoroutine(SpeadThatCorruption());
         }
 
         else
@@ -70,10 +71,10 @@ public class HiveGameController : AbstractGameController
             StartCoroutine(ProcessCorruption());
         }
 
-        if (IndexProcess % 4 == 0)
+        if (IndexProcess % 5 == 0)
         {
             StartCoroutine(CreateRed());
-            StartCoroutine(SpeadThatCorruption());
+            
         }
 
 
@@ -164,7 +165,7 @@ public class HiveGameController : AbstractGameController
         List<AbstractItem> NeighborsToCorrupt = 
         hexToCorrupted.GetNeighborsWithStatus(PropolisGameSettings.StatusFreeToBeCorrupted);
 
-        int numberOfHexToProcess = Mathf.Clamp(NeighborsToCorrupt.Count, 0, PropolisGameSettings.MaxEdgeHexNeighborsCorruption);
+        int numberOfHexToProcess = Mathf.Clamp(NeighborsToCorrupt.Count, 0, (int)(PropolisGameSettings.MaxEdgeHexNeighborsCorruption * PropolisGameSettings.CurrentDifficultyMultiplier));
 
         for (int i = 0; i < numberOfHexToProcess; i++)
         {
@@ -191,12 +192,21 @@ public class HiveGameController : AbstractGameController
         while (i < cleanser.Neighbors.Count && hexstoBeCleanned.Count>0)
         {
             AbstractItem hex = hexstoBeCleanned.ElementAt(random.Next(hexstoBeCleanned.Count)) ;
+            hex.StatusLocked = true;
             SendItemData(hex.ParentGroup.ID, hex.ID, PropolisStatus.ON);
             hexCleannedOrderList.Add(hex);
             hexstoBeCleanned.Remove(hex);
             yield return new WaitForSeconds(PropolisGameSettings.TimeBetweenAnimationSpawn);
             i++;
         }
+
+        yield return new WaitForSeconds(PropolisGameSettings.HexSafeTimeAfterCleanse);
+
+        foreach (var item in cleanser.Neighbors)
+        {
+            item.StatusLocked = false;
+        }
+
 
         //yield return new WaitForSeconds(PropolisGameSettings.CleansingStateDuration);
 
@@ -219,7 +229,7 @@ public class HiveGameController : AbstractGameController
             .ToList<AbstractItem>()
             .ForEach(z => CorrupedHexs.Add(z)));
 
-        int HexCountToCorrupt = Mathf.Clamp(PropolisGameSettings.MaxEdgeHexNeighborsCorruption, 0, CorrupedHexs.Count);
+        int HexCountToCorrupt = Mathf.Clamp((int)(PropolisGameSettings.MaxEdgeHexNeighborsCorruption * PropolisGameSettings.CurrentDifficultyMultiplier), 0, CorrupedHexs.Count);
         int i = 0;
 
 
@@ -250,7 +260,7 @@ public class HiveGameController : AbstractGameController
         int HexCountToUltraCorrupt = Mathf.Clamp(numUltra, 0, PotentialUtraCorrupt.Count);
         int i = 0;
 
-        while (i < HexCountToUltraCorrupt && PotentialUtraCorrupt.Count > 0 && UltraCorruptedList.Count < numMax)
+        while (i < HexCountToUltraCorrupt && PotentialUtraCorrupt.Count > 0 && UltraCorruptedList.Count <(int)( numMax * PropolisGameSettings.CurrentDifficultyMultiplier))
         {
             if (PotentialUtraCorrupt.Count > 0) { 
             AbstractItem UtraCorruptor =  PotentialUtraCorrupt.ElementAt(random.Next(PotentialUtraCorrupt.Count));

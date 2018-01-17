@@ -168,11 +168,32 @@ public class GameController : MonoBehaviour {
         recipeGameController.InitOnPlay();
         StopCoroutine(GameLoopCoroutine);
         StartCoroutine(GameLoopCoroutine);
+        StopCoroutine(ProcessDifficultyLevel());
+        StartCoroutine(ProcessDifficultyLevel());
         GenerateRecipe();
-        AlertUiController.Show("Propolis Event", "Gameplay Started");
+       AlertUiController.Show("Propolis Event", "Gameplay Started");
 
     }
 
+    private IEnumerator ProcessDifficultyLevel()
+    {
+        while (true)
+        {
+            yield return new WaitForSecondsRealtime(PropolisGameSettings.DifficultyUpdateDeltaTime);
+            float ratioOfActiveHex = hiveGameController.GetRatioOfGivenPropolisStatus(PropolisStatus.ON);
+            if (ratioOfActiveHex < PropolisGameSettings.MinStableDifficultyThreshold)
+            {
+                PropolisGameSettings.CurrentDifficultyMultiplier -= PropolisGameSettings.DifficultyModifier;
+            }
+            else if (ratioOfActiveHex > PropolisGameSettings.MaxStableDifficultyThreshold)
+            {
+                PropolisGameSettings.CurrentDifficultyMultiplier += PropolisGameSettings.DifficultyModifier;
+            }
+
+            PropolisGameSettings.CurrentDifficultyMultiplier = PropolisGameSettings.CurrentDifficultyMultiplier < 1 ? 1 : PropolisGameSettings.CurrentDifficultyMultiplier;
+
+        }
+    }
     public void GenerateRecipe()
     {
         for (int i = 0; i < 3; i++)
@@ -213,7 +234,7 @@ public class GameController : MonoBehaviour {
             molecularGameController.UpdateGameLogic();
             recipeGameController.UpdateGameLogic();
             //Debug.Log("looping game loop");
-            yield return new WaitForSeconds(PropolisGameSettings.DefaultGameTickTime);
+            yield return new WaitForSeconds(Mathf.Max(PropolisGameSettings.DefaultGameTickTime / PropolisGameSettings.CurrentDifficultyMultiplier));
         }
 
     }
@@ -222,7 +243,7 @@ public class GameController : MonoBehaviour {
    
     public void IncrementBatteryLevel(float increment)
     {
-        float futureBatteryLevel = propolisData.BatteryLevel + increment;
+        float futureBatteryLevel = propolisData.BatteryLevel + (increment / PropolisGameSettings.DifficultyModifier);
         if (futureBatteryLevel >= 1)
         {
             SendCommand(string.Format("{0} {1}", PropolisActions.SetBatteryLevel, 0));

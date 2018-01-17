@@ -4,7 +4,7 @@ namespace Propolis
 { 
     public static class PropolisGameSettings
     {
-        public const float DefaultGameTickTime = 5.0f;
+        public const float DefaultGameTickTime = 4.0f;
         public const float ScorePressOnActiveHex = 0.005f;
         public const float ScorePressOnCorruptedHex = 0.010f;
         public const float ScoreOnCleanUltraCorruptedHex = 0.100f;
@@ -18,10 +18,16 @@ namespace Propolis
         public const float IntervalProcessUltraCorrupted = 0.3f;
         public const int NumOfUltraCorruped = 1;
         public const int MaxNumOfUltraCorruped = 1;
+        public const float HexSafeTimeAfterCleanse = 2.0f;
         public const float CleansingStateDuration = 0.7f;
         public const float IntervalBetweenWaves = 20.0f;
         public const float WaveSpeed = 0.005f;
         public const float AtomSaturationCorruptionTime = 0.8f;
+        public static float CurrentDifficultyMultiplier = 1.0f;
+        public const float DifficultyModifier = 0.1f;
+        public const float MinStableDifficultyThreshold = 0.45f;
+        public const float MaxStableDifficultyThreshold = 0.55f;
+        public const float DifficultyUpdateDeltaTime = 0.6f;
         public static PropolisStatus[] StatusFreeToBeCorrupted = new PropolisStatus[] { PropolisStatus.ON, PropolisStatus.OFF };
     }
 
