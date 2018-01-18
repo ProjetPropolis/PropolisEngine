@@ -141,7 +141,7 @@ public class GameController : MonoBehaviour {
         hiveGameController.UpdateFromModel();
         molecularGameController.UpdateFromModel();
         recipeGameController.UpdateFromModel();
-        UpdateBattery();
+        //UpdateBattery();
 
 
     }
@@ -166,6 +166,8 @@ public class GameController : MonoBehaviour {
         hiveGameController.InitOnPlay();
         molecularGameController.InitOnPlay();
         recipeGameController.InitOnPlay();
+        StopCoroutine(ProcessBatteryUpdate());
+        StartCoroutine(ProcessBatteryUpdate());
         StopCoroutine(GameLoopCoroutine);
         StartCoroutine(GameLoopCoroutine);
         StopCoroutine(ProcessDifficultyLevel());
@@ -173,6 +175,25 @@ public class GameController : MonoBehaviour {
         GenerateRecipe();
        AlertUiController.Show("Propolis Event", "Gameplay Started");
 
+    }
+
+    private IEnumerator ProcessBatteryUpdate()
+    {
+        while (true)
+        {
+            yield return new WaitForSecondsRealtime(PropolisGameSettings.BatteryUpdateDeltaTime);
+            float currenBoardRatio = hiveGameController.GetRatioOfGivenPropolisStatus(PropolisStatus.ON);
+            if (currenBoardRatio < PropolisGameSettings.CriticalOnHexRatio)
+            {
+                IncrementBatteryLevel(PropolisGameSettings.BatteryLevelLostWhenCritical);
+            }
+            else
+            {
+                IncrementBatteryLevel(1/(PropolisGameSettings.TargetIntervalBetweenClimaxes / PropolisGameSettings.BatteryUpdateDeltaTime * 0.40f * currenBoardRatio));
+            }
+        }
+            
+        
     }
 
     private IEnumerator ProcessDifficultyLevel()
@@ -243,11 +264,13 @@ public class GameController : MonoBehaviour {
    
     public void IncrementBatteryLevel(float increment)
     {
-        float futureBatteryLevel = propolisData.BatteryLevel + (increment / PropolisGameSettings.DifficultyModifier);
-        if (futureBatteryLevel >= 1)
+        float futureBatteryLevel = propolisData.BatteryLevel + (increment);
+
+        futureBatteryLevel = Mathf.Clamp(futureBatteryLevel, 0, 1);
+       
+        if (futureBatteryLevel >= 1 || futureBatteryLevel < 0)
         {
             SendCommand(string.Format("{0} {1}", PropolisActions.SetBatteryLevel, 0));
-            //@TODO ADD TRIGGER FOR FULL BATTERY
         }
         else
         {
