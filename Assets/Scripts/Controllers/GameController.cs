@@ -190,7 +190,7 @@ public class GameController : MonoBehaviour {
                 PropolisGameSettings.CurrentDifficultyMultiplier += PropolisGameSettings.DifficultyModifier;
             }
 
-            PropolisGameSettings.CurrentDifficultyMultiplier = PropolisGameSettings.CurrentDifficultyMultiplier < 1 ? 1 : PropolisGameSettings.CurrentDifficultyMultiplier;
+            PropolisGameSettings.CurrentDifficultyMultiplier = PropolisGameSettings.CurrentDifficultyMultiplier < 1f ? 1f : PropolisGameSettings.CurrentDifficultyMultiplier;
 
         }
     }
