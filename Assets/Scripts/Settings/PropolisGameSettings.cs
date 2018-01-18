@@ -28,6 +28,7 @@ namespace Propolis
         public const float MinStableDifficultyThreshold = 0.45f;
         public const float MaxStableDifficultyThreshold = 0.55f;
         public const float DifficultyUpdateDeltaTime = 0.3f;
+        public const float BatteryUpdateDeltaTime =  15.0f;
         public static PropolisStatus[] StatusFreeToBeCorrupted = new PropolisStatus[] { PropolisStatus.ON, PropolisStatus.OFF };
     }
 

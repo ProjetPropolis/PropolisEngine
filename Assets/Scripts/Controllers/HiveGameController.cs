@@ -139,6 +139,7 @@ public class HiveGameController : AbstractGameController
         {
             SendItemData(abstractItem.ParentGroup.ID, abstractItem.ID, PropolisStatus.ULTRACORRUPTED);
             UltraCorruptedList.Add(abstractItem);
+            abstractItem.Neighbors.ForEach(x => CorruptHex(x));
         }
     }
     private IEnumerator ProcessDeleteUltraCorrupted()
@@ -181,13 +182,14 @@ public class HiveGameController : AbstractGameController
 
 
     private IEnumerator ProcessCleanserExplosion(int groupID, int itemID)
-    {
+    {   
         AbstractItem cleanser = GetAbstractItemFromIDS(groupID, itemID);
         List<AbstractItem> hexstoBeCleanned = new List<AbstractItem>(cleanser.Neighbors);
         int i=0;
         List<AbstractItem> hexCleannedOrderList = new List<AbstractItem>();
 
         SendItemData(cleanser.ParentGroup.ID, cleanser.ID, PropolisStatus.ON);
+        cleanser.StatusLocked = true;
 
         while (i < cleanser.Neighbors.Count && hexstoBeCleanned.Count>0)
         {
@@ -199,6 +201,8 @@ public class HiveGameController : AbstractGameController
             yield return new WaitForSeconds(PropolisGameSettings.TimeBetweenAnimationSpawn);
             i++;
         }
+
+        cleanser.StatusLocked = false;
 
         yield return new WaitForSeconds(PropolisGameSettings.HexSafeTimeAfterCleanse);
 
@@ -291,9 +295,6 @@ public class HiveGameController : AbstractGameController
       
     }
 
-
-
-
     public void InstanciateCleanser()
     {
         
@@ -302,43 +303,9 @@ public class HiveGameController : AbstractGameController
         .ChildItemsList.OrderByDescending(y=> y.CountNeighborsWithStatus(PropolisStatus.CORRUPTED)).First(); // get the hex with most corrupt Neighbors   
         CleanserHex(TileToCorrupt);
 
-        //if (propolisData.BatteryLevel > 0.5f)
-        //{
 
-        //    if (readyCleanser == true)
-        //    {
-        //        CleanserHex(TileToCorrupt);
-        //        readyCleanser = false;
-
-        //    }
-
-        //}
-        //else { 
-        //    if(readyCleanser != true)
-        //        readyCleanser = true;
-        //}
     }
 
-
-    //private AbstractItem GetFarthestHexFrom (AbstractItem target, List <AbstractItem> searchList)
-    //{
-    //    try
-    //    {
-    //        AbstractItem FarthestHex = searchList.OrderBy(t => Vector3.Distance(target.transform.position, t.transform.position)).First();
-    //        if (Vector3.Distance(target.transform.position, FarthestHex.transform.position) > PropolisGameSettings.MinPropraggationCorruptionDistance)
-    //        {
-    //            return FarthestHex;
-    //        }
-    //        else
-    //        {
-    //            return null; 
-    //        }
-    //    }
-    //    catch (Exception)
-    //    {
-    //        return null;
-    //    }      
-    //} 
 
 
 }
