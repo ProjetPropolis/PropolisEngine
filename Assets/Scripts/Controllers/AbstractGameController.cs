@@ -240,6 +240,7 @@ namespace Propolis
                 abstractGroup.SetOSCSettings(abstractGroupData.IP, abstractGroupData.OutPort);
                 //gameObject.transform.parent = GameViewTransform.transform;
                 abstractGroup.ID = abstractGroupData.ID;
+                abstractGroup.IDDisplay.text = abstractGroupData.ID.ToString();
                 ListOfGroups.Add(abstractGroup);
                 gameObject.SetActive(true);
             }

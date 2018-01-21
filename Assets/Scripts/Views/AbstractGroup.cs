@@ -6,6 +6,7 @@ using System;
 using Propolis;
 using UnityOSC;
 using System.Net;
+using UnityEngine.UI;
 
 public class AbstractGroup : MonoBehaviour {
 
@@ -19,6 +20,7 @@ public class AbstractGroup : MonoBehaviour {
     private bool _IsLocked;
     public GameObject EnvironnementalRepresentation;
     public bool IsPlayingAnimation;
+    public Text IDDisplay;
     public bool IsLocked
     {
         get { return _IsLocked; }
