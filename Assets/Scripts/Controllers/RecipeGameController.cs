@@ -36,12 +36,12 @@ public class RecipeGameController : AbstractGameController
         {
             if (!item.IsShield)
             {
-                molecularGameController.ReceivedRecipeInteracton(item.ParentGroup.ID - 100,item.ID,(PropolisStatus) item.status);
+                molecularGameController.ReceivedRecipeInteracton(item.ParentGroup.ID + 10,item.ID,(PropolisStatus) item.status);
             }
             else
             {
                 SendItemData(item.ParentGroup.ID, item.ID, PropolisStatus.SHIELD_ON);
-                molecularGameController.ReceiveShieldInteractionFromHive(item.ParentGroup.ID - 100, PropolisUserInteractions.PRESS);
+                molecularGameController.ReceiveShieldInteractionFromHive(item.ParentGroup.ID + 10, PropolisUserInteractions.PRESS);
             }
         }
         else if(item.ParentGroup.DataType == PropolisDataTypes.RecipeGroup)
@@ -53,7 +53,7 @@ public class RecipeGameController : AbstractGameController
             else
             {
                 SendItemData(item.ParentGroup.ID, item.ID, PropolisStatus.SHIELD_OFF);
-                molecularGameController.ReceiveShieldInteractionFromHive(item.ParentGroup.ID - 100, PropolisUserInteractions.PULL_OFF);
+                molecularGameController.ReceiveShieldInteractionFromHive(item.ParentGroup.ID + 10, PropolisUserInteractions.PULL_OFF);
             }
         }
     }

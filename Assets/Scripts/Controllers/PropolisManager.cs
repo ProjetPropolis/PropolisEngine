@@ -542,7 +542,7 @@ namespace Propolis
             {
                 case PropolisDataTypes.HexGroup: validDelete = _propolisData.DeleteDataGroup(PropolisDataTypes.HexGroup, _TempLastBuffer.ID, out statusMessage); break;
                 case PropolisDataTypes.AtomGroup: validDelete = _propolisData.DeleteDataGroup(PropolisDataTypes.AtomGroup, _TempLastBuffer.ID, out statusMessage); break;
-
+                case PropolisDataTypes.RecipeGroup: validDelete = _propolisData.DeleteDataGroup(PropolisDataTypes.RecipeGroup, _TempLastBuffer.ID, out statusMessage); break;
                 default: AppendToConsoleLog("Error on create method, Invalid type : " + type); break;
             }
 
