@@ -1548,6 +1548,11 @@ Prefab:
       propertyPath: molecularGameController
       value: 
       objectReference: {fileID: 2043317333}
+    - target: {fileID: 114304258551401574, guid: a02e9773f95fd4048bdd45f81bc64e6e,
+        type: 2}
+      propertyPath: molecularGameController
+      value: 
+      objectReference: {fileID: 2043317333}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a02e9773f95fd4048bdd45f81bc64e6e, type: 2}
   m_IsPrefabParent: 0

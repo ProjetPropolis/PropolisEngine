@@ -32,6 +32,7 @@ namespace Propolis
         public const float TargetIntervalBetweenClimaxes = 600.0f;
         public const float CriticalOnHexRatio = 0.1f;
         public const float BatteryLevelLostWhenCritical = -0.15f;
+        public const float RecipeBlinkingHintTime = 0.7f;
         public static PropolisStatus[] StatusFreeToBeCorrupted = new PropolisStatus[] { PropolisStatus.ON, PropolisStatus.OFF };
     }
 

@@ -15,6 +15,7 @@ namespace Propolis
         public OSCClient BatteryOSC, SoundOSC, MolecularHUDOSC;
         public int BatteryPort, SoundPort, MolecularHUDPort;
         public string BatteryAddress, SoundAddress, MolecularHUDAddress;
+        public MolecularGameController molecularGameController;
 
 
         // Use this for initialization
@@ -50,7 +51,6 @@ namespace Propolis
         }
 
 
-
         public void ExportFromModel()
         {
             if (Propolis.PropolisData.Instance.IsGamePlaying)
@@ -82,7 +82,7 @@ namespace Propolis
             SendHUDMessage("/WaveProgression", d.WaveProgress);
             SendHUDMessage("/WaveIsActive", d.WaveActivated ? 1 : 0 );
 
-
+            int i = 0;
             foreach (var molecule in d.AtomGroupList)
             {
                 SendHUDMessage(string.Format("/recipe_lvl2_{0}", molecule.ID), 0);
@@ -91,11 +91,20 @@ namespace Propolis
                 {
                     SendHUDMessage(string.Format("/atomgroup{0}_{1}",molecule.ID,atom.ID), atom.Status);
                 }
-                
+
+                try
+                {
+                    SendHUDMessage(string.Format("/atomgroup_distanceWave{0}", molecule.ID), molecularGameController.DistancesFromWave[i]);
+                }
+                catch (Exception)
+                {
+                    return;
+                }
+               
+                i++;
             }
             
         }
-
         public void ExportAllGroupPosition()
         {
             PropolisData.Instance.HexGroupList.ForEach(x => SendAbstractGroupPosition("/hexgroup_pos",x.ID,x.GetPosition().x,x.GetPosition().y));

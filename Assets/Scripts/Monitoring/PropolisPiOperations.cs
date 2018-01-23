@@ -35,6 +35,7 @@ namespace Propolis
             RunCommand(alertUIController,PiID, "sudo reboot");
         }
 
+
         public static void RestartPythonScript(PropolisAlertUIController alertUIController, int PiID)
         {
 

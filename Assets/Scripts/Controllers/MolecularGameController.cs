@@ -12,6 +12,8 @@ public class MolecularGameController : AbstractGameController
     private WaveController WaveController;
     private System.Random random;
     public PropolisAlertUIController AlertController;
+    public List<float> DistancesFromWave;
+    private Vector3 WaveOriginalTransform;
     //To be used instead of Update or FixedUpdate.
 
     private void Start()
@@ -22,6 +24,16 @@ public class MolecularGameController : AbstractGameController
     public   override void UpdateGameLogic()
     {
 
+    }
+
+    public void ProcessDistancesFromMoleculeAndWave()
+    {
+        DistancesFromWave = new List<float>();
+        foreach (var group in ListOfGroups)
+        {
+            DistancesFromWave.Add(( WaveController.transform.position.x - group.transform.position.x )/ ((GameArea.x + GameArea.width) - group.transform.position.x));
+
+        }
     }
 
     public override void UpdateFromModel()
@@ -156,7 +168,7 @@ public class MolecularGameController : AbstractGameController
             item.StatusLocked = true;
         }
 
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(PropolisGameSettings.RecipeBlinkingHintTime);
 
         for (int i = 0; i < items.Count; i++)
         {
@@ -272,6 +284,7 @@ public class MolecularGameController : AbstractGameController
         SetAllItemsTo(PropolisStatus.OFF);
         RandomizeAtoms();
         GenerateWaveGameController();
+        DistancesFromWave = new List<float>();
         StopAllCoroutines();
         StartCoroutine(ProcessWaveTrigger());
         StartCoroutine(ProcessWaveMovement());
@@ -340,6 +353,7 @@ public class MolecularGameController : AbstractGameController
     {
         while (true) { 
             WaveController.UpdateMovement();
+            ProcessDistancesFromMoleculeAndWave();
             yield return new WaitForSeconds(0.03f);
         }
     }
