@@ -1541,7 +1541,7 @@ Prefab:
     - target: {fileID: 114304258551401574, guid: a02e9773f95fd4048bdd45f81bc64e6e,
         type: 2}
       propertyPath: SoundAddress
-      value: 10.0.1.127
+      value: 10.0.1.102
       objectReference: {fileID: 0}
     - target: {fileID: 114284565043113564, guid: a02e9773f95fd4048bdd45f81bc64e6e,
         type: 2}
@@ -1553,6 +1553,11 @@ Prefab:
       propertyPath: molecularGameController
       value: 
       objectReference: {fileID: 2043317333}
+    - target: {fileID: 114304258551401574, guid: a02e9773f95fd4048bdd45f81bc64e6e,
+        type: 2}
+      propertyPath: BatteryAddress
+      value: 10.0.1.103
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a02e9773f95fd4048bdd45f81bc64e6e, type: 2}
   m_IsPrefabParent: 0

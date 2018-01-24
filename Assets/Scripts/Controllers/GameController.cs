@@ -163,6 +163,7 @@ public class GameController : MonoBehaviour {
     private void  StartGame()
     {
         Debug.Log("play");
+        PropolisGameSettings.CurrentDifficultyMultiplier = 1.0f;
         hiveGameController.InitOnPlay();
         molecularGameController.InitOnPlay();
         recipeGameController.InitOnPlay();
@@ -274,7 +275,7 @@ public class GameController : MonoBehaviour {
         }
         else
         {
-            SendCommand(string.Format("{0} {1}", PropolisActions.SetBatteryLevel, propolisData.BatteryLevel + increment));
+            SendCommand(string.Format("{0} {1}", PropolisActions.SetBatteryLevel, futureBatteryLevel));
         }
         
     }

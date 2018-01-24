@@ -16,6 +16,7 @@ namespace Propolis
         public int BatteryPort, SoundPort, MolecularHUDPort;
         public string BatteryAddress, SoundAddress, MolecularHUDAddress;
         public MolecularGameController molecularGameController;
+        
 
 
         // Use this for initialization
@@ -81,6 +82,20 @@ namespace Propolis
             SendHUDMessage("/reservoir", d.BatteryLevel);
             SendHUDMessage("/WaveProgression", d.WaveProgress);
             SendHUDMessage("/WaveIsActive", d.WaveActivated ? 1 : 0 );
+
+            try
+            {
+                SendHUDMessage("/RecipeItem1", PropolisData.Instance.RecipeStack.ToArray()[1].GetItem(0));
+                SendHUDMessage("/RecipeItem2", PropolisData.Instance.RecipeStack.ToArray()[1].GetItem(1));
+                SendHUDMessage("/RecipeItem3", PropolisData.Instance.RecipeStack.ToArray()[1].GetItem(2));
+            }
+            catch (Exception)
+            {
+
+
+            }
+
+
 
             int i = 0;
             foreach (var molecule in d.AtomGroupList)
