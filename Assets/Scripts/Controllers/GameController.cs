@@ -190,7 +190,10 @@ public class GameController : MonoBehaviour {
             }
             else
             {
-                IncrementBatteryLevel(1/(PropolisGameSettings.TargetIntervalBetweenClimaxes / (PropolisGameSettings.BatteryUpdateDeltaTime * 0.40f * currenBoardRatio)));
+                float numberOfWishedUpdate = PropolisGameSettings.TargetIntervalBetweenClimaxes / PropolisGameSettings.BatteryUpdateDeltaTime;
+                float BatteryIncrement = 1/(numberOfWishedUpdate*currenBoardRatio * 2.0f);
+
+                IncrementBatteryLevel(BatteryIncrement);
             }
         }
             

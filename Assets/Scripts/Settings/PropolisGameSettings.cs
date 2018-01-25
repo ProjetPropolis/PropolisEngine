@@ -33,6 +33,7 @@ namespace Propolis
         public const float CriticalOnHexRatio = 0.1f;
         public const float BatteryLevelLostWhenCritical = -0.15f;
         public const float RecipeBlinkingHintTime = 0.7f;
+        public const float WaveInitialDistanceRatioFromGameSize = 1.5f;
         public static PropolisStatus[] StatusFreeToBeCorrupted = new PropolisStatus[] { PropolisStatus.ON, PropolisStatus.OFF };
     }
 

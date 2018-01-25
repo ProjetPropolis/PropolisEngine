@@ -36,7 +36,7 @@ public class WaveController : MonoBehaviour {
             MolecularGameController.SetWavePosition(PropolisData.Instance.WaveProgress +  PropolisGameSettings.WaveSpeed);
             transform.position = new Vector3(
                 Mathf.Lerp(
-                    MolecularGameController.GameArea.x + MolecularGameController.GameArea.width,
+                    MolecularGameController.GameArea.x + MolecularGameController.GameArea.width * PropolisGameSettings.WaveInitialDistanceRatioFromGameSize,
                     MolecularGameController.GameArea.x,
                     PropolisData.Instance.WaveProgress
             ),

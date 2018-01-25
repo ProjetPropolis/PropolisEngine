@@ -31,7 +31,7 @@ public class MolecularGameController : AbstractGameController
         DistancesFromWave = new List<float>();
         foreach (var group in ListOfGroups)
         {
-            DistancesFromWave.Add(( WaveController.transform.position.x - group.transform.position.x )/ ((GameArea.x + GameArea.width) - group.transform.position.x));
+            DistancesFromWave.Add(( WaveController.transform.position.x - group.transform.position.x )/ ((GameArea.x + GameArea.width * PropolisGameSettings.WaveInitialDistanceRatioFromGameSize) - group.transform.position.x));
 
         }
     }
@@ -276,12 +276,20 @@ public class MolecularGameController : AbstractGameController
     {
         base.InitOnPlay();
         random = new System.Random();
-        Reset();       
+        Reset();    
+        
     }
 
     private void Reset()
     {
         SetAllItemsTo(PropolisStatus.OFF);
+        ListOfItems.ForEach(x =>
+        {
+            if(x.ID == 9)
+            {
+                SendItemData(x.ParentGroup.ID, x.ID, PropolisStatus.SHIELD_OFF);
+            }
+        });
         RandomizeAtoms();
         GenerateWaveGameController();
         DistancesFromWave = new List<float>();
@@ -320,7 +328,7 @@ public class MolecularGameController : AbstractGameController
     private void GenerateWaveGameController()
     {
 
-        WaveGameObjectInstance.transform.position = new Vector3(GameArea.x + GameArea.width, GameArea.y + GameArea.height * .5f);
+        WaveGameObjectInstance.transform.position = new Vector3(GameArea.x + GameArea.width * PropolisGameSettings.WaveInitialDistanceRatioFromGameSize, GameArea.y + GameArea.height * .5f);
         WaveGameObjectInstance.transform.localScale = new Vector3(1, GameArea.height, 1);
 
         BoxCollider2D waveBoxCollider = WaveGameObjectInstance.GetComponent<BoxCollider2D>();
