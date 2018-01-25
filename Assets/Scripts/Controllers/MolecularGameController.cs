@@ -229,23 +229,14 @@ public class MolecularGameController : AbstractGameController
 
                     if(recipe != null)
                     {
-                        if (compareResult == PropolisRecipeCompareStatus.PERFECT)
-                        {
-                            ProcessLevel2Climax(group, recipe);
-                            GameController.PushRecipe();
-                            GameController.ProcessSuccessfulRecipe(compareResult);
-                            AlertController.Show("Propolis Event", "Climax Molecular level 3");
-                            GameController.PropolisExport.SendRecipeEventToHUDS(group.ID, 3);
-                            GameController.IncrementBatteryLevel(PropolisGameSettings.ScorePressOnRecipeLvl3);
-                        }
-                        else
-                        {
-                            ProcessLevel2Climax(group, recipe);
-                            AlertController.Show("Propolis Event", "Climax Molecular level 2");
-                            GameController.PropolisExport.SendRecipeEventToHUDS(group.ID,2);
-                            GameController.ProcessSuccessfulRecipe(PropolisRecipeCompareStatus.IMPERFECT);
-                            GameController.IncrementBatteryLevel(PropolisGameSettings.ScorePressOnRecipeLvl2);
-                        }
+
+                        
+                        ProcessLevel2Climax(group, recipe);
+                        AlertController.Show("Propolis Event", "Climax Molecular level 2");
+                        GameController.PropolisExport.SendRecipeEventToHUDSAndSound(group.ID, 2);
+                        GameController.ProcessSuccessfulRecipe(PropolisRecipeCompareStatus.IMPERFECT);
+                        //GameController.IncrementBatteryLevel(PropolisGameSettings.ScorePressOnRecipeLvl2);
+                        
                     }
 
 

@@ -32,7 +32,7 @@ public class RecipeGameController : AbstractGameController
 
     public override void ProcessUserInteraction(AbstractItem item, PropolisUserInteractions userAction)
     {
-        if(userAction == PropolisUserInteractions.PRESS && item.ParentGroup.DataType == PropolisDataTypes.RecipeGroup)
+       /* if(userAction == PropolisUserInteractions.PRESS && item.ParentGroup.DataType == PropolisDataTypes.RecipeGroup)
         {
             if (!item.IsShield)
             {
@@ -55,7 +55,7 @@ public class RecipeGameController : AbstractGameController
                 SendItemData(item.ParentGroup.ID, item.ID, PropolisStatus.SHIELD_OFF);
                 molecularGameController.ReceiveShieldInteractionFromHive(item.ParentGroup.ID + 10, PropolisUserInteractions.PULL_OFF);
             }
-        }
+        }*/
     }
 
   
@@ -68,7 +68,7 @@ public class RecipeGameController : AbstractGameController
 
     public void UpdateFromNewRecipe()
     {
-        if (PropolisData.Instance.RecipeStack.Count >= 3)
+        /*if (PropolisData.Instance.RecipeStack.Count >= 3)
         {
             PropolisRecipe recipe = PropolisData.Instance.RecipeStack.ToArray()[1];
 
@@ -81,7 +81,7 @@ public class RecipeGameController : AbstractGameController
                 }
 
             }
-        }
+        }*/
     }
 
     public override void InitOnPlay()

@@ -21,7 +21,7 @@ namespace Propolis
         public const float HexSafeTimeAfterCleanse = 2.0f;
         public const float CleansingStateDuration = 0.7f;
         public const float IntervalBetweenWaves = 20.0f;
-        public const float WaveSpeed = 0.005f;
+        public const float WaveSpeed = 0.002f;
         public const float AtomSaturationCorruptionTime = 0.8f;
         public static float CurrentDifficultyMultiplier = 1.0f;
         public const float DifficultyModifier = 0.1f;

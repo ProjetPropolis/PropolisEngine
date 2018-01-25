@@ -71,9 +71,35 @@ namespace Propolis
                     SendBatteryOscMessage("/battery",PropolisData.Instance.BatteryLevel);
                 }
 
+
                 ExportToHUDS();
+                ExportToSound();
 
             } 
+        }
+
+        private void ExportToSound()
+        {
+            PropolisData d = PropolisData.Instance;
+            SendSoundMessage("/reservoir", d.BatteryLevel);
+            SendSoundMessage("/WaveProgression", d.WaveProgress);
+            SendSoundMessage("/difficulty", PropolisGameSettings.CurrentDifficultyMultiplier);
+            SendSoundMessage("/WaveIsActive", d.WaveActivated ? 1 : 0);
+
+
+
+
+            //int i = 0;
+            //foreach (var molecule in d.AtomGroupList)
+            //{
+            //    SendSoundMessage(string.Format("/recipe_lvl2_{0}", molecule.ID), 0);
+            //    foreach (var atom in molecule.Childrens)
+            //    {
+            //        SendSoundMessage(string.Format("/atomgroup{0}_{1}", molecule.ID, atom.ID), atom.Status);
+            //    }
+
+            //    i++;
+            //}
         }
 
         private void ExportToHUDS()
@@ -83,17 +109,6 @@ namespace Propolis
             SendHUDMessage("/WaveProgression", d.WaveProgress);
             SendHUDMessage("/WaveIsActive", d.WaveActivated ? 1 : 0 );
 
-            try
-            {
-                SendHUDMessage("/RecipeItem1", PropolisData.Instance.RecipeStack.ToArray()[1].GetItem(0));
-                SendHUDMessage("/RecipeItem2", PropolisData.Instance.RecipeStack.ToArray()[1].GetItem(1));
-                SendHUDMessage("/RecipeItem3", PropolisData.Instance.RecipeStack.ToArray()[1].GetItem(2));
-            }
-            catch (Exception)
-            {
-
-
-            }
 
 
 
@@ -101,7 +116,6 @@ namespace Propolis
             foreach (var molecule in d.AtomGroupList)
             {
                 SendHUDMessage(string.Format("/recipe_lvl2_{0}", molecule.ID), 0);
-                SendHUDMessage(string.Format("/recipe_lvl3_{0}", molecule.ID), 0);
                 foreach (var atom in molecule.Childrens)
                 {
                     SendHUDMessage(string.Format("/atomgroup{0}_{1}",molecule.ID,atom.ID), atom.Status);
@@ -126,10 +140,12 @@ namespace Propolis
             //PropolisData.Instance.AtomGroupList.ForEach(x => SendAbstractGroupPosition("/atomgroup_pos", x.ID, x.GetPosition().x, x.GetPosition().y));
             //PropolisData.Instance.RecipeGroupList.ForEach(x => SendAbstractGroupPosition("/recipegroup_pos", x.ID, x.GetPosition().x, x.GetPosition().y));
         }
-        public void SendRecipeEventToHUDS(int groupId,int lvl)
+        public void SendRecipeEventToHUDSAndSound(int groupId,int lvl)
         {
             SendHUDMessage(string.Format("/recipe_lvl{1}_{0}", groupId,lvl),1);
             SendHUDMessage(string.Format("/recipe_lvl{1}_{0}", groupId, lvl), 0);
+            SendSoundMessage(string.Format("/recipe_lvl{1}_{0}", groupId, lvl), 1);
+            SendSoundMessage(string.Format("/recipe_lvl{1}_{0}", groupId, lvl), 0);
         }
 
         private void SendOscMessage(string address, int value, int value2, int value3)
@@ -159,7 +175,13 @@ namespace Propolis
 
         }
 
+        private void SendSoundMessage(string address, float value)
+        {
+            OSCMessage message = new OSCMessage(address);
+            message.Append<float>(value);
+            SoundOSC.Send(message);
 
+        }
         private void SendBatteryOscMessage(string address, float value)
         {
             OSCMessage message = new OSCMessage(address);
