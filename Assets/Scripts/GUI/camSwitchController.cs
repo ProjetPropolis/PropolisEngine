@@ -12,7 +12,8 @@ public class camSwitchController : MonoBehaviour {
 	public void Start() {
 		cams = GameObject.FindGameObjectsWithTag("aView");
 		switchCam(initialState);
-	}
+        genericUi.UpdateInteractables("interactableZoneRuche");
+    }
 
     public void Update()
     {
