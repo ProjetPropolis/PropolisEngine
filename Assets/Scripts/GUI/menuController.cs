@@ -9,9 +9,9 @@ public class menuController : MonoBehaviour {
 	public Text btnArrowText;
 
 	void Start () {
-		menuAnimator.SetBool("showBool", true);	
+		menuAnimator.SetBool("showBool", false);	
 		updateArrow ();
-	}
+    }
 
 	void Update(){
 		if (Input.GetKeyDown("escape")) {
