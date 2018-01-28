@@ -1506,7 +1506,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4156677189815566, guid: a02e9773f95fd4048bdd45f81bc64e6e, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 114498831683773736, guid: a02e9773f95fd4048bdd45f81bc64e6e,
         type: 2}
@@ -3775,6 +3775,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!1 &507621719 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1282458792374670, guid: a02e9773f95fd4048bdd45f81bc64e6e,
+    type: 2}
+  m_PrefabInternal: {fileID: 190441851}
+--- !u!114 &507621720 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114304258551401574, guid: a02e9773f95fd4048bdd45f81bc64e6e,
+    type: 2}
+  m_PrefabInternal: {fileID: 190441851}
+  m_Script: {fileID: 11500000, guid: 26a5c68aeb2c87844bd928c6122ef6a3, type: 3}
+--- !u!114 &507621721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 507621719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b18bb21456d259148a9227e7e7526956, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameController: {fileID: 1782982170}
+  hiveController: {fileID: 507621722}
+  molecularGameController: {fileID: 2043317333}
+  propolisExport: {fileID: 507621720}
+--- !u!114 &507621722 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114808596420459798, guid: a02e9773f95fd4048bdd45f81bc64e6e,
+    type: 2}
+  m_PrefabInternal: {fileID: 190441851}
+  m_Script: {fileID: 11500000, guid: 0f9408f246cfbc243a000edb4b83fdb6, type: 3}
 --- !u!1 &514777957
 GameObject:
   m_ObjectHideFlags: 0
@@ -11887,7 +11919,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1448009966
 GameObject:

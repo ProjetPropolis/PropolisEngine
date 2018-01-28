@@ -16,6 +16,7 @@ public class AbstractGroup : MonoBehaviour {
     public List<AbstractItem> ChildItemsList;
     public AbstractGameController parentGameController;
     public string DataType;
+    [SerializeField]
     public OSCClient OSC;
     private bool _IsLocked;
     public GameObject EnvironnementalRepresentation;

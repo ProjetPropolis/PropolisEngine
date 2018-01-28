@@ -79,51 +79,7 @@ public class GameController : MonoBehaviour {
         propolisManager.SendCommand(command);
     }
 
-    private void UpdateBattery()
-    {
-
-        if (propolisData.IsGamePlaying && 
-            propolisData.LastEvent.Action == PropolisActions.UpdateItemStatus)
-        {
-           PropolisGroupItemData newItemData =propolisData.GetGroupDataById(propolisData.LastEvent.GroupID, 
-               propolisData.LastEvent.Type).Childrens.FirstOrDefault(x=> x.ID == propolisData.LastEvent.ID);
-            AbstractItem previousItemData =null;
-            switch (propolisData.LastEvent.Type)
-            {
-                case PropolisDataTypes.HexGroup:
-                     previousItemData = hiveGameController.ListOfGroups.FirstOrDefault(x => x.ID == propolisData.LastEvent.GroupID)
-                    .ChildItemsList.FirstOrDefault(x => x.ID == propolisData.LastEvent.ID);
-                    break;
-                case PropolisDataTypes.AtomGroup:
-                    previousItemData = molecularGameController.ListOfGroups.FirstOrDefault(x => x.ID == propolisData.LastEvent.GroupID)
-                   .ChildItemsList.FirstOrDefault(x => x.ID == propolisData.LastEvent.ID);
-                    break;
-                case PropolisDataTypes.RecipeGroup:
-                    previousItemData = recipeGameController.ListOfGroups.FirstOrDefault(x => x.ID == propolisData.LastEvent.GroupID)
-                   .ChildItemsList.FirstOrDefault(x => x.ID == propolisData.LastEvent.ID);
-                    break;
-            }
-
-            if (previousItemData != null)
-            {
-                if (newItemData.Status == (int)PropolisStatus.ON || newItemData.Status == (int)PropolisStatus.CLEANSING)
-                {
-                    switch (previousItemData.PrevState)
-                    {
-                        case PropolisStatus.ON: IncrementBatteryLevel(PropolisGameSettings.ScorePressOnActiveHex); break;
-                        case PropolisStatus.CORRUPTED: IncrementBatteryLevel(PropolisGameSettings.ScorePressOnCorruptedHex); break;
-                        case PropolisStatus.ULTRACORRUPTED: IncrementBatteryLevel(PropolisGameSettings.ScoreOnCleanUltraCorruptedHex); break;
-                        case PropolisStatus.CLEANSER: IncrementBatteryLevel(PropolisGameSettings.ScorePressOnCleannerHex); break;
-                    }
-                }
-
-                
-            }
-           
-        }
-
-
-    }
+   
 
 
     public void UpdateFromModel()
@@ -141,7 +97,6 @@ public class GameController : MonoBehaviour {
         hiveGameController.UpdateFromModel();
         molecularGameController.UpdateFromModel();
         recipeGameController.UpdateFromModel();
-        //UpdateBattery();
 
 
     }
@@ -230,6 +185,8 @@ public class GameController : MonoBehaviour {
 
 
 
+
+
     public void PushRecipe()
     {
         int r1 =random.Next(3) + (int)PropolisStatus.RECIPE1;
@@ -285,12 +242,16 @@ public class GameController : MonoBehaviour {
 
     public void ProcessUserInteraction(string type, AbstractItem item, PropolisUserInteractions userAction)
     {
-        switch (type)
-        {
-            case PropolisDataTypes.HexGroup: hiveGameController.ProcessUserInteraction(item, userAction);break;
-            case PropolisDataTypes.AtomGroup: molecularGameController.ProcessUserInteraction(item, userAction);break;
-            case PropolisDataTypes.RecipeGroup: recipeGameController.ProcessUserInteraction(item, userAction); break;
+        if (PropolisData.Instance.IsGamePlaying) {
+
+            switch (type)
+            {
+                case PropolisDataTypes.HexGroup: hiveGameController.ProcessUserInteraction(item, userAction); break;
+                case PropolisDataTypes.AtomGroup: molecularGameController.ProcessUserInteraction(item, userAction); break;
+                case PropolisDataTypes.RecipeGroup: recipeGameController.ProcessUserInteraction(item, userAction); break;
+            }
         }
+
     }
    
 

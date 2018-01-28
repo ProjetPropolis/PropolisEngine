@@ -98,6 +98,14 @@ public class AbstractItem : MonoBehaviour {
             case PropolisStatus.BLINKRECIPE1: material.color = PropolisColors.Orange; break;
             case PropolisStatus.BLINKRECIPE2: material.color = PropolisColors.Fushia; break;
             case PropolisStatus.BLINKRECIPE3: material.color = PropolisColors.DarkBlue; break;
+            case PropolisStatus.ANIM_TURQUOISE: material.color = PropolisColors.Blue; break;
+            case PropolisStatus.ANIM_ORANGE: material.color = PropolisColors.Orange; break;
+            case PropolisStatus.ANIM_YELLOW: material.color = PropolisColors.Yellow; break;
+            case PropolisStatus.ANIM_PURPLE: material.color = PropolisColors.Purple; break;
+            case PropolisStatus.ANIM_SNAKE: material.color = PropolisColors.Blue; break;
+            case PropolisStatus.ANIM_BLACK: material.color = PropolisColors.Dark; break;
+            
+
         }
 
     }
@@ -173,14 +181,17 @@ public class AbstractItem : MonoBehaviour {
 
 	}
 
-   //DEPRACIATED NOW USING MOUSE CONTROLLER TO GET CLICKS ON HEX
-   // private void OnMouseOver()
-   //{
-   //    if(Input.GetMouseButtonDown(1))
-   //     {
-   //         ParentGroup.SendHexDataToHiveController(ID, PropolisStatus.ON);
-   //    }
-   // }
+
+    public void BlockDectection()
+    {
+        SendOscMessage("/status", ID, (int)PropolisStatus.DETECTION_OFF);
+    }
+
+    public void RestoreDectection()
+    {
+        SendOscMessage("/status", ID, (int)PropolisStatus.DETECTION_ON);
+    }
+
 
     private void SendOscMessage(string address, int value, int value2)
     {
