@@ -6,7 +6,7 @@ public class EditorDummyVisibility : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        gameObject.SetActive(Debug.isDebugBuild);
+        gameObject.SetActive(false);
 	}
 	
 	// Update is called once per frame
