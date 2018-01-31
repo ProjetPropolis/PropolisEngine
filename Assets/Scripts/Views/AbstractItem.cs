@@ -10,6 +10,7 @@ public class AbstractItem : MonoBehaviour {
 
     public PropolisStatus status;
     public PropolisStatus PrevState { get; set; }
+    public int i = 0;
     
 
     public PropolisStatus Status {
@@ -25,8 +26,10 @@ public class AbstractItem : MonoBehaviour {
             ChangeColor();
 
             if(ParentGroup.OSC != null) {
+
                 SendOscMessage("/status", ID, (int)status);
-            }                   
+            }      
+            
 
         }
     }
@@ -198,6 +201,10 @@ public class AbstractItem : MonoBehaviour {
 
     private void SendOscMessage(string address, int value, int value2)
     {
+        if (ParentGroup.ID == 22 && status == PropolisStatus.ANIM_TURQUOISE)
+        {
+            Debug.Log(value);
+        }
         OSCMessage message = new OSCMessage(address);
         message.Append<int>(value);
         message.Append<int>(value2);

@@ -30,7 +30,9 @@ namespace Propolis
         ANIM_GREEN,
         ANIM_BLACK,
         ANIM_TURQUOISE_FADE,
-        ANIM_SNAKE_TURQUOISE
+        ANIM_SNAKE_TURQUOISE,
+        ANIM_SNAKE_YELLOW,
+        ANIM_GREEN_TURQUOISE,
     }
 }
 

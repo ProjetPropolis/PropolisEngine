@@ -12,9 +12,9 @@ namespace Propolis
     public class PropolisExport : MonoBehaviour
     {
 
-        public OSCClient BatteryOSC, SoundOSC, MolecularHUDOSC;
-        public int BatteryPort, SoundPort, MolecularHUDPort;
-        public string BatteryAddress, SoundAddress, MolecularHUDAddress;
+        public OSCClient BatteryOSC, SoundOSC, MolecularHUDOSC,PKOSC;
+        public int BatteryPort, SoundPort, MolecularHUDPort, PKPort;
+        public string BatteryAddress, SoundAddress, MolecularHUDAddress, PKAddress;
         public MolecularGameController molecularGameController;
         
 
@@ -26,6 +26,7 @@ namespace Propolis
             UpdateOscComponent(ref BatteryOSC, BatteryAddress, BatteryPort);
             UpdateOscComponent(ref SoundOSC, SoundAddress, SoundPort);
             UpdateOscComponent(ref MolecularHUDOSC, MolecularHUDAddress, MolecularHUDPort);
+            UpdateOscComponent(ref PKOSC, PKAddress, PKPort);
 
         }
 
@@ -58,12 +59,19 @@ namespace Propolis
             {
                 if (PropolisData.Instance.LastEvent.Action== PropolisActions.UpdateItemStatus)
                 {
+                    PropolisStatus lastStatus = (PropolisStatus)PropolisData.Instance.GetItemDataById(PropolisData.Instance.LastEvent.GroupID, PropolisData.Instance.LastEvent.ID, PropolisData.Instance.LastEvent.Type).Status;
                     PropolisLastEventState lastEvent = Propolis.PropolisData.Instance.LastEvent;
                     SendOscMessage(
                         "/" + lastEvent.Type,
                         lastEvent.GroupID, lastEvent.ID,
-                        PropolisData.Instance.GetItemDataById(lastEvent.GroupID, lastEvent.ID, lastEvent.Type).Status);
+                        PropolisData.Instance.GetItemDataById(lastEvent.GroupID, lastEvent.ID, lastEvent.Type).Status, SoundOSC);
+                    if (lastStatus == PropolisStatus.ON && PropolisData.Instance.LastEvent.Type == PropolisDataTypes.HexGroup) {
+                        SendPkMessage("/hexpress",1);
+                        SendPkMessage("/hexpress", 0);
+                    }
                     
+
+
 
                 }
                 else if (PropolisData.Instance.LastEvent.Action == PropolisActions.SetBatteryLevel)
@@ -74,8 +82,19 @@ namespace Propolis
 
                 ExportToHUDS();
                 ExportToSound();
+                ExportToPK();
 
             } 
+        }
+
+
+
+        private void ExportToPK() {
+            PropolisData d = PropolisData.Instance;
+            SendPkMessage("/reservoir", d.BatteryLevel);
+            SendPkMessage("/WaveProgression", d.WaveProgress);
+            SendPkMessage("/difficulty", PropolisGameSettings.CurrentDifficultyMultiplier);
+            SendPkMessage("/WaveIsActive", d.WaveActivated ? 1 : 0);
         }
 
         private void ExportToSound()
@@ -148,13 +167,13 @@ namespace Propolis
             SendSoundMessage(string.Format("/recipe_lvl{1}_{0}", groupId, lvl), 0);
         }
 
-        private void SendOscMessage(string address, int value, int value2, int value3)
+        private void SendOscMessage(string address, int value, int value2, int value3, OSCClient client)
         {
             OSCMessage message = new OSCMessage(address);
             message.Append<int>(value);
             message.Append<int>(value2);
             message.Append<int>(value3);
-            SoundOSC.Send(message);
+            client.Send(message);
 
         }
 
@@ -180,6 +199,14 @@ namespace Propolis
             OSCMessage message = new OSCMessage(address);
             message.Append<float>(value);
             SoundOSC.Send(message);
+
+        }
+
+        private void SendPkMessage(string address, float value)
+        {
+            OSCMessage message = new OSCMessage(address);
+            message.Append<float>(value);
+            PKOSC.Send(message);
 
         }
         private void SendBatteryOscMessage(string address, float value)

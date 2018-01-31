@@ -69,15 +69,15 @@ public class MolecularGameController : AbstractGameController
     private IEnumerator PlayLevel2Climax(AbstractGroup group, PropolisRecipe recipe)
     {
         group.IsPlayingAnimation = true;
-        foreach (var item in group.ChildItemsList)
+        //foreach (var item in group.ChildItemsList)
 
-        {
-            if (item.ID != 9)
-            {
-                SendItemData(group.ID, item.ID,PropolisStatus.OFF);
-                yield return new WaitForSeconds(0.05f);
-            }
-        }
+        //{
+        //    if (item.ID != 9)
+        //    {
+        //        SendItemData(group.ID, item.ID,PropolisStatus.OFF);
+        //        yield return new WaitForSeconds(f);
+        //    }
+        //}
         for (int i = 0; i < 3; i++)
         {
             foreach (var item in group.ChildItemsList)
@@ -86,11 +86,11 @@ public class MolecularGameController : AbstractGameController
                 if (item.ID != 9)
                 {
                     SendItemData(group.ID, item.ID, (PropolisStatus)recipe.GetItem(i));
-                    yield return new WaitForSeconds(0.02f);
+                    yield return new WaitForSeconds(0.2f);
                 }
             }
 
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.2f);
 
             foreach (var item in group.ChildItemsList)
 
@@ -98,23 +98,23 @@ public class MolecularGameController : AbstractGameController
                 if (item.ID != 9)
                 {
                     SendItemData(group.ID, item.ID, PropolisStatus.OFF);
-                    yield return new WaitForSeconds(0.02f);
+                    yield return new WaitForSeconds(0.2f);
                 }
             }
 
         }
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.2f);
         foreach (var item in group.ChildItemsList)
 
         {
             if (item.ID != 9)
             {
                 SendItemData(group.ID, item.ID, PropolisStatus.CLEANSER);
-                yield return new WaitForSeconds(0.02f);
+                yield return new WaitForSeconds(0.2f);
             }
         }
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.2f);
         foreach (var item in group.ChildItemsList)
 
         {
@@ -282,9 +282,9 @@ public class MolecularGameController : AbstractGameController
             }
         });
         RandomizeAtoms();
+        StopAllCoroutines();
         GenerateWaveGameController();
         DistancesFromWave = new List<float>();
-        StopAllCoroutines();
         StartCoroutine(ProcessWaveTrigger());
         StartCoroutine(ProcessWaveMovement());
     }
@@ -292,7 +292,6 @@ public class MolecularGameController : AbstractGameController
     public override void Stop()
     {
         StopAllCoroutines();
-
     }
 
     public void SetWavePosition(float position)

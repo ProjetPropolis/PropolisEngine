@@ -26,6 +26,10 @@ public class GameController : MonoBehaviour {
     bool _mustReadData ;
     private System.Random random;
 
+    public void SetDetectionOFF()
+    {
+        hiveGameController.ListOfItems.ForEach(x => x.BlockDectection());
+    }
 
 	void Start () {
         random = new System.Random();

@@ -71,22 +71,22 @@ namespace Propolis
             //}).Start();
 
 
-            new Thread(() =>
-            {
-                Debug.Log("Start Thread Update Pi");
-                using (SshClient sshclient = new SshClient(PartialIp, Username, Password))
-                {
-                    sshclient.Connect();
-                    Debug.Log("Thread started");
-                    ShellStream stream = sshclient.CreateShellStream("dumb", 80, 24, 800, 2000, 16000);
-                    Thread.Sleep(500);
-                    var result = sendCommand("python 3 Documents/python_server/serialTestVF.py", stream).ToString();
-                    Thread.Sleep(45000);
-                }
-            }).Start();
+            //new Thread(() =>
+            //{
+            //    Debug.Log("Start Thread Update Pi");
+            //    using (SshClient sshclient = new SshClient(PartialIp, Username, Password))
+            //    {
+            //        sshclient.Connect();
+            //        Debug.Log("Thread started");
+            //        ShellStream stream = sshclient.CreateShellStream("dumb", 80, 24, 800, 2000, 16000);
+            //        Thread.Sleep(500);
+            //        var result = sendCommand("./dispatchCMD.sh updateTeensy hexgroup", stream).ToString();
+
+            //    }
+            //}).Start();
 
 
-            //RunCommand(alertUIController, PiID, "/home/pi/Documents/teensyUpdate");
+            RunCommand(alertUIController, PiID, "./dispatchCMD.sh updateTeensy hexgroup");
             //RunCommand(alertUIController, PiID, ".");
 
         }
@@ -102,6 +102,33 @@ namespace Propolis
             answer = ReadStream(reader);
             Debug.Log(answer);
             return answer;
+        }
+
+        private static void TestSendCommand()
+        {
+            new Thread(() =>
+            {
+
+                try
+                {
+                    var connectionInfo = new PasswordConnectionInfo(PartialIp, 22, Username, Password);
+
+                    using (var client = new SshClient(connectionInfo))
+                    {
+                        client.Connect();
+
+                        var command = client.RunCommand("./dispatchCMD.sh updateTeensy Blink");
+                        Debug.Log(command.Result);
+
+                        client.Disconnect();
+                    }
+                }
+                catch (System.Exception e)
+                {
+                    Debug.Log("Error SSh");
+
+                }
+            }).Start();
         }
 
         private static void WriteStream(string cmd, StreamWriter writer, ShellStream stream)
