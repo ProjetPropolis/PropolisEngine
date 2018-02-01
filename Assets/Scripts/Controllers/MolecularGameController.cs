@@ -60,8 +60,7 @@ public class MolecularGameController : AbstractGameController
 
     private void ProcessLevel2Climax(AbstractGroup group, PropolisRecipe recipe)
     {
-        StopCoroutine(PlayLevel2Climax(group, recipe));
-        StartCoroutine(PlayLevel2Climax(group, recipe));
+         StartCoroutine(PlayLevel2Climax(group, recipe));
     }
 
 
@@ -69,15 +68,31 @@ public class MolecularGameController : AbstractGameController
     private IEnumerator PlayLevel2Climax(AbstractGroup group, PropolisRecipe recipe)
     {
         group.IsPlayingAnimation = true;
-        //foreach (var item in group.ChildItemsList)
 
-        //{
-        //    if (item.ID != 9)
-        //    {
-        //        SendItemData(group.ID, item.ID,PropolisStatus.OFF);
-        //        yield return new WaitForSeconds(f);
-        //    }
-        //}
+        foreach (var item in group.ChildItemsList)
+
+        {
+            if (item.ID != 9)
+            {
+                SendItemData(group.ID, item.ID, PropolisStatus.ON);
+
+            }
+        }
+
+
+        yield return new WaitForSecondsRealtime(0.7f);
+        foreach (var item in group.ChildItemsList)
+
+        {
+            if (item.ID != 9)
+            {
+                SendItemData(group.ID, item.ID,PropolisStatus.OFF);
+
+            }
+        }
+
+        yield return new WaitForSecondsRealtime(0.7f);
+
         for (int i = 0; i < 3; i++)
         {
             foreach (var item in group.ChildItemsList)
@@ -85,42 +100,37 @@ public class MolecularGameController : AbstractGameController
             {
                 if (item.ID != 9)
                 {
+
                     SendItemData(group.ID, item.ID, (PropolisStatus)recipe.GetItem(i));
-                    yield return new WaitForSeconds(0.2f);
-                }
-            }
-
-            yield return new WaitForSeconds(0.2f);
-
-            foreach (var item in group.ChildItemsList)
-
-            {
-                if (item.ID != 9)
-                {
+                    yield return new WaitForSecondsRealtime(0.08f);
                     SendItemData(group.ID, item.ID, PropolisStatus.OFF);
-                    yield return new WaitForSeconds(0.2f);
+                    yield return new WaitForSecondsRealtime(0.08f);
                 }
             }
+
+            yield return new WaitForSeconds(0.5f);
+
+           
 
         }
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.5f);
         foreach (var item in group.ChildItemsList)
 
         {
             if (item.ID != 9)
             {
                 SendItemData(group.ID, item.ID, PropolisStatus.CLEANSER);
-                yield return new WaitForSeconds(0.2f);
             }
         }
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(1f);
+
         foreach (var item in group.ChildItemsList)
 
         {
             if (item.ID != 9)
             {
-                SendItemData(group.ID, item.ID, random.Next(3)+PropolisStatus.RECIPE1);
+                SendItemData(group.ID, item.ID, random.Next(3) + PropolisStatus.RECIPE1);
             }
         }
 
@@ -218,7 +228,7 @@ public class MolecularGameController : AbstractGameController
                     case PropolisStatus.RECIPE1: SendItemData(item.ParentGroup.ID, item.ID, PropolisStatus.RECIPE2); break;
                     case PropolisStatus.RECIPE2: SendItemData(item.ParentGroup.ID, item.ID, PropolisStatus.RECIPE3); break;
                     case PropolisStatus.RECIPE3: SendItemData(item.ParentGroup.ID, item.ID, PropolisStatus.RECIPE1); break;
-                    default: SendItemData(item.ParentGroup.ID, item.ID, item.Status); break;
+                    //default: SendItemData(item.ParentGroup.ID, item.ID, item.Status); break;
                 }
 
                 try
