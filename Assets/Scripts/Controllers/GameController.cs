@@ -31,7 +31,12 @@ public class GameController : MonoBehaviour {
         hiveGameController.ListOfItems.ForEach(x => x.BlockDectection());
     }
 
-	void Start () {
+    public void SetDetectionON()
+    {
+        hiveGameController.ListOfItems.ForEach(x => x.RestoreDectection());
+    }
+
+    void Start () {
         random = new System.Random();
         _mustReadData = false;
         propolisData = PropolisData.Instance;

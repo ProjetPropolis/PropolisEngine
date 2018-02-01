@@ -44,7 +44,7 @@ namespace Propolis {
 
         }
         private IEnumerator WaitForClimaxEnd() {
-            yield return  new WaitForSecondsRealtime((float)ClimaxDirector.duration);
+            yield return  new WaitForSecondsRealtime((float)78.0f);
             Desactivate();
         }
 
@@ -61,6 +61,7 @@ namespace Propolis {
 
         public void Desactivate()
         {
+            gameController.SetDetectionON();
             _isClimaxPlaying = false;
             gameController.SendMessage(PropolisActions.Play);
 
