@@ -5,6 +5,7 @@ using Propolis;
 using UnityOSC;
 using System;
 using System.Net;
+using System.Threading;
 
 
 namespace Propolis
@@ -134,7 +135,6 @@ namespace Propolis
             int i = 0;
             foreach (var molecule in d.AtomGroupList)
             {
-                SendHUDMessage(string.Format("/recipe_lvl2_{0}", molecule.ID), 0);
                 foreach (var atom in molecule.Childrens)
                 {
                     SendHUDMessage(string.Format("/atomgroup{0}_{1}",molecule.ID,atom.ID), atom.Status);
@@ -161,10 +161,17 @@ namespace Propolis
         }
         public void SendRecipeEventToHUDSAndSound(int groupId,int lvl)
         {
-            SendHUDMessage(string.Format("/recipe_lvl{1}_{0}", groupId,lvl),1);
-            SendHUDMessage(string.Format("/recipe_lvl{1}_{0}", groupId, lvl), 0);
+            new Thread(() =>
+            {
+                SendHUDMessage(string.Format("/recipe_lvl{1}_{0}", groupId, lvl), 1);
+                Thread.Sleep(2000);
+                SendHUDMessage(string.Format("/recipe_lvl{1}_{0}", groupId, lvl), 0);
+
+            }).Start();
+
             SendSoundMessage(string.Format("/recipe_lvl{1}_{0}", groupId, lvl), 1);
             SendSoundMessage(string.Format("/recipe_lvl{1}_{0}", groupId, lvl), 0);
+
         }
 
         private void SendOscMessage(string address, int value, int value2, int value3, OSCClient client)
