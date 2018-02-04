@@ -164,13 +164,15 @@ namespace Propolis
             new Thread(() =>
             {
                 SendHUDMessage(string.Format("/recipe_lvl{1}_{0}", groupId, lvl), 1);
+                SendSoundMessage(string.Format("/recipe_lvl{1}_{0}", groupId, lvl), 1);
                 Thread.Sleep(2000);
                 SendHUDMessage(string.Format("/recipe_lvl{1}_{0}", groupId, lvl), 0);
+                SendSoundMessage(string.Format("/recipe_lvl{1}_{0}", groupId, lvl), 0);
 
             }).Start();
 
-            SendSoundMessage(string.Format("/recipe_lvl{1}_{0}", groupId, lvl), 1);
-            SendSoundMessage(string.Format("/recipe_lvl{1}_{0}", groupId, lvl), 0);
+
+
 
         }
 
