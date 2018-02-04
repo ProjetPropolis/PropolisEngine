@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour {
     List<GameObject> tuilesActives = new List<GameObject>();
     public PropolisManager propolisManager;
     public PropolisAlertUIController AlertUiController;
+    public PropolisAnimator animator;
     public PropolisExport PropolisExport {
         get
         {
@@ -128,6 +129,8 @@ public class GameController : MonoBehaviour {
     {
         Debug.Log("play");
         PropolisGameSettings.CurrentDifficultyMultiplier = 1.0f;
+        SetDetectionON();
+        animator.Desactivate();
         hiveGameController.InitOnPlay();
         molecularGameController.InitOnPlay();
         recipeGameController.InitOnPlay();
@@ -138,7 +141,7 @@ public class GameController : MonoBehaviour {
         StopCoroutine(ProcessDifficultyLevel());
         StartCoroutine(ProcessDifficultyLevel());
         GenerateRecipe();
-       AlertUiController.Show("Propolis Event", "Gameplay Started");
+        AlertUiController.Show("Propolis Event", "Gameplay Started");
 
     }
 
