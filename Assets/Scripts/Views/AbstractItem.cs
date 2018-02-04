@@ -108,7 +108,9 @@ public class AbstractItem : MonoBehaviour {
             case PropolisStatus.ANIM_SNAKE_TURQUOISE: material.color = PropolisColors.Blue; break;
             case PropolisStatus.ANIM_BLACK: material.color = PropolisColors.Dark; break;
             case PropolisStatus.ANIM_TURQUOISE_FADE: material.color = PropolisColors.Blue; break;
-                
+            case PropolisStatus.ANIM_SNAKE_YELLOW: material.color = PropolisColors.Yellow; break;
+            case PropolisStatus.ANIM_GREEN: material.color = PropolisColors.Green; break;
+
 
 
 

@@ -11,6 +11,7 @@ namespace Propolis
         public static Color Purple { get { return GetColorFromHTML("#887fd5"); } }
         public static Color Yellow { get { return GetColorFromHTML("#FDE981"); } }
         public static Color Blue { get { return GetColorFromHTML("#0bffe3"); } }
+        public static Color Green { get { return GetColorFromHTML("#0baaFF"); } }
         public static Color White { get { return GetColorFromHTML("#FFFFFF"); } }
         public static Color Fushia { get { return GetColorFromHTML("#ff33bc"); } }
         public static Color DarkBlue { get { return GetColorFromHTML("#005af9"); } }
