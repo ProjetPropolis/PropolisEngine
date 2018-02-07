@@ -126,7 +126,6 @@ namespace Propolis
 
                 ProcessUserInteraction(item, (PropolisUserInteractions)Convert.ToInt32(data[2]));
 
-                Debug.Log(string.Format("Received: {0} {1} {2} {3}", item.ParentGroup.DataType, Convert.ToInt32(data[0]), Convert.ToInt32(data[1]), Convert.ToInt32(data[2])));
             }
             catch (Exception ex)
             {
