@@ -203,7 +203,7 @@ public class AbstractItem : MonoBehaviour {
 
     private void SendOscMessage(string address, int value, int value2)
     {
-        if (ParentGroup.ID == 22 && status == PropolisStatus.ANIM_TURQUOISE)
+        if (ParentGroup.ID == 24)
         {
             Debug.Log(value);
         }

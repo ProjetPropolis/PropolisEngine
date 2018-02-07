@@ -161,19 +161,25 @@ namespace Propolis
         }
         public void SendRecipeEventToHUDSAndSound(int groupId,int lvl)
         {
-            new Thread(() =>
-            {
+            StartCoroutine(StartSendRecipeClimax(groupId,lvl));
+
+
+
+
+
+        }
+
+        IEnumerator StartSendRecipeClimax(int groupId, int lvl) {
+
+
                 SendHUDMessage(string.Format("/recipe_lvl{1}_{0}", groupId, lvl), 1);
                 SendSoundMessage(string.Format("/recipe_lvl{1}_{0}", groupId, lvl), 1);
-                Thread.Sleep(2000);
+                yield return new WaitForSecondsRealtime(.5f);
                 SendHUDMessage(string.Format("/recipe_lvl{1}_{0}", groupId, lvl), 0);
                 SendSoundMessage(string.Format("/recipe_lvl{1}_{0}", groupId, lvl), 0);
 
-            }).Start();
 
-
-
-
+            
         }
 
         private void SendOscMessage(string address, int value, int value2, int value3, OSCClient client)
@@ -207,6 +213,14 @@ namespace Propolis
         {
             OSCMessage message = new OSCMessage(address);
             message.Append<float>(value);
+            SoundOSC.Send(message);
+
+        }
+
+        private void SendSoundMessage(string address, int value)
+        {
+            OSCMessage message = new OSCMessage(address);
+            message.Append<int>(value);
             SoundOSC.Send(message);
 
         }
