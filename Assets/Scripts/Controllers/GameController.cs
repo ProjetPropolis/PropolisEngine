@@ -175,11 +175,14 @@ public class GameController : MonoBehaviour {
             float ratioOfActiveHex = hiveGameController.GetRatioOfGivenPropolisStatus(PropolisStatus.ON);
             if (ratioOfActiveHex < PropolisGameSettings.MinStableDifficultyThreshold)
             {
-                PropolisGameSettings.CurrentDifficultyMultiplier -= PropolisGameSettings.DifficultyModifier;
+                PropolisGameSettings.CurrentDifficultyMultiplier -= PropolisGameSettings.DifficultyModifier *10.0f;
             }
             else if (ratioOfActiveHex > PropolisGameSettings.MaxStableDifficultyThreshold)
             {
                 PropolisGameSettings.CurrentDifficultyMultiplier += PropolisGameSettings.DifficultyModifier;
+
+                if (PropolisGameSettings.CurrentDifficultyMultiplier > PropolisGameSettings.MaxDifficulty)
+                    PropolisGameSettings.CurrentDifficultyMultiplier = PropolisGameSettings.MaxDifficulty;
             }
 
             PropolisGameSettings.CurrentDifficultyMultiplier = PropolisGameSettings.CurrentDifficultyMultiplier < 1f ? 1f : PropolisGameSettings.CurrentDifficultyMultiplier;
