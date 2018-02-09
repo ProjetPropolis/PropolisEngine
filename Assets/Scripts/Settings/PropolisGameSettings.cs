@@ -14,9 +14,9 @@ namespace Propolis
         public const int MaxNumOfUltraCorruped = 5; // max d'ultra corrupted (rouge) quand la difficulté est à 1
         public const float HexSafeTimeAfterCleanse = 2.0f; // Durée de protection d'une tuile jaune quand elle provient d'une bombe bleu
         public const float CleansingStateDuration = 0.7f;
-        public const float IntervalBetweenWaves = 20.0f; // Interval de seconde entre les vagues 60.0f
-        public const float WaveSpeed = 0.005f; //Rapidité de la vague valeur assez random 0.001f
-        public const float AtomSaturationCorruptionTime = 0.8f;//don't touch
+        public const float IntervalBetweenWaves = 40.0f; // Interval de seconde entre les vagues 60.0f
+        public const float WaveSpeed = 0.0025f; //Rapidité de la vague valeur assez random 0.001f
+        public const float AtomSaturationCorruptionTime = 1.6f;//don't touch
         public static float CurrentDifficultyMultiplier = 1.0f;//don't touch
         public const float DifficultyModifier = 0.1f; //Incrément de la diffulté
         public const float MinStableDifficultyThreshold = 0.45f; // Pourcentage plancher decrease difficulty
@@ -27,6 +27,7 @@ namespace Propolis
         public const float CriticalOnHexRatio = 0.1f; // Taux d'occupation du plancher minimum pour que le réservoir ne se vide pas
         public const float BatteryLevelLostWhenCritical = -0.15f; // Pourcentage du réservoir perdu si necessaire
         public const float RecipeBlinkingHintTime = 0.7f; // no longer apply
+        public const float ShieldDeactivationDelay = 3.0f;
         public const float WaveInitialDistanceRatioFromGameSize = 1.5f; // Distance de la wave 1 étant collé sur les atomes (avertir charli si changement)
         public static PropolisStatus[] StatusFreeToBeCorrupted = new PropolisStatus[] { PropolisStatus.ON, PropolisStatus.OFF }; // Dont fucking touch this.
     }

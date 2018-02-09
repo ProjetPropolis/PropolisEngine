@@ -128,7 +128,6 @@ public class GameController : MonoBehaviour {
     private void  StartGame()
     {
         StopAllCoroutines();
-        Debug.Log("play");
         PropolisGameSettings.CurrentDifficultyMultiplier = 1.0f;
         SetDetectionON();
         animator.Desactivate();

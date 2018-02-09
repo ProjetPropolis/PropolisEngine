@@ -86,7 +86,7 @@ public class MolecularGameController : AbstractGameController
         {
             if (item.ID != 9)
             {
-                SendItemData(group.ID, item.ID,PropolisStatus.OFF);
+                SendItemData(group.ID, item.ID,PropolisStatus.ANIM_BLACK);
 
             }
         }
@@ -102,9 +102,9 @@ public class MolecularGameController : AbstractGameController
                 {
 
                     SendItemData(group.ID, item.ID, (PropolisStatus)recipe.GetItem(i));
-                    yield return new WaitForSecondsRealtime(0.08f);
-                    SendItemData(group.ID, item.ID, PropolisStatus.OFF);
-                    yield return new WaitForSecondsRealtime(0.08f);
+                    yield return new WaitForSecondsRealtime(0.3f);
+                    SendItemData(group.ID, item.ID, PropolisStatus.ANIM_BLACK);
+                    yield return new WaitForSecondsRealtime(0.3f);
                 }
             }
 
@@ -215,6 +215,10 @@ public class MolecularGameController : AbstractGameController
 
     }
 
+    private IEnumerator StartShieldDeactivation(AbstractItem item) {
+        yield return new WaitForSecondsRealtime(PropolisGameSettings.ShieldDeactivationDelay);
+        SendItemData(item.ParentGroup.ID, item.ID, PropolisStatus.SHIELD_OFF);
+    }
     public override void ProcessUserInteraction(AbstractItem item, PropolisUserInteractions userAction)
     {
         if (userAction == PropolisUserInteractions.PRESS && !item.ParentGroup.IsPlayingAnimation && !item.StatusLocked)
@@ -270,7 +274,7 @@ public class MolecularGameController : AbstractGameController
         {
             if (item.IsShield)
             {
-                SendItemData(item.ParentGroup.ID, item.ID, PropolisStatus.SHIELD_OFF);
+                StartCoroutine(StartShieldDeactivation(item));
             }
         }
     }
