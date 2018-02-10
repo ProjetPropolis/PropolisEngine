@@ -60,7 +60,8 @@ public class MolecularGameController : AbstractGameController
 
     private void ProcessLevel2Climax(AbstractGroup group, PropolisRecipe recipe)
     {
-         StartCoroutine(PlayLevel2Climax(group, recipe));
+        PropolisStatsExporter.IncrementStatValue("AtomRecipeDone");
+        StartCoroutine(PlayLevel2Climax(group, recipe));
     }
 
 
@@ -307,6 +308,8 @@ public class MolecularGameController : AbstractGameController
     public override void Stop()
     {
         StopAllCoroutines();
+        StopCoroutine(ProcessWaveTrigger());
+        StopCoroutine(ProcessWaveMovement());
     }
 
     public void SetWavePosition(float position)

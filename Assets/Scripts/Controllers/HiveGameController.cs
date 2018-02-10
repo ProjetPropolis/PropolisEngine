@@ -35,8 +35,8 @@ public class HiveGameController : AbstractGameController
             switch (item.Status)
             {
                 case PropolisStatus.OFF: SendItemData(item.ParentGroup.ID, item.ID, PropolisStatus.ON);break;
-                case PropolisStatus.CORRUPTED: SendItemData(item.ParentGroup.ID, item.ID, PropolisStatus.ON); break;
-                case PropolisStatus.CLEANSER: StartCoroutine(ProcessCleanserExplosion(item.ParentGroup.ID,item.ID));break;
+                case PropolisStatus.CORRUPTED: SendItemData(item.ParentGroup.ID, item.ID, PropolisStatus.ON); PropolisStatsExporter.IncrementStatValue("AlveolesPressed"); break;
+                case PropolisStatus.CLEANSER: StartCoroutine(ProcessCleanserExplosion(item.ParentGroup.ID,item.ID)); PropolisStatsExporter.IncrementStatValue("CleanserPressed"); break;
                 default: SendItemData(item.ParentGroup.ID, item.ID,item.Status);break;
             }
 
@@ -100,7 +100,7 @@ public class HiveGameController : AbstractGameController
 
     public override void Stop()
     {
-       StopCoroutine(ProcessDeleteUltraCorrupted());
+        StopAllCoroutines();
 
     }
 
@@ -153,6 +153,7 @@ public class HiveGameController : AbstractGameController
                 {
                     SendItemData(HexToProcesss.ParentGroup.ID, HexToProcesss.ID, PropolisStatus.ON);
                     UltraCorruptedList.Remove(HexToProcesss);
+                    PropolisStatsExporter.IncrementStatValue("UltraCorruptedDestroyed");
                     InstanciateCleanser();
                 }
             }

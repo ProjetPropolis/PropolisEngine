@@ -158,7 +158,7 @@ public class GameController : MonoBehaviour {
             else
             {
                 float numberOfWishedUpdate = PropolisGameSettings.TargetIntervalBetweenClimaxes / PropolisGameSettings.BatteryUpdateDeltaTime;
-                float BatteryIncrement = 1/(numberOfWishedUpdate*currenBoardRatio * 2.0f);
+                float BatteryIncrement = 1/(numberOfWishedUpdate*currenBoardRatio * .5f);
 
                 IncrementBatteryLevel(BatteryIncrement);
             }
@@ -246,6 +246,10 @@ public class GameController : MonoBehaviour {
        
         if (futureBatteryLevel >= 1 || futureBatteryLevel < 0)
         {
+            if (futureBatteryLevel >= 1) {
+                PropolisStatsExporter.IncrementStatValue("ReservoirFilled");
+                animator.StartClimax();
+            }
             SendCommand(string.Format("{0} {1}", PropolisActions.SetBatteryLevel, 0));
         }
         else

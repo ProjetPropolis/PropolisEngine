@@ -25,7 +25,7 @@ namespace Propolis
         private void Awake()
         {
             ConsoleLog = "";
-   
+            PropolisStatsExporter.LoadStatsFromFile();
             _propolisData = PropolisData.Instance;
             
 
@@ -35,11 +35,22 @@ namespace Propolis
         {
             SendCommand("load");
             StartCoroutine(CleanConsole());
+            StartCoroutine(ProcessStatsSaveLoop());
+        }
+
+        private IEnumerator ProcessStatsSaveLoop() {
+
+            while (true)
+            {
+                yield return new WaitForSeconds(10);
+                PropolisStatsExporter.SaveStats();
+            }
         }
 
         private void OnDestroy()
         {
             StopCoroutine(CleanConsole());
+            StopCoroutine(ProcessStatsSaveLoop());
         }
         public IEnumerator CleanConsole()
         {
