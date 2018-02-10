@@ -48,9 +48,17 @@ namespace Propolis {
             if (PropolisData.Instance.IsGamePlaying)
             {
                 gameController.SetDetectionOFF();
-                gameController.SendMessage(PropolisActions.Stop);
+                gameController.propolisManager.SendCommand(PropolisActions.Stop);
+                StopAllCoroutines();
+                StartCoroutine(StartClimaxEndWatch());
 
             }
+
+        }
+        public IEnumerator StartClimaxEndWatch() {
+            yield return new WaitForSecondsRealtime((float)ClimaxDirector.duration);
+            Desactivate();
+            gameController.propolisManager.SendCommand(PropolisActions.Play);
 
         }
 
@@ -60,7 +68,6 @@ namespace Propolis {
             gameController.SetDetectionON();
             _isClimaxPlaying = false;
             ClimaxDirector.gameObject.SetActive(false);
-            gameController.SendMessage(PropolisActions.Play);
 
         }
 
