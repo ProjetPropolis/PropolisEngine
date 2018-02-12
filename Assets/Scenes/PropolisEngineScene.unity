@@ -14766,9 +14766,9 @@ GameObject:
   - component: {fileID: 1563443725}
   - component: {fileID: 1563443732}
   - component: {fileID: 1563443731}
-  - component: {fileID: 1563443730}
   - component: {fileID: 1563443729}
   - component: {fileID: 1563443728}
+  - component: {fileID: 1563443734}
   - component: {fileID: 1563443733}
   - component: {fileID: 1563443726}
   - component: {fileID: 1563443727}
@@ -14846,7 +14846,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StatusToPaint: 26
-  DelayInSeconds: 6
+  DelayInSeconds: 4
   RestoreStatusAfterSeconds: 0.5
   WillRestoreStatusAfter: 0
 --- !u!114 &1563443729
@@ -14861,21 +14861,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StatusToPaint: 23
-  DelayInSeconds: 4
-  RestoreStatusAfterSeconds: 0.5
-  WillRestoreStatusAfter: 0
---- !u!114 &1563443730
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1563443724}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad6e2a3610d936a4d82b233a120c3390, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StatusToPaint: 21
   DelayInSeconds: 2
   RestoreStatusAfterSeconds: 0.5
   WillRestoreStatusAfter: 0
@@ -14893,7 +14878,7 @@ MonoBehaviour:
   StatusToPaint: 25
   DelayInSeconds: 0
   RestoreStatusAfterSeconds: 0.5
-  WillRestoreStatusAfter: 0
+  WillRestoreStatusAfter: 1
 --- !u!212 &1563443732
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -14952,6 +14937,21 @@ MonoBehaviour:
   StatusToPaint: 18
   DelayInSeconds: 8
   RestoreStatusAfterSeconds: 0.5
+  WillRestoreStatusAfter: 0
+--- !u!114 &1563443734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1563443724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad6e2a3610d936a4d82b233a120c3390, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StatusToPaint: 21
+  DelayInSeconds: 6
+  RestoreStatusAfterSeconds: 0
   WillRestoreStatusAfter: 0
 --- !u!1 &1567592394
 GameObject:
