@@ -69,7 +69,7 @@ public class MolecularGameController : AbstractGameController
     private IEnumerator PlayLevel2Climax(AbstractGroup group, PropolisRecipe recipe)
     {
         group.IsPlayingAnimation = true;
-        yield return new WaitForSecondsRealtime(0.3f);
+        yield return new WaitForSecondsRealtime(0.8f);
         foreach (var item in group.ChildItemsList)
 
         {
@@ -246,6 +246,7 @@ public class MolecularGameController : AbstractGameController
                     {
 
                         GameController.PropolisExport.SendRecipeEventToHUDSAndSound(group.ID, 2);
+                        GameController.PropolisExport.SendSuccessfulRecipeToHUD(group, recipe);
 
                         ProcessLevel2Climax(group, recipe);
                         AlertController.Show("Propolis Event", "Climax Molecular level 2");

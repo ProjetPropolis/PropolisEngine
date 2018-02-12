@@ -153,7 +153,7 @@ public class HiveGameController : AbstractGameController
                 {
                     SendItemData(HexToProcesss.ParentGroup.ID, HexToProcesss.ID, PropolisStatus.ON);
                     UltraCorruptedList.Remove(HexToProcesss);
-                    PropolisStatsExporter.IncrementStatValue("UltraCorruptedDestroyed");
+                    PropolisStatsExporter.IncrementStatValue("UltraCorruptedDestroye");
                     InstanciateCleanser();
                 }
             }

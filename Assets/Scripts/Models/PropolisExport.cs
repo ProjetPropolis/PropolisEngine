@@ -157,6 +157,12 @@ namespace Propolis
             //PropolisData.Instance.AtomGroupList.ForEach(x => SendAbstractGroupPosition("/atomgroup_pos", x.ID, x.GetPosition().x, x.GetPosition().y));
             //PropolisData.Instance.RecipeGroupList.ForEach(x => SendAbstractGroupPosition("/recipegroup_pos", x.ID, x.GetPosition().x, x.GetPosition().y));
         }
+
+        public void SendSuccessfulRecipeToHUD(AbstractGroup group, PropolisRecipe recipe) {
+            SendHUDMessage(string.Format("/recipe{0}_{1}", group.ID, 0), recipe.GetItem(0));
+            SendHUDMessage(string.Format("/recipe{0}_{1}", group.ID, 1), recipe.GetItem(1));
+            SendHUDMessage(string.Format("/recipe{0}_{1}", group.ID, 2), recipe.GetItem(2));
+        }
         public void SendRecipeEventToHUDSAndSound(int groupId,int lvl)
         {
             StartCoroutine(StartSendRecipeClimax(groupId,lvl));
