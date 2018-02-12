@@ -246,11 +246,13 @@ namespace Propolis
 
         public void SendClimaxStep(int step) {
             SendBatteryOscMessage("/climax",step);
+            SendHUDMessage("/climax", step);
 
         }
 
         public void SendClimaxState(int state) {
             SendBatteryOscMessage("/startClimax", state);
+            SendHUDMessage("/startClimax", state);
 
         }
     }
