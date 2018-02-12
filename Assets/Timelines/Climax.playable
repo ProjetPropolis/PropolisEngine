@@ -1996,7 +1996,7 @@ MonoBehaviour:
     m_ClipIn: 0
     m_Asset: {fileID: 114630495947059748}
     m_UnderlyingAsset: {fileID: 114630495947059748}
-    m_Duration: 38.283334096272796
+    m_Duration: 40.150000000000006
     m_TimeScale: 1
     m_ParentTrack: {fileID: 114048136081894988}
     m_EaseInDuration: 0

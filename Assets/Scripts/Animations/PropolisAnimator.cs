@@ -47,6 +47,7 @@ namespace Propolis {
         {
             if (PropolisData.Instance.IsGamePlaying)
             {
+                propolisExport.SendClimaxState(1);
                 gameController.SetDetectionOFF();
                 gameController.propolisManager.SendCommand(PropolisActions.Stop);
                 StopAllCoroutines();
@@ -64,6 +65,7 @@ namespace Propolis {
 
         public void Desactivate()
         {
+            propolisExport.SendClimaxState(0);
             ClimaxDirector.Stop();
             gameController.SetDetectionON();
             _isClimaxPlaying = false;

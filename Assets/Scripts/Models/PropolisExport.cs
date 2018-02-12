@@ -56,36 +56,34 @@ namespace Propolis
 
         public void ExportFromModel()
         {
-            if (Propolis.PropolisData.Instance.IsGamePlaying)
+            if (PropolisData.Instance.LastEvent.Action== PropolisActions.UpdateItemStatus)
             {
-                if (PropolisData.Instance.LastEvent.Action== PropolisActions.UpdateItemStatus)
-                {
-                    PropolisStatus lastStatus = (PropolisStatus)PropolisData.Instance.GetItemDataById(PropolisData.Instance.LastEvent.GroupID, PropolisData.Instance.LastEvent.ID, PropolisData.Instance.LastEvent.Type).Status;
-                    PropolisLastEventState lastEvent = Propolis.PropolisData.Instance.LastEvent;
-                    SendOscMessage(
-                        "/" + lastEvent.Type,
-                        lastEvent.GroupID, lastEvent.ID,
-                        PropolisData.Instance.GetItemDataById(lastEvent.GroupID, lastEvent.ID, lastEvent.Type).Status, SoundOSC);
-                    if (lastStatus == PropolisStatus.ON && PropolisData.Instance.LastEvent.Type == PropolisDataTypes.HexGroup) {
-                        SendPkMessage("/hexpress",1);
-                        SendPkMessage("/hexpress", 0);
-                    }
+                PropolisStatus lastStatus = (PropolisStatus)PropolisData.Instance.GetItemDataById(PropolisData.Instance.LastEvent.GroupID, PropolisData.Instance.LastEvent.ID, PropolisData.Instance.LastEvent.Type).Status;
+                PropolisLastEventState lastEvent = Propolis.PropolisData.Instance.LastEvent;
+                SendOscMessage(
+                    "/" + lastEvent.Type,
+                    lastEvent.GroupID, lastEvent.ID,
+                    PropolisData.Instance.GetItemDataById(lastEvent.GroupID, lastEvent.ID, lastEvent.Type).Status, SoundOSC);
+                if (lastStatus == PropolisStatus.ON && PropolisData.Instance.LastEvent.Type == PropolisDataTypes.HexGroup) {
+                    SendPkMessage("/hexpress",1);
+                    SendPkMessage("/hexpress", 0);
+                }
                     
 
 
 
-                }
-                else if (PropolisData.Instance.LastEvent.Action == PropolisActions.SetBatteryLevel)
-                {
-                    SendBatteryOscMessage("/battery",PropolisData.Instance.BatteryLevel);
-                }
+            }
+            else if (PropolisData.Instance.LastEvent.Action == PropolisActions.SetBatteryLevel)
+            {
+                SendBatteryOscMessage("/battery",PropolisData.Instance.BatteryLevel);
+            }
 
 
-                ExportToHUDS();
-                ExportToSound();
-                ExportToPK();
+            ExportToHUDS();
+            ExportToSound();
+            ExportToPK();
 
-            } 
+             
         }
 
 
@@ -237,6 +235,16 @@ namespace Propolis
             OSCMessage message = new OSCMessage(address);
             message.Append<float>(value);
             BatteryOSC.Send (message);
+
+        }
+
+        public void SendClimaxStep(int step) {
+            SendBatteryOscMessage("/climax",step);
+
+        }
+
+        public void SendClimaxState(int state) {
+            SendBatteryOscMessage("/startClimax", state);
 
         }
     }
