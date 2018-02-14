@@ -1583,6 +1583,16 @@ Prefab:
       propertyPath: animator
       value: 
       objectReference: {fileID: 507621721}
+    - target: {fileID: 114304258551401574, guid: a02e9773f95fd4048bdd45f81bc64e6e,
+        type: 2}
+      propertyPath: SoundPort2
+      value: 17002
+      objectReference: {fileID: 0}
+    - target: {fileID: 114304258551401574, guid: a02e9773f95fd4048bdd45f81bc64e6e,
+        type: 2}
+      propertyPath: SoundAddress2
+      value: 10.0.1.234
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a02e9773f95fd4048bdd45f81bc64e6e, type: 2}
   m_IsPrefabParent: 0

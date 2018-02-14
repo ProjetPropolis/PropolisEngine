@@ -11,7 +11,11 @@ public class AbstractItem : MonoBehaviour {
     public PropolisStatus status;
     public PropolisStatus PrevState { get; set; }
     public int i = 0;
-    
+    private PropolisStatus _temporaryStatus;
+    private float _temporaryStatusDuration;
+    public bool IsPlayingTemporaryStatus = false;
+    private Coroutine _temporaryStatusCoroutine;
+
 
     public PropolisStatus Status {
         get
@@ -98,7 +102,7 @@ public class AbstractItem : MonoBehaviour {
             case PropolisStatus.CLEANSING: material.color = PropolisColors.White; break;
             case PropolisStatus.SHIELD_ON: material.color = PropolisColors.Blue; break;
             case PropolisStatus.SHIELD_OFF: material.color = PropolisColors.DarkBlue; break;
-            case PropolisStatus.BLINKRECIPE1: material.color = PropolisColors.Orange; break;
+            case PropolisStatus.ULTRACORRUPTED_CLEAR_HINT: material.color = PropolisColors.White; break;
             case PropolisStatus.BLINKRECIPE2: material.color = PropolisColors.Fushia; break;
             case PropolisStatus.BLINKRECIPE3: material.color = PropolisColors.DarkBlue; break;
             case PropolisStatus.ANIM_TURQUOISE: material.color = PropolisColors.Blue; break;
@@ -200,19 +204,43 @@ public class AbstractItem : MonoBehaviour {
         SendOscMessage("/status", ID, (int)PropolisStatus.DETECTION_ON);
     }
 
+    public void ShowTemporaryStatusFor(PropolisStatus temporaryStatus, float duration)
+    {
+        _temporaryStatus = temporaryStatus;
+        _temporaryStatusDuration = duration;
+        _temporaryStatusCoroutine =StartCoroutine(PlayTemporaryStatus());
+    }
+
+
+    public void CancelResetForTemporaryStatus()
+    {
+        if(_temporaryStatusCoroutine != null)
+        {
+
+            StopCoroutine(_temporaryStatusCoroutine);
+            IsPlayingTemporaryStatus = false;
+        }
+
+    }
+
+
+    private IEnumerator PlayTemporaryStatus() {
+        IsPlayingTemporaryStatus = true;
+        ParentGroup.parentGameController.SendItemData(ParentGroup.ID, ID, _temporaryStatus);
+        yield return new WaitForSecondsRealtime(_temporaryStatusDuration);
+        ParentGroup.parentGameController.SendItemData(ParentGroup.ID, ID, PrevState);
+        IsPlayingTemporaryStatus = false;
+    }
 
     private void SendOscMessage(string address, int value, int value2)
     {
-        if (ParentGroup.ID == 24)
-        {
-            Debug.Log(value);
-        }
         OSCMessage message = new OSCMessage(address);
         message.Append<int>(value);
         message.Append<int>(value2);
         ParentGroup.OSC.Send(message);
 
     }
+
 
 
 }

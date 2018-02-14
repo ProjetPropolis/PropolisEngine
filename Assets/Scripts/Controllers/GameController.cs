@@ -130,6 +130,7 @@ public class GameController : MonoBehaviour {
         StopAllCoroutines();
         PropolisGameSettings.CurrentDifficultyMultiplier = 1.0f;
         SetDetectionON();
+        PropolisExport.SendClimaxState(0);
         animator.Desactivate();
         hiveGameController.InitOnPlay();
         molecularGameController.InitOnPlay();

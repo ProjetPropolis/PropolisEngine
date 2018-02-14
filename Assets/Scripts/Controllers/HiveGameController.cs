@@ -25,19 +25,22 @@ public class HiveGameController : AbstractGameController
 
     private void OnDestroy()
     {
-        
+
     }
 
     public override void ProcessUserInteraction(AbstractItem item, PropolisUserInteractions userAction)
     {
-        if(userAction == PropolisUserInteractions.PRESS && item.ParentGroup.DataType == PropolisDataTypes.HexGroup)
+        if (userAction == PropolisUserInteractions.PRESS && item.ParentGroup.DataType == PropolisDataTypes.HexGroup)
         {
+            PropolisStatsExporter.IncrementStatValue("AlveolesPressed");
             switch (item.Status)
             {
-                case PropolisStatus.OFF: SendItemData(item.ParentGroup.ID, item.ID, PropolisStatus.ON);break;
-                case PropolisStatus.CORRUPTED: SendItemData(item.ParentGroup.ID, item.ID, PropolisStatus.ON); PropolisStatsExporter.IncrementStatValue("AlveolesPressed"); break;
-                case PropolisStatus.CLEANSER: StartCoroutine(ProcessCleanserExplosion(item.ParentGroup.ID,item.ID)); PropolisStatsExporter.IncrementStatValue("CleanserPressed"); break;
-                default: SendItemData(item.ParentGroup.ID, item.ID,item.Status);break;
+                case PropolisStatus.OFF: SendItemData(item.ParentGroup.ID, item.ID, PropolisStatus.ON); break;
+                case PropolisStatus.CORRUPTED: SendItemData(item.ParentGroup.ID, item.ID, PropolisStatus.ON);  break;
+                case PropolisStatus.CLEANSER: StartCoroutine(ProcessCleanserExplosion(item.ParentGroup.ID, item.ID)); PropolisStatsExporter.IncrementStatValue("CleanserPressed"); break;
+                case PropolisStatus.ULTRACORRUPTED_CLEAR_HINT: ProcessUltraCorruptedHintPress(item); break;
+                case PropolisStatus.ULTRACORRUPTED: ProcessUltraCorruptedHint(item); break;
+                default: SendItemData(item.ParentGroup.ID, item.ID, item.Status); break;
             }
 
             if (item.Status == PropolisStatus.ON || item.Status == PropolisStatus.CLEANSING)
@@ -47,7 +50,7 @@ public class HiveGameController : AbstractGameController
 
 
         }
-        else if(item.ParentGroup.DataType == PropolisDataTypes.HexGroup)
+        else if (item.ParentGroup.DataType == PropolisDataTypes.HexGroup)
         {
             if (item.Status == PropolisStatus.ON || item.Status == PropolisStatus.CLEANSING)
             {
@@ -56,6 +59,24 @@ public class HiveGameController : AbstractGameController
         }
     }
 
+
+    private void ProcessUltraCorruptedHint(AbstractItem item){
+        foreach (var n in item.Neighbors)
+        {
+            if(n.status == PropolisStatus.CORRUPTED && !n.IsPlayingTemporaryStatus)
+            {
+                n.ShowTemporaryStatusFor(PropolisStatus.ULTRACORRUPTED_CLEAR_HINT, PropolisGameSettings.UltraCorruptedHintTime);
+            }
+        }
+
+    }
+
+    private void ProcessUltraCorruptedHintPress(AbstractItem item)
+    {
+        item.CancelResetForTemporaryStatus();
+        SendItemData(item.ParentGroup.ID, item.ID, PropolisStatus.ON);
+
+    }
     //To be used instead of Update or FixedUpdate. 
     public override void UpdateGameLogic()
     {
@@ -94,6 +115,7 @@ public class HiveGameController : AbstractGameController
         base.InitOnPlay();        // va calculer chaque neighbors 
         random = new System.Random();
         Reset();
+        SendItemData(28, 6, PropolisStatus.ULTRACORRUPTED);
 
 
     }
@@ -118,6 +140,7 @@ public class HiveGameController : AbstractGameController
         SetAllItemsTo(PropolisStatus.CORRUPTED);       
         StopCoroutine(ProcessDeleteUltraCorrupted());
         StartCoroutine(ProcessDeleteUltraCorrupted());
+        InstanciateCleanser();
     }
 
 
@@ -183,7 +206,8 @@ public class HiveGameController : AbstractGameController
 
 
     private IEnumerator ProcessCleanserExplosion(int groupID, int itemID)
-    {   
+    {
+        InstanciateCleanser();
         AbstractItem cleanser = GetAbstractItemFromIDS(groupID, itemID);
         List<AbstractItem> hexstoBeCleanned = new List<AbstractItem>(cleanser.Neighbors);
         int i=0;
@@ -197,6 +221,7 @@ public class HiveGameController : AbstractGameController
             AbstractItem hex = hexstoBeCleanned.ElementAt(random.Next(hexstoBeCleanned.Count)) ;
             hex.StatusLocked = true;
             SendItemData(hex.ParentGroup.ID, hex.ID, PropolisStatus.ON);
+            hex.CancelResetForTemporaryStatus();
             hexCleannedOrderList.Add(hex);
             hexstoBeCleanned.Remove(hex);
             yield return new WaitForSeconds(PropolisGameSettings.TimeBetweenAnimationSpawn);
@@ -298,10 +323,9 @@ public class HiveGameController : AbstractGameController
 
     public void InstanciateCleanser()
     {
-        
         var TileToCorrupt = 
          ListOfGroups.OrderByDescending(x => x.CountChildrenWithStatus(PropolisStatus.CORRUPTED)).First() // get the most corrupted parent
-        .ChildItemsList.OrderByDescending(y=> y.CountNeighborsWithStatus(PropolisStatus.CORRUPTED)).First(); // get the hex with most corrupt Neighbors   
+        .ChildItemsList.Where(y=>y.status != PropolisStatus.ULTRACORRUPTED && y.status != PropolisStatus.CLEANSER).OrderByDescending(y=> y.CountNeighborsWithStatus(PropolisStatus.CORRUPTED)).First(); // get the hex with most corrupt Neighbors   
         CleanserHex(TileToCorrupt);
 
 

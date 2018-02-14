@@ -16,7 +16,7 @@ namespace Propolis
         RECIPE3,
         CLEANSING,
         WAVECORRUPTED,
-        BLINKRECIPE1,
+        ULTRACORRUPTED_CLEAR_HINT,
         BLINKRECIPE2,
         BLINKRECIPE3,
         SHIELD_ON,
