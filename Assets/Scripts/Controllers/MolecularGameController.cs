@@ -260,7 +260,7 @@ public class MolecularGameController : AbstractGameController
         {
             if (item.IsShield)
             {
-                SendItemData(item.ParentGroup.ID, item.ID, PropolisStatus.SHIELD_OFF);
+                item.TriggerDelayedStatus(PropolisStatus.SHIELD_OFF, PropolisGameSettings.ShieldDeactivationDelay);
             }
         }
     }

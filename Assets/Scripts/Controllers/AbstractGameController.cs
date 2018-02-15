@@ -121,6 +121,7 @@ namespace Propolis
         {
             try
             {
+               
                 AbstractItem item = ListOfGroups.First<AbstractGroup>(x => x.ID == Convert.ToInt32(data[0]))
                     .ChildItemsList.First<AbstractItem>(x => x.ID == Convert.ToInt32(data[1]));
 

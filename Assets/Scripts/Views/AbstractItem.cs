@@ -12,7 +12,7 @@ public class AbstractItem : MonoBehaviour {
     public PropolisStatus PrevState { get; set; }
     public int i = 0;
 
-    private Coroutine _temporaryStatusCoroutine;
+    private Coroutine _delayedStatusCoroutine;
 
 
     public PropolisStatus Status {
@@ -23,6 +23,8 @@ public class AbstractItem : MonoBehaviour {
 
         set
         {
+            if (_delayedStatusCoroutine != null)
+                StopCoroutine(_delayedStatusCoroutine);
             PrevState = status;
             status = value;
             ChangeColor();
@@ -30,10 +32,29 @@ public class AbstractItem : MonoBehaviour {
             if(ParentGroup.OSC != null) {
 
                 SendOscMessage("/status", ID, (int)status);
+                //if(ParentGroup.DataType == PropolisDataTypes.AtomGroup)
+                //{
+                //    Debug.Log(string.Format("sending to {0} {1} status {2}",ParentGroup.ID, ID,(int)status));
+                //}
             }      
             
 
         }
+    }
+
+    public void TriggerDelayedStatus(PropolisStatus status, float delay)
+    {
+        if (_delayedStatusCoroutine != null)
+            StopCoroutine(_delayedStatusCoroutine);
+
+        _delayedStatusCoroutine = StartCoroutine(StartDelayedStatus(status, delay));
+
+    }
+
+    private IEnumerator StartDelayedStatus(PropolisStatus status, float delay)
+    {
+        yield return new WaitForSecondsRealtime(delay);
+        ParentGroup.parentGameController.SendItemData(ParentGroup.ID, ID, status);
     }
 
     public List<AbstractItem> Neighbors;
