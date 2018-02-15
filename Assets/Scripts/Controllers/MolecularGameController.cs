@@ -94,7 +94,6 @@ public class MolecularGameController : AbstractGameController
 
         yield return new WaitForSecondsRealtime(0.7f);
 
-        for (int i = 0; i < 3; i++)
         {
             foreach (var item in group.ChildItemsList)
 
@@ -102,27 +101,17 @@ public class MolecularGameController : AbstractGameController
                 if (item.ID != 9)
                 {
 
-                    SendItemData(group.ID, item.ID, (PropolisStatus)recipe.GetItem(i));
-                    yield return new WaitForSecondsRealtime(0.3f);
+                    SendItemData(group.ID, item.ID, (PropolisStatus)recipe.GetItem((int)(item.ID /3)));
+                    yield return new WaitForSecondsRealtime(0.4f);
                     SendItemData(group.ID, item.ID, PropolisStatus.ANIM_BLACK);
-                    yield return new WaitForSecondsRealtime(0.3f);
+                    yield return new WaitForSecondsRealtime(0.4f);
                 }
             }
-
-            yield return new WaitForSeconds(0.5f);
 
            
 
         }
-        yield return new WaitForSeconds(0.5f);
-        foreach (var item in group.ChildItemsList)
 
-        {
-            if (item.ID != 9)
-            {
-                SendItemData(group.ID, item.ID, PropolisStatus.CLEANSER);
-            }
-        }
 
         yield return new WaitForSeconds(1f);
 

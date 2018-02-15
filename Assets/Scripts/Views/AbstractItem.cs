@@ -11,9 +11,7 @@ public class AbstractItem : MonoBehaviour {
     public PropolisStatus status;
     public PropolisStatus PrevState { get; set; }
     public int i = 0;
-    private PropolisStatus _temporaryStatus;
-    private float _temporaryStatusDuration;
-    public bool IsPlayingTemporaryStatus = false;
+
     private Coroutine _temporaryStatusCoroutine;
 
 
@@ -61,7 +59,7 @@ public class AbstractItem : MonoBehaviour {
     public bool IsShield = false;
 
     private void Start()
-    {
+    {   
         ParentGroup = transform.parent.GetComponent<AbstractGroup>();
         if(ParentGroup == null)
         {
@@ -204,33 +202,6 @@ public class AbstractItem : MonoBehaviour {
         SendOscMessage("/status", ID, (int)PropolisStatus.DETECTION_ON);
     }
 
-    public void ShowTemporaryStatusFor(PropolisStatus temporaryStatus, float duration)
-    {
-        _temporaryStatus = temporaryStatus;
-        _temporaryStatusDuration = duration;
-        _temporaryStatusCoroutine =StartCoroutine(PlayTemporaryStatus());
-    }
-
-
-    public void CancelResetForTemporaryStatus()
-    {
-        if(_temporaryStatusCoroutine != null)
-        {
-
-            StopCoroutine(_temporaryStatusCoroutine);
-            IsPlayingTemporaryStatus = false;
-        }
-
-    }
-
-
-    private IEnumerator PlayTemporaryStatus() {
-        IsPlayingTemporaryStatus = true;
-        ParentGroup.parentGameController.SendItemData(ParentGroup.ID, ID, _temporaryStatus);
-        yield return new WaitForSecondsRealtime(_temporaryStatusDuration);
-        ParentGroup.parentGameController.SendItemData(ParentGroup.ID, ID, PrevState);
-        IsPlayingTemporaryStatus = false;
-    }
 
     private void SendOscMessage(string address, int value, int value2)
     {
