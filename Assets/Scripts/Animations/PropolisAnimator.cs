@@ -67,7 +67,7 @@ namespace Propolis {
         {
             propolisExport.SendClimaxState(0);
             ClimaxDirector.Stop();
-            gameController.SetDetectionON();
+            //gameController.SetDetectionON();
             _isClimaxPlaying = false;
             ClimaxDirector.gameObject.SetActive(false);
 

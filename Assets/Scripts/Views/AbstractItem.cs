@@ -35,12 +35,16 @@ public class AbstractItem : MonoBehaviour {
                 SendOscMessage("/status", ID, (int)status);
                 //if(ParentGroup.DataType == PropolisDataTypes.AtomGroup)
                 //{
-                //    Debug.Log(string.Format("sending to {0} {1} status {2}",ParentGroup.ID, ID,(int)status));
+                //    //Debug.Log(string.Format("sending to {0} {1} status {2}",ParentGroup.ID, ID,(int)status));
                 //}
             }      
             
 
         }
+    }
+
+    public void Refresh() {
+        SendOscMessage("/status", ID, (int)status);
     }
 
     public void TriggerDelayedStatus(PropolisStatus status, float delay)

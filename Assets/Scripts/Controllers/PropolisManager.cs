@@ -63,7 +63,7 @@ namespace Propolis
 
         private void AppendToConsoleLog(string line)
         {
-            ConsoleLog += line + LineFilterConsole;
+            //ConsoleLog += line + LineFilterConsole;
             //TO DELETE
             //var linesString = Regex.Split(ConsoleLog, "\r\n|\r|\n");
             //var lines = linesString;

@@ -54,7 +54,7 @@ namespace Propolis {
             }
             catch (System.Exception ex)
             {
-                Debug.Log(ex.Message);
+                //Debug.Log(ex.Message);
             }
         }
     }

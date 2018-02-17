@@ -42,7 +42,7 @@ namespace Propolis
             }
             catch (Exception ex)
             {
-                Debug.Log(ex.Message);
+                //Debug.Log(ex.Message);
             }
             
         }
@@ -68,7 +68,11 @@ namespace Propolis
                 SendOscMessage(
                   "/" + lastEvent.Type,
                   lastEvent.GroupID, lastEvent.ID,
-                  PropolisData.Instance.GetItemDataById(lastEvent.GroupID, lastEvent.ID, lastEvent.Type).Status, SoundOSC2);
+                  PropolisData.Instance.GetItemDataById(lastEvent.GroupID, lastEvent.ID, lastEvent.Type).Status, MolecularHUDOSC);
+                SendOscMessage(
+                  "/" + lastEvent.Type,
+                  lastEvent.GroupID, lastEvent.ID,
+                  PropolisData.Instance.GetItemDataById(lastEvent.GroupID, lastEvent.ID, lastEvent.Type).Status,);
                 if (lastStatus == PropolisStatus.ON && PropolisData.Instance.LastEvent.Type == PropolisDataTypes.HexGroup) {
                     SendPkMessage("/hexpress", 1);
                     SendPkMessage("/hexpress", 0);
@@ -141,25 +145,25 @@ namespace Propolis
 
 
 
-            int i = 0;
-            foreach (var molecule in d.AtomGroupList)
-            {
-                foreach (var atom in molecule.Childrens)
-                {
-                    SendHUDMessage(string.Format("/atomgroup{0}_{1}",molecule.ID,atom.ID), atom.Status);
-                }
+            //int i = 0;
+            //foreach (var molecule in d.AtomGroupList)
+            //{
+            //    foreach (var atom in molecule.Childrens)
+            //    {
+            //        SendHUDMessage(string.Format("/atomgroup{0}_{1}",molecule.ID,atom.ID), atom.Status);
+            //    }
 
-                try
-                {
-                    SendHUDMessage(string.Format("/atomgroup_distanceWave{0}", molecule.ID), molecularGameController.DistancesFromWave[i]);
-                }
-                catch (Exception)
-                {
-                    return;
-                }
+            //    try
+            //    {
+            //        SendHUDMessage(string.Format("/atomgroup_distanceWave{0}", molecule.ID), molecularGameController.DistancesFromWave[i]);
+            //    }
+            //    catch (Exception)
+            //    {
+            //        return;
+            //    }
                
-                i++;
-            }
+            //    i++;
+            //}
             
         }
         public void ExportAllGroupPosition()

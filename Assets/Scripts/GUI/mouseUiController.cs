@@ -37,7 +37,7 @@ public class mouseUiController : MonoBehaviour {
                 Cursor.SetCursor(cursorTextureDelete, hotSpot, cursorMode);
             }
 
-            if (mouseState == "edit")
+            if (mouseState == "edit" || mouseState == "refresh")
             {
                 Cursor.SetCursor(cursorTextureCreate, hotSpot, cursorMode);
             }
@@ -71,7 +71,7 @@ public class mouseUiController : MonoBehaviour {
                     if (hit.collider != null)
                     {
 
-                        Debug.Log(hit.collider.name);
+                        //Debug.Log(hit.collider.name);
 
                         if(gameObject.GetComponent<AbstractGroup>().ID != null) { 
                             deletecommand = "DELETE " + GroupType + " " + hit.collider.gameObject.GetComponent<AbstractGroup>().ID;
@@ -80,7 +80,24 @@ public class mouseUiController : MonoBehaviour {
                     }
                 }
 
-                if(mouseState == "edit")
+
+                if (mouseState == "refresh")
+                {
+                    Vector2 worldPoint = currentCam.ScreenToWorldPoint(Input.mousePosition);
+                    RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero, Mathf.Infinity, layer_mask_Ui.value);
+                    if (hit.collider != null)
+                    {
+
+                        AbstractGroup group = hit.collider.gameObject.GetComponent<AbstractGroup>();
+                        if (group != null)
+                        {
+                            group.Refresh();
+                            Cursor.SetCursor(null, Vector2.zero, cursorMode);
+                        }
+                    }
+                }
+
+                if (mouseState == "edit")
                 {
                     Vector2 worldPoint = currentCam.ScreenToWorldPoint(Input.mousePosition);
                     RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero, Mathf.Infinity, layer_mask_Ui.value);

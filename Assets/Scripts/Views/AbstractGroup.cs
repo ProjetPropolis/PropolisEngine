@@ -165,4 +165,9 @@ public class AbstractGroup : MonoBehaviour {
         }
 
     }
+
+    public void Refresh()
+    {
+        ChildItemsList.ForEach(x=>x.Refresh());
+    }
 }

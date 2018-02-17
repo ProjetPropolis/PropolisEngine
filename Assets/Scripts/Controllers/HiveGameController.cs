@@ -70,6 +70,7 @@ public class HiveGameController : AbstractGameController
 
     private void ProcessUltraCorruptedHint(AbstractItem item){
         item.StatusLocked = true;
+        SendItemData(item.ParentGroup.ID, item.ID, PropolisStatus.ULTRACORRUPTED);
         foreach (var n in item.Neighbors)
         {
             if (n.status == PropolisStatus.CORRUPTED)

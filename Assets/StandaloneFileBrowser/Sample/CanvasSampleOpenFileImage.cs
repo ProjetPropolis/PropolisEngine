@@ -52,7 +52,7 @@ public class CanvasSampleOpenFileImage : MonoBehaviour, IPointerDownHandler {
 #endif
 
     private IEnumerator OutputRoutine(string url) {
-        Debug.Log("URL: " + url);
+        //Debug.Log("URL: " + url);
         var loader = new WWW(url);
         yield return loader;
         output.texture = loader.texture;

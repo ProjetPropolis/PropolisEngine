@@ -158,11 +158,11 @@ public class GameController : MonoBehaviour {
         {
 
             yield return new WaitForSecondsRealtime(PropolisGameSettings.BatteryUpdateDeltaTime);
-                // Debug.Log("---------------StartOfNewBatteryUpdate---------------");
+                // //Debug.Log("---------------StartOfNewBatteryUpdate---------------");
             float currenBoardRatio = hiveGameController.GetRatioOfGivenPropolisStatus(PropolisStatus.ON);
             if (currenBoardRatio < PropolisGameSettings.CriticalOnHexRatio)
             {
-                //Debug.Log(string.Format("---------CriticalLostOf :{0} ---------", PropolisGameSettings.BatteryLevelLostWhenCritical));
+                ////Debug.Log(string.Format("---------CriticalLostOf :{0} ---------", PropolisGameSettings.BatteryLevelLostWhenCritical));
                 IncrementBatteryLevel(PropolisGameSettings.BatteryLevelLostWhenCritical);
             }
             else
@@ -177,16 +177,16 @@ public class GameController : MonoBehaviour {
                     wishedUpdateAdjustentFactor = 0.85f;
                 }
                 float numberOfWishedUpdate = PropolisGameSettings.TargetIntervalBetweenClimaxes / PropolisGameSettings.BatteryUpdateDeltaTime;
-                //Debug.Log(string.Format("---------NumberOfWishedUpdate :{0} ---------", numberOfWishedUpdate));
-                //Debug.Log(string.Format("---------BoardRatio :{0} ---------", currenBoardRatio));
-                //Debug.Log(string.Format("---------BufferCalculation :{0} ---------", numberOfWishedUpdate * currenBoardRatio * 2f));
+                ////Debug.Log(string.Format("---------NumberOfWishedUpdate :{0} ---------", numberOfWishedUpdate));
+                ////Debug.Log(string.Format("---------BoardRatio :{0} ---------", currenBoardRatio));
+                ////Debug.Log(string.Format("---------BufferCalculation :{0} ---------", numberOfWishedUpdate * currenBoardRatio * 2f));
                 float BatteryIncrement = 1 / (numberOfWishedUpdate * wishedUpdateAdjustentFactor);
-                //Debug.Log(string.Format("---------BatteryIncrement :{0} ---------", BatteryIncrement));
+                ////Debug.Log(string.Format("---------BatteryIncrement :{0} ---------", BatteryIncrement));
 
                 IncrementBatteryLevel(BatteryIncrement);
             }
 
-            //Debug.Log("---------------EndOfNewBatteryUpdate---------------");
+            ////Debug.Log("---------------EndOfNewBatteryUpdate---------------");
         }
             
         
@@ -239,7 +239,7 @@ public class GameController : MonoBehaviour {
 
     private void StopGame()
     {
-        Debug.Log("stop");
+        //Debug.Log("stop");
         hiveGameController.Stop();
         molecularGameController.Stop();
         recipeGameController.Stop();
@@ -255,7 +255,7 @@ public class GameController : MonoBehaviour {
             hiveGameController.UpdateGameLogic();
             molecularGameController.UpdateGameLogic();
             recipeGameController.UpdateGameLogic();
-            //Debug.Log("looping game loop");
+            ////Debug.Log("looping game loop");
             yield return new WaitForSeconds(Mathf.Max(PropolisGameSettings.DefaultGameTickTime / PropolisGameSettings.CurrentDifficultyMultiplier));
         }
 

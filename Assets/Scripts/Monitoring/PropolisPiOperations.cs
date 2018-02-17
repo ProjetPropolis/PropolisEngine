@@ -54,11 +54,11 @@ namespace Propolis
 
             //new Thread(() =>
             //{
-            //    Debug.Log("Start Thread Update Pi");
+            //    //Debug.Log("Start Thread Update Pi");
             //    using (SshClient sshclient = new SshClient(PartialIp, Username, Password))
             //    {
             //        sshclient.Connect();
-            //        Debug.Log("Thread started");
+            //        //Debug.Log("Thread started");
             //        ShellStream stream = sshclient.CreateShellStream("dumb", 80, 24, 800, 2000, 16000);
             //        Thread.Sleep(500);
             //        var result = sendCommand("cd Documents/teensyUpdate/", stream).ToString();
@@ -73,11 +73,11 @@ namespace Propolis
 
             //new Thread(() =>
             //{
-            //    Debug.Log("Start Thread Update Pi");
+            //    //Debug.Log("Start Thread Update Pi");
             //    using (SshClient sshclient = new SshClient(PartialIp, Username, Password))
             //    {
             //        sshclient.Connect();
-            //        Debug.Log("Thread started");
+            //        //Debug.Log("Thread started");
             //        ShellStream stream = sshclient.CreateShellStream("dumb", 80, 24, 800, 2000, 16000);
             //        Thread.Sleep(500);
             //        var result = sendCommand("./dispatchCMD.sh updateTeensy hexgroup", stream).ToString();
@@ -100,7 +100,7 @@ namespace Propolis
             writer.AutoFlush = true;
             WriteStream(customCMD, writer, stream);
             answer = ReadStream(reader);
-            Debug.Log(answer);
+            //Debug.Log(answer);
             return answer;
         }
 
@@ -118,14 +118,14 @@ namespace Propolis
                         client.Connect();
 
                         var command = client.RunCommand("./dispatchCMD.sh updateTeensy Blink");
-                        Debug.Log(command.Result);
+                        //Debug.Log(command.Result);
 
                         client.Disconnect();
                     }
                 }
                 catch (System.Exception e)
                 {
-                    Debug.Log("Error SSh");
+                    //Debug.Log("Error SSh");
 
                 }
             }).Start();
