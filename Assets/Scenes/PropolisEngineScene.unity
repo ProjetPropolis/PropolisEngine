@@ -4769,7 +4769,6 @@ MonoBehaviour:
   ID: 2
   NeighborsDist: 0.5
   ParentGroup: {fileID: 1116993341}
-  StatusLocked: 0
   IsShield: 0
 --- !u!58 &569196053
 CircleCollider2D:
@@ -6724,7 +6723,6 @@ MonoBehaviour:
   ID: 0
   NeighborsDist: 0.5
   ParentGroup: {fileID: 1116993341}
-  StatusLocked: 0
   IsShield: 0
 --- !u!58 &746417706
 CircleCollider2D:
@@ -6864,7 +6862,6 @@ MonoBehaviour:
   ID: 1
   NeighborsDist: 0.5
   ParentGroup: {fileID: 1116993341}
-  StatusLocked: 0
   IsShield: 0
 --- !u!58 &752536519
 CircleCollider2D:
@@ -8436,7 +8433,6 @@ MonoBehaviour:
   ID: 5
   NeighborsDist: 0.5
   ParentGroup: {fileID: 1116993341}
-  StatusLocked: 0
   IsShield: 0
 --- !u!58 &937905058
 CircleCollider2D:
@@ -11294,7 +11290,6 @@ MonoBehaviour:
   ID: 4
   NeighborsDist: 0.5
   ParentGroup: {fileID: 1116993341}
-  StatusLocked: 0
   IsShield: 0
 --- !u!58 &1155047395
 CircleCollider2D:
@@ -12035,7 +12030,6 @@ MonoBehaviour:
   ID: 3
   NeighborsDist: 0.5
   ParentGroup: {fileID: 1116993341}
-  StatusLocked: 0
   IsShield: 0
 --- !u!58 &1229642616
 CircleCollider2D:
@@ -12274,7 +12268,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: v1.4 Bitchy Nadeau
+  m_Text: v1.5 Dezielicous
 --- !u!222 &1245978113
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -16844,7 +16838,6 @@ MonoBehaviour:
   ID: 6
   NeighborsDist: 0.5
   ParentGroup: {fileID: 1116993341}
-  StatusLocked: 0
   IsShield: 0
 --- !u!58 &1779452929
 CircleCollider2D:

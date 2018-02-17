@@ -46,6 +46,10 @@ public class HiveGameController : AbstractGameController
             if (item.Status == PropolisStatus.ON || item.Status == PropolisStatus.CLEANSING)
             {
                 item.StatusLocked = true;
+                if(item.Status == PropolisStatus.ON)
+                {
+                    item.AutoUnlockIn(PropolisGameSettings.AutoUnlockHexAfter);
+                }
             }
 
 
@@ -97,6 +101,7 @@ public class HiveGameController : AbstractGameController
             StartCoroutine(SpeadThatCorruption());
             StartCoroutine(CreateRed());
             StartCoroutine(ProcessCorruption());
+            CreateCleanserNecessary();
     }
 
     private void Update()
@@ -110,8 +115,6 @@ public class HiveGameController : AbstractGameController
         base.InitOnPlay();        // va calculer chaque neighbors 
         random = new System.Random();
         Reset();
-        SendItemData(28, 6, PropolisStatus.ULTRACORRUPTED);
-
 
     }
 
@@ -237,7 +240,7 @@ public class HiveGameController : AbstractGameController
             i++;
         }
 
-        cleanser.StatusLocked = false;
+
 
         yield return new WaitForSeconds(PropolisGameSettings.HexSafeTimeAfterCleanse);
 
@@ -245,6 +248,7 @@ public class HiveGameController : AbstractGameController
         {
             item.StatusLocked = false;
         }
+        cleanser.StatusLocked = false;
 
 
         //yield return new WaitForSeconds(PropolisGameSettings.CleansingStateDuration);
@@ -257,6 +261,13 @@ public class HiveGameController : AbstractGameController
         //    yield return new WaitForSeconds(PropolisGameSettings.TimeBetweenAnimationSpawn);
         //}
 
+    }
+    public void CreateCleanserNecessary()
+    {
+        if (GetRatioOfGivenPropolisStatus(PropolisStatus.CLEANSER) < PropolisGameSettings.WishedPourcentageOfCleanser)
+        {
+            InstanciateCleanser();
+        }
     }
 
     private IEnumerator ProcessCorruption()

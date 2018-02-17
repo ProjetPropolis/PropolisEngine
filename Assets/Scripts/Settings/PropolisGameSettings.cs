@@ -4,7 +4,8 @@ namespace Propolis
 { 
     public static class PropolisGameSettings
     {
-        public const float DefaultGameTickTime = 2.5f; // Tick update de la corruption par défaut (difficulté à 1)     
+        public const float DefaultGameTickTime = 6.5f; // Tick update de la corruption par défaut (difficulté à 1)    
+        public const float WishedPourcentageOfCleanser = 0.02f;
         public const int MaxEdgeHexNeighborsCorruption = 2; // Le nombre de corrompus à la fois par les côté
         public const float DeltaTimeBetweenConsoleClean = 5; //don't touch
         public const int MaxOfTilesToCorruptExtend = 2;// Le nombre de corrompus à la fois lors de la corruption pas côtés
@@ -12,7 +13,7 @@ namespace Propolis
         public const float IntervalProcessUltraCorrupted = 0.3f; //don't touch
         public const int NumOfUltraCorruped = 1;//don't touch
         public const int MaxNumOfUltraCorruped = 2; // max d'ultra corrupted (rouge) quand la difficulté est à 1
-        public const float HexSafeTimeAfterCleanse = 2.0f; // Durée de protection d'une tuile jaune quand elle provient d'une bombe bleu
+        public const float HexSafeTimeAfterCleanse = 4.0f; // Durée de protection d'une tuile jaune quand elle provient d'une bombe bleu
         public const float CleansingStateDuration = 0.7f;
         public const float IntervalBetweenWaves = 10.0f; // Interval de seconde entre les vagues 60.0f
         public const float WaveSpeed = 0.00075f; //Rapidité de la vague valeur assez random 0.001f
@@ -31,6 +32,7 @@ namespace Propolis
         public const float MaxDifficulty = 15.0f;
         public const float UltraCorruptedHintTime = 2f;
         public const int AmountOfSpawnedCleanserOnRecipe = 2;
+        public const float AutoUnlockHexAfter = 10;
         public const float WaveInitialDistanceRatioFromGameSize = 1.5f; // Distance de la wave 1 étant collé sur les atomes (avertir charli si changement)
         public static PropolisStatus[] StatusFreeToBeCorrupted = new PropolisStatus[] { PropolisStatus.ON, PropolisStatus.OFF }; // Dont fucking touch this.
     }

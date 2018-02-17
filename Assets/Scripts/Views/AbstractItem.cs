@@ -13,6 +13,7 @@ public class AbstractItem : MonoBehaviour {
     public int i = 0;
 
     private Coroutine _delayedStatusCoroutine;
+    private Coroutine _autoUnlockCoroutine;
 
 
     public PropolisStatus Status {
@@ -76,9 +77,25 @@ public class AbstractItem : MonoBehaviour {
     public AbstractGroup ParentGroup;
     public PropolisData propolisData;
     private Material material;
-    public bool StatusLocked = false;
-    public bool IsShield = false;
+    public bool StatusLocked {
 
+        get
+        {
+            return _statusLocked;
+        }
+
+        set
+        {
+            _statusLocked = value;
+
+            if (_autoUnlockCoroutine !=null)
+            {
+                StopCoroutine(_autoUnlockCoroutine);
+            }
+        }
+    }
+    public bool IsShield = false;
+    private bool _statusLocked = false;
     private void Start()
     {   
         ParentGroup = transform.parent.GetComponent<AbstractGroup>();
@@ -101,6 +118,18 @@ public class AbstractItem : MonoBehaviour {
         }
     
 
+    }
+
+    public void AutoUnlockIn(float seconds) {
+        if (_autoUnlockCoroutine != null)
+            StopCoroutine(_autoUnlockCoroutine);
+        StartCoroutine(StartDelayedUnlock(seconds));
+            
+    }
+
+    private IEnumerator StartDelayedUnlock(float seconds) {
+        yield return new WaitForSecondsRealtime(seconds);
+        _statusLocked = false;
     }
 
 
