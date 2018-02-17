@@ -30,6 +30,7 @@ namespace Propolis
         public const float ShieldDeactivationDelay = 3.0f;
         public const float MaxDifficulty = 15.0f;
         public const float UltraCorruptedHintTime = 2f;
+        public const int AmountOfSpawnedCleanserOnRecipe = 2;
         public const float WaveInitialDistanceRatioFromGameSize = 1.5f; // Distance de la wave 1 étant collé sur les atomes (avertir charli si changement)
         public static PropolisStatus[] StatusFreeToBeCorrupted = new PropolisStatus[] { PropolisStatus.ON, PropolisStatus.OFF }; // Dont fucking touch this.
     }

@@ -102,9 +102,9 @@ public class MolecularGameController : AbstractGameController
                 {
 
                     SendItemData(group.ID, item.ID, (PropolisStatus)recipe.GetItem((int)(item.ID /3)));
-                    yield return new WaitForSecondsRealtime(0.4f);
+                    yield return new WaitForSecondsRealtime(0.2f);
                     SendItemData(group.ID, item.ID, PropolisStatus.ANIM_BLACK);
-                    yield return new WaitForSecondsRealtime(0.4f);
+                    yield return new WaitForSecondsRealtime(0.2f);
                 }
             }
 

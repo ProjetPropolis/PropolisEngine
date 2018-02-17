@@ -30,11 +30,13 @@ public class GameController : MonoBehaviour {
     public void SetDetectionOFF()
     {
         hiveGameController.ListOfItems.ForEach(x => x.BlockDectection());
+        molecularGameController.ListOfItems.ForEach(x => x.BlockDectection());
     }
 
     public void SetDetectionON()
     {
         hiveGameController.ListOfItems.ForEach(x => x.RestoreDectection());
+        molecularGameController.ListOfItems.ForEach(x => x.RestoreDectection());
     }
 
     void Start () {
@@ -115,8 +117,12 @@ public class GameController : MonoBehaviour {
     {
         if(status == PropolisRecipeCompareStatus.IMPERFECT)
         {
-            ((HiveGameController)hiveGameController).InstanciateCleanser();
-        }else if(status == PropolisRecipeCompareStatus.PERFECT)
+            for (int i = 0; i < PropolisGameSettings.AmountOfSpawnedCleanserOnRecipe; i++)
+            {
+                ((HiveGameController)hiveGameController).InstanciateCleanser();
+            }
+        }
+        else if(status == PropolisRecipeCompareStatus.PERFECT)
         {
             for (int i = 0; i < 3; i++)
             {
@@ -164,11 +170,11 @@ public class GameController : MonoBehaviour {
                 float wishedUpdateAdjustentFactor = 1;
                 if (currenBoardRatio < PropolisGameSettings.MinStableDifficultyThreshold)
                 {
-                    wishedUpdateAdjustentFactor = 1.25f;
+                    wishedUpdateAdjustentFactor = 1.15f;
                 }
                 else if(currenBoardRatio > PropolisGameSettings.MaxStableDifficultyThreshold)
                 {
-                    wishedUpdateAdjustentFactor = 0.65f;
+                    wishedUpdateAdjustentFactor = 0.85f;
                 }
                 float numberOfWishedUpdate = PropolisGameSettings.TargetIntervalBetweenClimaxes / PropolisGameSettings.BatteryUpdateDeltaTime;
                 //Debug.Log(string.Format("---------NumberOfWishedUpdate :{0} ---------", numberOfWishedUpdate));
