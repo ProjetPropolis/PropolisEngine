@@ -14,7 +14,7 @@ namespace Propolis
         public const int MaxNumOfUltraCorruped = 2; // max d'ultra corrupted (rouge) quand la difficulté est à 1
         public const float HexSafeTimeAfterCleanse = 2.0f; // Durée de protection d'une tuile jaune quand elle provient d'une bombe bleu
         public const float CleansingStateDuration = 0.7f;
-        public const float IntervalBetweenWaves = 120.0f; // Interval de seconde entre les vagues 60.0f
+        public const float IntervalBetweenWaves = 10.0f; // Interval de seconde entre les vagues 60.0f
         public const float WaveSpeed = 0.00075f; //Rapidité de la vague valeur assez random 0.001f
         public const float AtomSaturationCorruptionTime = 1.6f;//don't touch
         public static float CurrentDifficultyMultiplier = 1.0f;//don't touch

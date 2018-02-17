@@ -44,6 +44,7 @@ public class WaveController : MonoBehaviour {
             transform.position.z);
             if(PropolisData.Instance.WaveProgress >= 1.0f)
             {
+                MolecularGameController.BeginNewWaveCountdown();
                 MolecularGameController.SetWaveActiveStatus(false);
             }
            
