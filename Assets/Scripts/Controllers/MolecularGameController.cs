@@ -53,7 +53,7 @@ public class MolecularGameController : AbstractGameController
             }
             catch (System.Exception)
             {
-                Debug.Log("Invalid shield atom id");
+                //Debug.Log("Invalid shield atom id");
             }
         }
         
@@ -275,19 +275,15 @@ public class MolecularGameController : AbstractGameController
 
     private void Reset()
     {
-        ListOfItems.ForEach(x =>
-        {
-            if(x.ID == 9)
-            {
-                SendItemData(x.ParentGroup.ID, x.ID, PropolisStatus.SHIELD_OFF);
-            }
-        });
+        ResetShields();
         RandomizeAtoms();
         StopAllCoroutines();
         GenerateWaveGameController();
         DistancesFromWave = new List<float>();
+        SetWavePosition(0.0f);
         StartCoroutine(ProcessWaveTrigger());
         StartCoroutine(ProcessWaveMovement());
+        ValidateStatusFromPlay();
     }
 
     public override void Stop()
@@ -295,6 +291,16 @@ public class MolecularGameController : AbstractGameController
         StopAllCoroutines();
         StopCoroutine(ProcessWaveTrigger());
         StopCoroutine(ProcessWaveMovement());
+    }
+    public void ResetShields()
+    {
+        ListOfItems.ForEach(x =>
+        {
+            if (x.ID == 9)
+            {
+                SendItemData(x.ParentGroup.ID, x.ID, PropolisStatus.SHIELD_OFF);
+            }
+        });
     }
 
     public void SetWavePosition(float position)
@@ -354,7 +360,7 @@ public class MolecularGameController : AbstractGameController
         while (true) { 
             WaveController.UpdateMovement();
             ProcessDistancesFromMoleculeAndWave();
-            yield return new WaitForSeconds(0.03f);
+            yield return new WaitForSeconds(0.3f);
         }
     }
 

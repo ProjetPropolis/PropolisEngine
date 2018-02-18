@@ -7,12 +7,13 @@ using UnityOSC;
 
 namespace Propolis
 {
-    public abstract class AbstractGameController : MonoBehaviour {
+    public abstract class AbstractGameController : MonoBehaviour
+    {
 
         public GameController GameController;
         public PropolisData propolisData;
         public GameObject GroupsPrefab;
-        public Transform GameViewTransform; 
+        public Transform GameViewTransform;
         public List<AbstractGroup> ListOfGroups;
         public Rect GameArea;
         public string GroupDataType;
@@ -20,7 +21,8 @@ namespace Propolis
 
 
         // Use this for initialization
-        void Awake() {
+        void Awake()
+        {
             propolisData = PropolisData.Instance;
             ListOfGroups = new List<AbstractGroup>();
             GroupDataType = GroupsPrefab.GetComponent<AbstractGroup>().DataType;
@@ -40,7 +42,7 @@ namespace Propolis
 
             switch (propolisData.LastEvent.Action)
             {
-                case PropolisActions.Create: ProcessCreationElement();break ;
+                case PropolisActions.Create: ProcessCreationElement(); break;
                 case PropolisActions.Delete: ProcessSupressionElement(); break;
                 case PropolisActions.UpdateItemStatus: UpdateAbstractGroupItemStatus(); break;
                 case PropolisActions.Update: UpdateAbstractGroup(); break;
@@ -64,18 +66,19 @@ namespace Propolis
         private void LoadFromData()
         {
             DeleteAllComponents();
-            switch (GroupDataType) {
+            switch (GroupDataType)
+            {
 
                 case PropolisDataTypes.HexGroup: propolisData.HexGroupList.ForEach(x => InstantiateAbstractGroupGroup(x.ID)); break;
                 case PropolisDataTypes.AtomGroup: propolisData.AtomGroupList.ForEach(x => InstantiateAbstractGroupGroup(x.ID)); break;
                 case PropolisDataTypes.RecipeGroup: propolisData.RecipeGroupList.ForEach(x => InstantiateAbstractGroupGroup(x.ID)); break;
 
-            }   
+            }
         }
 
         private void CalculateGameRectArea()
         {
-            if(ListOfGroups.Count > 0 && GroupDataType != PropolisDataTypes.RecipeGroup)
+            if (ListOfGroups.Count > 0 && GroupDataType != PropolisDataTypes.RecipeGroup)
             {
                 float left = (float)ListOfGroups.Min(x => x.transform.position.x - x.GetComponent<CircleCollider2D>().bounds.size.x * 0.5f);
                 float right = (float)ListOfGroups.Max(x => x.transform.position.x + x.GetComponent<CircleCollider2D>().bounds.size.x * 0.5f);
@@ -112,8 +115,8 @@ namespace Propolis
                     }
                 }
             );
-            }      
-            
+            }
+
         }
         public abstract void UpdateGameLogic();
         public abstract void ProcessUserInteraction(AbstractItem item, PropolisUserInteractions userAction);
@@ -121,7 +124,7 @@ namespace Propolis
         {
             try
             {
-               
+
                 AbstractItem item = ListOfGroups.First<AbstractGroup>(x => x.ID == Convert.ToInt32(data[0]))
                     .ChildItemsList.First<AbstractItem>(x => x.ID == Convert.ToInt32(data[1]));
 
@@ -132,7 +135,7 @@ namespace Propolis
             {
                 //Debug.Log(ex.Message);
             }
-           
+
         }
         public virtual void InitOnPlay()
         {
@@ -152,7 +155,7 @@ namespace Propolis
             AbstractGroupData abstractGroupData = null;
             switch (GroupDataType)
             {
-                case PropolisDataTypes.HexGroup: abstractGroupData = propolisData.HexGroupList.FirstOrDefault(x => x.ID == propolisData.LastEvent.GroupID);break;
+                case PropolisDataTypes.HexGroup: abstractGroupData = propolisData.HexGroupList.FirstOrDefault(x => x.ID == propolisData.LastEvent.GroupID); break;
                 case PropolisDataTypes.AtomGroup: abstractGroupData = propolisData.AtomGroupList.FirstOrDefault(x => x.ID == propolisData.LastEvent.GroupID); break;
                 case PropolisDataTypes.RecipeGroup: abstractGroupData = propolisData.RecipeGroupList.FirstOrDefault(x => x.ID == propolisData.LastEvent.GroupID); break;
 
@@ -164,12 +167,12 @@ namespace Propolis
                 {
                     foreach (AbstractItem ai in ag.ChildItemsList)
                     {
-                    
+
                         if (ai.ID == propolisData.LastEvent.ID)
                         {
-                            ai.Status = (PropolisStatus)abstractGroupData.Childrens.FirstOrDefault(x=>x.ID == ai.ID).Status;
+                            ai.Status = (PropolisStatus)abstractGroupData.Childrens.FirstOrDefault(x => x.ID == ai.ID).Status;
                         }
-                        
+
                     }
                 }
 
@@ -213,7 +216,7 @@ namespace Propolis
         {
             try
             {
-                 AbstractGroup abstractGroup = ListOfGroups.First(x => x.ID == propolisData.LastEvent.ID);
+                AbstractGroup abstractGroup = ListOfGroups.First(x => x.ID == propolisData.LastEvent.ID);
                 ListOfGroups.Remove(abstractGroup);
 
                 Destroy(abstractGroup.transform.gameObject);
@@ -221,7 +224,7 @@ namespace Propolis
             catch
             {
 
-            }        
+            }
         }
 
         public void SendCommand(string command)
@@ -232,20 +235,28 @@ namespace Propolis
         private void InstantiateAbstractGroupGroup(int ID)
         {
 
-            AbstractGroupData abstractGroupData = propolisData.GetGroupDataById(ID,GroupDataType);
+            AbstractGroupData abstractGroupData = propolisData.GetGroupDataById(ID, GroupDataType);
             if (abstractGroupData != null)
             {
                 GameObject gameObject = Instantiate(GroupsPrefab, abstractGroupData.GetPosition(), Quaternion.identity);
-   	            AbstractGroup abstractGroup = gameObject.GetComponent<AbstractGroup>();
+                AbstractGroup abstractGroup = gameObject.GetComponent<AbstractGroup>();
                 abstractGroup.SetOSCSettings(abstractGroupData.IP, abstractGroupData.OutPort);
                 //gameObject.transform.parent = GameViewTransform.transform;
                 abstractGroup.ID = abstractGroupData.ID;
                 abstractGroup.IDDisplay.text = abstractGroupData.ID.ToString();
                 ListOfGroups.Add(abstractGroup);
                 gameObject.SetActive(true);
+
+                //Special patch for the atomgroup 51
+                if(abstractGroup.ID == 51)
+                    gameObject.transform.Rotate(0, 0, -40);
             }
 
-            
+
+
+
+
+
         }
 
         void DeleteAllComponents()
@@ -274,5 +285,18 @@ namespace Propolis
             return (float)ListOfItems.Where(x => x.status == status).Count() / (float)ListOfItems.Count;
         }
 
+        public void ValidateStatusFromPlay()
+        {
+            StartCoroutine(StartValidateStatusFromPlay());
+        }
+        public IEnumerator StartValidateStatusFromPlay()
+        {
+            foreach (var group in ListOfGroups)
+            {
+                group.Refresh();
+                yield return new WaitForSecondsRealtime(0.3f);
+            }
+
+        }
     }
 }

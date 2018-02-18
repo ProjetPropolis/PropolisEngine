@@ -146,7 +146,7 @@ public class UDPPacketIO
         // latest time for this socket to be closed
         if (IsOpen())
         {
-            Debug.Log("closing udpclient listener on port " + localPort);
+            //Debug.Log("closing udpclient listener on port " + localPort);
             Close();
         }
 
@@ -164,7 +164,7 @@ public class UDPPacketIO
             if (Sender == null)
             {
                 Sender = new UdpClient();
-                Debug.Log("Opening OSC listener on port " + localPort);
+                //Debug.Log("Opening OSC listener on port " + localPort);
             }
 
 
@@ -202,7 +202,7 @@ public class UDPPacketIO
         if (Receiver != null)
         {
             Receiver.Close();
-            // Debug.Log("UDP receiver closed");
+            // //Debug.Log("UDP receiver closed");
         }
         Receiver = null;
         socketsOpen = false;
@@ -236,7 +236,7 @@ public class UDPPacketIO
             return;
 
         Sender.Send(packet, length, remoteHostName, remotePort);
-        //Debug.Log("osc message sent to "+remoteHostName+" port "+remotePort+" len="+length);
+        ////Debug.Log("osc message sent to "+remoteHostName+" port "+remotePort+" len="+length);
     }
 
     /// <summary>
@@ -356,7 +356,7 @@ public class OscMessage
         }
         else
         {
-            //Debug.Log("Wrong type");
+            ////Debug.Log("Wrong type");
             return 0;
         }
     }
@@ -378,7 +378,7 @@ public class OscMessage
         }
         else
         {
-           // Debug.Log("Wrong type");
+           // //Debug.Log("Wrong type");
             return 0f;
         }
     }
@@ -517,7 +517,7 @@ public class OSC : MonoBehaviour
 
         if (messagesReceived.Count > 0)
         {
-            //Debug.Log("received " + messagesReceived.Count + " messages");
+            ////Debug.Log("received " + messagesReceived.Count + " messages");
             lock (ReadThreadLock)
             {
                 foreach (OscMessage om in messagesReceived)
@@ -560,7 +560,7 @@ public class OSC : MonoBehaviour
     */
     public void Close()
     {
-        //Debug.Log("Osc Cancel start");
+        ////Debug.Log("Osc Cancel start");
 
 
         if (ReaderRunning)
@@ -617,7 +617,7 @@ public class OSC : MonoBehaviour
 
         catch (Exception e)
         {
-            Debug.Log("ThreadAbortException" + e);
+            //Debug.Log("ThreadAbortException" + e);
         }
         finally
         {

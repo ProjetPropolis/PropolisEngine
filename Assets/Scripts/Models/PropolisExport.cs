@@ -61,18 +61,31 @@ namespace Propolis
             {
                 PropolisStatus lastStatus = (PropolisStatus)PropolisData.Instance.GetItemDataById(PropolisData.Instance.LastEvent.GroupID, PropolisData.Instance.LastEvent.ID, PropolisData.Instance.LastEvent.Type).Status;
                 PropolisLastEventState lastEvent = Propolis.PropolisData.Instance.LastEvent;
-                SendOscMessage(
-                    "/" + lastEvent.Type,
-                    lastEvent.GroupID, lastEvent.ID,
-                    PropolisData.Instance.GetItemDataById(lastEvent.GroupID, lastEvent.ID, lastEvent.Type).Status, SoundOSC);
-                SendOscMessage(
-                  "/" + lastEvent.Type,
-                  lastEvent.GroupID, lastEvent.ID,
-                  PropolisData.Instance.GetItemDataById(lastEvent.GroupID, lastEvent.ID, lastEvent.Type).Status, MolecularHUDOSC);
-                SendOscMessage(
-                  "/" + lastEvent.Type,
-                  lastEvent.GroupID, lastEvent.ID,
-                  PropolisData.Instance.GetItemDataById(lastEvent.GroupID, lastEvent.ID, lastEvent.Type).Status,);
+                if (PropolisData.Instance.LastEvent.Type == PropolisDataTypes.HexGroup)
+                {
+
+                    SendOscMessage(
+                        "/" + lastEvent.Type,
+                        lastEvent.GroupID, lastEvent.ID,
+                        PropolisData.Instance.GetItemDataById(lastEvent.GroupID, lastEvent.ID, lastEvent.Type).Status, SoundOSC);
+                }
+
+                if(PropolisData.Instance.LastEvent.Type == PropolisDataTypes.AtomGroup && PropolisData.Instance.IsGamePlaying)
+               {
+                    SendOscMessage(
+                      "/" + lastEvent.Type,
+                      lastEvent.GroupID, lastEvent.ID,
+                      PropolisData.Instance.GetItemDataById(lastEvent.GroupID, lastEvent.ID, lastEvent.Type).Status, SoundOSC2);
+                }
+
+
+                if(PropolisData.Instance.LastEvent.Type == PropolisDataTypes.AtomGroup)
+                {
+                    SendHUDMessage(string.Format("/atomgroup{0}_{1}", lastEvent.GroupID, lastEvent.ID), PropolisData.Instance.GetItemDataById(lastEvent.GroupID, lastEvent.ID, lastEvent.Type).Status);
+
+                }
+
+
                 if (lastStatus == PropolisStatus.ON && PropolisData.Instance.LastEvent.Type == PropolisDataTypes.HexGroup) {
                     SendPkMessage("/hexpress", 1);
                     SendPkMessage("/hexpress", 0);
@@ -80,8 +93,8 @@ namespace Propolis
                     SendBatteryOscMessage("/hexpress", 0);
 
                 } else if (lastStatus == PropolisStatus.CLEANSER && PropolisData.Instance.LastEvent.Type == PropolisDataTypes.HexGroup) {
-                    SendPkMessage("/cleanser", 1);
-                    SendPkMessage("/cleanser", 0);
+                    SendBatteryOscMessage("/cleanser", 1);
+                    SendBatteryOscMessage("/cleanser", 0);
                 }
                     
 
@@ -116,7 +129,6 @@ namespace Propolis
             PropolisData d = PropolisData.Instance;
             SendSoundMessage("/reservoir", d.BatteryLevel);
             SendSoundMessage("/WaveProgression", d.WaveProgress);
-            SendSoundMessage("/difficulty", PropolisGameSettings.CurrentDifficultyMultiplier);
             SendSoundMessage("/WaveIsActive", d.WaveActivated ? 1 : 0);
 
 
@@ -242,7 +254,8 @@ namespace Propolis
             OSCMessage message = new OSCMessage(address);
             message.Append<int>(value);
             SoundOSC.Send(message);
-            SoundOSC2.Send(message);
+            if(PropolisData.Instance.IsGamePlaying)
+                SoundOSC2.Send(message);
 
         }
 

@@ -104,7 +104,7 @@ public class AbstractGroup : MonoBehaviour {
             OSC = new OSCClient(address, port);
         }catch(Exception ex)
         {
-            Debug.Log(ex.Message);
+            //Debug.Log(ex.Message);
         }     
        
     }
@@ -125,7 +125,7 @@ public class AbstractGroup : MonoBehaviour {
     //        parentGameController.ProcessUserInteraction(item, (PropolisUserInteractions)Convert.ToInt32(message.values[1]));
 
 
-    //        Debug.Log(String.Format("received  from {0}:  {1} {2}", ID, message.values[0], message.values[1 ]));
+    //        //Debug.Log(String.Format("received  from {0}:  {1} {2}", ID, message.values[0], message.values[1 ]));
     //    }
     //    catch (Exception)
     //    {

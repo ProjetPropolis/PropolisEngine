@@ -33,6 +33,7 @@ namespace Propolis {
 
         public void StartClimax()
         {
+            ((MolecularGameController)gameController.molecularGameController).ResetShields();
             Activate();
             ClimaxDirector.gameObject.SetActive(true);
             _isClimaxPlaying = true;

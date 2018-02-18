@@ -140,6 +140,7 @@ public class HiveGameController : AbstractGameController
         StopCoroutine(ProcessDeleteUltraCorrupted());
         StartCoroutine(ProcessDeleteUltraCorrupted());
         InstanciateCleanser();
+        ValidateStatusFromPlay();
     }
 
 

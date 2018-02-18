@@ -273,6 +273,7 @@ public class GameController : MonoBehaviour {
         {
             if (futureBatteryLevel >= 1) {
                 PropolisStatsExporter.IncrementStatValue("ReservoirFilled");
+                ((MolecularGameController)molecularGameController).ResetShields();
                 animator.StartClimax();
             }
             SendCommand(string.Format("{0} {1}", PropolisActions.SetBatteryLevel, 0));
