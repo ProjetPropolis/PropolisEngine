@@ -15,6 +15,7 @@ public class MolecularGameController : AbstractGameController
     public List<float> DistancesFromWave;
     private Coroutine _waveCoroutine;
     private Vector3 WaveOriginalTransform;
+    private Coroutine waveCoroutine;
     //To be used instead of Update or FixedUpdate.
 
     private void Start()
@@ -275,6 +276,8 @@ public class MolecularGameController : AbstractGameController
 
     private void Reset()
     {
+        SetWaveActiveStatus(false);
+        KillWave();
         ResetShields();
         RandomizeAtoms();
         StopAllCoroutines();
@@ -288,6 +291,8 @@ public class MolecularGameController : AbstractGameController
 
     public override void Stop()
     {
+        SetWaveActiveStatus(false);
+        KillWave();
         StopAllCoroutines();
         StopCoroutine(ProcessWaveTrigger());
         StopCoroutine(ProcessWaveMovement());
@@ -363,10 +368,18 @@ public class MolecularGameController : AbstractGameController
             yield return new WaitForSeconds(0.3f);
         }
     }
+    private void KillWave()
+    {
+        if (waveCoroutine != null)
+        {
+            StopCoroutine(waveCoroutine);
+        }
 
+    }
     public void BeginNewWaveCountdown()
     {
-        StartCoroutine(ProcessWaveTrigger());
+        KillWave();
+        waveCoroutine =StartCoroutine(ProcessWaveTrigger());
 
 
     }

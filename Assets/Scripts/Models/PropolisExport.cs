@@ -6,6 +6,7 @@ using UnityOSC;
 using System;
 using System.Net;
 using System.Threading;
+using System.Linq;
 
 
 namespace Propolis
@@ -70,12 +71,22 @@ namespace Propolis
                         PropolisData.Instance.GetItemDataById(lastEvent.GroupID, lastEvent.ID, lastEvent.Type).Status, SoundOSC);
                 }
 
-                if(PropolisData.Instance.LastEvent.Type == PropolisDataTypes.AtomGroup && PropolisData.Instance.IsGamePlaying)
-               {
+                if (PropolisData.Instance.LastEvent.Type == PropolisDataTypes.AtomGroup && PropolisData.Instance.IsGamePlaying)
+                {
                     SendOscMessage(
                       "/" + lastEvent.Type,
                       lastEvent.GroupID, lastEvent.ID,
                       PropolisData.Instance.GetItemDataById(lastEvent.GroupID, lastEvent.ID, lastEvent.Type).Status, SoundOSC2);
+
+                    if (PropolisData.Instance.LastEvent.ID == 9)
+                    {
+                        SendPkMessage("/ShieldsCount",
+                            molecularGameController.ListOfItems
+                            .Where(x => x.ID == 9 && x.status == PropolisStatus.SHIELD_ON)
+                            .Count()
+                        );
+
+                    }
                 }
 
 
@@ -92,12 +103,7 @@ namespace Propolis
                     SendBatteryOscMessage("/hexpress", 1);
                     SendBatteryOscMessage("/hexpress", 0);
 
-                } else if (lastStatus == PropolisStatus.CLEANSER && PropolisData.Instance.LastEvent.Type == PropolisDataTypes.HexGroup) {
-                    SendBatteryOscMessage("/cleanser", 1);
-                    SendBatteryOscMessage("/cleanser", 0);
-                }
-                    
-
+                } 
 
 
             }
@@ -107,82 +113,63 @@ namespace Propolis
             }
 
 
-            ExportToHUDS();
-            ExportToSound();
-            ExportToPK();
+            if (PropolisData.Instance.IsGamePlaying)
+            {
 
-             
+                switch (PropolisData.Instance.LastEvent.Action)
+                {
+                    case PropolisActions.SetWaveActiveStatus: SendAllWaveStatus(); break;
+                    case PropolisActions.SetWavePosition: SendAllWaveProgression(); break;
+                    case PropolisActions.SetBatteryLevel: SendAllResevoirStatus(); break;
+                }
+
+            }
+
+
+        }
+        private void SendAllWaveStatus()
+        {
+            PropolisData d = PropolisData.Instance;
+            SendPkMessage("/WaveIsActive", d.WaveActivated ? 1 : 0);
+            SendSoundMessage("/WaveIsActive", d.WaveActivated ? 1 : 0);
+            SendHUDMessage("/WaveIsActive", d.WaveActivated ? 1 : 0);
         }
 
+        private void SendAllWaveProgression() {
+            PropolisData d = PropolisData.Instance;
+            SendPkMessage("/WaveProgression", d.WaveProgress);
+            SendSoundMessage("/WaveProgression", d.WaveProgress);
+            SendHUDMessage("/WaveProgression", d.WaveProgress);
 
+        }
 
-        private void ExportToPK() {
+        private void SendAllResevoirStatus()
+        {
             PropolisData d = PropolisData.Instance;
             SendPkMessage("/reservoir", d.BatteryLevel);
-            SendPkMessage("/WaveProgression", d.WaveProgress);
-            SendPkMessage("/difficulty", PropolisGameSettings.CurrentDifficultyMultiplier);
-            SendPkMessage("/WaveIsActive", d.WaveActivated ? 1 : 0);
-        }
-
-        private void ExportToSound()
-        {
-            PropolisData d = PropolisData.Instance;
             SendSoundMessage("/reservoir", d.BatteryLevel);
-            SendSoundMessage("/WaveProgression", d.WaveProgress);
-            SendSoundMessage("/WaveIsActive", d.WaveActivated ? 1 : 0);
-
-
-
-
-            //int i = 0;
-            //foreach (var molecule in d.AtomGroupList)
-            //{
-            //    SendSoundMessage(string.Format("/recipe_lvl2_{0}", molecule.ID), 0);
-            //    foreach (var atom in molecule.Childrens)
-            //    {
-            //        SendSoundMessage(string.Format("/atomgroup{0}_{1}", molecule.ID, atom.ID), atom.Status);
-            //    }
-
-            //    i++;
-            //}
-        }
-
-        private void ExportToHUDS()
-        {
-            PropolisData d = PropolisData.Instance;
             SendHUDMessage("/reservoir", d.BatteryLevel);
-            SendHUDMessage("/WaveProgression", d.WaveProgress);
-            SendHUDMessage("/WaveIsActive", d.WaveActivated ? 1 : 0 );
 
-
-
-
-            //int i = 0;
-            //foreach (var molecule in d.AtomGroupList)
-            //{
-            //    foreach (var atom in molecule.Childrens)
-            //    {
-            //        SendHUDMessage(string.Format("/atomgroup{0}_{1}",molecule.ID,atom.ID), atom.Status);
-            //    }
-
-            //    try
-            //    {
-            //        SendHUDMessage(string.Format("/atomgroup_distanceWave{0}", molecule.ID), molecularGameController.DistancesFromWave[i]);
-            //    }
-            //    catch (Exception)
-            //    {
-            //        return;
-            //    }
-               
-            //    i++;
-            //}
-            
         }
+
+
+      
+
+       
         public void ExportAllGroupPosition()
         {
             PropolisData.Instance.HexGroupList.ForEach(x => SendAbstractGroupPosition("/hexgroup_pos",x.ID,x.GetPosition().x,x.GetPosition().y));
             //PropolisData.Instance.AtomGroupList.ForEach(x => SendAbstractGroupPosition("/atomgroup_pos", x.ID, x.GetPosition().x, x.GetPosition().y));
             //PropolisData.Instance.RecipeGroupList.ForEach(x => SendAbstractGroupPosition("/recipegroup_pos", x.ID, x.GetPosition().x, x.GetPosition().y));
+        }
+
+        public void SendAllCleanserPress()
+        {
+            SendBatteryOscMessage("/cleanser", 1);
+            SendBatteryOscMessage("/cleanser", 0);
+            SendPkMessage("/cleanser", 1);
+            SendPkMessage("/cleanser", 0);
+
         }
 
         public void SendSuccessfulRecipeToHUD(AbstractGroup group, PropolisRecipe recipe) {
@@ -193,11 +180,6 @@ namespace Propolis
         public void SendRecipeEventToHUDSAndSound(int groupId,int lvl)
         {
             StartCoroutine(StartSendRecipeClimax(groupId,lvl));
-
-
-
-
-
         }
 
         IEnumerator StartSendRecipeClimax(int groupId, int lvl) {
@@ -263,6 +245,13 @@ namespace Propolis
         {
             OSCMessage message = new OSCMessage(address);
             message.Append<float>(value);
+            PKOSC.Send(message);
+
+        }
+        private void SendPkMessage(string address, int value)
+        {
+            OSCMessage message = new OSCMessage(address);
+            message.Append<int>(value);
             PKOSC.Send(message);
 
         }

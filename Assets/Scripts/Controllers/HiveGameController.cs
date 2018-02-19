@@ -48,7 +48,8 @@ public class HiveGameController : AbstractGameController
                 item.StatusLocked = true;
                 if(item.Status == PropolisStatus.ON)
                 {
-                    item.AutoUnlockIn(PropolisGameSettings.AutoUnlockHexAfter);
+                    item.AutoUnlockIn(PropolisGameSettings.AutoUnlockHexAfter / PropolisGameSettings.CurrentDifficultyMultiplier);
+                    item.TriggerDelayedStatus(PropolisStatus.CORRUPTED, PropolisGameSettings.AutoUnlockHexAfter *2/ PropolisGameSettings.CurrentDifficultyMultiplier);
                 }
             }
 
@@ -215,6 +216,7 @@ public class HiveGameController : AbstractGameController
 
     private IEnumerator ProcessCleanserExplosion(int groupID, int itemID)
     {
+        GameController.PropolisExport.SendAllCleanserPress();
         AbstractItem cleanser = GetAbstractItemFromIDS(groupID, itemID);
         List<AbstractItem> hexstoBeCleanned = new List<AbstractItem>(cleanser.Neighbors);
         int i=0;
@@ -235,7 +237,7 @@ public class HiveGameController : AbstractGameController
             {
                 SendItemData(hex.ParentGroup.ID, hex.ID, PropolisStatus.ON);
             }
-            
+            hex.TriggerDelayedStatus(PropolisStatus.CORRUPTED, PropolisGameSettings.AutoUnlockHexAfter * 2 / PropolisGameSettings.CurrentDifficultyMultiplier);
             hexCleannedOrderList.Add(hex);
             hexstoBeCleanned.Remove(hex);
             yield return new WaitForSeconds(PropolisGameSettings.TimeBetweenAnimationSpawn);

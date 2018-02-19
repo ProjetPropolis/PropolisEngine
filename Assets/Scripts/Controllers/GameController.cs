@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour {
     public PropolisManager propolisManager;
     public PropolisAlertUIController AlertUiController;
     public PropolisAnimator animator;
+    
     public PropolisExport PropolisExport {
         get
         {
@@ -26,6 +27,8 @@ public class GameController : MonoBehaviour {
     object ThreadLock = new object();
     bool _mustReadData ;
     private System.Random random;
+
+
 
     public void SetDetectionOFF()
     {
