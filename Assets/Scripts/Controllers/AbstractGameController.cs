@@ -246,10 +246,6 @@ namespace Propolis
                 abstractGroup.IDDisplay.text = abstractGroupData.ID.ToString();
                 ListOfGroups.Add(abstractGroup);
                 gameObject.SetActive(true);
-
-                //Special patch for the atomgroup 51
-                if(abstractGroup.ID == 51)
-                    gameObject.transform.Rotate(0, 0, -40);
             }
 
 
