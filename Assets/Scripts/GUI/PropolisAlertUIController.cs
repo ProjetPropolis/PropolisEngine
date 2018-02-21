@@ -25,7 +25,7 @@ public class PropolisAlertUIController : MonoBehaviour {
         TitleTextUI.text = TitleText;
         ContentTextUI.text = ContentText+"...";
         CanvasGroup.alpha = 0;
-        rectTransform.localPosition = new Vector3(rectTransform.localPosition.x, -Screen.currentResolution.height*.5f, 0.0f);
+        rectTransform.localPosition = new Vector3(rectTransform.localPosition.x, -Screen.currentResolution.height*.55f, 0.0f);
         StopCoroutine(StartShowing());
         StartCoroutine(StartShowing());
     }
@@ -47,7 +47,7 @@ public class PropolisAlertUIController : MonoBehaviour {
         while (CanvasGroup.alpha < 1.0f)
         {
             CanvasGroup.alpha += 0.01f;
-            rectTransform.localPosition += new Vector3(0.0f, 1f,0.0f);
+            rectTransform.localPosition += new Vector3(0.0f, 0.05f,0.0f);
             yield return new WaitForSeconds(0.005f);
 
         }
