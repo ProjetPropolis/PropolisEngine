@@ -59,6 +59,20 @@ public class GameController : MonoBehaviour {
         server.Close();
     }
 
+    public void StartSleepMode()
+    {
+        animator.Desactivate();
+        PropolisExport.SendClimaxState(0);
+        SendCommand(string.Format("{0} {1}", PropolisActions.SetBatteryLevel, 0));
+        SetDetectionOFF();
+        hiveGameController.SetAllItemsTo(Propolis.PropolisStatus.SLEEP_MODE);
+        molecularGameController.SetAllItemsTo(Propolis.PropolisStatus.SLEEP_MODE);
+        StopAllCoroutines();
+        propolisManager.SendCommand(PropolisActions.Stop);
+        Application.Quit();
+
+    }
+
     private void ProcessPacketReceived(OSCServer sender, OSCPacket packet)
     {
         if (propolisData.IsGamePlaying && packet.Data.Count == 3)

@@ -155,7 +155,7 @@ public class AbstractItem : MonoBehaviour {
             case PropolisStatus.SHIELD_ON: material.color = PropolisColors.Blue; break;
             case PropolisStatus.SHIELD_OFF: material.color = PropolisColors.DarkBlue; break;
             case PropolisStatus.ULTRACORRUPTED_CLEAR_HINT: material.color = PropolisColors.White; break;
-            case PropolisStatus.BLINKRECIPE2: material.color = PropolisColors.Fushia; break;
+            case PropolisStatus.SLEEP_MODE: material.color = PropolisColors.White; break;
             case PropolisStatus.BLINKRECIPE3: material.color = PropolisColors.DarkBlue; break;
             case PropolisStatus.ANIM_TURQUOISE: material.color = PropolisColors.Blue; break;
             case PropolisStatus.ANIM_ORANGE: material.color = PropolisColors.Orange; break;

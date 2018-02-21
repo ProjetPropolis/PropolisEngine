@@ -17,7 +17,7 @@ namespace Propolis
         CLEANSING,
         WAVECORRUPTED,
         ULTRACORRUPTED_CLEAR_HINT,
-        BLINKRECIPE2,
+        SLEEP_MODE,
         BLINKRECIPE3,
         SHIELD_ON,
         SHIELD_OFF,

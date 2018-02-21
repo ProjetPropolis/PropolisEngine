@@ -52,7 +52,7 @@ namespace Propolis
         }
 
 
-        protected void SetAllItemsTo(PropolisStatus status)
+        public void SetAllItemsTo(PropolisStatus status)
         {
             foreach (var group in ListOfGroups)
             {
