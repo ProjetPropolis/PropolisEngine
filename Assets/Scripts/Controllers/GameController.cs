@@ -12,7 +12,7 @@ public class GameController : MonoBehaviour {
     public PropolisManager propolisManager;
     public PropolisAlertUIController AlertUiController;
     public PropolisAnimator animator;
-    
+
     public PropolisExport PropolisExport {
         get
         {
@@ -27,6 +27,7 @@ public class GameController : MonoBehaviour {
     object ThreadLock = new object();
     bool _mustReadData ;
     private System.Random random;
+    private Coroutine SleepModeCouroutineHandle;
 
 
 
@@ -61,13 +62,27 @@ public class GameController : MonoBehaviour {
 
     public void StartSleepMode()
     {
+        StopAllCoroutines();
+        StartCoroutine(SleepModeCoroutine());
+    }
+
+    private IEnumerator SleepModeCoroutine()
+    {
         animator.Desactivate();
+        propolisManager.SendCommand(PropolisActions.Stop);
+        AlertUiController.Show("Propolis Shutdown", "Beginning sleep mode... Closing in 15 seconds");
         PropolisExport.SendClimaxState(0);
         SendCommand(string.Format("{0} {1}", PropolisActions.SetBatteryLevel, 0));
-        hiveGameController.SetAllItemsTo(Propolis.PropolisStatus.SLEEP_MODE);
-        molecularGameController.SetAllItemsTo(Propolis.PropolisStatus.SLEEP_MODE);
-        StopAllCoroutines();
-        propolisManager.SendCommand(PropolisActions.Stop);
+        for (int i = 0; i < 3; i++)
+        {
+            hiveGameController.SetAllItemsTo(Propolis.PropolisStatus.SLEEP_MODE);
+            molecularGameController.SetAllItemsTo(Propolis.PropolisStatus.SLEEP_MODE);
+            yield return new WaitForSeconds(2);
+        }
+
+        yield return new WaitForSeconds(2);
+        AlertUiController.Show("Propolis Shutdown", "Good night my love ! See you tomorrow.");
+        yield return new WaitForSeconds(3);
         Application.Quit();
 
     }
@@ -175,7 +190,7 @@ public class GameController : MonoBehaviour {
 
             yield return new WaitForSecondsRealtime(PropolisGameSettings.BatteryUpdateDeltaTime);
                 // //Debug.Log("---------------StartOfNewBatteryUpdate---------------");
-            float currenBoardRatio = hiveGameController.GetRatioOfGivenPropolisStatus(PropolisStatus.ON);
+            float currenBoardRatio = hiveGameController.GetRatioOfGivenPropolisStatus(PropolisStatus.ON) + hiveGameController.GetRatioOfGivenPropolisStatus(PropolisStatus.CLEANSER);
             if (currenBoardRatio < PropolisGameSettings.CriticalOnHexRatio)
             {
                 ////Debug.Log(string.Format("---------CriticalLostOf :{0} ---------", PropolisGameSettings.BatteryLevelLostWhenCritical));
@@ -191,6 +206,9 @@ public class GameController : MonoBehaviour {
                 else if(currenBoardRatio > PropolisGameSettings.MaxStableDifficultyThreshold)
                 {
                     wishedUpdateAdjustentFactor = 0.85f;
+                }else if(currenBoardRatio > 88)
+                {
+                    wishedUpdateAdjustentFactor = 0.1f;
                 }
                 float numberOfWishedUpdate = PropolisGameSettings.TargetIntervalBetweenClimaxes / PropolisGameSettings.BatteryUpdateDeltaTime;
                 ////Debug.Log(string.Format("---------NumberOfWishedUpdate :{0} ---------", numberOfWishedUpdate));

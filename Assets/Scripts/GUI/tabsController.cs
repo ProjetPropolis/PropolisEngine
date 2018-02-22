@@ -18,7 +18,6 @@ public class tabsController : MonoBehaviour {
 		counterMenu = 0;
 		buttonsPanel = gameObject.GetComponentsInChildren<Button>();
 		tabs = GameObject.FindGameObjectsWithTag("Tabs");
-		UpdateSelectedTab(buttonsPanel[counterMenu]);
         sensibleToKeypress = true;
     }
 

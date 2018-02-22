@@ -47,7 +47,7 @@ public class PropolisAlertUIController : MonoBehaviour {
         while (CanvasGroup.alpha < 1.0f)
         {
             CanvasGroup.alpha += 0.01f;
-            rectTransform.localPosition += new Vector3(0.0f, 0.05f,0.0f);
+            rectTransform.localPosition += new Vector3(0.0f, 1f,0.0f);
             yield return new WaitForSeconds(0.005f);
 
         }
@@ -57,9 +57,9 @@ public class PropolisAlertUIController : MonoBehaviour {
     {
        while (CanvasGroup.alpha > 0.0f)
         {
-            CanvasGroup.alpha -=  0.005f;
+            CanvasGroup.alpha -=  0.002f;
             rectTransform.localPosition -= new Vector3(0.0f, -.05f, 0.0f);
-            yield return new WaitForSeconds(0.001f);
+            yield return new WaitForSeconds(0.01f);
 
         }
 

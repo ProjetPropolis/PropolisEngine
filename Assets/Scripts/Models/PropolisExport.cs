@@ -22,7 +22,7 @@ namespace Propolis
 
 
         // Use this for initialization
-        void Start()
+        void Awake()
         {
             PropolisData d = PropolisData.Instance;
             UpdateOscComponent(ref BatteryOSC, BatteryAddress, BatteryPort);
