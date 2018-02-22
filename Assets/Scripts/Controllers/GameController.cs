@@ -64,7 +64,6 @@ public class GameController : MonoBehaviour {
         animator.Desactivate();
         PropolisExport.SendClimaxState(0);
         SendCommand(string.Format("{0} {1}", PropolisActions.SetBatteryLevel, 0));
-        SetDetectionOFF();
         hiveGameController.SetAllItemsTo(Propolis.PropolisStatus.SLEEP_MODE);
         molecularGameController.SetAllItemsTo(Propolis.PropolisStatus.SLEEP_MODE);
         StopAllCoroutines();
@@ -152,7 +151,6 @@ public class GameController : MonoBehaviour {
     {
         StopAllCoroutines();
         PropolisGameSettings.CurrentDifficultyMultiplier = 1.0f;
-        SetDetectionON();
         PropolisExport.SendClimaxState(0);
         animator.Desactivate();
         hiveGameController.InitOnPlay();
@@ -166,6 +164,7 @@ public class GameController : MonoBehaviour {
         StartCoroutine(ProcessDifficultyLevel());
         GenerateRecipe();
         AlertUiController.Show("Propolis Event", "Gameplay Started");
+        SetDetectionON();
 
     }
 

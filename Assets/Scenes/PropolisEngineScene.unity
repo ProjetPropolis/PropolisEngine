@@ -13071,7 +13071,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad6e2a3610d936a4d82b233a120c3390, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StatusToPaint: 22
+  StatusToPaint: 19
   DelayInSeconds: 4.5
   RestoreStatusAfterSeconds: 0.5
   WillRestoreStatusAfter: 0
@@ -13634,7 +13634,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad6e2a3610d936a4d82b233a120c3390, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StatusToPaint: 22
+  StatusToPaint: 19
   DelayInSeconds: 4.5
   RestoreStatusAfterSeconds: 0.5
   WillRestoreStatusAfter: 0

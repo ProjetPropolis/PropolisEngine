@@ -235,6 +235,17 @@ public class HiveGameController : AbstractGameController
             }
             else
             {
+                if(hex.status == PropolisStatus.ULTRACORRUPTED)
+                {
+                    try
+                    {
+                        UltraCorruptedList.Remove(hex);
+                    }
+                    catch (Exception)
+                    {
+                    }
+                    
+                }
                 SendItemData(hex.ParentGroup.ID, hex.ID, PropolisStatus.ON);
             }
             hex.TriggerDelayedStatus(PropolisStatus.CORRUPTED, PropolisGameSettings.AutoUnlockHexAfter * 2 / PropolisGameSettings.CurrentDifficultyMultiplier);
