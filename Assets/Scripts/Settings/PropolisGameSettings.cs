@@ -24,9 +24,9 @@ namespace Propolis
         public const float MaxStableDifficultyThreshold = 0.65f; // Pourcentage plancher increase difficulty
         public const float DifficultyUpdateDeltaTime = 0.3f; // Temp entre deux analyse de la difficultée
         public const float BatteryUpdateDeltaTime =  5.0f;// Temp entre deux analyse pour le réservoir
-        public const float TargetIntervalBetweenClimaxes =300.0f; // Durée souhaité  entre les climax
+        public const float TargetIntervalBetweenClimaxes =280.0f; // Durée souhaité  entre les climax
         public const float CriticalOnHexRatio = 0.06f; // Taux d'occupation du plancher minimum pour que le réservoir ne se vide pas
-        public const float BatteryLevelLostWhenCritical = -0.1f; // Pourcentage du réservoir perdu si necessaire
+        public const float BatteryLevelLostWhenCritical = -0.05f; // Pourcentage du réservoir perdu si necessaire
         public const float RecipeBlinkingHintTime = 0.7f; // no longer apply
         public const float ShieldDeactivationDelay = 3.0f;
         public const float MaxDifficulty = 15.0f;

@@ -81,7 +81,7 @@ public class GameController : MonoBehaviour {
         }
 
         yield return new WaitForSeconds(2);
-        AlertUiController.Show("Propolis Shutdown", "Good night my love ! See you tomorrow.");
+        AlertUiController.Show("Jennifer à tous", "Good night my love ! See you tomorrow.");
         yield return new WaitForSeconds(3);
         Application.Quit();
 
@@ -203,12 +203,13 @@ public class GameController : MonoBehaviour {
                 {
                     wishedUpdateAdjustentFactor = 1.15f;
                 }
-                else if(currenBoardRatio > PropolisGameSettings.MaxStableDifficultyThreshold)
-                {
-                    wishedUpdateAdjustentFactor = 0.85f;
-                }else if(currenBoardRatio > 88)
+                else if (currenBoardRatio > 85)
                 {
                     wishedUpdateAdjustentFactor = 0.1f;
+                }
+                else if(currenBoardRatio > PropolisGameSettings.MaxStableDifficultyThreshold)
+                {
+                    wishedUpdateAdjustentFactor = 0.82f;
                 }
                 float numberOfWishedUpdate = PropolisGameSettings.TargetIntervalBetweenClimaxes / PropolisGameSettings.BatteryUpdateDeltaTime;
                 ////Debug.Log(string.Format("---------NumberOfWishedUpdate :{0} ---------", numberOfWishedUpdate));

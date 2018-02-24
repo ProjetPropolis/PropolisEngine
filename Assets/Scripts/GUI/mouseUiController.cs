@@ -37,7 +37,7 @@ public class mouseUiController : MonoBehaviour {
                 Cursor.SetCursor(cursorTextureDelete, hotSpot, cursorMode);
             }
 
-            if (mouseState == "edit" || mouseState == "refresh")
+            if (mouseState == "edit" || mouseState == "refresh" || mouseState =="unlock")
             {
                 Cursor.SetCursor(cursorTextureCreate, hotSpot, cursorMode);
             }
@@ -92,6 +92,22 @@ public class mouseUiController : MonoBehaviour {
                         if (group != null)
                         {
                             group.Refresh();
+                            Cursor.SetCursor(null, Vector2.zero, cursorMode);
+                        }
+                    }
+                }
+
+                if (mouseState == "unlock")
+                {
+                    Vector2 worldPoint = currentCam.ScreenToWorldPoint(Input.mousePosition);
+                    RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero, Mathf.Infinity, layer_mask_Ui.value);
+                    if (hit.collider != null)
+                    {
+
+                        AbstractGroup group = hit.collider.gameObject.GetComponent<AbstractGroup>();
+                        if (group != null)
+                        {
+                            group.ChildItemsList.ForEach(x=>x.RestoreDectection());
                             Cursor.SetCursor(null, Vector2.zero, cursorMode);
                         }
                     }
