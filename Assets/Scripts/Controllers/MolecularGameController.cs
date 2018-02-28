@@ -151,44 +151,44 @@ public class MolecularGameController : AbstractGameController
 
     public void ReceivedRecipeInteracton(int parentID, int itemId, PropolisStatus status)
     {
-        StartCoroutine(AnimateBlinking(parentID, itemId, status));
+       // StartCoroutine(AnimateBlinking(parentID, itemId, status));
     }
 
-    private IEnumerator AnimateBlinking(int parentID, int itemId, PropolisStatus status)
-    {
+    //private IEnumerator AnimateBlinking(int parentID, int itemId, PropolisStatus status)
+    //{
 
-        AbstractGroup group = ListOfGroups.First<AbstractGroup>(x => x.ID == parentID);
-        List<AbstractItem> items = group.ChildItemsList.Where<AbstractItem>(x => x.ID >= (itemId * 3)  && x.ID <= (itemId * 3 + 2)).ToList<AbstractItem>();
-        List<PropolisStatus> previousStatus = new List<PropolisStatus>();
+    //    //AbstractGroup group = ListOfGroups.First<AbstractGroup>(x => x.ID == parentID);
+    //    //List<AbstractItem> items = group.ChildItemsList.Where<AbstractItem>(x => x.ID >= (itemId * 3)  && x.ID <= (itemId * 3 + 2)).ToList<AbstractItem>();
+    //    //List<PropolisStatus> previousStatus = new List<PropolisStatus>();
 
 
-        foreach (var item in items)
-        {
-            previousStatus.Add((PropolisStatus)item.status);
-            item.StatusBackup = ((PropolisStatus)item.status == PropolisStatus.WAVECORRUPTED ? PropolisStatus.CORRUPTED : (PropolisStatus)item.status);
-            SendItemData(group.ID, item.ID, ConvertRecipeToBlinking(status));
-            item.StatusLocked = true;
-        }
+    //    //foreach (var item in items)
+    //    //{
+    //    //    previousStatus.Add((PropolisStatus)item.status);
+    //    //    item.StatusBackup = ((PropolisStatus)item.status == PropolisStatus.WAVECORRUPTED ? PropolisStatus.CORRUPTED : (PropolisStatus)item.status);
+    //    //    SendItemData(group.ID, item.ID, ConvertRecipeToBlinking(status));
+    //    //    item.StatusLocked = true;
+    //    //}
 
-        yield return new WaitForSeconds(PropolisGameSettings.RecipeBlinkingHintTime);
+    //    //yield return new WaitForSeconds(PropolisGameSettings.RecipeBlinkingHintTime);
 
-        for (int i = 0; i < items.Count; i++)
-        {
-            SendItemData(group.ID, items[i].ID, (PropolisStatus)items[i].StatusBackup);
-            items[i].StatusLocked = false;
-        }
-    }
+    //    //for (int i = 0; i < items.Count; i++)
+    //    //{
+    //    //    SendItemData(group.ID, items[i].ID, (PropolisStatus)items[i].StatusBackup);
+    //    //    items[i].StatusLocked = false;
+    //    //}
+    //}
 
     public void ReceiveShieldInteractionFromHive(int itemId, PropolisUserInteractions action)
     {
         try
         {
             AbstractGroup group = ListOfGroups.First<AbstractGroup>(x => x.ID == itemId);
-            AbstractItem item  = group.ChildItemsList.First<AbstractItem>(x=>x.ID == 9);
+            AbstractItem item = group.ChildItemsList.First<AbstractItem>(x => x.ID == 9);
 
-            if(action == PropolisUserInteractions.PRESS)
+            if (action == PropolisUserInteractions.PRESS)
             {
-                item.StatusLocked = true ;
+                item.StatusLocked = true;
                 SendItemData(item.ParentGroup.ID, item.ID, PropolisStatus.SHIELD_ON);
             }
             else
@@ -258,7 +258,7 @@ public class MolecularGameController : AbstractGameController
             }
 
 
-        }else if(userAction == PropolisUserInteractions.PULL_OFF &&  !item.StatusLocked)
+        }else if(userAction == PropolisUserInteractions.PULL_OFF /*&&  !item.StatusLocked*/)
         {
             if (item.IsShield)
             {

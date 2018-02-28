@@ -166,6 +166,10 @@ public class AbstractItem : MonoBehaviour {
             case PropolisStatus.ANIM_TURQUOISE_FADE: material.color = PropolisColors.Blue; break;
             case PropolisStatus.ANIM_SNAKE_YELLOW: material.color = PropolisColors.Yellow; break;
             case PropolisStatus.ANIM_GREEN: material.color = PropolisColors.Green; break;
+            case PropolisStatus.SUPER_CLEAN_GREEN: material.color =  PropolisColors.SuperCleanTrigger; break;
+            case PropolisStatus.SUPER_CLEAN_TRIGGER: material.color = PropolisColors.SuperCleanTrigger; break;
+            case PropolisStatus.SUPER_CLEAN_TURQUOISE: material.color = PropolisColors.SuperClean1; break;
+            case PropolisStatus.SUPER_CLEAN_TURQUOISE_FADE: material.color = PropolisColors.SuperClean1; break;
 
 
 
@@ -253,6 +257,7 @@ public class AbstractItem : MonoBehaviour {
 
     public void RestoreDectection()
     {
+        StatusLocked = false;
         SendOscMessage("/status", ID, (int)PropolisStatus.DETECTION_ON);
     }
 

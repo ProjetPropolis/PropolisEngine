@@ -16,6 +16,8 @@ namespace Propolis
         public static Color Fushia { get { return GetColorFromHTML("#ff33bc"); } }
         public static Color DarkBlue { get { return GetColorFromHTML("#005af9"); } }
         public static Color Orange { get { return GetColorFromHTML("#ff7550"); } }
+        public static Color SuperCleanTrigger = Color.green;
+        public static Color SuperClean1 = Color.magenta;
 
 
         private static Color GetColorFromHTML(string hex)

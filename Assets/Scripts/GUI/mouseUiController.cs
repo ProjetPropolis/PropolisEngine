@@ -37,7 +37,7 @@ public class mouseUiController : MonoBehaviour {
                 Cursor.SetCursor(cursorTextureDelete, hotSpot, cursorMode);
             }
 
-            if (mouseState == "edit" || mouseState == "refresh" || mouseState =="unlock")
+            if (mouseState == "edit" || mouseState == "refresh" || mouseState =="unlock" || mouseState == "superClean")
             {
                 Cursor.SetCursor(cursorTextureCreate, hotSpot, cursorMode);
             }
@@ -107,6 +107,7 @@ public class mouseUiController : MonoBehaviour {
                         AbstractGroup group = hit.collider.gameObject.GetComponent<AbstractGroup>();
                         if (group != null)
                         {
+                            group.IsPlayingAnimation = false;
                             group.ChildItemsList.ForEach(x=>x.RestoreDectection());
                             Cursor.SetCursor(null, Vector2.zero, cursorMode);
                         }
@@ -136,6 +137,31 @@ public class mouseUiController : MonoBehaviour {
                         StartCoroutine(WaitTosend(configUI, hit.collider.gameObject, mouseState, Input.mousePosition));
                     }
                 }
+
+                if (mouseState == "superClean")
+                {
+                    Vector2 worldPoint = currentCam.ScreenToWorldPoint(Input.mousePosition);
+                    RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero, Mathf.Infinity, layer_mask_Game.value);
+                    if (hit.collider != null)
+                    {
+                        var abstractGroup = hit.collider.transform.parent.gameObject.GetComponent<AbstractGroup>();
+                        if (abstractGroup == null)
+                        {
+                            abstractGroup = hit.collider.transform.parent.parent.gameObject.GetComponent<AbstractGroup>();
+                        }
+                        var abstractItem = hit.collider.gameObject.GetComponent<AbstractItem>();
+                        var GroupType = abstractGroup.DataType;
+
+                        if (abstractItem != null && PropolisData.Instance.IsGamePlaying)
+                        {
+                            GameController.SpawnSuperCleanser(abstractItem);
+                        }
+
+                    }
+
+                }
+
+
 
                 mouseState = "default";
             }

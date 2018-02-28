@@ -8,6 +8,7 @@ using UnityOSC;
 
 public class GameController : MonoBehaviour {
 
+    public enum PropolisDifficultyMode { Auto, Manual }
     List<GameObject> tuilesActives = new List<GameObject>();
     public PropolisManager propolisManager;
     public PropolisAlertUIController AlertUiController;
@@ -25,9 +26,10 @@ public class GameController : MonoBehaviour {
     public float BatteryLevel = 0.0f;
     OSCServer server;
     object ThreadLock = new object();
-    bool _mustReadData ;
+    bool _mustReadData;
     private System.Random random;
     private Coroutine SleepModeCouroutineHandle;
+    public PropolisDifficultyMode DifficultyMode = PropolisDifficultyMode.Auto;
 
 
 
@@ -43,7 +45,7 @@ public class GameController : MonoBehaviour {
         molecularGameController.ListOfItems.ForEach(x => x.RestoreDectection());
     }
 
-    void Start () {
+    void Start() {
         random = new System.Random();
         _mustReadData = false;
         propolisData = PropolisData.Instance;
@@ -93,8 +95,8 @@ public class GameController : MonoBehaviour {
         {
             //lock (ThreadLock)
             //{
-                _mustReadData = true;
-           // }
+            _mustReadData = true;
+            // }
         }
     }
 
@@ -103,18 +105,18 @@ public class GameController : MonoBehaviour {
 
         //lock (ThreadLock)
         //{
-            if (_mustReadData)
+        if (_mustReadData)
+        {
+            _mustReadData = false;
+            switch (server.LastReceivedPacket.Address.Replace(@"/", ""))
             {
-                _mustReadData = false;
-                switch (server.LastReceivedPacket.Address.Replace(@"/", ""))
-                {
-                    case PropolisDataTypes.HexGroup: hiveGameController.ProcessPacketFromOsc(server.LastReceivedPacket.Data);break;
-                    case PropolisDataTypes.AtomGroup: molecularGameController.ProcessPacketFromOsc(server.LastReceivedPacket.Data); break;
-                    case PropolisDataTypes.RecipeGroup: recipeGameController.ProcessPacketFromOsc(server.LastReceivedPacket.Data); break;
-                }
+                case PropolisDataTypes.HexGroup: hiveGameController.ProcessPacketFromOsc(server.LastReceivedPacket.Data); break;
+                case PropolisDataTypes.AtomGroup: molecularGameController.ProcessPacketFromOsc(server.LastReceivedPacket.Data); break;
+                case PropolisDataTypes.RecipeGroup: recipeGameController.ProcessPacketFromOsc(server.LastReceivedPacket.Data); break;
             }
+        }
         //}
-    
+
     }
 
     public void SendCommand(string command)
@@ -122,20 +124,20 @@ public class GameController : MonoBehaviour {
         propolisManager.SendCommand(command);
     }
 
-   
+
 
 
     public void UpdateFromModel()
     {
         propolisData = PropolisData.Instance;
-                     
-            BatteryLevel = propolisData.BatteryLevel;
-            switch (propolisData.LastEvent.Action)
-            {
-                case PropolisActions.Play:StartGame(); break;
-                case PropolisActions.Stop:StopGame(); break;
-            }
-        
+
+        BatteryLevel = propolisData.BatteryLevel;
+        switch (propolisData.LastEvent.Action)
+        {
+            case PropolisActions.Play: StartGame(); break;
+            case PropolisActions.Stop: StopGame(); break;
+        }
+
 
         hiveGameController.UpdateFromModel();
         molecularGameController.UpdateFromModel();
@@ -146,14 +148,14 @@ public class GameController : MonoBehaviour {
 
     public void ProcessSuccessfulRecipe(PropolisRecipeCompareStatus status)
     {
-        if(status == PropolisRecipeCompareStatus.IMPERFECT)
+        if (status == PropolisRecipeCompareStatus.IMPERFECT)
         {
             for (int i = 0; i < PropolisGameSettings.AmountOfSpawnedCleanserOnRecipe; i++)
             {
                 ((HiveGameController)hiveGameController).InstanciateCleanser();
             }
         }
-        else if(status == PropolisRecipeCompareStatus.PERFECT)
+        else if (status == PropolisRecipeCompareStatus.PERFECT)
         {
             for (int i = 0; i < 3; i++)
             {
@@ -162,7 +164,7 @@ public class GameController : MonoBehaviour {
         }
     }
 
-    private void  StartGame()
+    private void StartGame()
     {
         StopAllCoroutines();
         PropolisGameSettings.CurrentDifficultyMultiplier = 1.0f;
@@ -189,42 +191,47 @@ public class GameController : MonoBehaviour {
         {
 
             yield return new WaitForSecondsRealtime(PropolisGameSettings.BatteryUpdateDeltaTime);
-                // //Debug.Log("---------------StartOfNewBatteryUpdate---------------");
-            float currenBoardRatio = hiveGameController.GetRatioOfGivenPropolisStatus(PropolisStatus.ON) + hiveGameController.GetRatioOfGivenPropolisStatus(PropolisStatus.CLEANSER);
-            if (currenBoardRatio < PropolisGameSettings.CriticalOnHexRatio)
-            {
-                ////Debug.Log(string.Format("---------CriticalLostOf :{0} ---------", PropolisGameSettings.BatteryLevelLostWhenCritical));
-                IncrementBatteryLevel(PropolisGameSettings.BatteryLevelLostWhenCritical);
-            }
-            else
-            {
-                float wishedUpdateAdjustentFactor = 1;
-                if (currenBoardRatio < PropolisGameSettings.MinStableDifficultyThreshold)
-                {
-                    wishedUpdateAdjustentFactor = 1.15f;
-                }
-                else if (currenBoardRatio > 85)
-                {
-                    wishedUpdateAdjustentFactor = 0.1f;
-                }
-                else if(currenBoardRatio > PropolisGameSettings.MaxStableDifficultyThreshold)
-                {
-                    wishedUpdateAdjustentFactor = 0.82f;
-                }
-                float numberOfWishedUpdate = PropolisGameSettings.TargetIntervalBetweenClimaxes / PropolisGameSettings.BatteryUpdateDeltaTime;
-                ////Debug.Log(string.Format("---------NumberOfWishedUpdate :{0} ---------", numberOfWishedUpdate));
-                ////Debug.Log(string.Format("---------BoardRatio :{0} ---------", currenBoardRatio));
-                ////Debug.Log(string.Format("---------BufferCalculation :{0} ---------", numberOfWishedUpdate * currenBoardRatio * 2f));
-                float BatteryIncrement = 1 / (numberOfWishedUpdate * wishedUpdateAdjustentFactor);
-                ////Debug.Log(string.Format("---------BatteryIncrement :{0} ---------", BatteryIncrement));
+            if (!((HiveGameController)hiveGameController).isPlayingSuperClean) {
 
-                IncrementBatteryLevel(BatteryIncrement);
+                // //Debug.Log("---------------StartOfNewBatteryUpdate---------------");
+                float currenBoardRatio = hiveGameController.GetRatioOfGivenPropolisStatus(PropolisStatus.ON) + hiveGameController.GetRatioOfGivenPropolisStatus(PropolisStatus.CLEANSER);
+                if (currenBoardRatio < PropolisGameSettings.CriticalOnHexRatio)
+                {
+                    ////Debug.Log(string.Format("---------CriticalLostOf :{0} ---------", PropolisGameSettings.BatteryLevelLostWhenCritical));
+                    IncrementBatteryLevel(PropolisGameSettings.BatteryLevelLostWhenCritical);
+                }
+                else
+                {
+                    float wishedUpdateAdjustentFactor = 1;
+                    if (currenBoardRatio < PropolisGameSettings.MinStableDifficultyThreshold)
+                    {
+                        wishedUpdateAdjustentFactor = 1.15f;
+                    }
+                    else if (currenBoardRatio > 85)
+                    {
+                        wishedUpdateAdjustentFactor = 0.1f;
+                    }
+                    else if (currenBoardRatio > PropolisGameSettings.MaxStableDifficultyThreshold)
+                    {
+                        wishedUpdateAdjustentFactor = 0.82f;
+                    }
+                    float numberOfWishedUpdate = PropolisGameSettings.TargetIntervalBetweenClimaxes / PropolisGameSettings.BatteryUpdateDeltaTime;
+                    ////Debug.Log(string.Format("---------NumberOfWishedUpdate :{0} ---------", numberOfWishedUpdate));
+                    ////Debug.Log(string.Format("---------BoardRatio :{0} ---------", currenBoardRatio));
+                    ////Debug.Log(string.Format("---------BufferCalculation :{0} ---------", numberOfWishedUpdate * currenBoardRatio * 2f));
+                    float BatteryIncrement = 1 / (numberOfWishedUpdate * wishedUpdateAdjustentFactor);
+                    ////Debug.Log(string.Format("---------BatteryIncrement :{0} ---------", BatteryIncrement));
+
+                    IncrementBatteryLevel(BatteryIncrement);
+                }
+
             }
+            
 
             ////Debug.Log("---------------EndOfNewBatteryUpdate---------------");
         }
-            
-        
+
+
     }
 
     private IEnumerator ProcessDifficultyLevel()
@@ -232,21 +239,35 @@ public class GameController : MonoBehaviour {
         while (true)
         {
             yield return new WaitForSecondsRealtime(PropolisGameSettings.DifficultyUpdateDeltaTime);
-            float ratioOfActiveHex = hiveGameController.GetRatioOfGivenPropolisStatus(PropolisStatus.ON);
-            if (ratioOfActiveHex < PropolisGameSettings.MinStableDifficultyThreshold)
-            {
-                PropolisGameSettings.CurrentDifficultyMultiplier -= PropolisGameSettings.DifficultyModifier *2.0f;
-            }
-            else if (ratioOfActiveHex > PropolisGameSettings.MaxStableDifficultyThreshold)
-            {
-                PropolisGameSettings.CurrentDifficultyMultiplier += PropolisGameSettings.DifficultyModifier;
+            if (DifficultyMode == PropolisDifficultyMode.Auto) {
+                float ratioOfActiveHex = hiveGameController.GetRatioOfGivenPropolisStatus(PropolisStatus.ON);
+                if (ratioOfActiveHex < PropolisGameSettings.MinStableDifficultyThreshold)
+                {
+                    PropolisGameSettings.CurrentDifficultyMultiplier -= PropolisGameSettings.DifficultyModifier * 2.0f;
+                }
+                else if (ratioOfActiveHex > PropolisGameSettings.MaxStableDifficultyThreshold)
+                {
+                    PropolisGameSettings.CurrentDifficultyMultiplier += PropolisGameSettings.DifficultyModifier;
 
-                if (PropolisGameSettings.CurrentDifficultyMultiplier > PropolisGameSettings.MaxDifficulty)
-                    PropolisGameSettings.CurrentDifficultyMultiplier = PropolisGameSettings.MaxDifficulty;
+                    if (PropolisGameSettings.CurrentDifficultyMultiplier > PropolisGameSettings.MaxDifficulty)
+                        PropolisGameSettings.CurrentDifficultyMultiplier = PropolisGameSettings.MaxDifficulty;
+                }
+
+                PropolisGameSettings.CurrentDifficultyMultiplier = PropolisGameSettings.CurrentDifficultyMultiplier < 1f ? 1f : PropolisGameSettings.CurrentDifficultyMultiplier;
             }
 
+
+        }
+    }
+
+    public void ApplyIncrementToDifficulty(float increment)
+    {
+        PropolisGameSettings.CurrentDifficultyMultiplier += increment;
+        if (PropolisGameSettings.CurrentDifficultyMultiplier > PropolisGameSettings.MaxDifficulty)
+            PropolisGameSettings.CurrentDifficultyMultiplier = PropolisGameSettings.MaxDifficulty;
+        else
+        {
             PropolisGameSettings.CurrentDifficultyMultiplier = PropolisGameSettings.CurrentDifficultyMultiplier < 1f ? 1f : PropolisGameSettings.CurrentDifficultyMultiplier;
-
         }
     }
     public void GenerateRecipe()
@@ -264,12 +285,12 @@ public class GameController : MonoBehaviour {
 
     public void PushRecipe()
     {
-        int r1 =random.Next(3) + (int)PropolisStatus.RECIPE1;
+        int r1 = random.Next(3) + (int)PropolisStatus.RECIPE1;
         int r2 = random.Next(3) + (int)PropolisStatus.RECIPE1;
         int r3 = random.Next(3) + (int)PropolisStatus.RECIPE1;
         SendCommand(string.Format("{0} {1} {2} {3}", PropolisActions.PushRecipe, r1, r2, r3));
         ((RecipeGameController)recipeGameController).UpdateFromNewRecipe();
-       
+
     }
 
     private void StopGame()
@@ -281,6 +302,11 @@ public class GameController : MonoBehaviour {
         StopCoroutine(GameLoopCoroutine);
         AlertUiController.Show("Propolis Event", "Gameplay Stopped");
 
+    }
+
+    public void ToggleDifficulty()
+    {
+        DifficultyMode = DifficultyMode == PropolisDifficultyMode.Auto ? PropolisDifficultyMode.Manual : PropolisDifficultyMode.Auto;
     }
 
     public IEnumerator ProcessGameLoop()
@@ -297,7 +323,13 @@ public class GameController : MonoBehaviour {
     }
 
 
-   
+    public void SpawnSuperCleanser(AbstractItem item)
+    {
+        if(item.ParentGroup.DataType == PropolisDataTypes.HexGroup)
+        {
+            ((HiveGameController)hiveGameController).InstantiateSuperClean(item);
+        }
+    }
     public void IncrementBatteryLevel(float increment)
     {
         float futureBatteryLevel = propolisData.BatteryLevel + (increment);
