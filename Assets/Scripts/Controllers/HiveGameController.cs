@@ -178,48 +178,38 @@ public class HiveGameController : AbstractGameController
                 }
 
             }
-            yield return new WaitForSecondsRealtime(0.1f);
         }
-        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSecondsRealtime(0.5f);
+       
         foreach (var n in item.Neighbors)
         {
-            SendItemData(n.ParentGroup.ID, n.ID, PropolisStatus.ON);
-            yield return new WaitForSecondsRealtime(0.2f);
-        }
-        foreach (var n in item.Neighbors)
-        {
-            foreach (var sn in n.Neighbors)
+            foreach (var sn in n.Neighbors)            
             {
-                if(sn.status != PropolisStatus.SUPER_CLEAN_GREEN &&
-                    sn.status != PropolisStatus.SUPER_CLEAN_TRIGGER &&
-                    sn.status != PropolisStatus.SUPER_CLEAN_TURQUOISE &&
-                    sn.status != PropolisStatus.SUPER_CLEAN_TURQUOISE_FADE)
+                if (sn.status == PropolisStatus.ULTRACORRUPTED)
                 {
-                    if (sn.status == PropolisStatus.ULTRACORRUPTED)
+                    try
                     {
-                        try
-                        {
-                            UltraCorruptedList.Remove(item);
-                        }
-                        catch (Exception)
-                        {
-                        }
-
+                        UltraCorruptedList.Remove(item);
                     }
-                    CleanserHex(sn);
+                    catch (Exception)
+                    {
+                    }
+
                 }
+                CleanserHex(sn);
+                
             }
-           
-            yield return new WaitForSecondsRealtime(0.2f);
+          
         }
 
 
 
 
 
-        yield return new WaitForSecondsRealtime(1.5f);
+        yield return new WaitForSecondsRealtime(0.5f);
         ExploseAllCleanser();
-        GameController.IncrementBatteryLevel(0.6f);
+        yield return new WaitForSecondsRealtime(3f);
+        GameController.IncrementBatteryLevel(0.3f);
         canSpawnSuperClean = true;
         isPlayingSuperClean = false;
     }
