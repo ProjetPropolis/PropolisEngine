@@ -154,7 +154,10 @@ namespace Propolis
 
 
       
-
+        public void SendSuperCleanExplosionStatusToSound(int state)
+        {
+            SendSoundMessage("/verte", state);
+        }
        
         public void ExportAllGroupPosition()
         {

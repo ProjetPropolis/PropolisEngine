@@ -144,6 +144,7 @@ namespace Propolis
             ListOfGroups.ForEach(x => x.ChildItemsList.ForEach(y => y.CalculateNeighborsList()));
             CalculateGameRectArea();
             ListOfGroups.ForEach(x => x.ChildItemsList.ForEach(y => y.StatusLocked = false));
+            ListOfGroups.ForEach(x => x.IsPlayingAnimation = false);
             ListOfItems = GetAbstratItemsListFromController();
         }
 

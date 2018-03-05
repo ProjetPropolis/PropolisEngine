@@ -12,6 +12,7 @@ public class HiveGameController : AbstractGameController
     List<AbstractItem> PotentialUtraCorrupt;
     List<AbstractItem> UltraCorruptedList;
     Coroutine SuperCleanExplosionCoroutine;
+    Coroutine SuperCleanCoroutine;
 
 
     System.Random random;
@@ -19,6 +20,33 @@ public class HiveGameController : AbstractGameController
     bool readyCleanser;
     public bool canSpawnSuperClean = true, isPlayingSuperClean = false;
 
+
+    private void KillSuperCleanCoroutine()
+    {
+        if(SuperCleanCoroutine != null)
+        {
+            StopCoroutine(SuperCleanCoroutine);
+        }
+    }
+
+    private IEnumerator ProcessSuperCleanSpawn()
+    {
+        while (true)
+        {
+            yield return new WaitForSecondsRealtime(50);
+            try
+            {
+                AbstractItem item = ListOfItems[random.Next(ListOfItems.Count)];
+                InstantiateSuperClean(item);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+      
+    }
 
     private void Start()
     {
@@ -161,7 +189,7 @@ public class HiveGameController : AbstractGameController
     IEnumerator ProcessSuperCleanExplosion(AbstractItem item)
     {
         isPlayingSuperClean = true;
-
+        GameController.PropolisExport.SendSuperCleanExplosionStatusToSound(1);
         SendItemData(item.ParentGroup.ID, item.ID, GetRandomSuperCleanStatus());
 
         foreach(var n in item.Neighbors)
@@ -178,9 +206,28 @@ public class HiveGameController : AbstractGameController
                 }
 
             }
+            yield return new WaitForSecondsRealtime(0.05f);
+
+            foreach (var sn in n.Neighbors)
+            {
+                if (sn.status == PropolisStatus.ULTRACORRUPTED)
+                {
+                    try
+                    {
+                        UltraCorruptedList.Remove(item);
+                    }
+                    catch (Exception)
+                    {
+                    }
+
+                }
+                SendItemData(sn.ParentGroup.ID, sn.ID, GetRandomSuperCleanStatus());
+                yield return new WaitForSecondsRealtime(0.05f);
+
+            }
         }
-        yield return new WaitForSecondsRealtime(0.5f);
-       
+
+        yield return new WaitForSecondsRealtime(0.05f);
         foreach (var n in item.Neighbors)
         {
             foreach (var sn in n.Neighbors)            
@@ -197,7 +244,8 @@ public class HiveGameController : AbstractGameController
 
                 }
                 CleanserHex(sn);
-                
+                yield return new WaitForSecondsRealtime(0.05f);
+
             }
           
         }
@@ -206,10 +254,11 @@ public class HiveGameController : AbstractGameController
 
 
 
-        yield return new WaitForSecondsRealtime(0.5f);
+        yield return new WaitForSecondsRealtime(0.2f);
         ExploseAllCleanser();
         yield return new WaitForSecondsRealtime(3f);
-        GameController.IncrementBatteryLevel(0.3f);
+        GameController.IncrementBatteryLevel(0.05f);
+        GameController.PropolisExport.SendSuperCleanExplosionStatusToSound(0);
         canSpawnSuperClean = true;
         isPlayingSuperClean = false;
     }
@@ -245,6 +294,8 @@ public class HiveGameController : AbstractGameController
     {
         canSpawnSuperClean = true;
         isPlayingSuperClean = false;
+        KillSuperCleanCoroutine();
+        SuperCleanCoroutine = StartCoroutine(ProcessSuperCleanSpawn());
         KillSuperCleanExplosionCoroutine();
         GenerateEdgeHexList();
         IndexProcess = 0; // nous donne le nombre de clics 
